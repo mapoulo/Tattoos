@@ -1,0 +1,474 @@
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+ 
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+.main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+.nav-bar {
+   flex-basis: 8%; 
+    background: #000;
+  
+ 
+}
+.navigation {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+.logo {
+    color: #fff;
+}
+.list {
+    display: flex;
+    align-items: center;
+    ul {
+        display: flex;
+        align-items: center;
+        li {
+            list-style: none;
+         
+            a {
+                color: #fff;
+                text-decoration: none;
+                padding: 1em;
+                position: relative;
+                cursor: pointer;
+            }
+        }
+        li:hover a::before {
+            background: #db6c50;
+            position: absolute;
+            bottom: 0%;
+            left: 10%;
+            width: 30%;
+            right: 10%;
+            height: 5px;
+            border-radius: 50px;
+            content: '';
+            animation-name: slide;
+            animation-duration: 500ms;
+            animation-fill-mode: forwards;
+            transition: all 500ms;
+        }
+        
+        @keyframes slide {
+            0% {
+                width: 60%;
+                bottom: 0%;
+            } 
+            100% {
+                width: 80%;
+                bottom: 10%;
+            } 
+        }
+    }
+ 
+}
+.btn-menu {
+    display: none;
+}
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    p {
+        padding: 1em;
+    }
+    .profile-image {
+        height: 5vh;
+        width: 5vh;
+        overflow: hidden;
+        border-radius: 50px;
+      
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}
+.notifications {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .badges {
+            height: 18px;
+            width: 18px;
+            border-radius: 50px;
+            padding: .2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 20%;
+            right: 30%;
+        }
+}
+.container {
+    flex: 1;
+    background: #fcfcff;
+    
+    display: flex;
+    flex-direction: column;
+}
+.profile-container {
+    height: 40vh;
+    padding: 1em;
+ 
+    .profile-info {
+        background: #fff;
+        height: 100%;
+        border-radius: .5em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        .profile-here {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .name {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1em;
+                flex-basis: 20%;
+                flex-wrap: wrap;
+                h1 {
+                    font-size: 3vw;
+                    font-weight: bolder;
+                    color: #888;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+            }
+            .profile-container-here {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 30px;
+                padding-left: 30px;
+                flex-basis: 60%;
+                .wrap-now {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-basis: 20%;
+                    .image-profile-here {
+                        height: 20vh;
+                        width: 20vh;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        margin-right: 30px;
+                        img {
+                            height: 100%;
+                            width: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    .information-profile {
+                      /*   font-weight: bold; */
+                        color: #888;
+                        font-size: 100%;
+                       
+                        p {
+                            padding: .5em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.analytics {
+    flex-basis: 20%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.history,
+.accepted,
+.declined {
+    flex-basis: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    p {
+        text-align: center;
+        font-size: 30px;
+        color: #888;
+    }
+}
+.history, .accepted {
+    border-right: 2px solid rgba(199, 199, 199, 0.5);
+}
+.details-container {
+    height: 50vh;
+    display: flex;
+    border-radius: 10px;
+    padding: 1em;
+    justify-content: space-between;
+}
+.history-booking {
+        background: #fff;
+    
+         border-radius: .2em; 
+        flex-basis: 60%;
+       display: flex;
+       flex-direction: column;
+       position: relative;
+      
+       
+}
+.booking-card {
+    flex-basis: 90%;
+    height: 90%;
+    flex-wrap: wrap;
+    display: flex;
+    overflow: auto;
+    justify-content: flex-start;
+   
+}
+.booking-list {
+    flex-basis: 50%;
+    height: 15vh;
+  
+    padding: 1em;
+}
+.booking-history-item {
+    height: 100%;
+    box-shadow: 0 0 3px #ddd;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .tattoo-booked {
+        flex-basis: 30%;
+        //height: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .btn-downloads {
+        position: absolute;
+      bottom: -15%;
+      left: 0;
+        padding-right: 3em;
+      width: 100%;
+      height: 30%;
+      display: flex;
+        justify-content: flex-end; 
+      .btn-downla {
+        height: 100%;
+        width: auto;
+        background: linear-gradient(#dadada, #7bc850);
+        padding: .3em;
+        color: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        outline: none;
+      }
+      .btn-downla:active {
+        background: linear-gradient( #7bc850, #dadada);
+      }
+      
+    }
+    .info-tattoo {
+        padding: .5em;
+        color: #888;
+    }
+}
+.customized-tattoo {
+    background: #fff;
+    height: 100%;
+    border-radius: .2em;
+    flex-basis: 30%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    
+    .scroll-container {
+        flex-basis: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        
+        .no-pictures {
+            flex-basis: 100%;
+            height: 100%;
+            background: rgb(241, 241, 241);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            transform: rotate(90deg);
+            p {
+                text-align: center;
+                color: #888;
+            }
+        }
+        .cards {
+            flex: 0 0 90%;
+            height: 40vh;
+            margin-left: -40px;
+          
+        /*     padding: 1em; */
+            .card {
+                background: #fff;
+                height: 100%;
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: 0 0 5px #ddd;
+                transition: all 500ms;
+                border-radius: .2em;
+                overflow: hidden;
+                transform: scale(.8);
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            .card:hover {
+                transform: scale(1);
+                filter: saturate(4);
+                transition: all 500ms;
+                position: relative;
+                z-index: 100;
+            }
+        }
+    }
+}
+.header {
+    font-weight: bold;
+    font-size: 100%;
+    color: rgb(92, 92, 92);
+    flex-basis: 10%;
+    padding: 1.3em;
+    display: flex;
+    align-items: center;
+}
+.modalView {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.404);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.small-modal-edit-profile {
+    flex-basis: 30%;
+    height: 50%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    .close-btn {
+        position: absolute;
+        top: -15%;
+        right: 0;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .list   ul, .profile  p{
+            display: none;
+        }
+        .logo img { width: 60px;}
+        .btn-menu {
+            display: block;
+        }
+        .analytics > * {
+            flex: 1;
+        }
+        .small-modal-edit-profile {
+            flex-basis: 90%;
+            height: 60%;
+        }
+        .details-container {
+            flex-direction: column;
+        }
+        .history-booking {
+            flex-basis: 100%;
+            height: 100%;
+           
+        }
+        .customized-tattoo {
+            flex-basis: 100%;
+        }
+        .booking-card {
+            flex-direction: column;
+            .booking-list {
+                height: 5vh;
+                flex-basis: 20%;
+            }
+        }
+}
+/* @media only screen and (min-width: 1024px) {
+    .booking-card {
+        flex-direction: column;
+        .booking-list {
+            height: 5vh;
+            flex-basis: 20%;
+        }
+    }
+    .analytics > * {
+        flex: 1;
+    }
+    .history-booking {
+        flex-basis: 40%;
+       
+    }
+    .customized-tattoo {
+        flex-basis: 50%;
+    }
+} */

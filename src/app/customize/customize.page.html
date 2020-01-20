@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Customize</ion-title>
+  </ion-toolbar>
+  <ion-buttons slot="end" >
+    <ion-button (click)="dismiss()" fill="clear" color="dark">
+      <ion-icon  name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+  <section class="upload-tattoo">
+    <div class="upload">
+        <ion-item  class="imageitem" lines="none" >
+            <ion-label position="stacked" id="profile_image" color="primary"></ion-label>
+            <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
+          </ion-item>
+    <ion-item class="imageitem" lines="none" *ngIf="tattoo"><img  src="{{tattoo}}" height="480px" width="400px" style="object-fit: cover;"></ion-item>
+      
+
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col size="8">
+            <ion-item>
+                <ion-label position="floating">Length in cm</ion-label>
+                <ion-input type="number"  [(ngModel)]="Length"></ion-input>
+            </ion-item>
+            
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="8">
+            <ion-item>
+                <ion-label position="floating">Breadth in cm</ion-label>
+                <ion-input type="number" [(ngModel)]="Breadth" ></ion-input>
+              </ion-item>
+              
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="8">
+            <p>You will receive a contract, date and time at which you can come and have your tattoo done.</p>
+        </ion-col>
+        <ion-col size="8" justify-content-center>
+            <ion-button  color="secondary" shape="round" expand="block" (click)="Booking()" >Book</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+      <!-- <p>Please Upload a Tattoo.</p> -->
+     
+    </div>
+  </section> 
+</ion-content>

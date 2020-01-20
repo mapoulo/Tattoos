@@ -1,0 +1,53 @@
+.error {
+    color: red;
+    margin: 0 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 80%;
+}
+.main {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -moz-transition: all 2s;
+    -webkit-transition: all 2s;
+    -o-transition: all 2s;
+    transition: all 2s;
+    
+}
+
+.upload-tattoo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2424246e;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.027), 0 3px 6px rgba(0, 0, 0, 0.11);
+
+    .upload {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #d6d6d6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        font-size: 2vh;
+        
+    }
+     
+}
+.btn-upload-tattoo {
+    height: 6vw;
+    width: 6vw;
+
+}
+.form-container {
+    flex: 1;
+    padding: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+}

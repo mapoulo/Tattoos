@@ -1,0 +1,594 @@
+
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+ 
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+.main-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin: 0;
+    background: #f1f1f1;
+
+
+
+}
+/* .fullscreenTattoo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+} */
+.nav-bar {
+    display: flex;
+    flex-basis: 5%;
+    background: #000;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.list {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+
+
+}
+.header-explore{
+    font-family: 'Pacifico', cursive !important;
+    color: #888 !important;
+}
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+
+    p {
+        margin: 0 !important;
+        padding: .5em;
+
+    }
+  
+
+    img {
+        height: 5vh;
+        width: 5vh;
+        object-fit: cover;
+        border-radius: 50px;
+
+
+    }
+}
+
+
+.split-pane, .menu-btn {
+    display: none;
+
+}
+
+.list-split-pane {
+    padding: 1em;
+
+}
+.logoman {
+    margin-top: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.wrapper-page {
+    flex-basis: 95%;
+    width: 100%;
+  
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+.wrapper-header {
+    flex-basis: 20%;
+    width: 100%;
+    background: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),url('../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg');
+    background-position: center;
+    background-size: cover; 
+   
+    
+
+
+    p {
+        color: #fff;
+        font-size: 100%;
+        font-weight: bold;
+        padding: .5em;
+        flex: 1;
+    }
+
+    h1 {
+        justify-self: center;
+        align-self: center;
+        color: #f1f1f1;
+        font-weight: 700;
+    }
+
+
+}
+.scroll-container {
+    flex-basis: 80%; 
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+
+
+}
+.notification {
+    position: relative;
+}
+.badge {
+    position: absolute;
+    top: 20%;
+    right: 20%;
+    width: 19px;
+    height: 19px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+ion-button.explore {
+    position: relative;
+
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 5px;
+        background: #d36954;
+        border-radius: 50px;
+        transition: 500ms;
+    }
+}
+
+.list > ion-button {
+    position: relative;
+    transition: 500ms;
+
+
+   
+
+    &:hover::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 5px;
+        background: #d36954;
+        border-radius: 50px;
+        transition: 500ms;
+    }
+}
+
+.scroll-list {
+    flex: 0 0 40%;
+    
+ /*    margin-top: 1em; */
+    display: flex;
+    flex-direction: column;
+
+   
+    .scroll-item {
+        flex-basis: 95%;
+      
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        .scroll-key {
+           flex: 0 0 20%;
+           padding: .3em;
+           transition: 500ms;
+
+           .scroll-value {
+               width: 100%;
+               height: 100%;
+               position: relative;
+               border-radius: .5em;
+               border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+               box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+               overflow: hidden;
+               
+               img {
+                   height: 100%;
+                   width: 100%;
+                   object-fit: cover;
+                   position: absolute;
+                   top: 0;
+                   left: 0;
+
+               }
+
+           }
+        }
+
+    }
+
+    
+}
+.header-scroll {
+    flex-basis: 5%;
+    display: flex;
+    align-items: center;
+   
+
+    h1 {
+        font-size: 1em;
+        padding: .3em;
+        font-weight: bold;
+        
+    }
+
+    
+}
+
+.info-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(8, 8, 8, 0.37);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+.price {
+    flex-basis: 85%;
+    padding: .3em;
+    color: #fff;
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: rgba(0,0,0,0.2);
+
+    
+
+
+    .price-tag {
+        font-weight: bold;
+        text-align: right;
+        padding: .5em;
+        color: #10dc60;
+     
+    }
+    .describe {
+        display: none;
+    }
+
+    &:hover .describe {
+        display: block;
+    }
+   
+
+}
+.book-btn {
+    flex-basis: 15%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+
+}
+
+.price::-webkit-scrollbar{
+    display: none;
+}
+
+.scroll-key:hover {
+    transform: scale(1.01);
+}
+
+
+.tattoo-image {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.849);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    
+}
+.tattoo-details {
+    flex-basis: 100%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction:row;
+
+}
+.tattoo-details > .tattoo-card-details {
+    flex-basis: 20%;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    font-size: 90%;
+
+}
+.image-card-t {
+    flex-basis: 30%;
+    width: 100%;
+    position: relative;
+  
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        padding: 1em;
+    }
+}
+.describe-card-s {
+    padding: .5em;
+   /*  flex: 1; */
+
+
+}
+.name {
+    padding:.9em;
+    font-weight: bold;
+    font-size: 1.9vw;
+}
+.booking {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tattoo-details > .image-tattoo {
+    flex-basis: 80%;
+    background: rgba(5, 5, 5, 0.329);
+    display: flex;
+    position: relative;
+    
+    img {
+        height: 90%;
+        width: 90%;
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        object-fit: contain;
+        border: 5px solid hsl(0, 0%, 40%);
+  
+        /* #2 */
+        padding: 5px;
+        background: hsl(0, 0%, 20%);
+        
+        /* #3 */
+        outline: 5px solid hsl(0, 0%, 7%);
+        
+        /* #4 AND INFINITY!!! (CSS3 only) */
+        box-shadow:
+            0 0 0 10px hsl(0, 0%, 0%),
+            0 0 0 15px hsl(0, 0%, 3%);
+    }
+}
+.close-btn {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    z-index: 700;
+
+}
+.slides {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .tattoo-details > .tattoo-card-details {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        justify-content: center;
+        align-items: center;
+
+      
+    }
+
+    .image-card-t, .describe-card-s {
+        display: none;
+    }
+
+    .slides {
+        display: none;
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        z-index: 800;
+
+
+        ion-fab-button {
+            --width: 30px;
+            --height: 30px;
+
+        }
+    }
+
+    .tattoo-details > .image-tattoo {
+        flex-basis: 100%;
+
+
+        img {
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border: none;
+  
+            /* #2 */
+            padding: 0px;
+            background: none;
+            
+            /* #3 */
+            outline: none;
+            
+            /* #4 AND INFINITY!!! (CSS3 only) */
+            box-shadow:
+                0 0 0 10px hsl(0, 0%, 0%),
+                0 0 0 15px hsl(0, 0%, 3%);
+        }
+
+
+    }
+
+
+    .scroll-container {
+        .scroll-list {
+            flex: 0 0 60%;
+
+            .scroll-item {
+                .scroll-key {
+                    flex: 0 0 80%;
+                }
+               
+            }
+        }
+    }
+
+    .list {
+        display: none;
+    
+    }
+    .menu-btn  {
+        display: block;
+    }
+    .split-pane {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.83);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+
+
+    }
+    .close {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 10%;
+       
+        padding-left: .3em;
+
+    }
+    .profile-image {
+        img {
+            height: 8vh;
+            width: 8vh;
+
+        }
+    }
+    .logo {
+        flex: 1;
+
+    }
+    
+}
+@media only screen and (min-width: 600px) {
+    .scroll-container {
+        .scroll-list {
+            flex: 0 0 40%;
+
+            .scroll-item {
+                .scroll-key {
+                    flex: 0 0 20%;
+                }
+               
+            }
+        }
+    }
+}
+
+
+

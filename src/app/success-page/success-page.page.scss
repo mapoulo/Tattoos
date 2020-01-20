@@ -1,0 +1,93 @@
+.main-success {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.7)), url(../../assets/kaizen-nguy-n-s9imzeGXKQ0-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+.container-success {
+   flex-basis: 20%;
+   width: 50%;
+   background: #fff;
+   border-radius: 10px;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.356);
+   position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+   &::after {
+       position: absolute;
+       bottom: -20px;
+       height: 20px;
+       content: '';
+       width: 90%;
+       left: 5%;
+       right: 5%;
+       z-index: -2;
+       background: #7bc850;
+       border-radius: 0 0 50px 50px;
+       animation-duration: 500ms;
+       animation-delay: 1s;
+      
+       animation-name: slideInDown;
+
+   }
+
+   .success {
+       position: absolute;
+       top: -50px;
+       width: 100%;
+       /* border: 1px solid #fff; */
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   .success-messages {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       text-align: center;
+       color: rgb(77, 77, 77);
+
+       h4 {
+           font-size: 3vh;
+       }
+   }
+
+}
+@media only screen and (max-width: 600px) {
+    .container-success {
+        flex-basis: 50%;
+        width: 90%;
+        padding: .5em;
+
+        &::after { 
+            width: 70%;
+            left: 15%;
+            right: 15%;
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .container-success {
+        flex-basis: 40%;
+        width: 60%;
+
+     
+    }
+} 

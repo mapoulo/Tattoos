@@ -1,0 +1,7 @@
+{
+  "name": "Tattoos",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,47 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">My Notifications</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-button fill="icon-only">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<main class="container">
+
+  <div class="cards">
+    <div class="messages" *ngIf="array.length == 0">
+      <p>You do not have any Notifications</p>
+    </div>
+    <div class="card"  *ngFor="let data of array; let i = index">
+        <div class="profile">
+          <img src="{{data.image}}" alt="">
+          </div>
+          <div class="info-to-card">
+              <h4>{{data.price | currency : '&#82;'}}</h4>
+             <article class="sessions"> <p> {{data.days}} Days Sessions</p> <ion-button fill="clear" color="dark" (click)="animate(i)" size="small"><ion-icon [name]="icon"></ion-icon></ion-button></article>
+              <article class="article animated" [ngClass]="{'zoomIn': article, 'zoomOut': !article}">
+                <p>Start Date: <strong>{{data.startingDate | date: 'dd/MM/yyyy'}}</strong> </p>
+                <p>End Date: <strong>{{data.endingDate | date: 'dd/MM/yyyy'}}</strong></p>
+              </article>
+             
+
+            </div>
+            
+            <div class="accept-decline">
+              <ion-button size="small" fill="clear" tooltip="Accept" color="success" class="btn" (click)="Accept(data, i)"><ion-icon name="checkmark-circle"></ion-icon></ion-button>
+              <ion-button size="small" fill="clear" color="danger" class="btn" (click)="Decline(data, i)"><ion-icon name="close-circle"></ion-icon></ion-button>
+            </div>
+
+            
+              <!-- <ion-fab-button class="call-btn" size="small" color="success">
+                  <ion-icon name="ios-call"></ion-icon>
+              </ion-fab-button> -->
+       
+    </div>
+  </div>
+  </main> 
+</ion-content>

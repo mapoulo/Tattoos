@@ -1,0 +1,204 @@
+/* *, *::after, *::before {
+    margin: 0;
+    padding: 0;
+} */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px; 
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+ion-header {
+    --background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3));
+}
+
+.main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    animation-name: fadeIn;
+
+   .description {
+       position: absolute;
+        z-index: 1000; 
+       bottom: 0;
+       width: 100%;
+       height: 80%;
+       background: #000;
+       padding: 1em;
+       transition: all 500ms;
+    /*    overflow: auto; */
+        article {
+            overflow: auto;  
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+       .header-para, p {
+           color: #fff;
+           font-size: 80%;
+       }
+       .header-para {
+           font-weight: bold;
+           font-size: 100%;
+       }
+
+       .slideUp {
+           position: absolute;
+           top: -25px;
+           right: 0;
+           width: 100%;
+           height: 50px;
+         
+           padding: 0;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+       }
+     
+   }
+
+   .descript {
+    position: absolute;
+    z-index: 1000; 
+   bottom: 0;
+   width: 100%;
+   height: 10%;
+   background: #000;
+   padding: 1em;
+   overflow: unset;
+   
+    p, h1, img {
+        display: none;
+    }
+
+    .header-para {
+        display: block;
+    }
+   }
+
+}
+
+.container {
+    flex-basis: 50%;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0)), transparent;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+       
+    }
+
+    .show-close {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.308) 10%, rgba(0, 0, 0, 0.208));
+    }
+
+  
+}
+.booking {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    right: 10%;
+    height: 60%;
+    background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,1));
+    box-shadow: 0 3px 6px rgba(27, 27, 27, 0.527);
+    z-index: 100;
+    transition: 500ms;
+  /*   border-radius: 5px; */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+}
+
+ion-item {
+    --background: rgba(0,0,0,0);
+
+}
+
+@media only screen and (max-width: 600px) {
+    .booking::-webkit-scrollbar, .description::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.priceRage{
+    background: rgb(61, 59, 59);
+    min-width: 30%;
+    max-width: 50%;
+    height: 10%;
+    color: #fff;
+    position: absolute;
+    top: 20%;
+    right: 0%;
+    padding: .5em;
+    /* transform: rotateX(-45deg); */
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80%;
+    border-radius: 50px 0 0 50px;
+ 
+}
+
+.tittle {
+    flex-basis: 50%;
+    width: 100%;
+  /*   border: 1px solid #ddd; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    color: #fff;
+
+    p {
+        font-weight: bold;
+        text-shadow: 1px 1px rgba(24, 24, 24, 0.26);
+        font-size: 100%;
+    }
+
+}

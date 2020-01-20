@@ -1,0 +1,117 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    
+    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-button fill="icon-only">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen padding>
+  <form   [formGroup]="tattooForm">
+  <main class="main">
+    <div class="loader" *ngIf="loader">
+      <div class="loader-1">
+        
+      </div>
+    </div>
+   <section class="upload-tattoo">
+    <h1 class="ink">INK TATTOOS</h1>
+   </section>
+ 
+    <section class="form-container">
+        
+            
+            <ion-list>
+
+              <ion-item class="item" style="margin-bottom: .5em;">
+                <ion-label color="primary" position="floating">Full Name</ion-label>
+                <ion-input autocorrect="on" autofocus="on" clearInput="true" type="text" formControlName="name" name="name" [(ngModel)]="name" placeholder="Enter name" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                <ion-icon name="person" color="primary" slot="end"></ion-icon>
+                  </ion-item>
+                    <div class="error" *ngFor="let validate of validation_messages.name">
+                      <div class="messages" *ngIf="tattooForm.get('name').hasError(validate.type) && (tattooForm.get('name').dirty || tattooForm.get('name').touched)">
+                        {{validate.message}}
+                    </div> 
+                  </div>
+                  
+
+                  <ion-item class="item" style="margin-bottom: .5em;">
+                    <ion-label color="primary" position="floating">Phone Number</ion-label>
+                    <ion-input autocorrect="on" autofocus="on" clearInput="true" type="tel" formControlName="number" name="name" [(ngModel)]="number" placeholder="Enter Phone number" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                    <ion-icon name="call" color="primary" slot="end"></ion-icon>
+                      </ion-item>
+                    <div class="error" *ngFor="let validate of validation_messages.number">
+                      <div class="messages" *ngIf="tattooForm.get('number').hasError(validate.type) && (tattooForm.get('number').dirty || tattooForm.get('number').touched)">
+                        {{validate.message}}
+                    </div> 
+                  </div>
+                  
+                  <ion-item class="item" style="margin-bottom: .5em;">
+                    <ion-label color="primary" position="floating">Email Address</ion-label>
+                    <ion-input autocorrect="on" autofocus="on" clearInput="true" type="text" formControlName="email" name="email" [(ngModel)]="email" placeholder="Enter your Email address" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                    <ion-icon name="mail" color="primary" slot="end"></ion-icon>
+                      </ion-item>
+                        <div class="error" *ngFor="let validate of validation_messages.email">
+                          <div class="messages" *ngIf="tattooForm.get('email').hasError(validate.type) && (tattooForm.get('email').dirty || tattooForm.get('email').touched)">
+                            {{validate.message}}
+                        </div> 
+                      </div>
+                      
+                      <ion-item class="item" style="margin-bottom: .5em;">
+                        <ion-label color="primary" position="floating">Password</ion-label>
+                        <ion-input autocorrect="on" autofocus="on" clearInput="true" type="password" formControlName="password" name="name" [(ngModel)]="password" placeholder="Enter password" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                        <ion-icon name="lock" color="primary" slot="end"></ion-icon>
+                          </ion-item>                        
+                          <div class="error" *ngFor="let validate of validation_messages.password">
+                            <div class="messages" *ngIf="tattooForm.get('password').hasError(validate.type) && (tattooForm.get('password').dirty || tattooForm.get('password').touched)">
+                              {{validate.message}}
+                          </div> 
+                        </div>
+                       
+                      
+                  
+                           <ion-button shape="round" expand="block" color="secondary" (click)="register(tattooForm)" [disabled]="!tattooForm.valid">Register</ion-button> 
+                    
+                     <div class="signin">
+                        <p>Already have an Account? </p><ion-button  fill="clear" size="small" color="secondary" (click)="SignIn()">Sign In</ion-button>
+                     </div>
+                     
+                </ion-list>
+    </section>
+  
+  </main>
+</form>
+  <!-- 
+  <ion-label>Tattooname</ion-label>
+  
+  <ion-input type="text"[(ngModel)]="tattoo.name" ></ion-input>
+  
+ 
+
+
+  <ion-label>Pricerange</ion-label>
+  <ion-input type="number"   [(ngModel)]="tattoo.pricerange"  ></ion-input>
+ 
+
+
+    <ion-label>Categories</ion-label>
+    <ion-select [(ngModel)]="tattoo.categories"  multiple="true">
+      <ion-select-option value="Previous work" >Previous work</ion-select-option>
+      <ion-select-option value="Sketch/design">Sketch/design</ion-select-option>
+    </ion-select>
+   
+
+
+    <ion-label>Description</ion-label>
+     <ion-input   type="text" [(ngModel)]="tattoo.description" ></ion-input>
+   
+
+     <button  (click)="addtattoo()" class="submit" ion-button full round>Add tatoo</button> 
+    -->
+ 
+</ion-content>
+

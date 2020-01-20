@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 426 426">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.301" y1="0.432" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#0dfb44"/>
+    </linearGradient>
+    <filter id="Rectangle_94" x="87" y="155.165" width="129.605" height="140.808" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_95" x="133.815" y="130.472" width="207.429" height="173.581" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_94" data-name="Group 94" transform="translate(-2417 -10970)">
+    <circle id="Ellipse_42" data-name="Ellipse 42" cx="192" cy="192" r="192" transform="translate(2438 10991)" fill="rgba(75,149,60,0.2)"/>
+    <circle id="Ellipse_42" data-name="Ellipse 43" cx="192" cy="192" r="192" transform="translate(2438 10991)" fill="rgba(75,149,60,0.2)"/>
+    <circle id="Ellipse_41" data-name="Ellipse 41" cx="213" cy="213" r="213" transform="translate(2417 10970)" fill="rgba(41,255,0,0.2)"/>
+    <circle id="Ellipse_40" data-name="Ellipse 40" cx="165" cy="165" r="165" transform="translate(2465 11014)" fill="#7bc850"/>
+    <g id="Group_93" data-name="Group 93" transform="translate(-19.697 13.568)">
+      <g transform="matrix(1, 0, 0, 1, 2436.7, 10956.43)" filter="url(#Rectangle_94)">
+        <rect id="Rectangle_94-2" data-name="Rectangle 94" width="51" height="116" transform="matrix(0.79, -0.62, 0.62, 0.79, 96, 192.56)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 2436.7, 10956.43)" filter="url(#Rectangle_95)">
+        <rect id="Rectangle_95-2" data-name="Rectangle 95" width="47" height="200" transform="matrix(-0.59, -0.81, 0.81, -0.59, 170.44, 292.05)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

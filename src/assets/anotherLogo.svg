@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="529.68" height="188" viewBox="0 0 529.68 188">
+  <g id="Group_17" data-name="Group 17" transform="translate(8604.846 -5158)">
+    <g id="Group_16" data-name="Group 16" transform="translate(-8604.846 5336.095) rotate(-90)">
+      <path id="Rectangle_28" data-name="Rectangle 28" d="M0,0H13.768a0,0,0,0,1,0,0V56.487a0,0,0,0,1,0,0h0A13.768,13.768,0,0,1,0,42.719V0A0,0,0,0,1,0,0Z" transform="translate(0 28.05)" fill="#d36954"/>
+      <text id="NK" transform="translate(67.752 81)" fill="#fff" font-size="75" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-53.961" y="0">NK</tspan></text>
+    </g>
+    <text id="SCRIBE" transform="translate(-8298.166 5303)" fill="#d36954" font-size="134" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-222.952" y="0">SCRIBE</tspan></text>
+    <text id="TATTOOS" transform="translate(-8296.166 5338)" fill="#fff" font-size="30" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="1.655em"><tspan x="-214.67" y="0">TATTOOS</tspan></text>
+  </g>
+</svg>
