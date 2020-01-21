@@ -27,6 +27,8 @@
             
             <ion-list>
 
+
+
               <ion-item class="item" style="margin-bottom: .5em;">
                 <ion-label color="primary" position="floating">Full Name</ion-label>
                 <ion-input autocorrect="on" autofocus="on" clearInput="true" type="text" formControlName="name" name="name" [(ngModel)]="name" placeholder="Enter name" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
@@ -37,6 +39,11 @@
                         {{validate.message}}
                     </div> 
                   </div>
+
+
+                 
+                  <ion-input class="pdf-upload"  type="file" accept="pdf/*" (change)="changeListener($event)"></ion-input>
+                 
                   
 
                   <ion-item class="item" style="margin-bottom: .5em;">

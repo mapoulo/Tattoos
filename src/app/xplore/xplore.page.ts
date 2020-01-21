@@ -71,6 +71,7 @@ tattoo = {
   ShowName=[];
 
   name = "";
+  image = '';
 
   email: string;
 
@@ -80,7 +81,7 @@ tattoo = {
     StartingpriceRange: '',
     EndingpriceRange: '',
     nameTattoo: '',
-    categories: ''
+    categories: '',
   }
  
   storage = firebase.storage().ref();
@@ -174,7 +175,8 @@ tattoo = {
                 this.ShowName = [];
                  if(item.data().email === this.email){
                    this.DeliverDataService.name = item.data().name;
-                   this.name = item.data().name
+                   this.name = item.data().name;
+                   this.image = item.data().image;
                    console.log("Your name is here ", item.data().name);
                    
                    this.ShowName.push(item.data());
@@ -232,15 +234,16 @@ tattoo = {
     this.loader = true;
     this.tattooDisplay = !this.tattooDisplay;
   
-    if(tattoo) {
+    
       
       this.tattoos.image = tattoo.image;
-      this.tattoos.price = tattoo.pricerange;
       this.tattoos.nameTattoo = tattoo.name;
       this.tattoos.description = tattoo.description
       this.tattoos.categories = tattoo.categories;
       this.continue = tattoo;
-    }
+      this.tattoo.StartingpriceRange = tattoo.startPrice;
+      this.tattoo.EndingpriceRange = tattoo.endPrice
+  
 
    
 
@@ -496,8 +499,8 @@ logOut(){
       this.DeliverDataService.dataSaved.description = tattoo.description;
       this.DeliverDataService.dataSaved.image = tattoo.image;
       this.DeliverDataService.dataSaved.name = tattoo.name;
-      this.DeliverDataService.dataSaved.pricerange = tattoo.pricerange;
-     
+      this.DeliverDataService.dataSaved.startPrice = tattoo.startPrice;
+      this.DeliverDataService.dataSaved.endPrice = tattoo.endPrice;
      this.tattooDisplay = false;
    
 

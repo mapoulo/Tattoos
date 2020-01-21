@@ -20,6 +20,7 @@ export class NotificationsPage implements OnInit {
   articleDiv: any = document.getElementsByClassName('article');
   days = "";
   icon = 'ios-arrow-down';
+  Username = "";
 
   constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
     // this.array = [];
@@ -67,20 +68,20 @@ export class NotificationsPage implements OnInit {
 
   }
 
-  animate() {
+  animate(i) {
     this.article = !this.article;
     let card = document.getElementsByClassName('card');
     if(this.article) {
       this.icon = 'ios-arrow-up';
-      this.render.setStyle(this.articleDiv[0], 'display', 'block');
-      this.render.setStyle(card[0], 'height', '25%');
-      this.render.setStyle(card[0], 'transition', '500ms');
+      this.render.setStyle(this.articleDiv[i], 'display', 'block');
+      this.render.setStyle(card[i], 'height', '25%');
+      this.render.setStyle(card[i], 'transition', '500ms');
     }else {
       setTimeout(() => {
         this.icon = 'ios-arrow-down';
-        this.render.setStyle(this.articleDiv[0], 'display', 'none');
-        this.render.setStyle(card[0], 'height', '20%');
-        this.render.setStyle(card[0], 'transition', '500ms');
+        this.render.setStyle(this.articleDiv[i], 'display', 'none');
+        this.render.setStyle(card[i], 'height', '20%');
+        this.render.setStyle(card[i], 'transition', '500ms');
       }, 500);
     }
   }
@@ -114,7 +115,7 @@ export class NotificationsPage implements OnInit {
           obj.auId = doc.data().auId,
           obj.image =  doc.data().image,doc.data()
 
-          this.updateDecline(doc.data().auId, doc.data());
+          this.updateDecline(doc.data().auId, doc.data(), data.customerName);
 
           }   
         })
@@ -131,7 +132,7 @@ export class NotificationsPage implements OnInit {
 
   }
 
-  updateDecline(auId, obj){
+  updateDecline(auId, obj, name){
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").doc(auId).update({
       startingDate : obj.startingDate,
@@ -153,11 +154,15 @@ export class NotificationsPage implements OnInit {
       uid : obj.price ,
       bookingState : "Decline",
       auId : obj.auId,
-      image : obj.image
+      image : obj.image,
+      name : name
 
     })
     
   }
+
+
+  
   dismiss() {
     this.modalController.dismiss({
       'dismissed': true
@@ -165,6 +170,10 @@ export class NotificationsPage implements OnInit {
   }
 
   async Accept(data, i){
+
+
+   
+    
 
     const alert = await this.AlertController.create({
       header: "",
@@ -182,6 +191,31 @@ export class NotificationsPage implements OnInit {
     setTimeout(() => {
       console.log("ACCEPTED DATA");
       this.array.splice(i, 1);
+
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(i => {
+
+        i.forEach(a => {
+
+          if(a.data().bookingState === "Accepted"){   
+           this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response")
+           .onSnapshot(data => {
+             this.array = []; 
+             data.forEach(item => {
+               if(item.data().bookingState === "Pending"){
+                
+                 this.array.push(item.data())
+                 // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
+               } 
+             })
+           })
+           
+           
+     
+       // return true; 
+          }
+         
+         })
+      })
      
     },1000);
     
@@ -211,14 +245,14 @@ export class NotificationsPage implements OnInit {
             obj.auId = doc.data().auId,
             obj.image =  doc.data().image,doc.data()
   
-            this.updateAccept(doc.data().auId, doc.data());
+            this.updateAccept(doc.data().auId, doc.data(), data.customerName);
   
             }   
           })
       
     })
 
-
+   
   
   }
 
@@ -229,7 +263,7 @@ export class NotificationsPage implements OnInit {
 
 
 
-  updateAccept(auId, obj){
+  updateAccept(auId, obj, name){
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").doc(auId).update({
       startingDate : obj.startingDate,
@@ -252,7 +286,8 @@ export class NotificationsPage implements OnInit {
       uid : obj.price ,
       bookingState : "Accepted",
       auId : obj.auId,
-      image : obj.image
+      image : obj.image,
+      name : name
 
     })
 

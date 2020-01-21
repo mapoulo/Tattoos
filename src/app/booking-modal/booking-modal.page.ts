@@ -27,7 +27,8 @@ export class BookingModalPage implements OnInit {
     category = "" 
     description = "" 
     image = "" 
-    priceRange = "" 
+    endPrice = ""
+    startPrice = ""
     name = "";
   
     Cname = "";
@@ -75,15 +76,16 @@ export class BookingModalPage implements OnInit {
       this.description = this.DeliverDataService.dataSaved.description  ;
       this.image = this.DeliverDataService.dataSaved.image  ;
       this.name = this.DeliverDataService.dataSaved.name;
-      this.priceRange = this.DeliverDataService.dataSaved.pricerange  ;
+      this.startPrice = this.DeliverDataService.dataSaved.startPrice  ;
+      this.endPrice = this.DeliverDataService.dataSaved.endPrice;
     }, 1000);
     
     this.category = this.DeliverDataService.dataSaved.category ;
     this.description = this.DeliverDataService.dataSaved.description  ;
     this.image = this.DeliverDataService.dataSaved.image  ;
     this.name = this.DeliverDataService.dataSaved.name  ;
-    this.priceRange = this.DeliverDataService.dataSaved.pricerange  ;
-
+    this.startPrice = this.DeliverDataService.dataSaved.startPrice  ;
+    this.endPrice = this.DeliverDataService.dataSaved.endPrice;
   
     console.log("Data in the booking modal" ,  this.description );
 
@@ -117,6 +119,28 @@ export class BookingModalPage implements OnInit {
     this.loader = true;
 
 
+
+    // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+    
+                
+    //   category : this.category,
+    //   description : this.description,
+    //   image : this.image,
+    //  startPrice : this.startPrice,
+    //  endPrice : this.endPrice,
+    //   tattoName: this.name,
+    //   breadth : this.Breadth,
+    //   length : this.Length,
+    //   email : firebase.auth().currentUser.email,
+    //   uid : firebase.auth().currentUser.uid,
+    //   customerName : this.Cname,
+    //   number : this.number,
+    //   bookingState : 'waiting',
+    //   field : "Booking"
+
+
+    // })
+
     setTimeout(() => {
       if (this.tattooForm.valid ) {
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
@@ -125,7 +149,8 @@ export class BookingModalPage implements OnInit {
           category : this.category,
           description : this.description,
           image : this.image,
-          priceRange :  this.priceRange,
+         startPrice : this.startPrice,
+         endPrice : this.endPrice,
           tattoName: this.name,
           breadth : this.Breadth,
           length : this.Length,
@@ -139,7 +164,7 @@ export class BookingModalPage implements OnInit {
     
         }).then( async() => {
     
-          console.log("Sorry no user here");
+          console.log("Your Booking is successful");
           const modal = await this.modalController.create({
             component: SuccessPagePage
           });
@@ -151,7 +176,8 @@ export class BookingModalPage implements OnInit {
           category : this.category,
           description : this.description,
           image : this.image,
-          priceRange :  this.priceRange,
+          startPrice : this.startPrice,
+          endPrice : this.endPrice,
           tattoName: this.name,
           breadth : this.Breadth,
           length : this.Length,
@@ -171,7 +197,7 @@ export class BookingModalPage implements OnInit {
 
       this.loader = false;
       
-    }, 1000);
+    }, 2000);
  
   
 

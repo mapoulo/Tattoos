@@ -34,7 +34,8 @@ export class ProfilePage implements OnInit {
   endingDate;
   Response=[];
   userID :string;
-  name="";
+  name = "";
+  image = "";
   size=0;
   PendingSize=0;
   pdf;
@@ -261,8 +262,8 @@ export class ProfilePage implements OnInit {
              
                if(item.data().email === this.email){
                 this.DeliverDataService.name = item.data().name;
-                this.name = item.data().name
-                
+                this.name = item.data().name;
+                this.image = item.data().image;
                  this.User.push(item.data());
               
                  this.User=[];

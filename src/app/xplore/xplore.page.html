@@ -18,7 +18,7 @@
    <div class="tattoo-details">
      <div class="image-tattoo" routerLink="/profile" >
      <img class="animated zoomIn delay-1s" src="{{tattoos.image}}" alt="">
-     <p style="color: aliceblue;"> hi</p>
+     <p style="color: aliceblue;"></p>
      </div> 
      <div class="tattoo-card-details">
 
@@ -31,7 +31,7 @@
        <img src="{{tattoos.image}}" alt="">
        </div>
        <div class="describe-card-s">
-       <h1 class="ion-text-center">{{tattoos.price | currency: '&#82;'}}</h1>
+       <h1 class="ion-text-center">R{{tattoo.StartingpriceRange}}-R{{tattoo.EndingpriceRange}}</h1>
        <p class="ion-text-center name">{{tattoos.nameTattoo}}</p>
        <p>{{tattoos.description}}</p> 
       </div>
@@ -92,7 +92,11 @@
           <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
           <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
             <p>{{name}}</p>
-            <img src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+
+            <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
+
+
+            <img *ngIf="image != ''" src="{{image}}" alt="">
           </div>
         </div>
 
