@@ -2,7 +2,7 @@
 <ion-content>
 
   <ion-fab vertical="bottom"  horizontal="end" slot="fixed">
-    <ion-fab-button color="success" (click)="modalAnimate()" *ngIf="!edit">
+    <ion-fab-button color="success" (click)="modalAnimate()" *ngIf="!edit && !custom">
       <ion-icon name="create"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -18,7 +18,7 @@
         </div>
        
         <div class="editHeader">
-          <h2 class="ion-text-center">Edit Your profile</h2>
+          <h2 class="ion-text-center" style="font-size: 100%;">Edit Your profile</h2>
         </div>
           <ion-grid>
             <ion-row justify-content-center>
