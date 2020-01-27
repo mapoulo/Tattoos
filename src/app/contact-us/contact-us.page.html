@@ -23,7 +23,9 @@
       </div>
 
       <div class="list-split-pane">
-        <ion-button  fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+        <ion-button  fill="clear" expand="block" color="light" (click)="goToExplore()">Explore</ion-button>
+
+        
         <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
@@ -128,24 +130,28 @@
        
         </div>
         <ion-list>
-        
+
+         
+
           <ion-item class="item" style="margin-bottom: 1em;">
-					  <ion-label color="primary" position="floating">Name</ion-label>
-					  <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-input>
+					  <ion-label color="primary" position="floating" >Name</ion-label>
+					  <ion-input [(ngModel)]="name" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-input>
 					  <ion-icon name="person" color="primary" slot="end"></ion-icon>
 					</ion-item>
         
           <ion-item class="item" style="margin-bottom: 1em;">
 					  <ion-label color="primary" position="floating">Email Address</ion-label>
-					  <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-input>
+					  <ion-input [(ngModel)]="email"  autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-input>
 					  <ion-icon name="mail" color="primary" slot="end"></ion-icon>
 					</ion-item>
           <ion-item class="item" style="margin-bottom: 1em;">
 					  <ion-label color="primary" position="floating">Messages</ion-label>
-					  <ion-textarea autocorrect="on" rows="6" cols="20" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-textarea>
+					  <ion-textarea  [(ngModel)]="message" autocorrect="on" rows="6" cols="20" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-textarea>
 					  <ion-icon name="mail" color="primary" slot="end"></ion-icon>
           </ion-item>
-          <ion-button class="extend" fill="solid" color="secondary" shape="round">Send Message</ion-button>
+          <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage()">Send Message</ion-button>
+
+       
         </ion-list>
         
       </div>

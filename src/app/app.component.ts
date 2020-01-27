@@ -4,8 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase';
-import { firebaseConfig } from '../environments/environment';
+import {firebaseConfig} from '../environments/firebaseConfig'
 import { AlertController } from '@ionic/angular';
+import { NotificationsService } from './notifications.service';
 
 
 
@@ -26,7 +27,8 @@ firebase_id = '396095430599';
     private alertCtrl: AlertController,
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private notificationsService: NotificationsService
   ) {
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
@@ -44,7 +46,12 @@ firebase_id = '396095430599';
     });
   }
 
-
+  ngAfterViewInit() {
+    
+    this.platform.ready().then(async () => {
+       await this.notificationsService.requestPermission();
+    });
+  }
   setupPush() {}
   
 

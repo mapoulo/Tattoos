@@ -25,8 +25,8 @@ export class RegisterPage implements OnInit {
   password = '';
   db=firebase.firestore();
   number : number ;
-
-
+  storage = firebase.storage().ref();
+  image = "";
   tattooForm : FormGroup;
   validation_messages = {
     'name': [
@@ -59,6 +59,29 @@ export class RegisterPage implements OnInit {
      number: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)]))
     })
   }
+
+
+  changeListener(event): void {
+    const i = event.target.files[0];
+    console.log(i);
+    const upload = this.storage.child(i.name).put(i);
+    upload.on('state_changed', snapshot => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('upload is: ', progress , '% done.');
+        
+       
+      
+    }, err => {
+    }, () => {
+
+      upload.snapshot.ref.getDownloadURL().then(image => {
+        console.log('File avail at: ', image);
+        this.image = image;
+     
+      });
+
+    });
+  }
   
 
  async register(){
@@ -71,7 +94,7 @@ export class RegisterPage implements OnInit {
    setTimeout(() => {
 
     
-    if (this.tattooForm.valid ) {
+    if (this.tattooForm.valid && this.image != "" ) {
 
    
   
@@ -90,7 +113,8 @@ export class RegisterPage implements OnInit {
       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
         name : this.name,
         email : this.email,
-        number : this.number
+        number : this.number,
+        image : this.image
       })
            console.log("Logged in");
        this.reg()

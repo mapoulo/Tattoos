@@ -325,13 +325,17 @@
         </div>
         <div class="list">
           <ul>
-              <li><a routerLink="/xplore">Explore</a></li>
+              <li><a routerLink=''>Explore</a></li>
               <li><a routerLink="/contact-us">Contact Us</a></li>
           </ul>
           <div class="profile">
             <p>{{name}}</p>
             <div class="profile-image">
-              <img src="../../../assets/sergio-rodriguez-portugues-del-olmo-IbnMDtiUP4Q-unsplash.jpg" alt="">
+
+
+              <img src="{{image}}" alt="">
+
+
             </div>
           </div>
           <div class="notifications"  (click)="Notifications()">
@@ -362,7 +366,7 @@
                 <div class="profile-container-here">
                   <div class="wrap-now">
                       <div class="image-profile-here">
-                          <img src="../../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg"  alt="">
+                          <img src="{{image}}" alt="">
                        </div>
                        <div  *ngFor="let user of User" class="information-profile">
                           <p>Name   :  {{ user.name}}</p>

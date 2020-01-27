@@ -35,7 +35,7 @@
             <p class="header-para" style="text-align: center;">View Tattoo's Information</p>
             <img src="{{image}}" alt="" width="100px" class="small-image">
             <p> {{description}}</p>
-            <h1 style="font-size: 2.8vh;text-align: center; color:#fff">{{priceRange | currency: '&#82;'}} - R700.00</h1>
+            <h1 style="font-size: 2.8vh;text-align: center; color:#fff">R{{startPrice}} - R{{endPrice}}</h1>
         </article>
       </div>
     <div class="container">
@@ -43,7 +43,7 @@
         <div class="show-close"></div>
        <div class="tittle">
           <div class="priceRage">
-              <p style="font-weight: bold; font-size: 100%;" class="animated flipInX delay-1s">{{priceRange | currency: '&#82;'}}</p>
+              <p style="font-weight: bold; font-size: 100%;" class="animated flipInX delay-1s">R{{startPrice}} - R{{endPrice}}</p>
             </div>
          <p>{{name}}</p>
        </div>

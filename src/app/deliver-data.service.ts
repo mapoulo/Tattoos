@@ -26,7 +26,8 @@ export class DeliverDataService {
     category : "",
     description : "",
     image : "",
-   pricerange : "",
+    endPrice : "",
+    startPrice : "",
     name : ""
   }
 
