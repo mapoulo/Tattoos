@@ -517,13 +517,48 @@ ion-row {
     
 }
 .deep {
-    flex-basis: 20%;
+    flex-basis: 10%;
     /* padding: 3em; */
    
 }
 .form {
-    flex-basis: 80%;
-    background: red;
+    height: 90%;
+  /*   flex-grow: 0;
+    flex-shrink: 0; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+
+
+    .messagesss {
+        position: relative;
+        padding: 1em;
+        margin-top: 1%;
+
+        .btt {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 1em;
+            
+        }
+      
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0%;
+            width: 3px;
+            height: 100%;
+            background: #d36954;
+            content: '';
+        }
+
+
+    }
+
+/*     height: 50%; */
+
 }
 .card-container{
     flex-basis: 80%;
@@ -630,9 +665,13 @@ ion-row {
 }
 .editForm {
     flex-basis: 30%;
+    height: 60vh;
     padding: 1em;
     margin-right: 1%;
     background: #fff;
+    display: flex;
+    flex-direction: column;
+
    /*  height: 70%; */
  
    /* justify-self: flex-start;
