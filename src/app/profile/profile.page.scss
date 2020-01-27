@@ -40,6 +40,45 @@
 
 }
 
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.648);
+    z-index: 500;
+    display: flex;
+   
+    justify-content: center;
+    align-items: center;
+
+
+    .small-modal-edit-profile{
+        flex-basis: 20%;
+        height: 60%;
+        background: rgb(255, 255, 255);
+        box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.5),  
+          -6px -6px 12px  rgb(82, 82, 82);
+          position: relative;
+          border-radius: 3px;
+
+
+          .close-btn {
+              position: absolute;
+              top: -10%;
+              right: 0%;
+          }
+          .pro-form-image {
+              margin-top: 1em;
+          }
+          
+    }
+}
+ion-row {
+    --padding: 1em;
+
+}
 .customizedTDiv {
     position: absolute;
     top: 0;
@@ -57,7 +96,7 @@
 
 
         .list-custom {
-            flex-basis: 40%;
+            flex-basis: 20%;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -69,6 +108,7 @@
                 flex: 0 0 25%;
                 position: relative;
                 margin: 1%;
+                
                 
                 img {
                     position: absolute;
@@ -83,7 +123,7 @@
     
         }
         .showDepict{
-            flex-basis: 60%;
+            flex-basis: 80%;
            /*  background: blue; */
             display: flex;
             flex-direction: column;
@@ -418,6 +458,14 @@
            /*  justify-content: center; */
             padding: 1em;
 
+            .messages {
+                height: 100%;
+                flex-basis: 100%;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+            }
+
             .custom-card {
                 flex-basis: 32%;
                 height: 50%;
@@ -470,7 +518,11 @@
 .deep {
     flex-basis: 20%;
     /* padding: 3em; */
-   /*  background: rgb(230, 230, 230); */
+   
+}
+.form {
+    flex-basis: 80%;
+    background: red;
 }
 .card-container{
     flex-basis: 80%;
@@ -531,6 +583,13 @@
                 }
             }
         }
+
+        .info {
+            padding: .5em;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
         
     }
   
@@ -573,9 +632,16 @@
     padding: 1em;
     margin-right: 1%;
     background: #fff;
-   justify-self: flex-start;
-   align-self:flex-start ;
+   /*  height: 70%; */
+ 
+   /* justify-self: flex-start;
+   align-self:flex-start ; */
+
+  
+
+ 
 }
+
 .scroll-container {
     flex-basis: 80%; 
     overflow: auto;
@@ -645,6 +711,24 @@ ion-button.explore {
 
 @media only screen and (max-width: 600px) {
 
+    .modal {
+        .small-modal-edit-profile{
+            flex-basis: 90%;
+
+            .close-btn {
+                top: -15%;
+            }
+        }
+    }
+
+    ion-badge {
+        width: 15px;
+        height: 15px;
+
+        font-size: 100%;
+
+    }
+
    .grow {
        font-size: 60% !important;
    }
@@ -663,7 +747,7 @@ ion-button.explore {
 
         .card {
             flex-basis: 90%;
-            background: red;
+           /*  background: red; */
             height: 100%;
             flex-grow: 0;
             flex-shrink: 0;
@@ -705,7 +789,7 @@ ion-button.explore {
            }
 
            .showDepict {
-
+            flex-basis: 60%;
            }
             
         }
