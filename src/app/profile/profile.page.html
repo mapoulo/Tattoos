@@ -1,7 +1,60 @@
 
 <ion-content>
+
+  <ion-fab vertical="bottom"  horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="modalAnimate()" *ngIf="!edit && !custom">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   
   <div class="main-container">
+
+    <div class="modal edit animated " [ngClass]="{'flipInX': edit, 'flipOutY': !edit}">
+      <div class="small-modal-edit-profile">
+        <div class="close-btn">
+          <ion-fab-button color="dark" size="small" class="close-btn" fill="clear" (click)="modalAnimate()">
+            <ion-icon name="close"></ion-icon>
+          </ion-fab-button>
+        </div>
+       
+        <div class="editHeader">
+          <h2 class="ion-text-center" style="font-size: 100%;">Edit Your profile</h2>
+        </div>
+          <ion-grid>
+            <ion-row justify-content-center>
+              <ion-col size="9" class="pro-form-image">
+                <ion-item>
+                  <ion-label position="floating">Full Name </ion-label>
+                  <ion-icon size="small" mode="ios" slot="end" name="person"></ion-icon>
+                  <ion-input type="text" [(ngModel)]="Myname"></ion-input>
+                 
+                </ion-item>
+             
+            </ion-col>
+             
+            </ion-row>
+
+            <ion-row justify-content-center>
+              <ion-col size="9" class="pro-form-image">
+                <ion-item>
+                  <ion-label position="floating">Phone Number</ion-label>
+                  <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
+                  <ion-input type="text" [(ngModel)]="Mynumber"></ion-input>
+                </ion-item>
+               
+              
+              </ion-col>
+            </ion-row>
+
+            <ion-row justify-content-center>
+              <ion-col size="5" class="pro-form-image">
+                <ion-button expand="block" color="success" shape="round" (click)="Edit()">Edit</ion-button>
+              
+              </ion-col>
+            </ion-row>
+          </ion-grid> 
+      </div>
+    </div>
 
     
   <div class="loader" *ngIf="loader">
@@ -46,12 +99,12 @@
           <div class="image-custom" >
             <img src="{{image}}" alt="">
           </div>
-          <div class="image-custom">
+         <!--  <div class="image-custom">
             <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
           </div>
           <div class="image-custom">
             <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
-          </div>
+          </div> -->
         </div>
         <div class="showDepict">
           <div class="img-fullscreen">
@@ -246,26 +299,8 @@
   </div>
 </div>
 </div>
-<div class="card" >
-  <div class="card-t">
-    <div class="image-card">
-      <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
-    </div>
-    <div class="info">
-      <p>Bookked</p>
-    </div>
-  </div>
-  </div>
-  <div class="card" >
-    <div class="card-t">
-      <div class="image-card">
-        <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
-      </div>
-      <div class="info">
-        <p>Bookked</p>
-      </div>
-    </div>
-    </div>
+
+
 </div>
            
          
@@ -277,26 +312,11 @@
         
 
           <div class="deep">
-            <h4 style="font-weight: 700;">Edit Your Profile</h4>
-            <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
+            <h4 style="font-weight: 700;">Messages</h4>
+            <p style="padding: 1em;">These are the list of all messages you sent via (Contact-Us) Form</p>
           </div>
           <div class="form">
-            <ion-list>
-              <ion-item>
-                <ion-label position="floating">Full Name</ion-label>
-                <ion-input name="Myname" type="text" [(ngModel)]="Myname"></ion-input>
-                <ion-icon mode="ios" name="person" slot="end"></ion-icon>
-              </ion-item>
-             
-              <ion-item style="margin-bottom: 2em;">
-                <ion-label position="floating" name="Mynumber" >Phone Number</ion-label>
-              <ion-input type="text" [(ngModel)]="Mynumber"></ion-input>
-                <ion-icon mode="ios" name="call" slot="end"></ion-icon>
-              </ion-item>
-
-              
-            </ion-list>
-            <ion-button color="success" shape="round" expand="half" (click)="Edit()"><ion-icon name="create"></ion-icon> &nbsp; Edit</ion-button>
+          
           </div>  
          
         </div>
