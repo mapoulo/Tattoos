@@ -446,6 +446,25 @@ export class ProfilePage implements OnInit {
         
   
     })
+    //view More
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+      this.Requests=[];
+    
+       data.forEach(i => {
+         if(i.exists){
+           if(i.data().field === "Customized"){
+            
+             console.log("ewewew ", i.data());
+             this.Requests.push(i.data());
+           
+            
+           }
+         }
+       })
+ 
+       
+ 
+   })
   }
   
 }
