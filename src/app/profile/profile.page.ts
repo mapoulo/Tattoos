@@ -271,15 +271,7 @@ export class ProfilePage implements OnInit {
     }
     diff;
     diffDays;
-    // download() {
-    //   const fileTransfer: FileTransferObject = this.transfer.create();
-    //   fileTransfer.download(this.pdf, this.file.dataDirectory + 'file.pdf').then((entry) => {
-    //     console.log('download complete: ' + entry.toURL());
-    //   }, (error) => {
-    //     // handle error
-    //   });
-      
-    // }
+ 
     downloadPdf() {
       
       this.db.collection("Admin").onSnapshot(data => {
@@ -295,23 +287,7 @@ export class ProfilePage implements OnInit {
       window.location.href = this.link;
      }, 1000);
     
-  //     this.fileOpener.open(this.MyPdf, 'application/pdf')
-  // .then(() => console.log('File is opened'))
-  // .catch(e => console.log('Error opening file', e));
-  //     if (this.plt.is('cordova')) {
-  //       this.pdfObj.getBuffer((buffer) => {
-  //         var blob = new Blob([buffer], { type: 'application/pdf' });
-  // 
-  //         // Save the PDF to the data Directory of our App
-  //         this.file.writeFile(this.file.dataDirectory, 'myletter.pdf', blob, { replace: true }).then(fileEntry => {
-  //           // Open the PDf with the correct OS tools
-  //           this.fileOpener.open(this.MyPdf, 'application/pdf');
-  //         });
-  //       });
-  //     } else {
-  //       // On a browser simply use download!
-  //       this.pdfObj.download();
-  //     }
+  
     }
     
     
@@ -352,29 +328,7 @@ export class ProfilePage implements OnInit {
         })
         
         
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
+    
       }
     })
          //User's details
@@ -473,24 +427,26 @@ export class ProfilePage implements OnInit {
     
       })
     
-      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
-      //   data.forEach(i => {
-      //     console.log("ewewew ", i.data());
-      //     this.Requests.push(i.data());
-          
-      //   })
-      // })
-      
+     //Customized tattoo
+     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
+       this.Requests=[];
+     
+        data.forEach(i => {
+          if(i.exists){
+            if(i.data().field === "Customized"){
+             
+              console.log("ewewew ", i.data());
+              this.Requests.push(i.data());
+            
+             
+            }
+          }
+        })
   
-      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
-      //   data.forEach(i => {
-      //     console.log("Response ", i.data());
-      //     this.Response.push(i.data());
-          
-      //   })
-      // })
-    
-      
+        
+  
+    })
   }
+  
 }
 }
