@@ -6,7 +6,7 @@ import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { ModalController, Platform, ToastController } from '@ionic/angular';
+import { ModalController,AlertController, Platform, ToastController } from '@ionic/angular';
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
@@ -28,10 +28,18 @@ export class ProfilePage implements OnInit {
   showProfile1;
   category: any = 'accepted';
 
+  showCustom = {
+    name_t: '',
+    image_t: '',
+    length: '',
+    breadth: '',
+    desc: ''
+  }
+
 
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
-  constructor(private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
   email: string;
@@ -467,5 +475,41 @@ export class ProfilePage implements OnInit {
    })
   }
   
+}
+
+showTattoo(item) {
+  console.log(item);
+  this.showCustom.name_t = item.name;
+  this.showCustom.breadth = item.breadth;
+  this.showCustom.length = item.length;
+  this.showCustom.image_t = item.image;
+  this.showCustom.desc = item.description;
+  
+}
+async DeleteData(Customized) {
+  console.log(Customized);
+  
+  const alert = await this.alertCtrl.create({
+    header: 'DELETE!',
+    message: '<strong>Are you sure you want to delete this tattoo?</strong>',
+    buttons: [
+      {
+        text: 'Cancel',
+        
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      }, {
+        text: 'Delete',
+        handler: data => {
+          this.db.collection("Bookings").doc(Customized.docid).delete();
+          
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+
 }
 }

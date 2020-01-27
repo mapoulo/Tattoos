@@ -95,9 +95,9 @@
         <ion-button fill="clear" (click)="customTattoos()" color="light" size="small"><ion-icon name="close"></ion-icon></ion-button>
       </div>
        <div class="custom-container">
-        <div class="list-custom" *ngFor = "let item of Requests">
-          <div class="image-custom" >
-            <img src="{{image}}" alt="">
+        <div class="list-custom">
+          <div class="image-custom"  *ngFor = "let item of Requests" (click)="showTattoo(item)">
+            <img src="{{item.image}}" alt="">
           </div>
          <!--  <div class="image-custom">
             <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
@@ -107,8 +107,11 @@
           </div> -->
         </div>
         <div class="showDepict">
+          <div class="mess" *ngIf="!showCustom">
+            <p style="font-weight: bold; color: #fff;">Please select the image on the side to diplay here in fullscreen</p>
+          </div>
           <div class="img-fullscreen">
-            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
+            <img src="{{showCustom.image_t}}" alt="">
           </div>
           <div class="details">
             <div class="arrows">
@@ -116,14 +119,14 @@
                 <ion-icon [name]="arrows"></ion-icon>
               </ion-button>
             </div>
-            <h1>Tattoo Name</h1>
-            <p>R400.00</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque dolore ducimus laboriosam voluptas consequuntur tempora mollitia praesentium qui, sint assumenda sed nesciunt soluta pariatur accusamus consequatur nobis unde aliquid deserunt.</p>
-            <p>Length: 4cm</p>
-            <p>Breadth: 4cm</p>
+            <h1>{{showCustom.name}}</h1>
+            <!-- <p>R400.00</p> -->
+            <p>{{showCustom.desc}}</p>
+            <p>Length: {{showCustom.breadth}}cm</p>
+            <p>Breadth: {{showCustom.length}}cm</p>
 
             <ion-button size="large" fill="clear"color="danger">
-              <ion-icon name="trash"></ion-icon> Delete
+              <ion-icon name="trash" (Click)="DeleteData(Customized)"></ion-icon> Delete
             </ion-button>
           </div>
         </div>
@@ -258,37 +261,17 @@
                 <p>You have no request <span style="color: green;">accepted</span>  yet</p>
               </div>
  
-<!-- <div class="card" >
-  <div class="card-t">
-    <div class="image-card">
-      <img src="../../assets/kaizen-nguy-n-s9imzeGXKQ0-unsplash.jpg" alt="">
-    </div>
-    <div class="info">
-      <p>Bookked</p>
-    </div>
-  </div>
-</div> -->
+
 
        </div>
        <div class="cardFor" *ngSwitchCase="'declined'">
         <div class="no-items">
           <p>You have no request <span style="color: rgb(207, 49, 1);">declined</span>   yet</p>
         </div>
-      <!--   <div class="card" >
-      <div class="card-t">
-        <div class="image-card">
-          <img src="../../assets/anotherLogo.svg" alt="">
-        </div>
-        <div class="info">
-          <p>Bookked</p>
-        </div>
-      </div>
-  </div> -->
+  
  </div>
  <div class="cardFor" *ngSwitchCase="'pending'">
- <!--  <div class="no-items">
-    <p>You have no request <span style="color: rgb(109, 109, 109);">pending</span>   yet</p>
-  </div> -->
+
   <div class="card" >
 <div class="card-t">
   <div class="image-card">
@@ -326,274 +309,5 @@
 
       </div>
       </div>
-<!--   <main class="main animated fadeIn">
-    <nav class="nav-bar">
-      <div class="navigation animated slideInDown delay-1s">
-        <div class="logo">
-          <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
-        </div>
-        <div class="list">
-          <ul>
-              <li><a routerLink=''>Explore</a></li>
-              <li><a routerLink="/contact-us">Contact Us</a></li>
-          </ul>
-          <div class="profile">
-            <p>{{name}}</p>
-            <div class="profile-image">
 
-
-              <img src="{{image}}" alt="">
-
-
-            </div>
-          </div>
-          <div class="notifications"  (click)="Notifications()">
-            <ion-button fill="clear" color="light" size="large">
-              <ion-icon name="notifications-outline"> </ion-icon>
-            </ion-button>
-            <ion-badge class="badges" color="secondary">{{MyNotifications}}</ion-badge>
-          </div>
-          <ion-button class="btn-menu" fill="clear" color="light" size="large">
-              <ion-icon name="menu"> </ion-icon>
-            </ion-button>
-        </div>
-      </div>
-    </nav>
-
-    
-    <section class="container">
-        <div class="profile-container">
-          <div class="profile-info">
-             <div class="profile-here">
-               <div class="name" *ngFor="let user of User">
-                <p></p> 
-                <h1>Hi, {{ user.name}}</h1>
-                <ion-button color="secondary" (click)="logout()">
-                  <ion-icon name="log-out"></ion-icon> &nbsp; Logout
-                </ion-button>
-               </div>
-                <div class="profile-container-here">
-                  <div class="wrap-now">
-                      <div class="image-profile-here">
-                          <img src="{{image}}" alt="">
-                       </div>
-                       <div  *ngFor="let user of User" class="information-profile">
-                          <p>Name   :  {{ user.name}}</p>
-                          <p>Email  : {{ user.email}}</p>
-                      
-                          <p>{{user.number}}</p>
-                        </div>
-                  </div>
-                  <ion-fab-button (click)="modalAnimate()" size="small" color="success">
-                      <ion-icon name="create"></ion-icon>
-                     </ion-fab-button>
-                </div>
-                <div class="analytics">
-              
-                    <div class="accepted">
-                        <p>{{size}}</p>
-                        <p style="color: green; font-size: 16px;"><small>Accepted Bookings</small></p>
-                      </div>
-                      <div class="declined">
-                          <p>{{PendingSize}}</p>
-                          <p style="color: blue; font-size: 16px;"><small>Pending Bookings</small></p>
-                        </div>
-                  </div>
-             </div> 
-            
-      
-             
-          </div>
-        </div>
-
-
-        <div class="details-container">
-          <div class="history-booking">
-            <div class="header">
-              <p >History Bookings</p>
-            </div>
-              <div class="booking-card">
-                  <div class="booking-list" *ngFor="let request of Response">
-                      <div class="booking-history-item">
-                        <div class="tattoo-booked">
-                          <img src="{{request.image}}" alt="">
-                        </div>
-                        <div class="info-tattoo">
-                            <p>Booking Status : {{request.bookingState}} </p>
-                            <p>Start Date     : {{request.startingDate | date: 'fullDate'}}</p>
-                            <p>End Date  : {{request.endingDate | date: 'fullDate'}}</p>
-                            <p>{{request.days}} Days Sessions</p>
-                        </div>
-
-
-                        
-                        <div class="btn-downloads">
-                         
-                           <button class="btn-downla" (click)="downloadPdf()">
-                              <ion-icon name="download"></ion-icon> &nbsp; Download Contract
-                           </button>
-
-                           
-                        </div>
-                      
-                      </div>
-                    
-                  </div>
-                 
-                 
-                </div>
-          </div>
-
-        
-        </div>
-
-
-
-        <div class="details-container">
-          <div class="history-booking">
-            <div class="header">
-              <p >Pending Bookings</p>
-            </div>
-              <div class="booking-card">
-                  <div class="booking-list" *ngFor="let request of Requests">
-                      <div class="booking-history-item">
-                        <div class="tattoo-booked">
-                          <img src="{{request.image}}" alt="">
-                        </div>
-                        <div class="info-tattoo">
-                            <p>Booking Status : {{request.bookingState}} </p>
-                            
-                        </div>
-
-
-                        
-                       
-                      
-                      </div>
-                    
-                  </div>
-                 
-                 
-                </div>
-          </div>
-
-          
-        
-        </div>
-
-    </section>
-    
-    <div class="modal edit animated " [ngClass]="{'flipInX': edit, 'flipOutY': !edit}">
-      <div class="small-modal-edit-profile">
-        <ion-fab-button color="dark" size="lage" class="close-btn" fill="clear" (click)="modalAnimate()">
-          <ion-icon size="large" name="close"></ion-icon>
-        </ion-fab-button>
-        <p class="header" text-center>Edit Your profile</p>
-          <ion-grid>
-            <ion-row justify-content-center>
-              <ion-col size="12" class="pro-form-image">
-              name : <input type="text" [(ngModel)]="Myname">
-            </ion-col>
-             
-            </ion-row>
-
-            <ion-row justify-content-center>
-              <ion-col size="12" class="pro-form-image">
-                number : <input type="text" [(ngModel)]="Mynumber">
-              
-              </ion-col>
-            </ion-row>
-
-            <ion-row justify-content-center>
-              <ion-col size="12" class="pro-form-image">
-                <button (click)="Edit()">Edit</button>
-              
-              </ion-col>
-            </ion-row>
-          </ion-grid> 
-      </div>
-    </div>
-  </main> -->
-   
-<!-- 
-  name: <input type="text" [(ngModel)]="name" placeholder="{{name}}"><br />
-  phoneNumber: <input type="text" [(ngModel)]="phoneNumber" placeholder="{{phoneNumber}}"><br />
-  email: <input type="text" [(ngModel)]="email" placeholder="{{email}}"><br />
-  <button (click)="goToEditPage()">Edit</button>  -->
-          
-<!-- 
-                  <section class="content-container"> 
-                    <header class="header" *ngFor="let user of User">
-                        <h1 class="first-header">wellcome  {{ user.name}}</h1>
-                     
-                      </header>
-                      <ion-button color="secondary" (click)="logout()">
-                          <ion-icon name="log-out"></ion-icon> Logout
-                        </ion-button>
-                      <div class="sub-container">
-                        <div class="top-profile">
-                           <div class="profiles-info">
-                               <div   class="profile" style="height: 20vh; width: 20vh;">
-                                
-                                 </div>
-                                 <article *ngFor="let user of User">
-                                  <h4>Name : {{ user.name}}</h4>
-                                  <p>{{ user.email}}</p>
-                                  
-                                  </article>
-                                
-                               </div>
-                  
-                          
-                        </div>
-                       
-                     
-                        </div>
-                    </section>
-                    <br>
-                    <br>
-                    <section class="content-container"> 
-                      <header class="header" >
-                          <h1 class="first-header">Recent Bookings</h1>
-                    
-                        </header>
-                        <div class="sub-container">
-                        
-                                   </div>
-                                   <article *ngFor="let request of Requests"> -->
-                                    <!-- <h4>Status : {{ request.bookingState}}</h4> -->
-                                  
-                                    <!-- <img src="{{request.image}}" class="tattoo-image" alt=""> -->
-                                 <!--     <p>TattoName: {{ request.tattoName}}</p>
-                                    <p>Category :{{ request.category}}</p>
-                                    <p>Breadth: {{ request.breadth}}</p>
-                                    <p>Length :{{ request.length}}</p>
-                                    <p>Description: {{ request.description}}</p>
-                                    <br>
-                               
-                                    
-                                    
-                                    </article>
-                                  
-                           
-                      </section> -->
-                      <!-- <section class="content-container"> 
-                        <header class="header" >
-                            <h1 class="first-header">booking </h1>
-                      
-                          </header>
-                          <div class="sub-container">
-                          
-                                     </div>
-                                     <article *ngFor="let admin of Response">
-                                      <h4>Start Date : {{ admin.bookingState}}</h4>
-                                      <p>Price: {{ admin.price}}</p>
-                                      <p>End Date :{{ admin.endingDate}}</p>
-                                      
-                                      </article>
-                                    
-                             
-                        </section> -->
-              
-         
 </ion-content>

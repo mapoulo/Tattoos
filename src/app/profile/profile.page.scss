@@ -130,6 +130,14 @@ ion-row {
             flex-direction: column;
             position: relative;
 
+            .mess {
+                flex-basis: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
             .img-fullscreen {
                 flex-basis: 100%;
                 position: relative;
