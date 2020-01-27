@@ -8,8 +8,13 @@
     </ion-button>
   </ion-buttons>
 </ion-header>
-
 <ion-content>
+ 
+    <div class="loader" *ngIf="loader">
+      <div class="loader-1">
+        
+      </div>
+    </div>
   <section class="upload-tattoo">
     <div class="upload">
         <ion-item  class="imageitem" lines="none" >
@@ -18,14 +23,19 @@
           </ion-item>
     <ion-item class="imageitem" lines="none" *ngIf="tattoo"><img  src="{{tattoo}}" height="480px" width="400px" style="object-fit: cover;"></ion-item>
       
-
+    <form [formGroup]="tattooForm">
     <ion-grid>
       <ion-row justify-content-center>
         <ion-col size="8">
             <ion-item>
                 <ion-label position="floating">Length in cm</ion-label>
-                <ion-input type="number"  [(ngModel)]="Length"></ion-input>
+                <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
             </ion-item>
+            <div class="error" *ngFor="let validate of validation_messages.Length">
+              <div class="messages" *ngIf="tattooForm.get('Length').hasError(validate.type) && (tattooForm.get('Length').dirty || tattooForm.get('Length').touched)">
+                {{validate.message}}
+            </div>
+            </div>
             
         </ion-col>
       </ion-row>
@@ -33,8 +43,13 @@
         <ion-col size="8">
             <ion-item>
                 <ion-label position="floating">Breadth in cm</ion-label>
-                <ion-input type="number" [(ngModel)]="Breadth" ></ion-input>
+                <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
               </ion-item>
+              <div class="error" *ngFor="let validate of validation_messages.Breadth">
+                <div class="messages" *ngIf="tattooForm.get('Breadth').hasError(validate.type) && (tattooForm.get('Breadth').dirty || tattooForm.get('Breadth').touched)">
+                  {{validate.message}}
+              </div>
+              </div>
               
         </ion-col>
       </ion-row>
@@ -43,13 +58,12 @@
             <p>You will receive a contract, date and time at which you can come and have your tattoo done.</p>
         </ion-col>
         <ion-col size="8" justify-content-center>
-            <ion-button  color="secondary" shape="round" expand="block" (click)="Booking()" >Book</ion-button>
+            <ion-button  color="secondary" shape="round" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   
-      <!-- <p>Please Upload a Tattoo.</p> -->
-     
+    </form>
     </div>
   </section> 
 </ion-content>

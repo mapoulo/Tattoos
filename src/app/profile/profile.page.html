@@ -96,7 +96,7 @@
           <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
           <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
             <p>{{name}}</p>
-            <img src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+            <img src="{{image}}"alt="">
           </div>
         </div>
 
@@ -111,7 +111,7 @@
     </div>
     <div class="wrapper-page">
       <div class="wrapper-header">
-        <h1>Hi, khuthy</h1>
+        <h1>Hi,{{Myname}} </h1>
       </div>
 
       <div class="container-sub">
@@ -119,37 +119,26 @@
           <div class="cup">
             <div class="profile-image-header-div">
               <div class="move-up">
-                <img src="../../assets/allef-vinicius-hxNiXP498UI-unsplash.jpg" alt="">
+                <img src="{{image}}"alt="">
               </div>
             </div>
             <div class="info-data">
               <h4> Personal Information</h4>
-              <div class="p"> <ion-icon mode="ios" name="person"></ion-icon><p>Khuthadzo Muenda</p></div>
-              <div class="p"><ion-icon mode="ios" name="mail"></ion-icon><p>muebda@gmail.com</p></div>
-              <div class="p"><ion-icon mode="ios" name="call"></ion-icon><p>+2776 647 6467</p></div>
+              <div class="p"> <ion-icon mode="ios" name="person"></ion-icon><p>{{Myname}}</p></div>
+              <div class="p"><ion-icon mode="ios" name="mail"></ion-icon><p>{{email}}</p></div>
+              <div class="p"><ion-icon mode="ios" name="call"></ion-icon><p>{{Mynumber}}</p></div>
             </div>
 
             <div class="customizedTattoo">
               <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
-              <div class="custom-card-container">
-                <div class="custom-card">
-                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+              <div class="custom-card-container" >
+               
+                <div class="custom-card" *ngFor = "let item of Requests">
+                  <img src="{{item.image}}" alt="">
                 </div>
-                <div class="custom-card">
-                  <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
-                </div>
-                <div class="custom-card">
-                  <img src="../../assets/chris-blonk-sjI_iRsD-kU-unsplash.jpg" alt="">
-                </div>
-                <div class="custom-card">
-                  <img src="../../assets/clem-onojeghuo-tHEXNI4L4S4-unsplash.jpg" alt="">
-                </div>
-                <div class="custom-card">
-                  <img src="../../assets/clem-onojeghuo-tHEXNI4L4S4-unsplash.jpg" alt="">
-                </div>
-                <div class="custom-card">
-                  <img src="../../assets/clem-onojeghuo-tHEXNI4L4S4-unsplash.jpg" alt="">
-                </div>
+
+
+              
               </div>
               <div class="more">
                 <ion-button fill="clear" slot="icon-only" size="small" expand="block" color="secondary" (click)="customTattoos()">View More</ion-button>
@@ -160,8 +149,8 @@
           </div>
           <div class="download">
            
-            <div class="btn-download">
-              <div class="download-icon"><ion-icon name="download"></ion-icon></div>
+            <div class="btn-download" >
+              <div class="download-icon"><ion-icon name="download" click="downloadPdf()"></ion-icon></div>
               <div class="text-download">
                 <p>Download Contract Form</p>
               </div>
