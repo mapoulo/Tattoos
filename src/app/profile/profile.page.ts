@@ -433,7 +433,7 @@ export class ProfilePage implements OnInit {
         
          // this.Date;
         //Response  
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response") .onSnapshot(data => {
        
         data.forEach(i => {
           this.Response=[];
