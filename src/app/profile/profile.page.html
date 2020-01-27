@@ -42,9 +42,9 @@
         <ion-button fill="clear" (click)="customTattoos()" color="light" size="small"><ion-icon name="close"></ion-icon></ion-button>
       </div>
        <div class="custom-container">
-        <div class="list-custom">
-          <div class="image-custom">
-            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
+        <div class="list-custom" *ngFor = "let item of Requests">
+          <div class="image-custom" >
+            <img src="{{image}}" alt="">
           </div>
           <div class="image-custom">
             <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
