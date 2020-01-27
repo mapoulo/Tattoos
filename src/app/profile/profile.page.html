@@ -1,6 +1,323 @@
 
 <ion-content>
-  <main class="main animated fadeIn">
+  
+  <div class="main-container">
+
+    
+  <div class="loader" *ngIf="loader">
+    <div class="loader-1">
+      
+    </div>
+  </div>
+
+    <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
+      <div class="close">
+        <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+          <img  *ngIf="showProfile1"  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+        </div>
+        <ion-button fill="clear" (click)="addClasseAnimates()" color="light">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+
+       
+      </div>
+
+      <div class="list-split-pane">
+        <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+        <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
+        <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
+        <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
+        <ion-button fill="solid" expand="block" color="light"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+     
+      </div>
+      <div class="logoman">
+        <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+      </div>
+    </aside>
+
+
+    <div class="customizedTDiv animated" [ngClass]="{'bounceOutUp': !custom, 'bounceInUp': custom}">
+      <div class="header-custom">
+        <h4>Customized Tattoo</h4>
+        <ion-button fill="clear" (click)="customTattoos()" color="light" size="small"><ion-icon name="close"></ion-icon></ion-button>
+      </div>
+       <div class="custom-container">
+        <div class="list-custom">
+          <div class="image-custom">
+            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
+          </div>
+          <div class="image-custom">
+            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
+          </div>
+          <div class="image-custom">
+            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
+          </div>
+        </div>
+        <div class="showDepict">
+          <div class="img-fullscreen">
+            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
+          </div>
+          <div class="details">
+            <div class="arrows">
+              <ion-button size="small" (click)="seeDecribe()" fill="solid"color="light">
+                <ion-icon [name]="arrows"></ion-icon>
+              </ion-button>
+            </div>
+            <h1>Tattoo Name</h1>
+            <p>R400.00</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque dolore ducimus laboriosam voluptas consequuntur tempora mollitia praesentium qui, sint assumenda sed nesciunt soluta pariatur accusamus consequatur nobis unde aliquid deserunt.</p>
+            <p>Length: 4cm</p>
+            <p>Breadth: 4cm</p>
+
+            <ion-button size="large" fill="clear"color="danger">
+              <ion-icon name="trash"></ion-icon> Delete
+            </ion-button>
+          </div>
+        </div>
+       </div>
+       
+    </div>
+
+    <div class="nav-bar">
+      <div  class="menu-btn">
+        <ion-button fill="clear" color="light" (click)="addClasseAnimates()">
+          <ion-icon name="menu"></ion-icon>
+        </ion-button>
+      </div>
+     
+        <div class="logo">
+          <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+        </div>
+        <div class="list">
+          <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+          <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
+          <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
+          <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
+          <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+          <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+            <p>{{name}}</p>
+            <img src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+          </div>
+        </div>
+
+        <div class="notification" *ngIf="showProfile1">
+
+          <ion-button fill="clear" (click)="Notifications()" size="large" color="light">
+            <ion-icon name="notifications-outline"></ion-icon>
+          </ion-button>
+          <ion-badge class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+        </div>
+      
+    </div>
+    <div class="wrapper-page">
+      <div class="wrapper-header">
+        <h1>Hi, khuthy</h1>
+      </div>
+
+      <div class="container-sub">
+        <div class="information">
+          <div class="cup">
+            <div class="profile-image-header-div">
+              <div class="move-up">
+                <img src="../../assets/allef-vinicius-hxNiXP498UI-unsplash.jpg" alt="">
+              </div>
+            </div>
+            <div class="info-data">
+              <h4> Personal Information</h4>
+              <div class="p"> <ion-icon mode="ios" name="person"></ion-icon><p>Khuthadzo Muenda</p></div>
+              <div class="p"><ion-icon mode="ios" name="mail"></ion-icon><p>muebda@gmail.com</p></div>
+              <div class="p"><ion-icon mode="ios" name="call"></ion-icon><p>+2776 647 6467</p></div>
+            </div>
+
+            <div class="customizedTattoo">
+              <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
+              <div class="custom-card-container">
+                <div class="custom-card">
+                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+                </div>
+                <div class="custom-card">
+                  <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+                </div>
+                <div class="custom-card">
+                  <img src="../../assets/chris-blonk-sjI_iRsD-kU-unsplash.jpg" alt="">
+                </div>
+                <div class="custom-card">
+                  <img src="../../assets/clem-onojeghuo-tHEXNI4L4S4-unsplash.jpg" alt="">
+                </div>
+                <div class="custom-card">
+                  <img src="../../assets/clem-onojeghuo-tHEXNI4L4S4-unsplash.jpg" alt="">
+                </div>
+                <div class="custom-card">
+                  <img src="../../assets/clem-onojeghuo-tHEXNI4L4S4-unsplash.jpg" alt="">
+                </div>
+              </div>
+              <div class="more">
+                <ion-button fill="clear" slot="icon-only" size="small" expand="block" color="secondary" (click)="customTattoos()">View More</ion-button>
+              </div>
+            </div>
+
+            
+          </div>
+          <div class="download">
+           
+            <div class="btn-download">
+              <div class="download-icon"><ion-icon name="download"></ion-icon></div>
+              <div class="text-download">
+                <p>Download Contract Form</p>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+        <div class="segment">
+          <div class="deep">
+          
+              <h4 style="font-weight: 700;">View all Request</h4>
+              <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
+          
+            <ion-segment [(ngModel)]="category" color="primary">
+            
+              <ion-segment-button value="accepted">
+               
+                <div class="grow">
+                  <ion-badge color="primary">{{size}}</ion-badge>
+                  <ion-label>Accepted</ion-label>
+                  
+                </div>
+                
+              </ion-segment-button>
+              <ion-segment-button  value="declined">
+                <div class="grow">
+                  <ion-badge color="primary"></ion-badge>
+                  <ion-label>Declined</ion-label>
+                  
+                </div>
+              </ion-segment-button>
+  
+  
+              <ion-segment-button  value="pending">
+                <div class="grow">
+                  <ion-badge color="primary">{{PendingSize}}</ion-badge>
+                  <ion-label>Pedding</ion-label>
+                  
+                </div>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+    
+           
+    
+        
+
+          <div class="card-container" [ngSwitch]="category">
+            <div class="cardFor" *ngSwitchCase="'accepted'">
+
+              <div class="no-items">
+                <p>You have no request <span style="color: green;">accepted</span>  yet</p>
+              </div>
+ 
+<!-- <div class="card" >
+  <div class="card-t">
+    <div class="image-card">
+      <img src="../../assets/kaizen-nguy-n-s9imzeGXKQ0-unsplash.jpg" alt="">
+    </div>
+    <div class="info">
+      <p>Bookked</p>
+    </div>
+  </div>
+</div> -->
+
+       </div>
+       <div class="cardFor" *ngSwitchCase="'declined'">
+        <div class="no-items">
+          <p>You have no request <span style="color: rgb(207, 49, 1);">declined</span>   yet</p>
+        </div>
+      <!--   <div class="card" >
+      <div class="card-t">
+        <div class="image-card">
+          <img src="../../assets/anotherLogo.svg" alt="">
+        </div>
+        <div class="info">
+          <p>Bookked</p>
+        </div>
+      </div>
+  </div> -->
+ </div>
+ <div class="cardFor" *ngSwitchCase="'pending'">
+ <!--  <div class="no-items">
+    <p>You have no request <span style="color: rgb(109, 109, 109);">pending</span>   yet</p>
+  </div> -->
+  <div class="card" >
+<div class="card-t">
+  <div class="image-card">
+    <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+  </div>
+  <div class="info">
+    <p>Bookked</p>
+  </div>
+</div>
+</div>
+<div class="card" >
+  <div class="card-t">
+    <div class="image-card">
+      <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+    </div>
+    <div class="info">
+      <p>Bookked</p>
+    </div>
+  </div>
+  </div>
+  <div class="card" >
+    <div class="card-t">
+      <div class="image-card">
+        <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+      </div>
+      <div class="info">
+        <p>Bookked</p>
+      </div>
+    </div>
+    </div>
+</div>
+           
+         
+           
+           
+          </div>
+        </div>
+        <div class="editForm">
+        
+
+          <div class="deep">
+            <h4 style="font-weight: 700;">Edit Your Profile</h4>
+            <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
+          </div>
+          <div class="form">
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">Full Name</ion-label>
+                <ion-input name="Myname" type="text" [(ngModel)]="Myname"></ion-input>
+                <ion-icon mode="ios" name="person" slot="end"></ion-icon>
+              </ion-item>
+             
+              <ion-item style="margin-bottom: 2em;">
+                <ion-label position="floating" name="Mynumber" >Phone Number</ion-label>
+              <ion-input type="text" [(ngModel)]="Mynumber"></ion-input>
+                <ion-icon mode="ios" name="call" slot="end"></ion-icon>
+              </ion-item>
+
+              
+            </ion-list>
+            <ion-button color="success" shape="round" expand="half" (click)="Edit()"><ion-icon name="create"></ion-icon> &nbsp; Edit</ion-button>
+          </div>  
+         
+        </div>
+      </div>
+
+     
+
+      </div>
+      </div>
+<!--   <main class="main animated fadeIn">
     <nav class="nav-bar">
       <div class="navigation animated slideInDown delay-1s">
         <div class="logo">
@@ -59,10 +376,7 @@
                      </ion-fab-button>
                 </div>
                 <div class="analytics">
-                    <!-- <div class="history">
-                      <p>{{NumberOfBookings}}</p>
-                      <p  style="color: #888; font-size: 16px;"><small> Total Bookings </small></p>
-                    </div> -->
+              
                     <div class="accepted">
                         <p>{{size}}</p>
                         <p style="color: green; font-size: 16px;"><small>Accepted Bookings</small></p>
@@ -117,25 +431,7 @@
                 </div>
           </div>
 
-          
-           <!--  <div class="customized-tattoo">
-            <div class="header"><p>Your Customized Tattoos</p></div>
-            <div class="scroll-container">
-               <div class="no-pictures">
-                <p>You have not customized your favourate tattoo</p>
-              </div> 
-             <div class="cards" >
-                <div class="card">
-                  <img src="../../../assets/sergio-rodriguez-portugues-del-olmo-IbnMDtiUP4Q-unsplash.jpg" alt="">
-                </div>
-              </div>
-              <div class="cards">
-                  <div class="card">
-                      <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
-                  </div>
-                </div> 
-            </div>
-          </div>-->
+        
         </div>
 
 
@@ -169,24 +465,7 @@
           </div>
 
           
-           <!--  <div class="customized-tattoo">
-            <div class="header"><p>Your Customized Tattoos</p></div>
-            <div class="scroll-container">
-               <div class="no-pictures">
-                <p>You have not customized your favourate tattoo</p>
-              </div> 
-             <div class="cards" >
-                <div class="card">
-                  <img src="../../../assets/sergio-rodriguez-portugues-del-olmo-IbnMDtiUP4Q-unsplash.jpg" alt="">
-                </div>
-              </div>
-              <div class="cards">
-                  <div class="card">
-                      <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
-                  </div>
-                </div> 
-            </div>
-          </div>-->
+        
         </div>
 
     </section>
@@ -221,7 +500,7 @@
           </ion-grid> 
       </div>
     </div>
-  </main>
+  </main> -->
    
 <!-- 
   name: <input type="text" [(ngModel)]="name" placeholder="{{name}}"><br />
