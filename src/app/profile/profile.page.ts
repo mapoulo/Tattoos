@@ -40,6 +40,8 @@ export class ProfilePage implements OnInit {
   startingDate;
   endingDate;
   Response=[];
+  Decline=[];
+  DeclineSize=0;
   userID :string;
   name = "";
   image = "";
@@ -314,8 +316,14 @@ export class ProfilePage implements OnInit {
   //     }
     }
     
+    goToExplore(){
+      this.rout.navigateByUrl('');
+    }
+    
+
     
   ionViewWillEnter(){
+   
    
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
@@ -472,6 +480,27 @@ export class ProfilePage implements OnInit {
           
     
       })
+
+      //Decline
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+        this.Decline=[];
+        this.DeclineSize = 0;
+       
+          data.forEach(i => {
+            if(i.exists){
+              if(i.data().bookingState === "Decline"){
+               
+                console.log("DeclineSize ", i.data());
+                this.Decline.push(i.data());
+              
+                this.DeclineSize =  this.Decline.length;
+              }
+            }
+          })
+    
+          
+    
+      })
     
       // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
       //   data.forEach(i => {
@@ -489,8 +518,7 @@ export class ProfilePage implements OnInit {
           
       //   })
       // })
-    
-      
+     
   }
 }
 }
