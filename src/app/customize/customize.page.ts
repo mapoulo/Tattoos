@@ -1,43 +1,54 @@
 import { ModalController } from '@ionic/angular';
+import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { SuccessPagePage } from '../success-page/success-page.page';
-import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
+
+
 @Component({
   selector: 'app-customize',
   templateUrl: './customize.page.html',
   styleUrls: ['./customize.page.scss'],
 })
 export class CustomizePage implements OnInit {
-  loader: boolean = false;
+
 db = firebase.firestore();
   storage = firebase.storage().ref();
   tattoo = "";
   Length = "";
   Breadth = "";
   Cname = "";
-  number : any = 0;
-  tattooForm : FormGroup;
-  validation_messages = {
-    'Length': [
-      { type: 'required', message: 'Length  is required.' },
-    ],
-    'Breadth': [
-      { type: 'required', message: 'Breadth  is required.' },
-    ],
-  }
-  constructor(public ModalController : ModalController,public fb:FormBuilder) {
+    number : any = 0;
+
+    tattooForm : FormGroup;
+    validation_messages = {
+      'Length': [
+        { type: 'required', message: 'Length  is required.' },
+  
+      ],
+      'Breadth': [
+        { type: 'required', message: 'Breadth  is required.' },
+  
+      ],
+    }
+  loader: boolean = false;
+  constructor(public ModalController : ModalController,private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       Length: new FormControl('', Validators.compose([Validators.required])),
       Breadth: new FormControl('', Validators.compose([Validators.required])),
     })
+  
   }
+
   ngOnInit() {
+
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
     })
   }
+
+
   changeListener(event): void {
     console.log("My Method is Called");
     
@@ -60,9 +71,15 @@ db = firebase.firestore();
       });
     });
   }
+
   async Booking(tattoo){
+
+
     if (firebase.auth().currentUser) {
+
+
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+
             
       category : "Customized",
       description : "Customized Tattoo",
@@ -78,22 +95,29 @@ db = firebase.firestore();
       bookingState : 'waiting',
       field : "Customized"
     
+
+
     }).then( async() => {
+
       console.log("Sorry no user here");
       const modal = await this.ModalController.create({
         component: SuccessPagePage
       });
       return await  modal.present();
+
     })
+
     // this.modalController.dismiss({
     //   'dismissed': true
     // });
   }
     
   }
+
   dismiss() {
     this.ModalController.dismiss({
       'dismissed': true
     });
   }
+
 }

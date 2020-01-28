@@ -20,14 +20,11 @@ export class ProfilePage implements OnInit {
   respnses=[]
   split: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
-
   describeDiv: any = document.getElementsByClassName('details');
   decribe: boolean = true;
   arrows: string = 'arrow-back';
-
   showProfile1;
   category: any = 'accepted';
-
   showCustom = {
     name_t: '',
     image_t: '',
@@ -36,8 +33,6 @@ export class ProfilePage implements OnInit {
     desc: '',
     id: ''
   }
-
-
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
   constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
@@ -86,22 +81,15 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
   showProfile(){
-
-
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
-
         this.presentToast('You have logged in Successfully')
-
         this.showProfile1 = true;
-
         this.email=firebase.auth().currentUser.email;
         
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
           data.forEach(a => {
-
             if(a.data().bookingState === "Accepted"){ 
-
               this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
               .collection("Response")
               
@@ -125,14 +113,11 @@ export class ProfilePage implements OnInit {
         
         
       
-
       }else {
         this.showProfile1 = false;
       }
     })
    }
-
-
    seeDecribe() {
      if(this.decribe) {
       this.arrows = 'arrow-forward';
@@ -145,7 +130,6 @@ export class ProfilePage implements OnInit {
        
        this.decribe = true;
      }
-
     /*  this.arrows = 'arrow-back'; */
    }
  
@@ -164,11 +148,9 @@ export class ProfilePage implements OnInit {
       }, 500);
     }
   }
-
   customTattoos() {
     this.custom = !this.custom;
      this.loader = true;
-
      setTimeout(() => {
         this.loader = false;
      }, 1000);
@@ -184,9 +166,6 @@ export class ProfilePage implements OnInit {
       }, 500);
     }
   }
-
-
-
   async CreateAccount(){
     this.loader = true;
     this.split = false;
@@ -511,7 +490,6 @@ export class ProfilePage implements OnInit {
   }
   
 }
-
 showTattoo(item) {
 
   console.log("pppppp",item);
@@ -547,8 +525,6 @@ async DeleteData( ) {
       }
     ]
   });
-
   await alert.present();
-
 }
 }

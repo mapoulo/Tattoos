@@ -19,7 +19,15 @@
       </div>
     </div>
    <section class="upload-tattoo">
-    <h1 class="ink">INK TATTOOS</h1>
+    
+   
+    
+      <ion-item  class="imageitem" lines="none" >
+        <ion-label position="stacked" id="profile_image" color="primary"></ion-label>
+        <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
+      </ion-item>
+  <ion-item class="imageitem" lines="none" *ngIf="image"><img  src="{{image}}" height="480px" width="3000px" style="object-fit: cover;"></ion-item>
+     
    </section>
  
     <section class="form-container">
@@ -31,7 +39,7 @@
 
               <ion-item class="item" style="margin-bottom: .5em;">
                 <ion-label color="primary" position="floating">Full Name</ion-label>
-                <ion-input autocorrect="on" autofocus="on" clearInput="true" type="text" formControlName="name" name="name" [(ngModel)]="name" placeholder="Enter name" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                <ion-input autocorrect="on" autofocus="on" type="text" formControlName="name" name="name" [(ngModel)]="name" placeholder="Enter name" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
                 <ion-icon name="person" size="small" color="primary" slot="end"></ion-icon>
                   </ion-item>
                     <div class="error" *ngFor="let validate of validation_messages.name">
@@ -42,7 +50,7 @@
 
 
                  
-                  <ion-input class="pdf-upload"  type="file" accept="pdf/*" (change)="changeListener($event)"></ion-input>
+                  <!-- <ion-input class="image-upload"  type="file" accept="image/*" (change)="changeListener($event)"></ion-input> -->
                  
                   
 
