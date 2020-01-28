@@ -6,7 +6,7 @@ import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { ModalController, Platform, ToastController } from '@ionic/angular';
+import { ModalController,AlertController, Platform, ToastController } from '@ionic/angular';
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
@@ -26,7 +26,6 @@ export class ProfilePage implements OnInit {
   describeDiv: any = document.getElementsByClassName('details');
   decribe: boolean = true;
   arrows: string = 'arrow-back';
-
   showProfile1;
   category: any = 'accepted';
 
@@ -36,21 +35,31 @@ export class ProfilePage implements OnInit {
   UserPhoneNumber = ""
   UserImage = ""
 
+  showCustom = {
+    name_t: '',
+    image_t: '',
+    length: '',
+    breadth: '',
+    desc: '',
+    id: ''
+  }
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
-  constructor(private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
   email: string;
   Requests=[];
+  Request=[];
   Bookings=[];
   startingDate;
   endingDate;
   Response=[];
-  Decline=[];
-  DeclineSize=0;
+  ViewMore=[];
   userID :string;
   name = "";
+  Decline=[];
+  DeclineSize=0;
   image = "";
   size=0;
   PendingSize=0;
@@ -63,7 +72,7 @@ export class ProfilePage implements OnInit {
   MyPdf = "";
   pdfObj = null;
   MyNotifications = 0;
-  
+  Customized=[];
   db = firebase.firestore();
   
 
@@ -97,22 +106,15 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
   showProfile(){
-
-
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
-
         this.presentToast('You have logged in Successfully')
-
         this.showProfile1 = true;
-
         this.email=firebase.auth().currentUser.email;
         
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
           data.forEach(a => {
-
             if(a.data().bookingState === "Accepted"){ 
-
               this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
               .collection("Response")
               
@@ -135,38 +137,12 @@ export class ProfilePage implements OnInit {
         })
         
         
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
-
+      
       }else {
         this.showProfile1 = false;
       }
     })
    }
-
-
    seeDecribe() {
      if(this.decribe) {
       this.arrows = 'arrow-forward';
@@ -179,7 +155,6 @@ export class ProfilePage implements OnInit {
        
        this.decribe = true;
      }
-
     /*  this.arrows = 'arrow-back'; */
    }
  
@@ -198,11 +173,9 @@ export class ProfilePage implements OnInit {
       }, 500);
     }
   }
-
   customTattoos() {
     this.custom = !this.custom;
      this.loader = true;
-
      setTimeout(() => {
         this.loader = false;
      }, 1000);
@@ -218,9 +191,6 @@ export class ProfilePage implements OnInit {
       }, 500);
     }
   }
-
-
-
   async CreateAccount(){
     this.loader = true;
     this.split = false;
@@ -296,16 +266,9 @@ export class ProfilePage implements OnInit {
     }
     diff;
     diffDays;
-    // download() {
-    //   const fileTransfer: FileTransferObject = this.transfer.create();
-    //   fileTransfer.download(this.pdf, this.file.dataDirectory + 'file.pdf').then((entry) => {
-    //     console.log('download complete: ' + entry.toURL());
-    //   }, (error) => {
-    //     // handle error
-    //   });
-      
-    // }
+ 
     downloadPdf() {
+      console.log('logg');
       
       this.db.collection("Admin").onSnapshot(data => {
         data.forEach(i => {
@@ -320,30 +283,9 @@ export class ProfilePage implements OnInit {
       window.location.href = this.link;
      }, 1000);
     
-  //     this.fileOpener.open(this.MyPdf, 'application/pdf')
-  // .then(() => console.log('File is opened'))
-  // .catch(e => console.log('Error opening file', e));
-  //     if (this.plt.is('cordova')) {
-  //       this.pdfObj.getBuffer((buffer) => {
-  //         var blob = new Blob([buffer], { type: 'application/pdf' });
-  // 
-  //         // Save the PDF to the data Directory of our App
-  //         this.file.writeFile(this.file.dataDirectory, 'myletter.pdf', blob, { replace: true }).then(fileEntry => {
-  //           // Open the PDf with the correct OS tools
-  //           this.fileOpener.open(this.MyPdf, 'application/pdf');
-  //         });
-  //       });
-  //     } else {
-  //       // On a browser simply use download!
-  //       this.pdfObj.download();
-  //     }
+  
     }
     
-    goToExplore(){
-      this.rout.navigateByUrl('');
-    }
-    
-
     
   ionViewWillEnter(){
 
@@ -401,29 +343,7 @@ export class ProfilePage implements OnInit {
         })
         
         
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
+    
       }
     })
          //User's details
@@ -474,7 +394,7 @@ export class ProfilePage implements OnInit {
         
          // this.Date;
         //Response  
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response") .onSnapshot(data => {
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
        
         data.forEach(i => {
           this.Response=[];
@@ -501,67 +421,120 @@ export class ProfilePage implements OnInit {
         })
       })
       
-      //Pending
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-        this.Requests=[];
-        this.PendingSize = 0;
-       
-          data.forEach(i => {
-            if(i.exists){
-              if(i.data().bookingState === "waiting"){
-               
-                console.log("ewewew ", i.data());
-                this.Requests.push(i.data());
-              
-                this.PendingSize =  this.Requests.length;
-              }
-            }
-          })
-    
+  //Pending
+  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+    this.Request=[];
+    this.PendingSize = 0;
+   
+      data.forEach(i => {
+        if(i.exists){
+          if(i.data().bookingState === "waiting"){
+           
+            console.log("ewewew ", i.data());
+            this.Request.push(i.data());
           
-    
+            this.PendingSize =  this.Request.length;
+          }
+        }
       })
-
-
-      //Decline
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
-        this.Decline=[];
-        this.DeclineSize = 0;
-       
-          data.forEach(i => {
-            if(i.exists){
-              if(i.data().bookingState === "Decline"){
-               
-                console.log("DeclineSize ", i.data());
-                this.Decline.push(i.data());
-              
-                this.DeclineSize =  this.Decline.length;
-              }
-            }
-          })
-    
-          
-    
-      })
-    
-      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
-      //   data.forEach(i => {
-      //     console.log("ewewew ", i.data());
-      //     this.Requests.push(i.data());
-          
-      //   })
-      // })
       
-  
-      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
-      //   data.forEach(i => {
-      //     console.log("Response ", i.data());
-      //     this.Response.push(i.data());
+  })
+  //Decline
+  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+    this.Decline=[];
+    this.DeclineSize = 0;
+   
+      data.forEach(i => {
+        if(i.exists){
+          if(i.data().bookingState === "Decline"){
+           
+            console.log("DeclineSize ", i.data());
+            this.Decline.push(i.data());
           
-      //   })
-      // })
+            this.DeclineSize =  this.Decline.length;
+          }
+        }
+      })
+      
+  })
+    
+     //Customized tattoo
+     this.Customized=[];
+     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
+       this.Customized=[];
      
+        data.forEach(i => {
+          if(i.exists){
+            if(i.data().field === "Customized"){
+             
+              console.log("ewewew ", i.data());
+              this.Customized.push({id: i.id, dataTattoo: i.data()});
+            
+             
+            }
+          }
+        })
+  
+        
+  
+    })
+    //view More
+    this.ViewMore=[];
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+      this.ViewMore=[];
+      
+    
+       data.forEach(i => {
+         if(i.exists){
+           if(i.data().field === "Customized"){
+          
+             console.log("ewewew ", i.data());
+             this.ViewMore.push({id: i.id, dataTattoo: i.data()});
+           
+            
+           }
+         }
+       })
+ 
+       
+ 
+   })
   }
+  
+}
+showTattoo(item) {
+  console.log(item);
+  this.showCustom.name_t = item.dataTattoo.name;
+  this.showCustom.breadth = item.dataTattoo.breadth;
+  this.showCustom.length = item.dataTattoo.length;
+  this.showCustom.image_t = item.dataTattoo.image;
+  this.showCustom.desc = item.dataTattoo.description;
+  this.showCustom.id = item.dataTattoo.id
+  
+}
+async DeleteData() {
+  console.log();
+  
+  const alert = await this.alertCtrl.create({
+    header: 'DELETE!',
+    message: '<strong>Are you sure you want to delete this tattoo?</strong>',
+    buttons: [
+      {
+        text: 'Cancel',
+        
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      }, {
+        text: 'Delete',
+        handler: data => {
+          this.db.collection("Bookings").doc().delete();
+          
+        }
+      }
+    ]
+  });
+  await alert.present();
 }
 
 }

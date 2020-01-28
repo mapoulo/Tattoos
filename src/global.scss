@@ -42,6 +42,34 @@ p, h1, h2,h3,h4,h5,h6,small {
     transform: translate(0, -100%);
 }
 
+input[type="file"] {
+	display: inline-block;
+	opacity: 0;
+	position: absolute;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-top: 30px;
+	padding-bottom: 67px;
+	width: 85%;
+	z-index: 99;
+	margin-top: 10px;
+	cursor:pointer;
+}
+input[type='file']{
+	position:relative;
+    display: inline-block;
+    cursor: pointer;
+	padding-top:40px;
+	padding-bottom:40px;
+	background:red;
+	width:91%;
+	border:1px dashed #ff5b57 !important;
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:10px;
+	text-align:center;
+}
+
     
 @media only screen and (max-width: 600px) {
     .modalNotification .modal-wrapper {
