@@ -39,6 +39,13 @@
 
 }
 
+.times {
+    display: flex;
+    justify-content: space-between;
+    padding-top:.5em ;
+    padding-bottom: .5em;
+}
+
 .modal {
     position: absolute;
     top: 0;
@@ -280,6 +287,8 @@ ion-row {
 }
 
 
+
+
 .split-pane, .menu-btn {
     display: none;
 
@@ -472,6 +481,8 @@ ion-row {
                 justify-content: center;
                 align-items: center;
                 display: flex;
+
+              
             }
 
             .custom-card {
@@ -482,6 +493,7 @@ ion-row {
                 transition: 500ms;
                 flex-grow: 0;
                 flex-shrink: 0;
+                background-color: #888 !important;
 
                 img {
                     position: absolute;
@@ -832,7 +844,7 @@ ion-button.explore {
     }
 
     .details {
-        display: none;
+        display: flex;
     }
     .profile-image-header-div {
         flex-basis: 5%;

@@ -315,6 +315,10 @@
             <p style="padding: 1em;">These are the list of all messages you sent via (Contact-Us) Form</p>
           </div>
           <div class="form">
+
+            <div class="no-messages">
+              <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
+            </div>
             <div class="messages"  *ngFor = "let item of Messages"><!-- Put forloop -->
               <p>{{item.data.message}}</p>
             

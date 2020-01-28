@@ -69,13 +69,18 @@
 
 
     <div class="container" *ngIf="!tattoo">
+    
       <div class="images">
+        <div class="percent">
+          <p>{{progress | percent}}</p>
+          </div>
         <label class="fileContainer animated jello">
           Upload your custom Tattoo
           <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
       </label>
       </div>
 
+     
      
     </div>
    

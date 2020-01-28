@@ -91,13 +91,14 @@ input[type="file"] {
     
 .upload-tattoo {
     flex-basis: 20%;
+    position: relative;
 
 
-    .ink {
-        transform: rotate(0deg);
-        font-family: 'Pacifico', cursive !important;
-        color: rgb(0, 0, 0);
-
+    .profilee {
+        position: absolute;
+        bottom: -5vh;
+        left: 1vh;
+        z-index: 100;
     }
 }
 }

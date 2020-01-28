@@ -104,6 +104,8 @@ db = firebase.firestore();
 
     }).then( async() => {
 
+
+      this.dismiss()
       console.log("Sorry no user here");
       const modal = await this.ModalController.create({
         component: SuccessPagePage

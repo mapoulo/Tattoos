@@ -52,7 +52,7 @@
     <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
       <div class="close">
         <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-          <img  *ngIf="showProfile1"  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+          <img  *ngIf="showProfile1"  src="{{image}}" alt="">
         </div>
         <ion-button fill="clear" (click)="addClasseAnimates()" color="light">
           <ion-icon name="close"></ion-icon>
