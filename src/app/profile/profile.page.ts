@@ -33,7 +33,8 @@ export class ProfilePage implements OnInit {
     image_t: '',
     length: '',
     breadth: '',
-    desc: ''
+    desc: '',
+    id: ''
   }
 
 
@@ -44,12 +45,16 @@ export class ProfilePage implements OnInit {
   User=[];
   email: string;
   Requests=[];
+  Request=[];
   Bookings=[];
   startingDate;
   endingDate;
   Response=[];
+  ViewMore=[];
   userID :string;
   name = "";
+  Decline=[];
+  DeclineSize=0;
   image = "";
   size=0;
   PendingSize=0;
@@ -62,7 +67,7 @@ export class ProfilePage implements OnInit {
   MyPdf = "";
   pdfObj = null;
   MyNotifications = 0;
-  
+  Customized=[];
   db = firebase.firestore();
   
   ngOnInit() {
@@ -118,30 +123,7 @@ export class ProfilePage implements OnInit {
         })
         
         
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
+      
 
       }else {
         this.showProfile1 = false;
@@ -281,6 +263,7 @@ export class ProfilePage implements OnInit {
     diffDays;
  
     downloadPdf() {
+      console.log('logg');
       
       this.db.collection("Admin").onSnapshot(data => {
         data.forEach(i => {
@@ -414,37 +397,58 @@ export class ProfilePage implements OnInit {
         })
       })
       
-      //Pending
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-        this.Requests=[];
-        this.PendingSize = 0;
-       
-          data.forEach(i => {
-            if(i.exists){
-              if(i.data().bookingState === "waiting"){
-               
-                console.log("ewewew ", i.data());
-                this.Requests.push(i.data());
-              
-                this.PendingSize =  this.Requests.length;
-              }
-            }
-          })
-    
+  //Pending
+  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+    this.Request=[];
+    this.PendingSize = 0;
+   
+      data.forEach(i => {
+        if(i.exists){
+          if(i.data().bookingState === "waiting"){
+           
+            console.log("ewewew ", i.data());
+            this.Request.push(i.data());
           
-    
+            this.PendingSize =  this.Request.length;
+          }
+        }
       })
+
+      
+
+  })
+  //Decline
+  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+    this.Decline=[];
+    this.DeclineSize = 0;
+   
+      data.forEach(i => {
+        if(i.exists){
+          if(i.data().bookingState === "Decline"){
+           
+            console.log("DeclineSize ", i.data());
+            this.Decline.push(i.data());
+          
+            this.DeclineSize =  this.Decline.length;
+          }
+        }
+      })
+
+      
+
+  })
     
      //Customized tattoo
+     this.Customized=[];
      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
-       this.Requests=[];
+       this.Customized=[];
      
         data.forEach(i => {
           if(i.exists){
             if(i.data().field === "Customized"){
              
               console.log("ewewew ", i.data());
-              this.Requests.push(i.data());
+              this.Customized.push({id: i.id, dataTattoo: i.data()});
             
              
             }
@@ -455,15 +459,17 @@ export class ProfilePage implements OnInit {
   
     })
     //view More
+    this.ViewMore=[];
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-      this.Requests=[];
+      this.ViewMore=[];
+      
     
        data.forEach(i => {
          if(i.exists){
            if(i.data().field === "Customized"){
-            
+          
              console.log("ewewew ", i.data());
-             this.Requests.push(i.data());
+             this.ViewMore.push({id: i.id, dataTattoo: i.data()});
            
             
            }
@@ -478,16 +484,20 @@ export class ProfilePage implements OnInit {
 }
 
 showTattoo(item) {
+
   console.log(item);
-  this.showCustom.name_t = item.name;
-  this.showCustom.breadth = item.breadth;
-  this.showCustom.length = item.length;
-  this.showCustom.image_t = item.image;
-  this.showCustom.desc = item.description;
+  this.showCustom.name_t = item.dataTattoo.name;
+  this.showCustom.breadth = item.dataTattoo.breadth;
+  this.showCustom.length = item.dataTattoo.length;
+  this.showCustom.image_t = item.dataTattoo.image;
+  this.showCustom.desc = item.dataTattoo.description;
+  this.showCustom.id = item.dataTattoo.id
   
 }
-async DeleteData(Customized) {
-  console.log(Customized);
+
+
+async DeleteData() {
+  console.log();
   
   const alert = await this.alertCtrl.create({
     header: 'DELETE!',
@@ -502,7 +512,7 @@ async DeleteData(Customized) {
       }, {
         text: 'Delete',
         handler: data => {
-          this.db.collection("Bookings").doc(Customized.docid).delete();
+          this.db.collection("Bookings").doc().delete();
           
         }
       }
