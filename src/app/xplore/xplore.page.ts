@@ -9,6 +9,7 @@ import { SignInPage } from '../sign-in/sign-in.page';
 import { BookingModalPage } from '../booking-modal/booking-modal.page';
 import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
+
 // import { OneSignal } from '@ionic-native/onesignal';
 
 
@@ -231,6 +232,8 @@ tattoo = {
 
   tattooAnimated(tattoo) {
 
+    this.DeliverDataService.checkValue = 1
+
     this.loader = true;
     this.tattooDisplay = !this.tattooDisplay;
   
@@ -410,6 +413,9 @@ tattoo = {
 
 
 async CreateAccount(){
+
+  this.DeliverDataService.checkValue = 0;
+
   this.loader = true;
   this.split = false;
   setTimeout(() => {
@@ -421,6 +427,8 @@ async CreateAccount(){
   this.showProfile();
   return await modal.present();
 }
+
+
 async Login(){
 
   this.loader = true;
@@ -451,6 +459,8 @@ async presentToast(message) {
 }
 
 logOut(){
+  this.name = "";
+  this.image = "";
   this.loader = true
   this.split = false;
   this.ShowName=[];
@@ -486,15 +496,10 @@ logOut(){
       console.log("Your data ", tattoo);
       console.log("Your uid here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
-      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+     
 
         this.ShowName.push(firebase.auth().currentUser.email);
-        console.log("display name ", this.ShowName);
-      //   name : "Simon",
-      //   surname : "Cowel",
-      //   legnth : "153",
-      //   breadth : "353"
-      // })
+    
       this.DeliverDataService.dataSaved.category = tattoo.categories;
       this.DeliverDataService.dataSaved.description = tattoo.description;
       this.DeliverDataService.dataSaved.image = tattoo.image;
@@ -512,6 +517,14 @@ logOut(){
 
 
     }else{
+
+      this.DeliverDataService.dataSaved.category = tattoo.categories;
+      this.DeliverDataService.dataSaved.description = tattoo.description;
+      this.DeliverDataService.dataSaved.image = tattoo.image;
+      this.DeliverDataService.dataSaved.name = tattoo.name;
+      this.DeliverDataService.dataSaved.startPrice = tattoo.startPrice;
+      this.DeliverDataService.dataSaved.endPrice = tattoo.endPrice;
+
       this.tattooDisplay = false;
       console.log("Sorry no user here");
       const modal = await this.modalController.create({

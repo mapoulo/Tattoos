@@ -6,6 +6,8 @@ import * as firebase from 'firebase';
 import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { SuccessPagePage } from '../success-page/success-page.page';
 import { SuccessPagePageModule } from '../success-page/success-page.module';
+import { NotificationsService } from '../notifications.service';
+
 
 
 
@@ -17,6 +19,13 @@ import { SuccessPagePageModule } from '../success-page/success-page.module';
 })
 export class BookingModalPage implements OnInit {
 
+
+
+  Myemail = ""
+  Myimage = ""
+  Myname = ""
+  Mynumber = ""
+  cmsTokenId = ""
 
     Length : number ;
     Breadth : number;
@@ -46,15 +55,36 @@ export class BookingModalPage implements OnInit {
       ],
     }
   loader: boolean = false;
-        
+       
+  
 
-  constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private render: Renderer2) { 
+ 
+
+  constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, private render: Renderer2) { 
   this.tattooForm = this.fb.group({
     Length: new FormControl('', Validators.compose([Validators.required])),
     Breadth: new FormControl('', Validators.compose([Validators.required])),
   })
 }
   ngOnInit() {
+
+    
+
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+      this.Myemail = data.data().email;
+      this.Myimage  = data.data().image
+      this.Myname  = data.data().name
+      this.Mynumber  = data.data().number
+ })
+
+    this.db.collection("Admin").onSnapshot(data => {
+      data.forEach(item => {
+        this.cmsTokenId = item.data().tokenId
+        console.log("Your data is dddddd ", item.data().tokenId);
+        
+      })
+    })
+
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
@@ -72,12 +102,12 @@ export class BookingModalPage implements OnInit {
 
     setTimeout(() => {
       this.loader = false;
-      this.category = this.DeliverDataService.dataSaved.category ;
-      this.description = this.DeliverDataService.dataSaved.description  ;
-      this.image = this.DeliverDataService.dataSaved.image  ;
-      this.name = this.DeliverDataService.dataSaved.name;
-      this.startPrice = this.DeliverDataService.dataSaved.startPrice  ;
-      this.endPrice = this.DeliverDataService.dataSaved.endPrice;
+      // this.category = this.DeliverDataService.dataSaved.category ;
+      // this.description = this.DeliverDataService.dataSaved.description  ;
+      // this.image = this.DeliverDataService.dataSaved.image  ;
+      // this.name = this.DeliverDataService.dataSaved.name;
+      // this.startPrice = this.DeliverDataService.dataSaved.startPrice  ;
+      // this.endPrice = this.DeliverDataService.dataSaved.endPrice;
     }, 1000);
     
     this.category = this.DeliverDataService.dataSaved.category ;
@@ -114,32 +144,42 @@ export class BookingModalPage implements OnInit {
     
   }
 
+
   senBookig(){
 
+
+
     this.loader = true;
+   this.notifications.requestPermission();
+
+   console.log("The key Is here ", this.notifications.token);
+   
+  
+   
+   if(firebase.auth().currentUser){
+
+  
+
+    setTimeout(() => {
 
 
+  
 
-    // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
-    
-                
-    //   category : this.category,
-    //   description : this.description,
-    //   image : this.image,
-    //  startPrice : this.startPrice,
-    //  endPrice : this.endPrice,
-    //   tattoName: this.name,
-    //   breadth : this.Breadth,
-    //   length : this.Length,
-    //   email : firebase.auth().currentUser.email,
-    //   uid : firebase.auth().currentUser.uid,
-    //   customerName : this.Cname,
-    //   number : this.number,
-    //   bookingState : 'waiting',
-    //   field : "Booking"
+      
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
+        email : this.Myemail,
+        image  : this.Myimage,
+        name  : this.Myname ,
+        number  : this.Mynumber,
+        tokenId : this.notifications.token,
+        cmsTokenId : this.cmsTokenId ,
+        myTokenId : this.notifications.token
+
+  })
+    }, 4000);
+   }
 
 
-    // })
 
     setTimeout(() => {
       if (this.tattooForm.valid ) {
@@ -159,7 +199,9 @@ export class BookingModalPage implements OnInit {
           customerName : this.Cname,
           number : this.number,
           bookingState : 'waiting',
-          field : "Booking"
+          field : "Booking",
+          tokenId : this.notifications.token,
+          cmsTokenId : this.cmsTokenId 
     
     
         }).then( async() => {
@@ -186,7 +228,8 @@ export class BookingModalPage implements OnInit {
           customerName : this.Cname,
           number : this.number,
           bookingState : 'waiting',
-          field : "Booking"
+          field : "Booking",
+          cmsTokenId : this.cmsTokenId 
     
         })
     

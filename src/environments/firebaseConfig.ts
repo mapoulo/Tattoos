@@ -11,3 +11,4 @@ export const firebaseConfig = {
     measurementId: "G-694DP6LKJV",
     vapidKey: 'BCGequqI1YHWjkM6s4cJ-RVbGV8pW8f-fjeGjNERQTbPGBAZdpYcrT5DgmTxvXtN_5fIPbeBf2y9tVS6xFR9ukU'
   };
+

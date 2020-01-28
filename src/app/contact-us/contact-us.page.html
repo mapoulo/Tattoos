@@ -1,4 +1,3 @@
-
 <ion-content>
  
   <div class="loader" *ngIf="loader">
@@ -6,10 +5,8 @@
       
     </div>
   </div>
-
   
   <div class="main-container">
-
     <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
       <div class="close">
         <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
@@ -18,13 +15,10 @@
         <ion-button fill="clear" (click)="addClasseAnimates()" color="light">
           <ion-icon name="close"></ion-icon>
         </ion-button>
-
        
       </div>
-
       <div class="list-split-pane">
         <ion-button  fill="clear" expand="block" color="light" (click)="goToExplore()">Explore</ion-button>
-
         
         <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
@@ -36,7 +30,6 @@
         <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
       </div>
     </aside>
-
     <div class="nav-bar">
       <div  class="menu-btn">
         <ion-button fill="clear" color="light" (click)="addClasseAnimates()">
@@ -48,19 +41,19 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button  fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+          <ion-button  fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/xplore">Explore</ion-button>
           <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
-          <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+          <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account </ion-button>
+          
           <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p>{{name}}</p>
-            <img src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+            <p> {{name}}</p>
+            <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
+            <img *ngIf="image != ''" src="{{image}}" alt="">
           </div>
         </div>
-
         <div class="notification" *ngIf="showProfile1">
-
           <ion-button fill="clear" (click)="Notifications()" size="large" color="light">
             <ion-icon name="notifications-outline"></ion-icon>
           </ion-button>
@@ -77,7 +70,6 @@
         <P>Your Tattoos Destination</P>
       </div>
       <div class="cont-container">
-
         <div class="information"  *ngFor="let contact of Contact">
         <div class="phone">
           <ion-fab-button fill="clear" color="dark" size="large">
@@ -122,46 +114,55 @@
       </div>
      
     </div>
-
-      <div class="forms">
-        <div class="header-form">
-          <h3>Send Us A Message Below</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur incidunt quaerat iste, vero ea quos optio doloribus dolorum libero est aperiam, obcaecati expedita a perferendis, eveniet tempore praesentium aut velit.</p>
-       
-        </div>
-        <ion-list>
-
-         
-
-          <ion-item class="item" style="margin-bottom: 1em;">
-					  <ion-label color="primary" position="floating" >Name</ion-label>
-					  <ion-input [(ngModel)]="name" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-input>
-					  <ion-icon name="person" color="primary" slot="end"></ion-icon>
-					</ion-item>
+    <div class="forms"  [formGroup]="tattooForm">
+      <div class="header-form">
         
-          <ion-item class="item" style="margin-bottom: 1em;">
-					  <ion-label color="primary" position="floating">Email Address</ion-label>
-					  <ion-input [(ngModel)]="email"  autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-input>
-					  <ion-icon name="mail" color="primary" slot="end"></ion-icon>
-					</ion-item>
-          <ion-item class="item" style="margin-bottom: 1em;">
-					  <ion-label color="primary" position="floating">Messages</ion-label>
-					  <ion-textarea  [(ngModel)]="message" autocorrect="on" rows="6" cols="20" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="Enter your name" required="true"></ion-textarea>
-					  <ion-icon name="mail" color="primary" slot="end"></ion-icon>
-          </ion-item>
-          <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage()">Send Message</ion-button>
-
-       
-        </ion-list>
-        
+        <h3>Send Us A Message Below</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur incidunt quaerat iste, vero ea quos optio doloribus dolorum libero est aperiam, obcaecati expedita a perferendis, eveniet tempore praesentium aut velit.</p>
+     
       </div>
-
+      <ion-list>
+       
+        <ion-item class="item" style="margin-bottom: 1em;">
+          <ion-label color="primary" position="floating" >Name</ion-label>
+          <ion-input   [(ngModel)]="name" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary"  inputmode="text" formControlName="name" placeholder="Enter your name" required="true"></ion-input>
+          <ion-icon name="person" color="primary" slot="end"></ion-icon>
+        </ion-item>
+        <div class="error" *ngFor="let validate of validation_messages.name">
+          <div class="messages" *ngIf="tattooForm.get('name').hasError(validate.type) && (tattooForm.get('name').dirty || tattooForm.get('name').touched)">
+            {{validate.message}}
+        </div>
+        </div>
+        <ion-item class="item" style="margin-bottom: 1em;">
+          <ion-label color="primary" position="floating">Email Address</ion-label>
+          <ion-input disabled="{{inputDisabled}}" [(ngModel)]="email"  autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" formControlName="email" placeholder="Enter your name" required="true"></ion-input>
+          <ion-icon name="mail" color="primary" slot="end"></ion-icon>
+        </ion-item>
+        <div class="error" *ngFor="let validate of validation_messages.email">
+          <div class="messages" *ngIf="tattooForm.get('email').hasError(validate.type) && (tattooForm.get('email').dirty || tattooForm.get('email').touched)">
+            {{validate.message}}
+        </div>
+      </div>
+        <ion-item class="item" style="margin-bottom: 1em;">
+          <ion-label color="primary" position="floating">Messages</ion-label>
+          <ion-textarea  [(ngModel)]="message" autocorrect="on" rows="6" cols="20" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" formControlName="message" placeholder="Enter your name" required="true"></ion-textarea>
+          <ion-icon name="mail" color="primary" slot="end"></ion-icon>
+        </ion-item>
+        <div class="error" *ngFor="let validate of validation_messages.message">
+          <div class="messages" *ngIf="tattooForm.get('message').hasError(validate.type) && (tattooForm.get('message').dirty || tattooForm.get('message').touched)">
+            {{validate.message}}
+        </div>
+      </div>
+        <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage(attooForm)" [disabled]="!tattooForm.valid">Send Message</ion-button>
+     
+      </ion-list>
+      
+    </div>
       </div>
       
         
       </div>
       
     </div>
-
-
 </ion-content>
+

@@ -1,5 +1,5 @@
 import { ModalController } from '@ionic/angular';
-
+import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { SuccessPagePage } from '../success-page/success-page.page';
@@ -20,7 +20,25 @@ db = firebase.firestore();
   Cname = "";
     number : any = 0;
 
-  constructor(public ModalController : ModalController) { }
+    tattooForm : FormGroup;
+    validation_messages = {
+      'Length': [
+        { type: 'required', message: 'Length  is required.' },
+  
+      ],
+      'Breadth': [
+        { type: 'required', message: 'Breadth  is required.' },
+  
+      ],
+    }
+  loader: boolean = false;
+  constructor(public ModalController : ModalController,private fb: FormBuilder) { 
+    this.tattooForm = this.fb.group({
+      Length: new FormControl('', Validators.compose([Validators.required])),
+      Breadth: new FormControl('', Validators.compose([Validators.required])),
+    })
+  
+  }
 
   ngOnInit() {
 
@@ -38,6 +56,11 @@ db = firebase.firestore();
     console.log(i);
     const upload = this.storage.child(i.name).put(i);
     upload.on('state_changed', snapshot => {
+      this.loader=true;
+     
+    setTimeout(() => {
+      this.loader = false;
+   }, 1000);
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log('upload is: ', progress , '% done.');
     }, err => {
