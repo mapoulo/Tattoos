@@ -39,6 +39,43 @@
 
 
 }
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.648);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .small-modal-edit-profile {
+        padding: 1em;
+        flex-basis: 20%;
+        height: 60%;
+        background: #fff;
+        box-shadow: 6px 6px 12px rgba(0,0,0,0.5), -6px -6px 12px rgba(82, 82, 82);
+        position: relative;
+        border-radius: 3px;
+
+        .close-btn {
+            position: absolute;
+            top: -10%;
+            right: 0%;
+
+        }
+        .pro-form-image {
+            margin-top: 1em;
+        }
+    }
+}
+
+
+    ion-row {
+        --padding: 1em;
+    }
 
 .customizedTDiv {
     position: absolute;
@@ -659,7 +696,23 @@ ion-button.explore {
 }
 
 @media only screen and (max-width: 600px) {
+    .modal {
+        .small-modal-edit-profile {
+            flex-basis: 90%;
 
+            .close-btn {
+                top: -15%;
+            }
+        }
+    }
+    ion-badge {
+        width: 15px;
+        height: 15px;
+        font-size: 100%;
+    }
+        
+        
+          
    .grow {
        font-size: 60% !important;
    }
