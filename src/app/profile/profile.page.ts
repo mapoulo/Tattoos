@@ -21,6 +21,8 @@ export class ProfilePage implements OnInit {
   split: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
 
+
+  limitedTattoo = []
   describeDiv: any = document.getElementsByClassName('details');
   decribe: boolean = true;
   arrows: string = 'arrow-back';
@@ -28,6 +30,11 @@ export class ProfilePage implements OnInit {
   showProfile1;
   category: any = 'accepted';
 
+
+  UserName =  ""
+  UserEmail =  ""
+  UserPhoneNumber = ""
+  UserImage = ""
 
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
@@ -59,12 +66,28 @@ export class ProfilePage implements OnInit {
   
   db = firebase.firestore();
   
+
+
+
   ngOnInit() {
+
+
+
+
+
     this.showProfile();
     setTimeout(() => {
       this.loader = false;
+
+
+
+
     }, 1000);
+
+
   }
+
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
@@ -323,10 +346,28 @@ export class ProfilePage implements OnInit {
 
     
   ionViewWillEnter(){
-   
+
+  
    
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+          data.forEach(item => {
+            this.limitedTattoo.push(item.data())
+          })
+        })
+
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+          this.UserName = data.data().name;
+          this.UserEmail = firebase.auth().currentUser.email;
+          this.UserPhoneNumber = data.data().number
+          this.UserImage = data.data().image
+          console.log("Your data is here ", data.data().name);
+          
+        })
+
+
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
           this.Myname = item.data().name;
@@ -481,6 +522,7 @@ export class ProfilePage implements OnInit {
     
       })
 
+
       //Decline
       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
         this.Decline=[];
@@ -521,4 +563,5 @@ export class ProfilePage implements OnInit {
      
   }
 }
+
 }
