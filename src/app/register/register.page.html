@@ -20,15 +20,20 @@
     </div>
    <section class="upload-tattoo">
     
-   
+    <div *ngIf="image" class="profilee">
+    <img  src="{{image}}">
+    </div>
     
-      <div  class="imageitem" lines="none" >
+      <div  class="imageitem">
         <label class="fileContainer">
           Upload your profile image
           <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
       </label>
+
     </div>
-  <ion-item class="imageitem" lines="none" *ngIf="image"><img  src="{{image}}" height="480px" width="3000px" style="object-fit: cover;"></ion-item>
+  
+ 
+    
      
    </section>
  

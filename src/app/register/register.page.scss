@@ -24,33 +24,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background: url('../../assets/allef-vinicius-hxNiXP498UI-unsplash.jpg');
     background-position: right;
     background-size: cover;
 
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.027), 0 3px 6px rgba(0, 0, 0, 0.11);
 
-    .upload {
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #d6d6d6;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     .profilee {
+         height: 10vh;
+         width: 10vh;
+         overflow: hidden;
+         border-radius: 50px;
+         border: 3px solid #ddd;
+         position: relative;
+         margin: 1%;
 
-        font-size: 2vh;
-        
-    }
+         img {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
 
-    .ink {
-        transform: rotate(-90deg);
-        font-weight: bolder;
-        font-size: 200%;
-        color: #333;
+         }
+     }
 
-    }
+   
      
 }
+input[type="file"] {
+    margin: 4%;
+ }
 .btn-upload-tattoo {
     height: 6vw;
     width: 6vw;
