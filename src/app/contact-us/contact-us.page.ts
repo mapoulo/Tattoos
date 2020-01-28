@@ -15,6 +15,7 @@ import { NotificationsPage } from '../notifications/notifications.page';
 })
 export class ContactUsPage implements OnInit {
   
+  
   tattooForm : FormGroup;
   name = ""
   email = ""
@@ -24,7 +25,8 @@ export class ContactUsPage implements OnInit {
   MyNotifications = 0
   split: boolean = false;
   image = '';
-  respnses=[]
+  respnses=[];
+  Contact: any = [];
   loader: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
@@ -44,6 +46,8 @@ export class ContactUsPage implements OnInit {
   }
   constructor(private fb:FormBuilder,private rout : Router, private alertCtrl: AlertController, public modalController: ModalController, public deliverDataService : DeliverDataService) 
   {
+    //his.ionViewWillEnter();
+   // this.name;
     this.respnses = this.deliverDataService.AcceptedData; 
   
     this.tattooForm = this.fb.group({
@@ -65,7 +69,8 @@ export class ContactUsPage implements OnInit {
     setTimeout(() => {
       this.loader = false;
    }, 1000);
-   
+    // this.name = this.DeliverDataService.name;
+           //User's details
            if(firebase.auth().currentUser) {
             this.email=firebase.auth().currentUser.email;
            }
@@ -118,12 +123,13 @@ export class ContactUsPage implements OnInit {
                   
                    this. MyNotifications += 1;
                    console.log("@@@@@@@@@@@@@",  doc.data() );
-                
+                    // this.array.push(doc.data())
+                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
                   }   
                 })
             
           })
-       
+          // return true; 
              }
           })
         })
@@ -152,7 +158,30 @@ export class ContactUsPage implements OnInit {
           })
         })
         
-      
+        
+        // .get().then(i => {
+        //   i.forEach(a => {
+  
+        //    if(a.data().bookingState === "Accepted"){ 
+        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
+        //     .collection("Response").get().then(myItem => {
+        //       this. MyNotifications = 0;     
+        //       myItem.forEach(doc => {
+        //         if(doc.data().bookingState === "Pending"){
+                
+        //          this. MyNotifications += 1;
+        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
+        //           // this.array.push(doc.data())
+        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
+        //         }   
+        //       })
+          
+        // })
+        // // return true; 
+        //    }
+          
+        //   })
+        // })
       }else {
          this.showProfile1 = false;
       }
@@ -219,14 +248,32 @@ async Login(){
   }
   
    async sendMessage(){
-     firebase.firestore().collection("Messages").doc().set({
-       name : this.name,
-       email : this.email,
-       message : this.message,
-       satatus : "NotRead",
-       time : moment().format('MMMM Do YYYY, h:mm:ss a'),
-       
-     })
+  
+    var user = firebase.auth().currentUser;
+    if (user) {
+      this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").doc().set({
+        //firebase.firestore().collection("Messages").doc().set({
+         
+          name : this.name,
+          email : this.email,
+          message : this.message,
+          satatus : "NotRead",
+          time : moment().format('MMMM Do YYYY, h:mm:ss a'),
+          
+        })
+      // User is signed in.
+    } else {
+      this.db.collection("Messages").doc().set({
+        name : this.name,
+        email : this.email,
+        message : this.message,
+        satatus : "NotRead",
+        time : moment().format('MMMM Do YYYY, h:mm:ss a'),
+        
+      })
+      // No user is signed in.
+    }
+ 
      this.name = "";
      this.email = "";
      this.message = "";
@@ -243,4 +290,3 @@ async Login(){
      this.rout.navigateByUrl('');
    }
 }
-
