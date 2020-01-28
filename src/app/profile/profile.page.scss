@@ -519,11 +519,7 @@
     
     
 }
-.deep {
-    flex-basis: 20%;
-    /* padding: 3em; */
-   /*  background: rgb(230, 230, 230); */
-}
+
 .card-container{
     flex-basis: 80%;
 
@@ -625,8 +621,49 @@
     padding: 1em;
     margin-right: 1%;
     background: #fff;
-   justify-self: flex-start;
-   align-self:flex-start ;
+    height: 60vh;
+   
+    display: flex;
+    flex-direction: column;
+
+    .deep {
+        flex-basis: 20%;
+        
+    }
+    .form {
+        flex-basis: 80%;
+     
+        overflow-y: auto;
+        overflow-x: hidden;
+        
+
+        .messages {
+            font-size: 90%;
+            padding: 1em;
+            position: relative;
+            margin: 1%;
+
+            &::before {
+                content: '';
+                height: 100%;
+                width: 3px;
+                background: #d36954;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .times {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                padding-top: .5em;
+                padding-bottom: .5em;
+                align-items: center;
+                font-size: 90%;
+            }
+
+        }
+    }
 }
 .scroll-container {
     flex-basis: 80%; 
@@ -801,10 +838,10 @@ ion-button.explore {
         } */
     }
 
-    .editForm {
+ /*    .editForm {
         display: none;
 
-    }
+    } */
   /*   .information {
         flex-basis: 100%;
     } */
