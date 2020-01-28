@@ -103,13 +103,13 @@
                 <ion-icon [name]="arrows"></ion-icon>
               </ion-button>
             </div>
-            <h1>{{showCustom.name_t}}</h1>
+            <h1>{{showCustom.name}}</h1>
            
             <p>{{showCustom.desc}}</p>
             <p>Length: {{showCustom.breadth}}cm</p>
             <p>Breadth: {{showCustom.length}}cm</p>
-            <ion-button size="large" fill="clear"color="danger">
-              <ion-icon name="trash" (Click)="DeleteData(showCustom.id)"></ion-icon> Delete
+            <ion-button   (click)="DeleteData()" size="large" fill="clear"color="danger">
+              <ion-icon name="trash"></ion-icon> Delete
             </ion-button>
           </div>
         </div>
@@ -232,38 +232,76 @@
         
           <div class="card-container" [ngSwitch]="category">
             <div class="cardFor" *ngSwitchCase="'accepted'">
-              <div class="no-items">
+
+              <div class="no-items" *ngIf="Response.length == 0">
                 <p>You have no request <span style="color: green;">accepted</span>  yet</p>
               </div>
               
  
+            <div class="card"  *ngFor = "let item of Response">
+              <div class="card-t">
+                <div class="image-card">
+                  <img src="{{item.image}}" alt="">
+                </div>
+                <div class="info">
+                  <p>{{item.bookingState}}</p>
+                  <p>{{item.days}} Days Session</p>
+                  <p>{{item.startingDate | date: 'fullDate'}}</p>
+                  <p>{{item.endingDate | date: 'fullDate'}}</p>
+                </div>
+              </div>
+            </div> 
+
        </div>
-       <div class="card"  *ngFor = "let item of Decline">
-        <div class="card-t">
-          <div class="image-card">
-            <img src="{{item.image}}" alt="">
+       <div class="cardFor" *ngSwitchCase="'declined'">
+        <div class="no-items" *ngIf="DeclineSize.length == 0">
+          <p>You have no request <span style="color: rgb(207, 49, 1);">declined</span>   yet</p>
+        </div>
+
+        
+        <div class="card"  *ngFor = "let item of Decline">
+          <div class="card-t">
+            <div class="image-card">
+              <img src="{{item.image}}" alt="">
+            </div>
+            <div class="info">
+              <p >{{item.bookingState}}</p>
+              <p>{{item.days}} Days Session</p>
+              <p>{{item.startingDate | date: 'fullDate'}}</p>
+              <p>{{item.endingDate | date: 'fullDate'}}</p>
+            </div>
           </div>
-          <div class="info">
-            <p >{{item.bookingState}}</p>
-            <p>{{item.days}} Days Session</p>
-            <p>{{item.startingDate | date: 'fullDate'}}</p>
-            <p>{{item.endingDate | date: 'fullDate'}}</p>
-          </div>
+        </div> 
+      <!--   <div class="card" >
+      <div class="card-t">
+        <div class="image-card">
+          <img src="../../assets/anotherLogo.svg" alt="">
+        </div>
+        <div class="info">
+          <p>Bookked</p>
         </div>
       </div>
+  </div> -->
+ </div>
  <div class="cardFor" *ngSwitchCase="'pending'">
-  <div class="card" *ngFor = "let item of Request">
+ <!--  <div class="no-items">
+    <p>You have no request <span style="color: rgb(109, 109, 109);">pending</span>   yet</p>
+  </div> -->
+  <div class="card" *ngFor = "let item of Requests">
     <div class="card-t">
       <div class="image-card">
         <img src="{{item.image}}" alt="">
       </div>
       <div class="info">
         <p>{{item.bookingState}}</p>
-        <p>{{item.category}}</p>
       </div>
     </div>
 </div>
 </div>
+	  
+	  
+	  
+	  
            
          
            
@@ -277,12 +315,12 @@
             <p style="padding: 1em;">These are the list of all messages you sent via (Contact-Us) Form</p>
           </div>
           <div class="form">
-            <div class="messages"><!-- Put forloop -->
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id eaque perferendis quidem vel omnis hic! Ab et ea unde minus numquam ex aliquam, fugit eligendi accusantium, architecto explicabo neque aperiam.</p>
+            <div class="messages"  *ngFor = "let item of Messages"><!-- Put forloop -->
+              <p>{{item.data.message}}</p>
             
               <div class="times">
-                <p><small>12/09/2010</small></p>
-                <ion-button fill="clear" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+                <p><small>{{item.data.time}}</small></p>
+                <ion-button fill="clear" color="danger" (click)="DeleteMessage(item.key)"><ion-icon name="trash"></ion-icon></ion-button>
               </div>
             </div>
           
@@ -294,3 +332,7 @@
       </div>
       </div>
 </ion-content>
+
+
+
+

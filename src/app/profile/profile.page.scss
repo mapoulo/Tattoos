@@ -1,5 +1,4 @@
 
-
 *, *::after, *::before {
     margin: 0;
     padding: 0;
@@ -39,6 +38,7 @@
 
 
 }
+
 .modal {
     position: absolute;
     top: 0;
@@ -48,35 +48,37 @@
     background: rgba(0, 0, 0, 0.648);
     z-index: 500;
     display: flex;
+   
     justify-content: center;
     align-items: center;
 
-    .small-modal-edit-profile {
+
+    .small-modal-edit-profile{
         padding: 1em;
         flex-basis: 20%;
         height: 60%;
-        background: #fff;
-        box-shadow: 6px 6px 12px rgba(0,0,0,0.5), -6px -6px 12px rgba(82, 82, 82);
-        position: relative;
-        border-radius: 3px;
+        background: rgb(255, 255, 255);
+        box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.5),  
+          -6px -6px 12px  rgb(82, 82, 82);
+          position: relative;
+          border-radius: 3px;
 
-        .close-btn {
-            position: absolute;
-            top: -10%;
-            right: 0%;
 
-        }
-        .pro-form-image {
-            margin-top: 1em;
-        }
+          .close-btn {
+              position: absolute;
+              top: -10%;
+              right: 0%;
+          }
+          .pro-form-image {
+              margin-top: 1em;
+          }
+          
     }
 }
+ion-row {
+    --padding: 1em;
 
-
-    ion-row {
-        --padding: 1em;
-    }
-
+}
 .customizedTDiv {
     position: absolute;
     top: 0;
@@ -107,6 +109,7 @@
                 position: relative;
                 margin: 1%;
                 
+                
                 img {
                     position: absolute;
                     top: 0;
@@ -125,6 +128,14 @@
             display: flex;
             flex-direction: column;
             position: relative;
+
+            .mess {
+                flex-basis: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
 
             .img-fullscreen {
                 flex-basis: 100%;
@@ -250,21 +261,6 @@
     align-items: center;
     justify-content: space-between;
     color: #fff;
-    position: relative;
-
-    &::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 10%;
-        width: 70%;
-        height: 5px;
-        background: #d36954;
-        border-radius: 50px;
-        transition: 500ms;
-    }
-
-    
 
     p {
         margin: 0 !important;
@@ -470,6 +466,14 @@
            /*  justify-content: center; */
             padding: 1em;
 
+            .messages {
+                height: 100%;
+                flex-basis: 100%;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+            }
+
             .custom-card {
                 flex-basis: 32%;
                 height: 50%;
@@ -519,7 +523,65 @@
     
     
 }
+.deep {
+    flex-basis: 10%;
+    /* padding: 3em; */
+   
+}
+.contact {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.form {
+    height: 90%;
+  /*   flex-grow: 0;
+    flex-shrink: 0; */
+    overflow-y: scroll;
+    overflow-x: hidden;
 
+    .no-mmessages {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .messagesss {
+        position: relative;
+        padding: 1em;
+        margin-top: 1%;
+
+        .btt {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 1em;
+
+        }
+      
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0%;
+            width: 3px;
+            height: 100%;
+            background: #d36954;
+            content: '';
+        }
+
+
+    }
+
+/*     height: 50%; */
+
+}
 .card-container{
     flex-basis: 80%;
 
@@ -587,6 +649,13 @@
                 font-size: 90%;
             }
         }
+
+        .info {
+            padding: .5em;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
         
     }
   
@@ -626,53 +695,23 @@
 }
 .editForm {
     flex-basis: 30%;
+    height: 60vh;
     padding: 1em;
     margin-right: 1%;
     background: #fff;
-    height: 60vh;
-   
     display: flex;
     flex-direction: column;
 
-    .deep {
-        flex-basis: 20%;
-        
-    }
-    .form {
-        flex-basis: 80%;
-     
-        overflow-y: auto;
-        overflow-x: hidden;
-        
+   /*  height: 70%; */
+ 
+   /* justify-self: flex-start;
+   align-self:flex-start ; */
 
-        .messages {
-            font-size: 90%;
-            padding: 1em;
-            position: relative;
-            margin: 1%;
+  
 
-            &::before {
-                content: '';
-                height: 100%;
-                width: 3px;
-                background: #d36954;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            .times {
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-                padding-top: .5em;
-                padding-bottom: .5em;
-                align-items: center;
-                font-size: 90%;
-            }
-
-        }
-    }
+ 
 }
+
 .scroll-container {
     flex-basis: 80%; 
     overflow: auto;
@@ -746,7 +785,7 @@ ion-button.explore {
 
   
     .modal {
-        .small-modal-edit-profile {
+        .small-modal-edit-profile{
             flex-basis: 90%;
 
             .close-btn {
@@ -754,14 +793,15 @@ ion-button.explore {
             }
         }
     }
+
     ion-badge {
         width: 15px;
         height: 15px;
+
         font-size: 100%;
+
     }
-        
-        
-          
+
    .grow {
        font-size: 60% !important;
    }
@@ -850,7 +890,6 @@ ion-button.explore {
         } */
     }
 
-
     .editForm {
         display: none;
 
@@ -858,10 +897,7 @@ ion-button.explore {
   /*   .information {
         flex-basis: 100%;
     } */
-    .info-data {
-     /*  display: flex; */
-
-    }
+   
 
     .p {
         padding: 0 !important;
@@ -878,9 +914,7 @@ ion-button.explore {
        /*  flex-grow: 1;
         flex-shrink: 1; */
 
-        .segment {
         
-        }
         .information
          {
 
@@ -894,9 +928,7 @@ ion-button.explore {
                 margin: 0 !important;
             }
         }
-        .editForm {
-          
-        }
+        
     }
    
 
@@ -1012,7 +1044,6 @@ ion-button.explore {
 
     }
     .profile-image {
-        
         img {
             height: 8vh;
             width: 8vh;

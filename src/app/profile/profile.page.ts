@@ -33,15 +33,22 @@ export class ProfilePage implements OnInit {
     desc: '',
     id: ''
   }
+
+  key = ""
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
-  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { 
+    
+  
+    
+    this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
   email: string;
   Requests=[];
   Request=[];
   Bookings=[];
+  Messages=[];
   startingDate;
   endingDate;
   Response=[];
@@ -66,10 +73,242 @@ export class ProfilePage implements OnInit {
   db = firebase.firestore();
   
   ngOnInit() {
+
     this.showProfile();
     setTimeout(() => {
       this.loader = false;
     }, 1000);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+          console.log("User Logged in ", item.data());
+          this.Myname = item.data().name;
+          this.Mynumber = item.data().number;
+          
+        })
+        this.email=firebase.auth().currentUser.email;
+        
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+          data.forEach(a => {
+            if(a.data().bookingState === "Accepted"){ 
+              this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
+              .collection("Response")
+              
+              .get().then(myItem => {
+                this. MyNotifications = 0;     
+                myItem.forEach(doc => {
+                  if(doc.data().bookingState === "Pending"){
+                  
+                   this. MyNotifications += 1;
+                   console.log("@@@@@@@@@@@@@",  doc.data() );
+                    // this.array.push(doc.data())
+                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
+                  }   
+                })
+            
+          })
+          // return true; 
+             }
+          })
+        })
+        
+        
+    
+      }
+    })
+         //User's details
+         this.email=firebase.auth().currentUser.email;
+   
+         this.db.collection("Bookings").onSnapshot(data => {
+        
+          
+           data.forEach(item => {
+             
+             if(item.exists){
+             
+               if(item.data().email === this.email){
+                this.DeliverDataService.name = item.data().name;
+                this.name = item.data().name;
+                this.image = item.data().image;
+                 this.User.push(item.data());
+              
+                 this.User=[];
+                 console.log("Testing",item.data().name);
+               }
+             }
+           })
+         })
+       
+      
+    if(firebase.auth().currentUser){
+    //  console.log("Your  pb data ", Bookings);
+      console.log("Your pb here is ", firebase.auth().currentUser.uid);
+      console.log("Your email here is ", firebase.auth().currentUser.email);
+     // this.User.push(item.data());
+        
+        
+        //User's details
+          this.email=firebase.auth().currentUser.email;
+          this.db.collection("Bookings").onSnapshot(data => {         
+            data.forEach(item => {
+              if(item.exists){
+                if(item.data().email === this.email){
+                  
+                  this.User.push(item.data());
+                  console.log("Testing",this.User);
+                }
+              }
+            })
+          })
+        
+        
+         // this.Date;
+        //Response  
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
+       
+        data.forEach(i => {
+          this.Response=[];
+          data.forEach(i => {
+           
+            if(i.exists){
+              if(i.data().bookingState === "Accepted"){
+                
+               
+                this.Response.push(i.data());
+                this.size=  this.Response.length;
+                
+                //this.date=i.data().startdate;
+                
+             
+               
+              }
+             
+            }
+          })
+    
+         
+          
+        })
+      })
+      
+  //Pending
+  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+    this.Request=[];
+    this.PendingSize = 0;
+   
+      data.forEach(i => {
+        if(i.exists){
+          if(i.data().bookingState === "waiting"){
+           
+            console.log("ewewew ", i.data());
+            this.Request.push(i.data());
+          
+            this.PendingSize =  this.Request.length;
+          }
+        }
+      })
+      
+  })
+  //Decline
+  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+    this.Decline=[];
+    this.DeclineSize = 0;
+   
+      data.forEach(i => {
+        if(i.exists){
+          if(i.data().bookingState === "Decline"){
+           
+            console.log("DeclineSize ", i.data());
+            this.Decline.push(i.data());
+          
+            this.DeclineSize =  this.Decline.length;
+          }
+        }
+      })
+      
+  })
+    
+//Display Messages
+
+  this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").onSnapshot(data => {
+       
+    
+   let obj = {data : {}, key : ""}
+      this.Messages=[];
+
+      data.forEach(i => {
+       
+        if(i.exists){
+          // if(i.data().bookingState === "Accepted"){
+            
+           obj.data = i.data()
+           obj.key = i.id
+            this.Messages.push(obj);
+            console.log("ssssssssssssss ", this.Messages );
+            
+            obj = {data : {}, key : ""}
+           // this.size=  this.Messages.length;
+            
+          // console.log("messages",this.Messages)
+            //this.date=i.data().startdate;
+            
+         
+           
+          // }
+         
+        }
+      })
+
+     
+      
+ 
+  })
+
+
+
+     //Customized tattoo
+     this.Customized=[];
+     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
+       this.Customized=[];
+     
+        data.forEach(i => {
+          if(i.exists){
+            if(i.data().field === "Customized"){
+             
+              console.log("ewewew ", i.data());
+              this.Customized.push({id: i.id, dataTattoo: i.data()});
+            
+             
+            }
+          }
+        })
+  
+        
+  
+    })
+    //view More
+    this.ViewMore=[];
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+      this.ViewMore=[];
+      
+    
+       data.forEach(i => {
+         if(i.exists){
+           if(i.data().field === "Customized"){
+          
+             console.log("ewewew ", i.data());
+             this.ViewMore.push({id: i.id, dataTattoo: i.data()});
+           
+            
+           }
+         }
+       })
+ 
+       
+ 
+   })
+  }
   }
   async presentToast(message) {
     const toast = await this.toastController.create({
@@ -263,202 +502,18 @@ export class ProfilePage implements OnInit {
     
   ionViewWillEnter(){
    
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
-          console.log("User Logged in ", item.data());
-          this.Myname = item.data().name;
-          this.Mynumber = item.data().number;
-          
-        })
-        this.email=firebase.auth().currentUser.email;
-        
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-          data.forEach(a => {
-            if(a.data().bookingState === "Accepted"){ 
-              this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-              .collection("Response")
-              
-              .get().then(myItem => {
-                this. MyNotifications = 0;     
-                myItem.forEach(doc => {
-                  if(doc.data().bookingState === "Pending"){
-                  
-                   this. MyNotifications += 1;
-                   console.log("@@@@@@@@@@@@@",  doc.data() );
-                    // this.array.push(doc.data())
-                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-                  }   
-                })
-            
-          })
-          // return true; 
-             }
-          })
-        })
-        
-        
-    
-      }
-    })
-         //User's details
-         this.email=firebase.auth().currentUser.email;
-   
-         this.db.collection("Bookings").onSnapshot(data => {
-        
-          
-           data.forEach(item => {
-             
-             if(item.exists){
-             
-               if(item.data().email === this.email){
-                this.DeliverDataService.name = item.data().name;
-                this.name = item.data().name;
-                this.image = item.data().image;
-                 this.User.push(item.data());
-              
-                 this.User=[];
-                 console.log("Testing",item.data().name);
-               }
-             }
-           })
-         })
-       
-      
-    if(firebase.auth().currentUser){
-    //  console.log("Your  pb data ", Bookings);
-      console.log("Your pb here is ", firebase.auth().currentUser.uid);
-      console.log("Your email here is ", firebase.auth().currentUser.email);
-     // this.User.push(item.data());
-        
-        
-        //User's details
-          this.email=firebase.auth().currentUser.email;
-          this.db.collection("Bookings").onSnapshot(data => {         
-            data.forEach(item => {
-              if(item.exists){
-                if(item.data().email === this.email){
-                  
-                  this.User.push(item.data());
-                  console.log("Testing",this.User);
-                }
-              }
-            })
-          })
-        
-        
-         // this.Date;
-        //Response  
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
-       
-        data.forEach(i => {
-          this.Response=[];
-          data.forEach(i => {
-           
-            if(i.exists){
-              if(i.data().bookingState === "Accepted"){
-                
-               
-                this.Response.push(i.data());
-                this.size=  this.Response.length;
-                
-                //this.date=i.data().startdate;
-                
-             
-               
-              }
-             
-            }
-          })
-    
-         
-          
-        })
-      })
-      
-  //Pending
-  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-    this.Request=[];
-    this.PendingSize = 0;
-   
-      data.forEach(i => {
-        if(i.exists){
-          if(i.data().bookingState === "waiting"){
-           
-            console.log("ewewew ", i.data());
-            this.Request.push(i.data());
-          
-            this.PendingSize =  this.Request.length;
-          }
-        }
-      })
-      
-  })
-  //Decline
-  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
-    this.Decline=[];
-    this.DeclineSize = 0;
-   
-      data.forEach(i => {
-        if(i.exists){
-          if(i.data().bookingState === "Decline"){
-           
-            console.log("DeclineSize ", i.data());
-            this.Decline.push(i.data());
-          
-            this.DeclineSize =  this.Decline.length;
-          }
-        }
-      })
-      
-  })
-    
-     //Customized tattoo
-     this.Customized=[];
-     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
-       this.Customized=[];
-     
-        data.forEach(i => {
-          if(i.exists){
-            if(i.data().field === "Customized"){
-             
-              console.log("ewewew ", i.data());
-              this.Customized.push({id: i.id, dataTattoo: i.data()});
-            
-             
-            }
-          }
-        })
-  
-        
-  
-    })
-    //view More
-    this.ViewMore=[];
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-      this.ViewMore=[];
-      
-    
-       data.forEach(i => {
-         if(i.exists){
-           if(i.data().field === "Customized"){
-          
-             console.log("ewewew ", i.data());
-             this.ViewMore.push({id: i.id, dataTattoo: i.data()});
-           
-            
-           }
-         }
-       })
- 
-       
- 
-   })
-  }
+
   
 }
+
+goToExplore(){
+  this.rout.navigateByUrl('');
+}
+
 showTattoo(item) {
-  console.log(item);
+
+  this.key = item.id
+  console.log("Your data ",item);
   this.showCustom.name_t = item.dataTattoo.name;
   this.showCustom.breadth = item.dataTattoo.breadth;
   this.showCustom.length = item.dataTattoo.length;
@@ -467,9 +522,20 @@ showTattoo(item) {
   this.showCustom.id = item.dataTattoo.id
   
 }
+
+DeleteMessage(key){
+       
+  this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").doc(key).delete()
+}
+
+
 async DeleteData() {
-  console.log();
+ 
   
+
+  
+  console.log("Method called ", this.key);
+
   const alert = await this.alertCtrl.create({
     header: 'DELETE!',
     message: '<strong>Are you sure you want to delete this tattoo?</strong>',
@@ -483,8 +549,10 @@ async DeleteData() {
       }, {
         text: 'Delete',
         handler: data => {
-          this.db.collection("Bookings").doc().delete();
-          
+        
+          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc(this.key).delete()
+          this.showCustom.image_t = ""
+          this.seeDecribe()
         }
       }
     ]
