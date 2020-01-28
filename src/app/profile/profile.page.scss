@@ -262,6 +262,21 @@ ion-row {
     align-items: center;
     justify-content: space-between;
     color: #fff;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 70%;
+        height: 5px;
+        background: #d36954;
+        border-radius: 50px;
+        transition: 500ms;
+    }
+
+    
 
     p {
         margin: 0 !important;
@@ -1041,6 +1056,7 @@ ion-button.explore {
 
     }
     .profile-image {
+        
         img {
             height: 8vh;
             width: 8vh;

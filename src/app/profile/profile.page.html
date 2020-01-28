@@ -1,7 +1,7 @@
 
 <ion-content>
 
-  <ion-fab vertical="bottom"  horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom"  horizontal="end" size="small" slot="fixed">
     <ion-fab-button color="success" (click)="modalAnimate()" *ngIf="!edit && !custom">
       <ion-icon name="create"></ion-icon>
     </ion-fab-button>
@@ -76,14 +76,14 @@
       </div>
 
       <div class="list-split-pane">
-        <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+        <ion-button  fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
         <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
         <ion-button fill="solid" expand="block" color="light"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
      
       </div>
-      <div class="logoman">
+      <div class="logoman explore">
         <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
       </div>
     </aside>
@@ -126,7 +126,7 @@
             <p>Breadth: {{showCustom.length}}cm</p>
 
             <ion-button size="large" fill="clear"color="danger">
-              <ion-icon name="trash" (Click)="DeleteData(Customized)"></ion-icon> Delete
+              <ion-icon name="trash" (Click)="DeleteData(showCustom)"></ion-icon> Delete
             </ion-button>
           </div>
         </div>
@@ -145,7 +145,7 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+          <ion-button  fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -217,8 +217,8 @@
         <div class="segment">
           <div class="deep">
           
-              <h4 style="font-weight: 700;">View all Request</h4>
-              <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
+             <!--  <h4 style="font-weight: 700;">View all Request</h4>
+              <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p> -->
           
             <ion-segment [(ngModel)]="category" color="primary">
             
@@ -243,7 +243,7 @@
               <ion-segment-button  value="pending">
                 <div class="grow">
                   <ion-badge color="primary">{{PendingSize}}</ion-badge>
-                  <ion-label>Pedding</ion-label>
+                  <ion-label>Pending</ion-label>
                   
                 </div>
               </ion-segment-button>
