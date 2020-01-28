@@ -19,7 +19,15 @@
       </div>
     </div>
    <section class="upload-tattoo">
-    <h1 class="ink">INK TATTOOS</h1>
+    
+   
+    
+      <ion-item  class="imageitem" lines="none" >
+        <ion-label position="stacked" id="profile_image" color="primary"></ion-label>
+        <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
+      </ion-item>
+  <ion-item class="imageitem" lines="none" *ngIf="image"><img  src="{{image}}" height="480px" width="3000px" style="object-fit: cover;"></ion-item>
+     
    </section>
  
     <section class="form-container">
@@ -42,7 +50,7 @@
 
 
                  
-                  <ion-input class="pdf-upload"  type="file" accept="pdf/*" (change)="changeListener($event)"></ion-input>
+                  <!-- <ion-input class="image-upload"  type="file" accept="image/*" (change)="changeListener($event)"></ion-input> -->
                  
                   
 

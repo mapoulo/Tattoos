@@ -7,14 +7,50 @@ exports.test = functions.firestore.document('Bookings/{docid}/Requests/{id}').on
     console.log('Document change', snap.data());
     const dataR = snap.data();
 
-    const token ='eGFvbAkVYDxpRDsTZi1NJe:APA91bHyOBsQnwAQoKECjE0B88u_IOFiO1iMoOuTrUhzDh7dEh6dsu4lybzqCynxcQQUDey0oj9D5suvEOhIjW7Ule_yRuC1vAmv7iYTWudSvRNmPlP0PYs17vdlEmjaaF3PMSNdRgdu'
-    const payload = {
-        notification: {
-            title: 'New Booking!',
-            body: `name of customer: ${dataR.customerName} TattooName   ${dataR.tattoName}`,
-            icon: 'https://goo.gl/Fz9nrQ'
+   
+
+        const token = dataR.cmsTokenId
+
+        const payload = {
+            notification: {
+                title: 'New Booking!',
+                body: `name of customer: ${dataR.customerName} TattooName   ${dataR.tattoName}`,
+                icon: 'https://goo.gl/Fz9nrQ'
+            }
         }
-    }
-    return admin.messaging().sendToDevice(token, payload)
+
+        return admin.messaging().sendToDevice(token, payload)
+
+  
+ 
+ 
 
 })
+
+exports.ClinetResponse = functions.firestore.document('Bookings/{docid}/Response/{id}').onCreate((snap: { data: () => any; }, context: any) => {
+    console.log('Document change', snap.data());
+    const dataR = snap.data();
+
+   
+
+        const token = dataR.tokenId
+
+        const payload = {
+            notification: {
+                title: 'Response from the CMS',
+                body: ``,
+                icon: 'https://goo.gl/Fz9nrQ'
+            }
+        }
+
+        return admin.messaging().sendToDevice(token, payload)
+
+  
+ 
+ 
+
+})
+
+
+
+

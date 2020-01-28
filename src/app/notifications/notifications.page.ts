@@ -1,6 +1,6 @@
 import { ModalController, AlertController } from '@ionic/angular';
 import { DeliverDataService } from './../deliver-data.service';
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 
 
@@ -16,74 +16,46 @@ export class NotificationsPage implements OnInit {
   array = [];
   showMessage : boolean;
   message = "";
-  article: boolean = false;
-  articleDiv: any = document.getElementsByClassName('article');
-  days = "";
-  icon = 'ios-arrow-down';
-  Username = "";
 
-  constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
+  days = "";
+
+  constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController ) {
     // this.array = [];
     // this.array = this.DeliverDataService.AcceptedData;
     console.log("Data in the Notifications ", this.array);
     
    }
 
-   ionViewWillEnter(){
-
-    if(firebase.auth().currentUser){
-
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(i => {
-
-        i.forEach(a => {
-
-          if(a.data().bookingState === "Accepted"){   
-           this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response")
-           .onSnapshot(data => {
-             this.array = []; 
-             data.forEach(item => {
-               if(item.data().bookingState === "Pending"){
-                
-                 this.array.push(item.data())
-                 // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-               } 
-             })
-           })
-           
-           
-     
-       // return true; 
-          }
-         
-         })
-      })
-    }
-
-   }
-
   ngOnInit() {
 
 
- 
+    if(firebase.auth().currentUser){
 
-  }
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(i => {
+        i.forEach(a => {
 
-  animate(i) {
-    this.article = !this.article;
-    let card = document.getElementsByClassName('card');
-    if(this.article) {
-      this.icon = 'ios-arrow-up';
-      this.render.setStyle(this.articleDiv[i], 'display', 'block');
-      this.render.setStyle(card[i], 'height', '25%');
-      this.render.setStyle(card[i], 'transition', '500ms');
-    }else {
-      setTimeout(() => {
-        this.icon = 'ios-arrow-down';
-        this.render.setStyle(this.articleDiv[i], 'display', 'none');
-        this.render.setStyle(card[i], 'height', '20%');
-        this.render.setStyle(card[i], 'transition', '500ms');
-      }, 500);
+         if(a.data().bookingState === "Accepted"){   
+          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response")
+          .onSnapshot(data => {
+            this.array = []; 
+            data.forEach(item => {
+              if(item.data().bookingState === "Pending"){
+               
+                this.array.push(item.data())
+                // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
+              } 
+            })
+          })
+          
+          
+    
+      // return true; 
+         }
+        
+        })
+      })
     }
+
   }
 
   async Decline(data, i){
@@ -96,9 +68,11 @@ export class NotificationsPage implements OnInit {
     endingDate : "",
     price : "",
     uid : "",
+    number:"",
     bookingState : "",
     auId : "",
-    image : ""
+    image : "",
+    customerName:""
   }
       
       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(myItem => {       
@@ -115,7 +89,7 @@ export class NotificationsPage implements OnInit {
           obj.auId = doc.data().auId,
           obj.image =  doc.data().image,doc.data()
 
-          this.updateDecline(doc.data().auId, doc.data(), data.customerName);
+          this.updateDecline(doc.data().auId, doc.data());
 
           }   
         })
@@ -132,7 +106,7 @@ export class NotificationsPage implements OnInit {
 
   }
 
-  updateDecline(auId, obj, name){
+  updateDecline(auId, obj){
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").doc(auId).update({
       startingDate : obj.startingDate,
@@ -154,15 +128,11 @@ export class NotificationsPage implements OnInit {
       uid : obj.price ,
       bookingState : "Decline",
       auId : obj.auId,
-      image : obj.image,
-      name : name
+      image : obj.image
 
     })
     
   }
-
-
-  
   dismiss() {
     this.modalController.dismiss({
       'dismissed': true
@@ -170,10 +140,6 @@ export class NotificationsPage implements OnInit {
   }
 
   async Accept(data, i){
-
-
-   
-    
 
     const alert = await this.AlertController.create({
       header: "",
@@ -191,33 +157,8 @@ export class NotificationsPage implements OnInit {
     setTimeout(() => {
       console.log("ACCEPTED DATA");
       this.array.splice(i, 1);
-
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(i => {
-
-        i.forEach(a => {
-
-          if(a.data().bookingState === "Accepted"){   
-           this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response")
-           .onSnapshot(data => {
-             this.array = []; 
-             data.forEach(item => {
-               if(item.data().bookingState === "Pending"){
-                
-                 this.array.push(item.data())
-                 // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-               } 
-             })
-           })
-           
-           
      
-       // return true; 
-          }
-         
-         })
-      })
-     
-    },1000);
+    },2000);
     
    
 
@@ -225,6 +166,8 @@ export class NotificationsPage implements OnInit {
       startingDate : "",
       endingDate : "",
       price : "",
+      number: "",
+      customerName:"",
       uid : "",
       bookingState : "",
       auId : "",
@@ -245,14 +188,14 @@ export class NotificationsPage implements OnInit {
             obj.auId = doc.data().auId,
             obj.image =  doc.data().image,doc.data()
   
-            this.updateAccept(doc.data().auId, doc.data(), data.customerName);
+            this.updateAccept(doc.data().auId, doc.data());
   
             }   
           })
       
     })
 
-   
+
   
   }
 
@@ -263,13 +206,15 @@ export class NotificationsPage implements OnInit {
 
 
 
-  updateAccept(auId, obj, name){
+  updateAccept(auId, obj){
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").doc(auId).update({
       startingDate : obj.startingDate,
       endingDate : obj.endingDate,
       price : obj.price ,
       uid : obj.price ,
+      number:obj.number,
+      customerName:obj.customerName,
       bookingState : "Accepted",
       auId : obj.auId,
       image : obj.image
@@ -284,10 +229,11 @@ export class NotificationsPage implements OnInit {
       endingDate : obj.endingDate,
       price : obj.price ,
       uid : obj.price ,
+      number:obj.number,
+      customerName:obj.customerName,
       bookingState : "Accepted",
       auId : obj.auId,
-      image : obj.image,
-      name : name
+      image : obj.image
 
     })
 

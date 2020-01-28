@@ -28,6 +28,7 @@ export class ContactUsPage implements OnInit {
   loader: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
+  inputDisabled: boolean = false;
   validation_messages = {
     'name': [
       { type: 'required', message: 'Name is required.' },
@@ -57,8 +58,10 @@ export class ContactUsPage implements OnInit {
   }
  
   ionViewWillEnter(){
+    this.showProfile();
   
    
+    this.inputDisabled = false;
     setTimeout(() => {
       this.loader = false;
    }, 1000);
@@ -88,13 +91,14 @@ export class ContactUsPage implements OnInit {
          
  
   
-    this.showProfile();
+  
   }
     
   showProfile(){
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         this.showProfile1 = true;
+        this.inputDisabled = true;
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
          
@@ -264,3 +268,4 @@ async Login(){
      this.rout.navigateByUrl('');
    }
 }
+

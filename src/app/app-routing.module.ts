@@ -22,6 +22,12 @@ const routes: Routes = [
   },
 
   {
+    path: '',
+    loadChildren: () => import('./xplore/xplore.module').then( m => m.XplorePageModule)
+  },
+
+
+  {
     path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
   },

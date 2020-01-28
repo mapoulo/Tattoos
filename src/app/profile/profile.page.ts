@@ -6,7 +6,7 @@ import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { ModalController,AlertController, Platform, ToastController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
@@ -28,18 +28,10 @@ export class ProfilePage implements OnInit {
   showProfile1;
   category: any = 'accepted';
 
-  showCustom = {
-    name_t: '',
-    image_t: '',
-    length: '',
-    breadth: '',
-    desc: ''
-  }
-
 
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
-  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
   email: string;
@@ -48,6 +40,8 @@ export class ProfilePage implements OnInit {
   startingDate;
   endingDate;
   Response=[];
+  Decline=[];
+  DeclineSize=0;
   userID :string;
   name = "";
   image = "";
@@ -279,7 +273,15 @@ export class ProfilePage implements OnInit {
     }
     diff;
     diffDays;
- 
+    // download() {
+    //   const fileTransfer: FileTransferObject = this.transfer.create();
+    //   fileTransfer.download(this.pdf, this.file.dataDirectory + 'file.pdf').then((entry) => {
+    //     console.log('download complete: ' + entry.toURL());
+    //   }, (error) => {
+    //     // handle error
+    //   });
+      
+    // }
     downloadPdf() {
       
       this.db.collection("Admin").onSnapshot(data => {
@@ -295,11 +297,33 @@ export class ProfilePage implements OnInit {
       window.location.href = this.link;
      }, 1000);
     
-  
+  //     this.fileOpener.open(this.MyPdf, 'application/pdf')
+  // .then(() => console.log('File is opened'))
+  // .catch(e => console.log('Error opening file', e));
+  //     if (this.plt.is('cordova')) {
+  //       this.pdfObj.getBuffer((buffer) => {
+  //         var blob = new Blob([buffer], { type: 'application/pdf' });
+  // 
+  //         // Save the PDF to the data Directory of our App
+  //         this.file.writeFile(this.file.dataDirectory, 'myletter.pdf', blob, { replace: true }).then(fileEntry => {
+  //           // Open the PDf with the correct OS tools
+  //           this.fileOpener.open(this.MyPdf, 'application/pdf');
+  //         });
+  //       });
+  //     } else {
+  //       // On a browser simply use download!
+  //       this.pdfObj.download();
+  //     }
     }
     
+    goToExplore(){
+      this.rout.navigateByUrl('');
+    }
+    
+
     
   ionViewWillEnter(){
+   
    
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
@@ -336,7 +360,29 @@ export class ProfilePage implements OnInit {
         })
         
         
-    
+        // .get().then(i => {
+        //   i.forEach(a => {
+  
+        //    if(a.data().bookingState === "Accepted"){ 
+        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
+        //     .collection("Response").get().then(myItem => {
+        //       this. MyNotifications = 0;     
+        //       myItem.forEach(doc => {
+        //         if(doc.data().bookingState === "Pending"){
+                
+        //          this. MyNotifications += 1;
+        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
+        //           // this.array.push(doc.data())
+        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
+        //         }   
+        //       })
+          
+        // })
+        // // return true; 
+        //    }
+          
+        //   })
+        // })
       }
     })
          //User's details
@@ -387,7 +433,7 @@ export class ProfilePage implements OnInit {
         
          // this.Date;
         //Response  
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response") .onSnapshot(data => {
        
         data.forEach(i => {
           this.Response=[];
@@ -434,82 +480,45 @@ export class ProfilePage implements OnInit {
           
     
       })
-    
-     //Customized tattoo
-     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
-       this.Requests=[];
-     
-        data.forEach(i => {
-          if(i.exists){
-            if(i.data().field === "Customized"){
-             
-              console.log("ewewew ", i.data());
-              this.Requests.push(i.data());
-            
-             
-            }
-          }
-        })
-  
-        
-  
-    })
-    //view More
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-      this.Requests=[];
-    
-       data.forEach(i => {
-         if(i.exists){
-           if(i.data().field === "Customized"){
-            
-             console.log("ewewew ", i.data());
-             this.Requests.push(i.data());
-           
-            
-           }
-         }
-       })
- 
+
+      //Decline
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+        this.Decline=[];
+        this.DeclineSize = 0;
        
- 
-   })
-  }
-  
-}
-
-showTattoo(item) {
-  console.log(item);
-  this.showCustom.name_t = item.name;
-  this.showCustom.breadth = item.breadth;
-  this.showCustom.length = item.length;
-  this.showCustom.image_t = item.image;
-  this.showCustom.desc = item.description;
-  
-}
-async DeleteData(Customized) {
-  console.log(Customized);
-  
-  const alert = await this.alertCtrl.create({
-    header: 'DELETE!',
-    message: '<strong>Are you sure you want to delete this tattoo?</strong>',
-    buttons: [
-      {
-        text: 'Cancel',
-        
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      }, {
-        text: 'Delete',
-        handler: data => {
-          this.db.collection("Bookings").doc(Customized.docid).delete();
+          data.forEach(i => {
+            if(i.exists){
+              if(i.data().bookingState === "Decline"){
+               
+                console.log("DeclineSize ", i.data());
+                this.Decline.push(i.data());
+              
+                this.DeclineSize =  this.Decline.length;
+              }
+            }
+          })
+    
           
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-
+    
+      })
+    
+      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
+      //   data.forEach(i => {
+      //     console.log("ewewew ", i.data());
+      //     this.Requests.push(i.data());
+          
+      //   })
+      // })
+      
+  
+      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
+      //   data.forEach(i => {
+      //     console.log("Response ", i.data());
+      //     this.Response.push(i.data());
+          
+      //   })
+      // })
+     
+  }
 }
 }
