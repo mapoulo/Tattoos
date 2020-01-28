@@ -80,6 +80,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+ 
+    img {
+        transform: translate(0%, -15%); 
+    }
 }
 .profile-image {
     display: flex;
@@ -455,6 +459,10 @@ ion-button.explore {
 }
 
 @media only screen and (max-width: 600px) {
+    .logo img {
+        width: 60px;
+        transform: translate(0, -15%);
+    }
 
     .tattoo-details > .tattoo-card-details {
         position: absolute;

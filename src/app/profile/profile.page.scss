@@ -1,9 +1,11 @@
 
+
 *, *::after, *::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -25,450 +27,896 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-.main {
+.main-container {
     height: 100%;
     width: 100%;
     display: flex;
     position: relative;
     flex-direction: column;
+    margin: 0;
+    background: #f1f1f1;
+
+
+
 }
-.nav-bar {
-   flex-basis: 8%; 
-    background: #000;
-  
- 
-}
-.navigation {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-}
-.logo {
-    color: #fff;
-}
-.list {
-    display: flex;
-    align-items: center;
-    ul {
-        display: flex;
-        align-items: center;
-        li {
-            list-style: none;
-         
-            a {
-                color: #fff;
-                text-decoration: none;
-                padding: 1em;
-                position: relative;
-                cursor: pointer;
-            }
-        }
-        li:hover a::before {
-            background: #db6c50;
-            position: absolute;
-            bottom: 0%;
-            left: 10%;
-            width: 30%;
-            right: 10%;
-            height: 5px;
-            border-radius: 50px;
-            content: '';
-            animation-name: slide;
-            animation-duration: 500ms;
-            animation-fill-mode: forwards;
-            transition: all 500ms;
-        }
-        
-        @keyframes slide {
-            0% {
-                width: 60%;
-                bottom: 0%;
-            } 
-            100% {
-                width: 80%;
-                bottom: 10%;
-            } 
-        }
-    }
- 
-}
-.btn-menu {
-    display: none;
-}
-.profile {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #fff;
-    p {
-        padding: 1em;
-    }
-    .profile-image {
-        height: 5vh;
-        width: 5vh;
-        overflow: hidden;
-        border-radius: 50px;
-      
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-    }
-}
-.notifications {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .badges {
-            height: 18px;
-            width: 18px;
-            border-radius: 50px;
-            padding: .2em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 20%;
-            right: 30%;
-        }
-}
-.container {
-    flex: 1;
-    background: #fcfcff;
-    
-    display: flex;
-    flex-direction: column;
-}
-.profile-container {
-    height: 40vh;
-    padding: 1em;
- 
-    .profile-info {
-        background: #fff;
-        height: 100%;
-        border-radius: .5em;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        display: flex;
-        flex-direction: row;
-        .profile-here {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            .name {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1em;
-                flex-basis: 20%;
-                flex-wrap: wrap;
-                h1 {
-                    font-size: 3vw;
-                    font-weight: bolder;
-                    color: #888;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                }
-            }
-            .profile-container-here {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding-right: 30px;
-                padding-left: 30px;
-                flex-basis: 60%;
-                .wrap-now {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-basis: 20%;
-                    .image-profile-here {
-                        height: 20vh;
-                        width: 20vh;
-                        border-radius: 50%;
-                        overflow: hidden;
-                        margin-right: 30px;
-                        img {
-                            height: 100%;
-                            width: 100%;
-                            object-fit: cover;
-                        }
-                    }
-                    .information-profile {
-                      /*   font-weight: bold; */
-                        color: #888;
-                        font-size: 100%;
-                       
-                        p {
-                            padding: .5em;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-.analytics {
-    flex-basis: 20%;
-    padding: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.history,
-.accepted,
-.declined {
-    flex-basis: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    
-    p {
-        text-align: center;
-        font-size: 30px;
-        color: #888;
-    }
-}
-.history, .accepted {
-    border-right: 2px solid rgba(199, 199, 199, 0.5);
-}
-.details-container {
-    height: 50vh;
-    display: flex;
-    border-radius: 10px;
-    padding: 1em;
-    justify-content: space-between;
-}
-.history-booking {
-        background: #fff;
-    
-         border-radius: .2em; 
-        flex-basis: 60%;
-       display: flex;
-       flex-direction: column;
-       position: relative;
-      
-       
-}
-.booking-card {
-    flex-basis: 90%;
-    height: 90%;
-    flex-wrap: wrap;
-    display: flex;
-    overflow: auto;
-    justify-content: flex-start;
-   
-}
-.booking-list {
-    flex-basis: 50%;
-    height: 15vh;
-  
-    padding: 1em;
-}
-.booking-history-item {
-    height: 100%;
-    box-shadow: 0 0 3px #ddd;
-    border-radius: 5px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    .tattoo-booked {
-        flex-basis: 30%;
-        //height: 100%;
-        border-radius: 5px;
-        overflow: hidden;
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-    }
-    .btn-downloads {
-        position: absolute;
-      bottom: -15%;
-      left: 0;
-        padding-right: 3em;
-      width: 100%;
-      height: 30%;
-      display: flex;
-        justify-content: flex-end; 
-      .btn-downla {
-        height: 100%;
-        width: auto;
-        background: linear-gradient(#dadada, #7bc850);
-        padding: .3em;
-        color: #fff;
-        border-radius: 4px;
-        font-weight: bold;
-        outline: none;
-      }
-      .btn-downla:active {
-        background: linear-gradient( #7bc850, #dadada);
-      }
-      
-    }
-    .info-tattoo {
-        padding: .5em;
-        color: #888;
-    }
-}
-.customized-tattoo {
-    background: #fff;
-    height: 100%;
-    border-radius: .2em;
-    flex-basis: 30%;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-    
-    .scroll-container {
-        flex-basis: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: nowrap;
-        
-        .no-pictures {
-            flex-basis: 100%;
-            height: 100%;
-            background: rgb(241, 241, 241);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5px;
-            transform: rotate(90deg);
-            p {
-                text-align: center;
-                color: #888;
-            }
-        }
-        .cards {
-            flex: 0 0 90%;
-            height: 40vh;
-            margin-left: -40px;
-          
-        /*     padding: 1em; */
-            .card {
-                background: #fff;
-                height: 100%;
-                width: 100%;
-                border-radius: 10px;
-                box-shadow: 0 0 5px #ddd;
-                transition: all 500ms;
-                border-radius: .2em;
-                overflow: hidden;
-                transform: scale(.8);
-                img {
-                    height: 100%;
-                    width: 100%;
-                    object-fit: cover;
-                }
-            }
-            .card:hover {
-                transform: scale(1);
-                filter: saturate(4);
-                transition: all 500ms;
-                position: relative;
-                z-index: 100;
-            }
-        }
-    }
-}
-.header {
-    font-weight: bold;
-    font-size: 100%;
-    color: rgb(92, 92, 92);
-    flex-basis: 10%;
-    padding: 1.3em;
-    display: flex;
-    align-items: center;
-}
-.modalView {
+
+.customizedTDiv {
     position: absolute;
-    z-index: 1000;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.404);
+    background: rgba(0, 0, 0, 0.648);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    
+    .custom-container {
+        display: flex;
+        flex-basis: 95%;
+
+
+        .list-custom {
+            flex-basis: 40%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 2em;
+            background: rgba(0, 0, 0, 0.696);
+    
+            .image-custom {
+                flex: 0 0 25%;
+                position: relative;
+                margin: 1%;
+                
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            
+    
+        }
+        .showDepict{
+            flex-basis: 60%;
+           /*  background: blue; */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            .img-fullscreen {
+                flex-basis: 100%;
+                position: relative;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    background: rgba(0, 0, 0, 0.696);
+                }
+            }
+
+            .details {
+                flex-basis: 20%;
+                background: rgb(0, 0, 0);
+                position: absolute;
+                top: 0;
+                right: -30%;
+                height: 100%;
+                width: 30%;
+                color: #fff;
+                padding: 1em;
+                transition: 500ms;
+                
+
+                .arrows {
+                    position: absolute;
+                    top: 5%;
+                    left: -10%;
+                }
+
+                p {
+                    padding: 1em;
+                }
+                h1 {
+                    padding: 1em;
+                }
+
+            }
+
+        }
+      
+    }
+    .header-custom {
+        flex-basis: 5%;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        position: relative;
+
+        ion-button {
+            position: absolute;
+            right: 0;
+            top: 0;
+
+        }
+
+
+        h4 {
+            text-align: center;
+            color: #fff;
+            margin: 0 !important;
+            font-size: 100%;
+        }
+
+    }
+   
+}
+
+/* .fullscreenTattoo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+} */
+.nav-bar {
+    display: flex;
+    flex-basis: 5%;
+    background: #000;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.list {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+
+
+}
+.header-explore{
+    font-family: 'Pacifico', cursive !important;
+    color: #888 !important;
+}
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    img {
+        transform: translate(0%, -15%); 
+    }
+}
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+
+    p {
+        margin: 0 !important;
+        padding: .5em;
+
+    }
+  
+
+    img {
+        height: 5vh;
+        width: 5vh;
+        object-fit: cover;
+        border-radius: 50px;
+
+
+    }
+}
+
+
+.split-pane, .menu-btn {
+    display: none;
+
+}
+
+.list-split-pane {
+    padding: 1em;
+
+}
+.logoman {
+    margin-top: 5em;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
-.small-modal-edit-profile {
-    flex-basis: 30%;
-    height: 50%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-    background: #fff;
-    border-radius: 5px;
+.wrapper-page {
+    flex-basis: 95%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+.wrapper-header {
+    flex-basis: 20%;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
-    .close-btn {
-        position: absolute;
-        top: -15%;
-        right: 0;
-    }
-}
-@media only screen and (max-width: 600px) {
-    .list   ul, .profile  p{
-            display: none;
-        }
-        .logo img { width: 60px;}
-        .btn-menu {
-            display: block;
-        }
-        .analytics > * {
-            flex: 1;
-        }
-        .small-modal-edit-profile {
-            flex-basis: 90%;
-            height: 60%;
-        }
-        .details-container {
-            flex-direction: column;
-        }
-        .history-booking {
-            flex-basis: 100%;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),url('../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg');
+    background-position: center;
+    background-size: cover; 
+   
+    
+    .profile-image-header {
+       /*  position: absolute; */
+       /*  top: 10vh;
+        left: 10vh; */
+        height: 20px;
+        width: 20px;
+        overflow: hidden;
+        border-radius: 50%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281); 
+        border: 10px solid #f1f1f1;
+        justify-self: flex-start;
+        align-self: flex-end;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
+        }
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 4vw;
+        margin: 0 !important;
+    }
+
+
+}
+.container-sub {
+    flex-basis: 80%;
+   /*  background: red; */
+    display: flex;
+    
+}
+.information {
+    flex-basis: 20%;
+ /*    background: rgb(207, 207, 207); */
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+   /*  justify-content: space-between;
+ */
+
+}
+.grow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+   ion-badge {
+       margin-right: .56em;
+       width: 20px;
+       height: 20px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       border-radius: 50px;
+       padding:1em;
+
+       
+   }
+}
+.cup {
+    flex-basis: 80%;
+    background: rgb(255, 255, 255); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281); 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 5%;
+
+
+    .profile-image-header-div {
+        flex-basis: 15%;
+        display: flex;
+        position: relative;
+
+
+        .move-up {
            
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: -7.5vh;
+            width: 100%;
+            height: 15vh;
+
+            img {
+                height: 15vh;
+                width: 15vh;
+                border-radius: 50%;
+                border: 5px solid #f1f1f1;
+            }
+
+
         }
-        .customized-tattoo {
-            flex-basis: 100%;
+    }
+
+    .info-data {
+        padding: 10px;
+        flex-basis: 30%;
+        
+
+        h4 {
+            text-align: center;
+            font-weight: 700;
+            
         }
-        .booking-card {
-            flex-direction: column;
-            .booking-list {
-                height: 5vh;
-                flex-basis: 20%;
+        .p {
+         /*    padding: .8em; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p {
+                margin: 5%;
             }
         }
-}
-/* @media only screen and (min-width: 1024px) {
-    .booking-card {
+
+    }
+
+    .customizedTattoo {
+        flex-basis: 50%;
+        
+       /*  background: red; */
+        display: flex;
         flex-direction: column;
-        .booking-list {
-            height: 5vh;
-            flex-basis: 20%;
+
+        .header-custom {
+            flex-basis: 5%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-card-container {
+            flex-basis: 90%;
+            display: flex;
+            flex-wrap: wrap;
+           /*  justify-content: center; */
+            padding: 1em;
+
+            .custom-card {
+                flex-basis: 32%;
+                height: 50%;
+                position: relative;
+                margin: .5%;
+                transition: 500ms;
+                flex-grow: 0;
+                flex-shrink: 0;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+
+                &:hover {
+                    transform: scale(1.1);
+
+                }
+            }
+
+
+        }
+
+        .more {
+            flex-basis: 5%;
+
+        }
+
+
+    }
+
+
+}
+.segment {
+    flex-basis: 50%;
+    background: rgb(255, 255, 255);
+    margin-left: 1%;
+    margin-right: 1%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+.deep {
+    flex-basis: 20%;
+    /* padding: 3em; */
+   /*  background: rgb(230, 230, 230); */
+}
+.card-container{
+    flex-basis: 80%;
+
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+
+     .cardFor {
+        display: flex;
+        padding: 1em;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-basis: 100%;
+
+
+    .no-items {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+     
+     }
+
+    .card {
+       
+        flex-basis: 50%;
+        height: 25%;
+        padding: .5em;
+
+        .card-t {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+            box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.1),  
+              -6px -6px 12px  rgba(255, 255, 255, 1);
+            background: rgb(255, 255, 255);
+            border-radius: 1px;
+
+            .image-card {
+                flex-basis: 30%;
+                position: relative;
+                overflow: hidden;
+               
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+
+                }
+            }
+        }
+        
+    }
+  
+}
+.download {
+    flex-basis: 7%;
+    border-radius: 50px;
+    background:#eaeaea;
+    cursor: pointer;
+    box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.1),  
+    -6px -6px 12px  rgba(255, 255, 255, 1);
+   /*  background: red; */
+    /* padding: 1em; */
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    .btn-download {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+    .header-download {
+        margin: 2%;
+    }
+
+
+    &:active {
+        box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.1),  
+       inset -6px -6px 12px  rgba(255, 255, 255, 1);
+    border-radius: 50px;
+    cursor: pointer;
+    }
+}
+.editForm {
+    flex-basis: 30%;
+    padding: 1em;
+    margin-right: 1%;
+    background: #fff;
+   justify-self: flex-start;
+   align-self:flex-start ;
+}
+.scroll-container {
+    flex-basis: 80%; 
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+
+
+}
+.notification {
+    position: relative;
+}
+.badge {
+    position: absolute;
+    top: 20%;
+    right: 20%;
+    width: 19px;
+    height: 19px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+ion-segment {
+    padding: 5px;
+  }
+
+ion-button.explore {
+    position: relative;
+
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 5px;
+        background: #d36954;
+        border-radius: 50px;
+        transition: 500ms;
+    }
+}
+
+.list > ion-button {
+    position: relative;
+    transition: 500ms;
+
+
+   
+
+    &:hover::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 5px;
+        background: #d36954;
+        border-radius: 50px;
+        transition: 500ms;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+   .grow {
+       font-size: 60% !important;
+   }
+
+    .card-container {
+    
+        
+
+        .cardFor {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            flex-wrap: nowrap;
+            flex-basis: 100%;
+        }
+      
+
+        .card {
+            flex-basis: 90%;
+            background: red;
+            height: 100%;
+            flex-grow: 0;
+            flex-shrink: 0;
         }
     }
-    .analytics > * {
-        flex: 1;
+
+    .download {
+        margin: 2em;
     }
-    .history-booking {
-        flex-basis: 40%;
+
+    .details {
+        display: none;
+    }
+    .profile-image-header-div {
+        flex-basis: 5%;
+    }
+
+    .customizedTDiv {
+        flex-direction: column;
+
+      
+        .custom-container {
+            flex-direction: column;
+
+            .list-custom {
+           
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                flex-basis: 40%;
+           
+            
+
+                .image-custom {
+                   flex: 0 0 65%;
+                   
+               }
+   
+           }
+
+           .showDepict {
+
+           }
+            
+        }
+    }
+ .wrapper-page {
+    overflow-y: auto;
+    overflow-x: hidden;
+ }
+ .information {
+   height: 100%;
+ }
+
+    .wrapper-page > div{
+        flex-grow: 0;
+        flex-shrink: 0;
+        
+    }
+    .wrapper-header{
+        justify-content: flex-start;
+        padding: .5em;
+       /*  .profile-image-header {
+            position: relative;
+            jus
+
+        } */
+    }
+
+    .editForm {
+        display: none;
+
+    }
+  /*   .information {
+        flex-basis: 100%;
+    } */
+    .info-data {
+     /*  display: flex; */
+
+    }
+
+    .p {
+        padding: 0 !important;
+        
+        p {
+            padding: 0 !important;
+        }
+
+        /* justify-content: center; */
+    }
+
+    .container-sub { 
+        display: block;
+       /*  flex-grow: 1;
+        flex-shrink: 1; */
+
+        .segment {
+        
+        }
+        .information
+         {
+
+            flex: 1;
+            flex-direction: column;
+           
+         
+            .cup {
+                flex: 1;
+               /*  background: blue; */
+                margin: 0 !important;
+            }
+        }
+        .editForm {
+          
+        }
+    }
+   
+
+    .logo img {
+        width: 60px;
+        transform: translate(0, -15%);
+    }
+
+    .tattoo-details > .tattoo-card-details {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        justify-content: center;
+        align-items: center;
+
+      
+    }
+
+    .image-card-t, .describe-card-s {
+        display: none;
+    }
+
+    .slides {
+        display: none;
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        z-index: 800;
+
+
+        ion-fab-button {
+            --width: 30px;
+            --height: 30px;
+
+        }
+    }
+
+    .tattoo-details > .image-tattoo {
+        flex-basis: 100%;
+
+
+        img {
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border: none;
+  
+            /* #2 */
+            padding: 0px;
+            background: none;
+            
+            /* #3 */
+            outline: none;
+            
+            /* #4 AND INFINITY!!! (CSS3 only) */
+            box-shadow:
+                0 0 0 10px hsl(0, 0%, 0%),
+                0 0 0 15px hsl(0, 0%, 3%);
+        }
+
+
+    }
+
+
+    .scroll-container {
+        .scroll-list {
+            flex: 0 0 60%;
+
+            .scroll-item {
+                .scroll-key {
+                    flex: 0 0 80%;
+                }
+               
+            }
+        }
+    }
+
+    .list {
+        display: none;
+    
+    }
+    .menu-btn  {
+        display: block;
+    }
+    .split-pane {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.83);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+
+
+    }
+    .close {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 10%;
        
+        padding-left: .3em;
+
     }
-    .customized-tattoo {
-        flex-basis: 50%;
+    .profile-image {
+        img {
+            height: 8vh;
+            width: 8vh;
+
+        }
     }
-} */
+    .logo {
+        flex: 1;
+
+    }
+    
+}
+@media only screen and (min-width: 600px) {
+    .scroll-container {
+        .scroll-list {
+            flex: 0 0 40%;
+
+            .scroll-item {
+                .scroll-key {
+                    flex: 0 0 20%;
+                }
+               
+            }
+        }
+    }
+}

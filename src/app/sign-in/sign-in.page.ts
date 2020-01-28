@@ -95,7 +95,7 @@ export class SignInPage implements OnInit {
          })
        
      
-         this.Router.navigateByUrl('/xplore')
+         this.Router.navigateByUrl('xplore')
      
         }).catch(error => {
      
