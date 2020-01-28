@@ -43,6 +43,7 @@ export class ProfilePage implements OnInit {
   constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
+  Messages=[];
   email: string;
   Requests=[];
   Request=[];
@@ -437,6 +438,34 @@ export class ProfilePage implements OnInit {
       
 
   })
+
+  //Display Messages
+  this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").onSnapshot(data => {
+       
+    data.forEach(i => {
+      this.Messages=[];
+      data.forEach(i => {
+       
+        if(i.exists){
+          // if(i.data().bookingState === "Accepted"){
+            
+           
+            this.Messages.push(i.data());
+           // this.size=  this.Messages.length;
+            
+          // console.log("messages",this.Messages)
+            //this.date=i.data().startdate;
+            
+         
+           
+          // }
+         
+        }
+      })
+     
+      
+    })
+  })
     
      //Customized tattoo
      this.Customized=[];
@@ -485,7 +514,7 @@ export class ProfilePage implements OnInit {
 
 showTattoo(item) {
 
-  console.log(item);
+  console.log("pppppp",item);
   this.showCustom.name_t = item.dataTattoo.name;
   this.showCustom.breadth = item.dataTattoo.breadth;
   this.showCustom.length = item.dataTattoo.length;
@@ -496,8 +525,8 @@ showTattoo(item) {
 }
 
 
-async DeleteData() {
-  console.log();
+async DeleteData( ) {
+  console.log("deleted" );
   
   const alert = await this.alertCtrl.create({
     header: 'DELETE!',
@@ -512,7 +541,7 @@ async DeleteData() {
       }, {
         text: 'Delete',
         handler: data => {
-          this.db.collection("Bookings").doc().delete();
+          this.db.collection("Bookings").doc( ).delete();
           
         }
       }

@@ -120,8 +120,9 @@
             <p>Length: {{showCustom.breadth}}cm</p>
             <p>Breadth: {{showCustom.length}}cm</p>
 
-            <ion-button size="large" fill="clear"color="danger">
-              <ion-icon name="trash" (Click)="DeleteData(showCustom.id)"></ion-icon> Delete
+            <ion-button size="large" fill="clear"color="danger" (Click)="DeleteData(showCustom.id )">
+              <ion-icon name="trash" ></ion-icon> Delete
+            <button (Click)="DeleteData(showCustom.id )">del</button>
             </ion-button>
           </div>
         </div>
@@ -296,11 +297,12 @@
           </div>
         </div>
         <div class="editForm">
-        
-
-          <div class="deep">
-            <h4 style="font-weight: 700;">Messages</h4>
-            <p style="padding: 1em;">These are the list of all messages you sent via (Contact-Us) Form</p>
+          <h4 style="font-weight: 700;">Messages</h4>
+          <div class="deep" *ngFor = "let item of Messages">
+            
+            <p style="padding: 1em;">{{item.message}}</p>
+            <p style="padding: 1em;">{{item.time}}</p>
+         
           </div>
           <div class="form">
           
