@@ -31,7 +31,7 @@
        <img src="{{tattoos.image}}" alt="">
        </div>
        <div class="describe-card-s">
-       <h1 class="ion-text-center">R{{tattoo.StartingpriceRange}}-R{{tattoo.EndingpriceRange}}</h1>
+       <h1 class="ion-text-center">{{tattoo.StartingpriceRange | currency : '&#82;'}}-R{{tattoo.EndingpriceRange | currency : '&#82;'}}</h1>
        <p class="ion-text-center name">{{tattoos.nameTattoo}}</p>
        <p>{{tattoos.description}}</p> 
       </div>
