@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -42,7 +42,7 @@ export class ContactUsPage implements OnInit {
       { type: 'required', message: 'Message  is required.' },
     ],
   }
-  constructor(private fb:FormBuilder,private rout : Router, private alertCtrl: AlertController, public modalController: ModalController, public deliverDataService : DeliverDataService) 
+  constructor(private fb:FormBuilder,private rout : Router, private alertCtrl: AlertController, public modalController: ModalController, public deliverDataService : DeliverDataService, private render: Renderer2) 
   {
     this.respnses = this.deliverDataService.AcceptedData; 
   
@@ -93,6 +93,23 @@ export class ContactUsPage implements OnInit {
   
   
   }
+
+  
+  addClasseAnimates() {
+    this.split = !this.split
+    if (this.split) {
+     
+       this.render.setStyle(this.splitDiv[0],'display','block'); 
+     
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.splitDiv[0],'display','none');
+       
+       
+      }, 500);
+    }
+  }
+
     
   showProfile(){
     firebase.auth().onAuthStateChanged((user) => {

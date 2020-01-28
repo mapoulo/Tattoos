@@ -94,7 +94,7 @@
 
 
         .list-custom {
-            flex-basis: 40%;
+            flex-basis: 20%;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -120,7 +120,7 @@
     
         }
         .showDepict{
-            flex-basis: 60%;
+            flex-basis: 80%;
            /*  background: blue; */
             display: flex;
             flex-direction: column;
@@ -578,6 +578,14 @@
 
                 }
             }
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: .5em;
+                font-size: 90%;
+            }
         }
         
     }
@@ -732,7 +740,11 @@ ion-button.explore {
     }
 }
 
+
+
 @media only screen and (max-width: 600px) {
+
+  
     .modal {
         .small-modal-edit-profile {
             flex-basis: 90%;
@@ -768,7 +780,7 @@ ion-button.explore {
 
         .card {
             flex-basis: 90%;
-            background: red;
+           /*  background: red; */
             height: 100%;
             flex-grow: 0;
             flex-shrink: 0;
@@ -810,8 +822,8 @@ ion-button.explore {
            }
 
            .showDepict {
-
-           }
+            flex-basis: 60%;
+           }    
             
         }
     }
@@ -838,10 +850,11 @@ ion-button.explore {
         } */
     }
 
- /*    .editForm {
+
+    .editForm {
         display: none;
 
-    } */
+    }
   /*   .information {
         flex-basis: 100%;
     } */
@@ -861,7 +874,7 @@ ion-button.explore {
     }
 
     .container-sub { 
-        display: block;
+        display: table-column;
        /*  flex-grow: 1;
         flex-shrink: 1; */
 

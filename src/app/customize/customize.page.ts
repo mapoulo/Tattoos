@@ -32,6 +32,7 @@ db = firebase.firestore();
       ],
     }
   loader: boolean = false;
+  progress: number = 0;
   constructor(public ModalController : ModalController,private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       Length: new FormControl('', Validators.compose([Validators.required])),
@@ -48,6 +49,8 @@ db = firebase.firestore();
     })
   }
 
+  
+
 
   changeListener(event): void {
     console.log("My Method is Called");
@@ -62,6 +65,8 @@ db = firebase.firestore();
       this.loader = false;
    }, 1000);
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+      this.progress += progress;
       console.log('upload is: ', progress , '% done.');
     }, err => {
     }, () => {

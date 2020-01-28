@@ -35,41 +35,51 @@ ion-toolbar {
 }
 p, h1, h2,h3,h4,h5,h6,small {
   font-family: 'Montserrat', sans-serif !important;
+  
 }
+
 
 .modalNotification .modal-wrapper {
     width: 30%;
     transform: translate(0, -100%);
 }
 
-input[type="file"] {
-	display: inline-block;
-	opacity: 0;
-	position: absolute;
-	margin-left: 20px;
-	margin-right: 20px;
-	padding-top: 30px;
-	padding-bottom: 67px;
-	width: 85%;
-	z-index: 99;
-	margin-top: 10px;
-	cursor:pointer;
-}
-input[type='file']{
-	position:relative;
-    display: inline-block;
-    cursor: pointer;
-	padding-top:40px;
-	padding-bottom:40px;
-	background:red;
-	width:91%;
-	border:1px dashed #ff5b57 !important;
-	margin-left:20px;
-	margin-right:20px;
-	margin-top:10px;
-	text-align:center;
+.fileContainer {
+  overflow: hidden;
+  position: relative;
 }
 
+.fileContainer [type=file] {
+  cursor: inherit;
+  display: block;
+  font-size: 999px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}
+
+
+.fileContainer {
+  background: #de652d;
+  color: #fff;
+  float: left;
+  padding: 1em !important;
+}
+
+.fileContainer [type=file] {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 50em) {
+.inputfile-6 + label strong {
+  display: block;
+}
+}
     
 @media only screen and (max-width: 600px) {
     .modalNotification .modal-wrapper {

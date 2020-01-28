@@ -1,53 +1,91 @@
-.error {
-    color: red;
-    margin: 0 !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 80%;
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.main {
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+ 
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.container {
     display: flex;
     height: 100%;
     width: 100%;
-    -moz-transition: all 2s;
-    -webkit-transition: all 2s;
-    -o-transition: all 2s;
-    transition: all 2s;
     
+
+    .images {
+     
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+
+    }
+
+ 
+
 }
 
-.upload-tattoo {
-    flex: 1;
+.error {
+    color: rgb(196, 36, 36);
+    width: 90%;
+    margin: 0 auto;
+    font-family: 80%;
+    padding: .3em;
+
+}
+
+.wrap-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #2424246e;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.027), 0 3px 6px rgba(0, 0, 0, 0.11);
+    
 
-    .upload {
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #d6d6d6;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-        font-size: 2vh;
-        
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
-     
-}
-.btn-upload-tattoo {
-    height: 6vw;
-    width: 6vw;
 
-}
-.form-container {
-    flex: 1;
-    padding: 1em;
-}
-
-@media only screen and (max-width: 768px) {
-    .main {
-        flex-direction: column;
+    .fileContainer {
+        z-index: 10;
     }
+}
+
+.form {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 50%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }

@@ -67,7 +67,7 @@
        
       </div>
       <div class="list-split-pane">
-        <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+        <ion-button fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
         <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -127,7 +127,7 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+          <ion-button fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -148,6 +148,7 @@
     <div class="wrapper-page">
       <div class="wrapper-header">
         <h1>Hi,{{Myname}} </h1>
+     
       </div>
       <div class="container-sub">
         <div class="information">
@@ -234,6 +235,7 @@
               <div class="no-items">
                 <p>You have no request <span style="color: green;">accepted</span>  yet</p>
               </div>
+              
  
        </div>
        <div class="card"  *ngFor = "let item of Decline">

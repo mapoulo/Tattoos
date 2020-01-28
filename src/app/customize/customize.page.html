@@ -1,27 +1,97 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-title>Customize</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" fill="icon-only" color="dark">
+        <ion-icon  name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
-  <ion-buttons slot="end" >
-    <ion-button (click)="dismiss()" fill="clear" color="dark">
-      <ion-icon  name="close"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+ 
 </ion-header>
-<ion-content>
+<ion-content fullscreen>
  
     <div class="loader" *ngIf="loader">
       <div class="loader-1">
-        
+    
       </div>
     </div>
-  <section class="upload-tattoo">
+
+    <div class="wrap-image animated bounce" *ngIf="tattoo">
+      <label class="fileContainer">
+        Change your custom Tattoo
+        <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
+    </label>
+     <img src="{{tattoo}}" alt="">
+    </div>
+
+    <form class="form" [formGroup]="tattooForm" *ngIf="tattoo">
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col size="10">
+              <ion-item>
+                  <ion-label position="floating">Length in cm</ion-label>
+                  <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
+                  <ion-icon slot="end"  name="ios-calculator" size="small"></ion-icon>
+              </ion-item>
+              <div class="error" *ngFor="let validate of validation_messages.Length">
+                <div class="messages" *ngIf="tattooForm.get('Length').hasError(validate.type) && (tattooForm.get('Length').dirty || tattooForm.get('Length').touched)">
+                  {{validate.message}}
+              </div>
+              </div>
+              
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="10">
+              <ion-item>
+                  <ion-label position="floating">Breadth in cm</ion-label>
+                  <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
+                  <ion-icon name="calculator" size="small" color="primary" slot="end"></ion-icon>
+                </ion-item>
+                <div class="error" *ngFor="let validate of validation_messages.Breadth">
+                  <div class="messages" *ngIf="tattooForm.get('Breadth').hasError(validate.type) && (tattooForm.get('Breadth').dirty || tattooForm.get('Breadth').touched)">
+                    {{validate.message}}
+                </div>
+                </div>
+                
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="6" justify-content-center>
+              <ion-button  color="secondary" shape="round" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
+      </form>
+
+
+
+    <div class="container" *ngIf="!tattoo">
+      <div class="images">
+        <label class="fileContainer animated jello">
+          Upload your custom Tattoo
+          <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
+      </label>
+      </div>
+
+     
+    </div>
+   
+ <!--  <section class="upload-tattoo">
     <div class="upload">
-        <ion-item  class="imageitem" lines="none" >
+
+      <input type="file" class="custom-file-input">
+        
+      
+      <ion-item  class="imageitem" lines="none" >
             <ion-label position="stacked" id="profile_image" color="primary"></ion-label>
             <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
+
+          
           </ion-item>
-    <ion-item class="imageitem" lines="none" *ngIf="tattoo"><img  src="{{tattoo}}" height="480px" width="400px" style="object-fit: cover;"></ion-item>
+    
       
     <form [formGroup]="tattooForm">
     <ion-grid>
@@ -65,5 +135,5 @@
   
     </form>
     </div>
-  </section> 
+  </section>  -->
 </ion-content>
