@@ -65,8 +65,7 @@ export class ContactUsPage implements OnInit {
     setTimeout(() => {
       this.loader = false;
    }, 1000);
-    // this.name = this.DeliverDataService.name;
-           //User's details
+   
            if(firebase.auth().currentUser) {
             this.email=firebase.auth().currentUser.email;
            }
@@ -119,13 +118,12 @@ export class ContactUsPage implements OnInit {
                   
                    this. MyNotifications += 1;
                    console.log("@@@@@@@@@@@@@",  doc.data() );
-                    // this.array.push(doc.data())
-                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
+                
                   }   
                 })
             
           })
-          // return true; 
+       
              }
           })
         })
@@ -154,30 +152,7 @@ export class ContactUsPage implements OnInit {
           })
         })
         
-        
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
+      
       }else {
          this.showProfile1 = false;
       }

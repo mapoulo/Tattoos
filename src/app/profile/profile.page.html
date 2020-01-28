@@ -103,13 +103,15 @@
                 <ion-icon [name]="arrows"></ion-icon>
               </ion-button>
             </div>
-            <h1>{{showCustom.name_t}}</h1>
+            <h1>{{showCustom.name}}</h1>
            
             <p>{{showCustom.desc}}</p>
             <p>Length: {{showCustom.breadth}}cm</p>
             <p>Breadth: {{showCustom.length}}cm</p>
-            <ion-button size="large" fill="clear"color="danger">
-              <ion-icon name="trash" (Click)="DeleteData(showCustom.id)"></ion-icon> Delete
+
+            <ion-button size="large" fill="clear"color="danger" (Click)="DeleteData(showCustom.id )">
+              <ion-icon name="trash" ></ion-icon> Delete
+            <button (Click)="DeleteData(showCustom.id )">del</button>
             </ion-button>
           </div>
         </div>
