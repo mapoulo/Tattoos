@@ -71,7 +71,7 @@
     <div class="container" *ngIf="!tattoo">
     
       <div class="images">
-        <div class="percent">
+        <div class="percent" *ngIf="progress != 0">
           <p>{{progress | percent}}</p>
           </div>
         <label class="fileContainer animated jello">

@@ -31,7 +31,7 @@
        <img src="{{tattoos.image}}" alt="">
        </div>
        <div class="describe-card-s">
-       <h1 class="ion-text-center">{{tattoo.StartingpriceRange | currency : '&#82;'}}-R{{tattoo.EndingpriceRange | currency : '&#82;'}}</h1>
+       <h1 class="ion-text-center">{{tattoo.StartingpriceRange | currency : '&#82;'}} - {{tattoo.EndingpriceRange | currency : '&#82;'}}</h1>
        <p class="ion-text-center name">{{tattoos.nameTattoo}}</p>
        <p>{{tattoos.description}}</p> 
       </div>
@@ -46,8 +46,124 @@
  
  </div>
 
+
+
+
+
+
+
   
   <div class="main-container">
+
+    <div class="onbording animated" [ngClass]="{'bounceInUp': onboard, 'bounceOutUp': !onboard}">
+      <div class="onboard">
+
+        <div class="btn-close">
+          <ion-fab-button size="small" (click)="onboardingFunc()" color="dark">
+            <ion-icon mode="ios" name="close"></ion-icon>
+          </ion-fab-button>
+        </div>
+            <ion-slides pager="true" #slides>
+           
+           
+              <ion-slide>
+                <div class="content">
+                  <div class="image">
+                    <img src="../../assets/allef-vinicius-hxNiXP498UI-unsplash.jpg" alt="">
+                    <h1>EXPLORE!</h1>
+                  </div>
+                  <div class="info">
+                    <div class="dc_lorem">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium delectus totam ipsam, debitis labore adipisci harum </p>
+                    </div>
+                      <div class="dc_btn">
+                        <ion-row justify-content-center>
+                          <ion-col size="8">
+                             <ion-button color="secondary" (click)="onNext()" shape="round">
+                               Next
+                           </ion-button>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                
+                  </div>
+                </div>
+                
+              </ion-slide>
+              <ion-slide>
+                <div class="content">
+                  <div class="image">
+                    <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+                    <h1>BOOK RIGHT AWAY!</h1>
+                  </div>
+                  <div class="info">
+                    <div class="dc_lorem">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium delectus totam ipsam, debitis labore adipisci harum </p>
+                    </div>
+                      <div class="dc_btn">
+                        <ion-row justify-content-center>
+                          <ion-col size="8">
+                             <ion-button color="secondary" (click)="onNext()" shape="round">
+                               Next
+                           </ion-button>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                
+                  </div>
+                </div>
+              </ion-slide>
+              <ion-slide>
+                <div class="content">
+                  <div class="image">
+                    <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+                    <h1>NOTIFICATIONS!</h1>
+                  </div>
+                  <div class="info">
+                    <div class="dc_lorem">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium delectus totam ipsam, debitis labore adipisci harum </p>
+                    </div>
+                      <div class="dc_btn">
+                        <ion-row justify-content-center>
+                          <ion-col size="8">
+                             <ion-button color="secondary" (click)="onNext()" shape="round">
+                               Next
+                           </ion-button>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                
+                  </div>
+                </div>
+              </ion-slide>
+              <ion-slide>
+                <div class="content">
+                  <div class="image">
+                    <img src="../../assets/chris-blonk-sjI_iRsD-kU-unsplash.jpg" alt="">
+                    <h1>CUSTOMIZE A TATTOO!</h1>
+                  </div>
+                  <div class="info">
+                    <div class="dc_lorem">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium delectus totam ipsam, debitis labore adipisci harum </p>
+                    </div>
+                      <div class="dc_btn">
+                        <ion-row justify-content-center>
+                          <ion-col size="8">
+                             <ion-button color="secondary" (click)="onboardingFunc()" shape="round">
+                               Done
+                           </ion-button>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                
+                  </div>
+                </div>
+              </ion-slide>
+
+            </ion-slides>
+        
+      </div>
+</div>
 
     <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
       <div class="close">
