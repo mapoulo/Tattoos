@@ -26,6 +26,19 @@
     background: #555;
   }
 
+  ion-col {
+      margin-top: 1em;
+  }
+
+  ion-toolbar {
+      background: linear-gradient(rgba(59, 59, 59, 0.219), rgba(107, 107, 107, 0.13));
+      color: #fff;
+  }
+  ion-title {
+      padding-left: 1em;
+      text-shadow: 2px 2px rgb(116, 116, 116);
+  }
+
 .container {
     display: flex;
     height: 100%;

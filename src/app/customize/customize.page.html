@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>Customize</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismiss()" fill="icon-only" color="dark">
-        <ion-icon  name="close"></ion-icon>
+      <ion-button (click)="dismiss()" fill="icon-only" color="light">
+        <ion-icon color="light"  name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -28,7 +28,7 @@
     <form class="form" [formGroup]="tattooForm" *ngIf="tattoo">
       <ion-grid>
         <ion-row justify-content-center>
-          <ion-col size="10">
+          <ion-col size="11">
               <ion-item>
                   <ion-label position="floating">Length in cm</ion-label>
                   <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
@@ -43,7 +43,7 @@
           </ion-col>
         </ion-row>
         <ion-row justify-content-center>
-          <ion-col size="10">
+          <ion-col size="11">
               <ion-item>
                   <ion-label position="floating">Breadth in cm</ion-label>
                   <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
@@ -75,7 +75,7 @@
           <p>{{progress | percent}}</p>
           </div>
         <label class="fileContainer animated jello">
-          Upload your custom Tattoo
+          Tap to Upload your custom Tattoo
           <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
       </label>
       </div>
