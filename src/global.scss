@@ -75,11 +75,6 @@ p, h1, h2,h3,h4,h5,h6,small {
   cursor: pointer;
 }
 
-@media screen and (max-width: 50em) {
-.inputfile-6 + label strong {
-  display: block;
-}
-}
     
 @media only screen and (max-width: 600px) {
     .modalNotification .modal-wrapper {
