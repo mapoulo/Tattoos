@@ -104,11 +104,14 @@
 
           .close-btn {
               position: absolute;
-              top: -10%;
+              top: -15%;
               right: 0%;
           }
           .pro-form-image {
               margin-top: 1em;
+              display: flex;
+              justify-content: center;
+             
           }
           
     }
@@ -849,7 +852,7 @@ ion-button.explore {
             flex-basis: 90%;
 
             .close-btn {
-                top: -15%;
+                top: -20%;
             }
         }
     }

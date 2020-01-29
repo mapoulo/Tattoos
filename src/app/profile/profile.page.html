@@ -18,8 +18,8 @@
           <h2 class="ion-text-center" style="font-size: 100%;">Edit Your profile</h2>
         </div>
         <div class="p_">
-          <div class="profile" >
-            <img src="../../assets/allef-vinicius-hxNiXP498UI-unsplash.jpg" alt="">
+          <div class="profile" *ngIf="MyImage">
+          <img src="{{MyImage}}" alt="khuthy">
             </div>
         </div>
       
@@ -32,7 +32,7 @@
                   <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
               </label> 
               </ion-col>
-              <ion-col size="9" class="pro-form-image">
+              <ion-col size="12" class="pro-form-image">
                 <ion-item>
                   <ion-label position="floating">Full Name </ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="person"></ion-icon>
@@ -46,7 +46,7 @@
              
             </ion-row>
             <ion-row justify-content-center>
-              <ion-col size="9" class="pro-form-image">
+              <ion-col size="12" class="pro-form-image">
                 <ion-item>
                   <ion-label position="floating">Phone Number</ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
@@ -57,7 +57,7 @@
               </ion-col>
             </ion-row>
             <ion-row justify-content-center>
-              <ion-col size="5" class="pro-form-image">
+              <ion-col size="7" class="pro-form-image">
                 <ion-button expand="block" color="success" shape="round" (click)="Edit()">Edit</ion-button>
               
               </ion-col>
