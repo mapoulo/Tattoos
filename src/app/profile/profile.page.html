@@ -17,9 +17,22 @@
         <div class="editHeader">
           <h2 class="ion-text-center" style="font-size: 100%;">Edit Your profile</h2>
         </div>
+        <div class="p_">
+          <div class="profile" *ngIf="MyImage">
+          <img src="{{MyImage}}" alt="khuthy">
+            </div>
+        </div>
+      
           <ion-grid>
             <ion-row justify-content-center>
+            
               <ion-col size="9" class="pro-form-image">
+                <label class="fileContainer">
+                  Change your custom Tattoo
+                  <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
+              </label> 
+              </ion-col>
+              <ion-col size="12" class="pro-form-image">
                 <ion-item>
                   <ion-label position="floating">Full Name </ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="person"></ion-icon>
@@ -27,17 +40,13 @@
                  
                 </ion-item>
 
-                <ion-item>
-                  <ion-label position="floating">Upload Image </ion-label>
-                  <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
-                 
-                </ion-item>
+                
              
             </ion-col>
              
             </ion-row>
             <ion-row justify-content-center>
-              <ion-col size="9" class="pro-form-image">
+              <ion-col size="12" class="pro-form-image">
                 <ion-item>
                   <ion-label position="floating">Phone Number</ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
@@ -48,7 +57,7 @@
               </ion-col>
             </ion-row>
             <ion-row justify-content-center>
-              <ion-col size="5" class="pro-form-image">
+              <ion-col size="7" class="pro-form-image">
                 <ion-button expand="block" color="success" shape="round" (click)="Edit()">Edit</ion-button>
               
               </ion-col>
@@ -250,7 +259,10 @@
                   <img src="{{item.image}}" alt="">
                 </div>
                 <div class="info">
-                  <p>{{item.bookingState}}</p>
+                  <div class="icon" *ngIf="item.bookingState == 'Accepted'">
+                    <ion-icon color="light" name="checkmark"></ion-icon>
+                  </div>
+              
                   <p>{{item.days}} Days Session</p>
                   <p>{{item.startingDate | date: 'fullDate'}}</p>
                   <p>{{item.endingDate | date: 'fullDate'}}</p>
@@ -271,6 +283,9 @@
               <img src="{{item.image}}" alt="">
             </div>
             <div class="info">
+              <div class="icon" style="background: red !important;">
+                <ion-icon color="light" name="close"></ion-icon>
+              </div>
               <p >{{item.bookingState}}</p>
               <p>{{item.days}} Days Session</p>
               <p>{{item.startingDate | date: 'fullDate'}}</p>
