@@ -69,9 +69,39 @@ export class ContactUsPage implements OnInit {
 
   }
  
-  ionViewWillEnter(){
+  ionViewDidEnter(){
     this.showProfile();
   
+
+    let firetattoo = {
+      docid: '',
+      doc: {}
+    }
+   
+  
+   
+   
+    this.db.collection('Admin').get().then(data => {
+      
+      //console.log('tt',this.Tattoos);
+      data.forEach(item => {
+        firetattoo.doc = item.data();
+        firetattoo.docid = item.id;
+        
+        
+        this.Contact.push(firetattoo)
+        //console.log('all',this.Tattoos);
+         firetattoo = {
+          docid: '',
+      
+          doc: {}
+        }
+      })
+      
+      console.log("Contact US ",  this.Contact );
+      
+      
+    })
    
     this.inputDisabled = false;
     setTimeout(() => {

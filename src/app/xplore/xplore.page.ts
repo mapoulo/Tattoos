@@ -155,9 +155,14 @@ tattoo = {
 
 
 
-   ionViewWillEnter(){
+   ionViewDidEnter(){
 
-      // Or to get a key/value pair
+    
+    this.showProfile();
+
+
+
+        // Or to get a key/value pair
  
       this.store.get('onboard').then((val) => {
         if(val == true) {
@@ -169,41 +174,41 @@ tattoo = {
 
 
    setTimeout(() => {
-      this.loader = false;
-   }, 1000);
+    this.loader = false;
+
 
     // this.name = this.DeliverDataService.name;
 
-           //User's details
+         //User's details
 
-           if(firebase.auth().currentUser) {
-            this.email=firebase.auth().currentUser.email;
-           }
-           
-           this.db.collection("Bookings").onSnapshot(data => {         
-             data.forEach(item => {
-               if(item.exists){
-  
-                this.ShowName = [];
-                 if(item.data().email === this.email){
-                   this.DeliverDataService.name = item.data().name;
-                   this.name = item.data().name;
-                   this.image = item.data().image;
-                   console.log("Your name is here ", item.data().name);
-                   
-                   this.ShowName.push(item.data());
-                   console.log("ShowName",item.data().name);
-                 }
-               }
-             })
-           })
+         if(firebase.auth().currentUser) {
+          this.email=firebase.auth().currentUser.email;
+         }
          
- 
+         this.db.collection("Bookings").onSnapshot(data => {         
+           data.forEach(item => {
+             if(item.exists){
+
+              this.ShowName = [];
+               if(item.data().email === this.email){
+                 this.DeliverDataService.name = item.data().name;
+                 this.name = item.data().name;
+                 this.image = item.data().image;
+                 console.log("Your name is here ", item.data().name);
+                 
+                 this.ShowName.push(item.data());
+                 console.log("ShowName",item.data().name);
+               }
+             }
+           })
+         })
+       
   
-    this.showProfile();
 
+ }, 1000);
 
-
+  
+  
   }
 
 
@@ -386,12 +391,6 @@ tattoo = {
   ngOnInit() {
 
     
-
-   
-
-    this.showProfile();
-
-
 
    
 
