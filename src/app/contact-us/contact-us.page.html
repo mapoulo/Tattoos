@@ -18,7 +18,7 @@
        
       </div>
       <div class="list-split-pane">
-        <ion-button  fill="clear" expand="block" color="light" (click)="goToExplore()">Explore</ion-button>
+        <ion-button  fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
         
         <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
@@ -153,7 +153,10 @@
             {{validate.message}}
         </div>
       </div>
-        <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage(attooForm)" [disabled]="!tattooForm.valid">Send Message</ion-button>
+      <ion-row justify-content-center>
+        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage(attooForm)" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
+      </ion-row>
+       
      
       </ion-list>
       

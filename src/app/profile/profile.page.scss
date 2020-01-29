@@ -39,6 +39,13 @@
 
 }
 
+.times {
+    display: flex;
+    justify-content: space-between;
+    padding-top:.5em ;
+    padding-bottom: .5em;
+}
+
 .modal {
     position: absolute;
     top: 0;
@@ -280,6 +287,8 @@ ion-row {
 }
 
 
+
+
 .split-pane, .menu-btn {
     display: none;
 
@@ -472,6 +481,8 @@ ion-row {
                 justify-content: center;
                 align-items: center;
                 display: flex;
+
+              
             }
 
             .custom-card {
@@ -482,6 +493,7 @@ ion-row {
                 transition: 500ms;
                 flex-grow: 0;
                 flex-shrink: 0;
+                background-color: #888 !important;
 
                 img {
                     position: absolute;
@@ -640,6 +652,14 @@ ion-row {
 
                 }
             }
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: .5em;
+                font-size: 90%;
+            }
         }
 
         .info {
@@ -771,8 +791,11 @@ ion-button.explore {
     }
 }
 
+
+
 @media only screen and (max-width: 600px) {
 
+  
     .modal {
         .small-modal-edit-profile{
             flex-basis: 90%;
@@ -821,7 +844,7 @@ ion-button.explore {
     }
 
     .details {
-        display: none;
+        display: flex;
     }
     .profile-image-header-div {
         flex-basis: 5%;
@@ -852,7 +875,7 @@ ion-button.explore {
 
            .showDepict {
             flex-basis: 60%;
-           }
+           }    
             
         }
     }
@@ -899,7 +922,7 @@ ion-button.explore {
     }
 
     .container-sub { 
-        display: block;
+        display: table-column;
        /*  flex-grow: 1;
         flex-shrink: 1; */
 

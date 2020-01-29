@@ -73,8 +73,7 @@
        
       </div>
       <div class="list-split-pane">
-        
-        <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+        <ion-button fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
         <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -155,6 +154,7 @@
     <div class="wrapper-page">
       <div class="wrapper-header">
         <h1>Hi,{{Myname}} </h1>
+     
       </div>
       <div class="container-sub">
         <div class="information">
@@ -242,6 +242,7 @@
               <div class="no-items" *ngIf="Response.length == 0">
                 <p>You have no request <span style="color: green;">accepted</span>  yet</p>
               </div>
+              
  
             <div class="card"  *ngFor = "let item of Response">
               <div class="card-t">
@@ -320,6 +321,10 @@
             <p style="padding: 1em;">These are the list of all messages you sent via (Contact-Us) Form</p>
           </div>
           <div class="form">
+
+            <div class="no-messages">
+              <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
+            </div>
             <div class="messages"  *ngFor = "let item of Messages"><!-- Put forloop -->
               <p>{{item.data.message}}</p>
             

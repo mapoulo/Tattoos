@@ -1,14 +1,9 @@
 <ion-header translucent no-border>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-button fill="icon-only">
-            <ion-icon name="log-in"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Sign In</ion-title>
+    <ion-title text-left style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #fff;">Welcome!</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
-      <ion-button fill="icon-only">
-        <ion-icon name="close"></ion-icon>
+      <ion-button fill="icon-only" color="light">
+        <ion-icon [color]="color" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -27,7 +22,7 @@
     <section class="form-container">
         <ion-list >
             <div class="logo">
-                <img src="../../assets/icon/Group 17.svg" alt="" width="150px">
+                <img src="../../assets/icon/Group 17.svg" alt="" width="100px">
               </div>
 
               <ion-item class="item" style="margin-bottom: 1em;">
@@ -58,7 +53,7 @@
             </div>
            
             <div class="signUp">
-                <p>Create an Account?</p><ion-button  fill="clear" size="small" (click)="CreateAccount()">Sign Up</ion-button>
+                <p>Create an Account?</p><ion-button  fill="clear" color="secondary" expand="half" size="small" (click)="CreateAccount()">Sign Up</ion-button>
              </div>
         </ion-list>
     </section>

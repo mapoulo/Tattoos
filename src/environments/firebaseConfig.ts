@@ -6,9 +6,10 @@ export const firebaseConfig = {
   storageBucket: "tattoo-964b7.appspot.com",
   messagingSenderId: "396095430599",
   appId: "1:396095430599:web:3675e9c40eb99256d303e2",
-  measurementId: "G-8TQ9T2QMHS"
-    //vapidKey: 'BCGequqI1YHWjkM6s4cJ-RVbGV8pW8f-fjeGjNERQTbPGBAZdpYcrT5DgmTxvXtN_5fIPbeBf2y9tVS6xFR9ukU'
+  measurementId: "G-8TQ9T2QMHS",
+  vapidKey: 'BCGequqI1YHWjkM6s4cJ-RVbGV8pW8f-fjeGjNERQTbPGBAZdpYcrT5DgmTxvXtN_5fIPbeBf2y9tVS6xFR9ukU'
   };
+
 
 
 

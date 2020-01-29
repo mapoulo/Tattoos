@@ -1,7 +1,7 @@
 <ion-header translucent no-border>
   <ion-toolbar>
     
-    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</ion-title>
+    <ion-title text-right style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
       <ion-button fill="icon-only">
         <ion-icon name="close"></ion-icon>
@@ -20,13 +20,20 @@
     </div>
    <section class="upload-tattoo">
     
-   
+    <div *ngIf="image" class="profilee">
+    <img  src="{{image}}">
+    </div>
     
-      <ion-item  class="imageitem" lines="none" >
-        <ion-label position="stacked" id="profile_image" color="primary"></ion-label>
-        <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
-      </ion-item>
-  <ion-item class="imageitem" lines="none" *ngIf="image"><img  src="{{image}}" height="480px" width="3000px" style="object-fit: cover;"></ion-item>
+      <div  class="imageitem">
+        <label class="fileContainer">
+          Upload your profile image
+          <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
+      </label>
+
+    </div>
+  
+ 
+    
      
    </section>
  
@@ -88,8 +95,10 @@
                         </div>
                        
                       
-                  
-                           <ion-button shape="round" expand="block" color="secondary" (click)="register(tattooForm)" [disabled]="!tattooForm.valid">Register</ion-button> 
+                          <ion-row justify-content-center>
+                            <ion-col size="6"><ion-button shape="round" expand="block" color="secondary" (click)="register(tattooForm)" [disabled]="!tattooForm.valid">Register</ion-button> </ion-col>
+                          </ion-row>
+                   
                     
                      <div class="signin">
                         <p>Already have an Account? </p><ion-button  fill="clear" size="small" color="secondary" (click)="SignIn()">Sign In</ion-button>

@@ -24,8 +24,7 @@ import { SignInPageModule } from './sign-in/sign-in.module';
 import { SuccessPagePageModule } from './success-page/success-page.module';
 import { RegisterPageModule } from './register/register.module';
 
-
-
+import { IonicStorageModule } from '@ionic/storage';
 
 
 
@@ -33,7 +32,7 @@ import { RegisterPageModule } from './register/register.module';
 @NgModule({
   declarations: [AppComponent ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CustomizePageModule, NotificationsPageModule, BookingModalPageModule, RegisterPageModule, SuccessPagePageModule, SignInPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule, CustomizePageModule, NotificationsPageModule, BookingModalPageModule, RegisterPageModule, SuccessPagePageModule, SignInPageModule],
   providers: [
     FileOpener,
     File,

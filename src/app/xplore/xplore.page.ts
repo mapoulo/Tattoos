@@ -1,7 +1,7 @@
 
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import * as firebase from 'firebase';
-import { ModalController, AlertController, Platform, ToastController } from '@ionic/angular';
+import { ModalController, AlertController, Platform, ToastController, IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CustomizePage } from '../customize/customize.page';
 import { NotificationsPage } from '../notifications/notifications.page';
@@ -9,7 +9,7 @@ import { SignInPage } from '../sign-in/sign-in.page';
 import { BookingModalPage } from '../booking-modal/booking-modal.page';
 import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
-
+import { Storage } from '@ionic/storage';
 // import { OneSignal } from '@ionic-native/onesignal';
 
 
@@ -20,11 +20,13 @@ import { RegisterPage } from '../register/register.page';
 })
 export class XplorePage implements OnInit {
 
+ 
+
   split: boolean = false;
   tattooView: any;
   splitDiv: any = document.getElementsByClassName('split-pane');
   loader: boolean = true;
-
+  onboard: boolean = false;
   tattooDisplay: boolean = false;
   tattooDisplaDiv: any = document.getElementsByClassName('tattoo-image');
 
@@ -88,11 +90,12 @@ tattoo = {
   storage = firebase.storage().ref();
   showProfile1;
   continue: any;
+  @ViewChild('slides', { read: IonSlides }) slides: IonSlides;
 
-  constructor(public DeliverDataService : DeliverDataService, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
+  constructor(public DeliverDataService : DeliverDataService, private store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
-   
+    
    }
 
 
@@ -154,7 +157,8 @@ tattoo = {
 
    ionViewWillEnter(){
 
-   
+      // Or to get a key/value pair
+ 
 
 
    setTimeout(() => {
@@ -362,7 +366,27 @@ tattoo = {
 
     }
 
+
+    onboardingFunc() {
+      this.onboard = false;
+      this.store.set('onboard', true);
+    }
+    onNext() {
+      this.slides.slideNext(); 
+      this.store.set('onboard', true);
+    }
+
   ngOnInit() {
+
+    this.store.get('onboard').then((val) => {
+      if(val == true) {
+        this.onboard = false;
+      }else {
+        this.onboard = true;
+      }
+    });
+
+   
 
     this.showProfile();
 

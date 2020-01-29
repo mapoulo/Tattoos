@@ -2,7 +2,7 @@ import { RegisterPage } from './../register/register.page';
 // import { XplorePage } from './../pages/xplore/xplore.page';
 
 
-import { ModalController,AlertController } from '@ionic/angular';
+import { ModalController, AlertController, Platform } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from "firebase";
 import { Router } from '@angular/router';
@@ -42,9 +42,17 @@ export class SignInPage implements OnInit {
     ]
 
   }
-  constructor(public AlertController:AlertController,public modalController : ModalController, private fb: FormBuilder,public Router : Router,  public DeliverDataService : DeliverDataService) { }
+  color: string = 'secondary';
+  constructor(public AlertController:AlertController,public modalController : ModalController, private fb: FormBuilder,public Router : Router,  public DeliverDataService : DeliverDataService, private plt: Platform) { }
 
   ngOnInit() {
+    if(this.plt.width() < 600) {
+        this.color="light";
+    }else {
+      this.color="dark";
+
+      
+    }
     this.showProfile();
     this.tattooForm = this.fb.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
@@ -95,7 +103,7 @@ export class SignInPage implements OnInit {
          })
        
      
-         this.Router.navigateByUrl('xplore')
+         this.Router.navigateByUrl('/')
      
         }).catch(error => {
      
