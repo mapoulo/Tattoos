@@ -155,48 +155,53 @@ tattoo = {
 
 
 
-   ionViewWillEnter(){
+   ionViewDidEnter(){
 
-      // Or to get a key/value pair
- 
-
-
-   setTimeout(() => {
-      this.loader = false;
-   }, 1000);
-
-    // this.name = this.DeliverDataService.name;
-
-           //User's details
-
-           if(firebase.auth().currentUser) {
-            this.email=firebase.auth().currentUser.email;
-           }
-           
-           this.db.collection("Bookings").onSnapshot(data => {         
-             data.forEach(item => {
-               if(item.exists){
-  
-                this.ShowName = [];
-                 if(item.data().email === this.email){
-                   this.DeliverDataService.name = item.data().name;
-                   this.name = item.data().name;
-                   this.image = item.data().image;
-                   console.log("Your name is here ", item.data().name);
-                   
-                   this.ShowName.push(item.data());
-                   console.log("ShowName",item.data().name);
-                 }
-               }
-             })
-           })
-         
- 
-  
+    
     this.showProfile();
 
 
 
+        // Or to get a key/value pair
+ 
+
+
+   setTimeout(() => {
+    this.loader = false;
+
+
+    // this.name = this.DeliverDataService.name;
+
+         //User's details
+
+         if(firebase.auth().currentUser) {
+          this.email=firebase.auth().currentUser.email;
+         }
+         
+         this.db.collection("Bookings").onSnapshot(data => {         
+           data.forEach(item => {
+             if(item.exists){
+
+              this.ShowName = [];
+               if(item.data().email === this.email){
+                 this.DeliverDataService.name = item.data().name;
+                 this.name = item.data().name;
+                 this.image = item.data().image;
+                 console.log("Your name is here ", item.data().name);
+                 
+                 this.ShowName.push(item.data());
+                 console.log("ShowName",item.data().name);
+               }
+             }
+           })
+         })
+       
+  
+
+ }, 1000);
+
+  
+  
   }
 
 
@@ -385,12 +390,6 @@ tattoo = {
         this.onboard = true;
       }
     });
-
-   
-
-    this.showProfile();
-
-
 
    
 
