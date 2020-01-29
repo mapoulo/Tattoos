@@ -17,6 +17,7 @@ export class ContactUsPage implements OnInit {
   
   
   tattooForm : FormGroup;
+  UserIn : boolean
   name = ""
   email = ""
   message = ""
@@ -59,6 +60,13 @@ export class ContactUsPage implements OnInit {
   
   }
   ngOnInit() {
+
+    if(firebase.auth().currentUser){
+      this.UserIn = false
+    }else{
+      this.UserIn = true
+    }
+
   }
  
   ionViewWillEnter(){
@@ -103,7 +111,10 @@ export class ContactUsPage implements OnInit {
       if(user) {
         this.showProfile1 = true;
         this.inputDisabled = true;
+        this.UserIn = false
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+          this.name = item.data().name;
+          this.image = item.data().image;
           console.log("User Logged in ", item.data());
          
           
@@ -184,6 +195,7 @@ export class ContactUsPage implements OnInit {
         // })
       }else {
          this.showProfile1 = false;
+         this.UserIn = true
       }
     })
    }

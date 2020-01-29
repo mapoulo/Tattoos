@@ -26,6 +26,12 @@
                   <ion-input type="text" [(ngModel)]="Myname"></ion-input>
                  
                 </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Upload Image </ion-label>
+                  <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
+                 
+                </ion-item>
              
             </ion-col>
              
@@ -67,6 +73,7 @@
        
       </div>
       <div class="list-split-pane">
+        
         <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/xplore">Explore</ion-button>
         <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
@@ -127,7 +134,7 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/xplore">Explore</ion-button>
+          <ion-button class="explore" fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/">Explore</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
