@@ -25,7 +25,7 @@ export class RegisterPage implements OnInit {
   email = '';
   password = '';
   db=firebase.firestore();
-  storage = firebase.storage().ref();;
+  storage = firebase.storage().ref();
   number : number ;
   tattooForm : FormGroup;
   validation_messages = {

@@ -311,6 +311,9 @@ tattoo = {
                 this. MyNotifications = 0;     
                 myItem.forEach(doc => {
                   if(doc.data().bookingState === "Pending"){
+
+                              this.name = a.data().name;
+                               this.image = a.data().image;
                   
                    this. MyNotifications += 1;
                    console.log("@@@@@@@@@@@@@",  this. MyNotifications );

@@ -10,6 +10,8 @@ import { ModalController,AlertController, Platform, ToastController } from '@ion
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -25,6 +27,8 @@ export class ProfilePage implements OnInit {
   arrows: string = 'arrow-back';
   showProfile1;
   category: any = 'accepted';
+  MyImage = ""
+  storage = firebase.storage().ref();
   showCustom = {
     name_t: '',
     image_t: '',
@@ -71,6 +75,40 @@ export class ProfilePage implements OnInit {
       this.loader = false;
     }, 1000);
   }
+
+
+
+
+
+  changeListener(event): void {
+    
+    const i = event.target.files[0];
+    console.log(i);
+    const upload = this.storage.child(i.name).put(i);
+    upload.on('state_changed', snapshot => {
+  this.loader=true;
+     
+    setTimeout(() => {
+      this.loader = false;
+   }, 1000);
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('upload is: ', progress , '% done.');
+        
+      
+      
+    }, err => {
+    }, () => {
+      upload.snapshot.ref.getDownloadURL().then(image => {
+        console.log('File avail at: ', image);
+        this.MyImage = image;
+     
+      });
+    });
+
+
+  }
+
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
@@ -209,14 +247,25 @@ export class ProfilePage implements OnInit {
       }, 2000);
     })
     }
+
+
     Edit(){
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
-        name :this.Myname,
+
+      console.log("Images  ", this.MyImage);
       
-        number:this.Mynumber,
-      
-      });
-      this.modalAnimate();
+      setTimeout(() => {
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
+          name :this.Myname,
+        
+          number:this.Mynumber,
+          image : this.MyImage
+        
+        });
+  
+  
+        this.modalAnimate();
+      }, 3000)
+    
    
     }
   
