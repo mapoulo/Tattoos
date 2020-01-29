@@ -159,6 +159,13 @@ tattoo = {
 
       // Or to get a key/value pair
  
+      this.store.get('onboard').then((val) => {
+        if(val == true) {
+          this.onboard = false;
+        }else {
+          this.onboard = true;
+        }
+      });
 
 
    setTimeout(() => {
@@ -378,13 +385,7 @@ tattoo = {
 
   ngOnInit() {
 
-    this.store.get('onboard').then((val) => {
-      if(val == true) {
-        this.onboard = false;
-      }else {
-        this.onboard = true;
-      }
-    });
+    
 
    
 

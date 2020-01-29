@@ -17,8 +17,21 @@
         <div class="editHeader">
           <h2 class="ion-text-center" style="font-size: 100%;">Edit Your profile</h2>
         </div>
+        <div class="p_">
+          <div class="profile" >
+            <img src="../../assets/allef-vinicius-hxNiXP498UI-unsplash.jpg" alt="">
+            </div>
+        </div>
+      
           <ion-grid>
             <ion-row justify-content-center>
+            
+              <ion-col size="9" class="pro-form-image">
+                <label class="fileContainer">
+                  Change your custom Tattoo
+                  <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
+              </label> 
+              </ion-col>
               <ion-col size="9" class="pro-form-image">
                 <ion-item>
                   <ion-label position="floating">Full Name </ion-label>
@@ -27,11 +40,7 @@
                  
                 </ion-item>
 
-                <ion-item>
-                  <ion-label position="floating">Upload Image </ion-label>
-                  <ion-input class="image-upload"  type="file"  accept="image/*" (change)="changeListener($event)"></ion-input>
-                 
-                </ion-item>
+                
              
             </ion-col>
              
@@ -109,7 +118,7 @@
                 <ion-icon [name]="arrows"></ion-icon>
               </ion-button>
             </div>
-            <h1>{{showCustom.name}}</h1>
+            <h1>{{showCustom.name_t}}</h1>
            
             <p>{{showCustom.desc}}</p>
             <p>Length: {{showCustom.breadth}}cm</p>
@@ -133,7 +142,7 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/">Explore</ion-button>
+          <ion-button class="explore" fill="clear" expand="block" color="light"  routerLink="/">Explore</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -250,7 +259,10 @@
                   <img src="{{item.image}}" alt="">
                 </div>
                 <div class="info">
-                  <p>{{item.bookingState}}</p>
+                  <div class="icon" *ngIf="item.bookingState == 'Accepted'">
+                    <ion-icon color="light" name="checkmark"></ion-icon>
+                  </div>
+              
                   <p>{{item.days}} Days Session</p>
                   <p>{{item.startingDate | date: 'fullDate'}}</p>
                   <p>{{item.endingDate | date: 'fullDate'}}</p>
@@ -260,7 +272,7 @@
 
        </div>
        <div class="cardFor" *ngSwitchCase="'declined'">
-        <div class="no-items" *ngIf="DeclineSize.length == 0">
+        <div class="no-items" *ngIf="Decline.length == 0">
           <p>You have no request <span style="color: rgb(207, 49, 1);">declined</span>   yet</p>
         </div>
 
@@ -271,6 +283,9 @@
               <img src="{{item.image}}" alt="">
             </div>
             <div class="info">
+              <div class="icon" style="background: red !important;">
+                <ion-icon color="light" name="close"></ion-icon>
+              </div>
               <p >{{item.bookingState}}</p>
               <p>{{item.days}} Days Session</p>
               <p>{{item.startingDate | date: 'fullDate'}}</p>
@@ -325,14 +340,14 @@
             <div class="no-messages">
               <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
             </div>
-            <div class="messages"  *ngFor = "let item of Messages"><!-- Put forloop -->
+           <!-- <div class="messages"  *ngFor = "let item of Messages"> Put forloop 
               <p>{{item.data.message}}</p>
             
               <div class="times">
                 <p><small>{{item.data.time}}</small></p>
                 <ion-button fill="clear" color="danger" (click)="DeleteMessage(item.key)"><ion-icon name="trash"></ion-icon></ion-button>
               </div>
-            </div>
+            </div>-->
           
           </div>  
          
