@@ -90,7 +90,7 @@ tattoo = {
   storage = firebase.storage().ref();
   showProfile1;
   continue: any;
-  @ViewChild('slides', { read: IonSlides }) slides: IonSlides;
+  @ViewChild('slides', {static: true}) slides: IonSlides;
 
   constructor(public DeliverDataService : DeliverDataService, private store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
