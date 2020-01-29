@@ -1,6 +1,6 @@
 import { ModalController, AlertController } from '@ionic/angular';
 import { DeliverDataService } from './../deliver-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 
 
@@ -16,10 +16,12 @@ export class NotificationsPage implements OnInit {
   array = [];
   showMessage : boolean;
   message = "";
-
+  icon = 'ios-arrow-down'
   days = "";
-
-  constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController ) {
+  article: boolean = false;
+  articleDiv: any = document.getElementsByClassName('article');
+  cardDiv: any = document.getElementsByClassName('card');
+  constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
     // this.array = [];
     // this.array = this.DeliverDataService.AcceptedData;
     console.log("Data in the Notifications ", this.array);
@@ -137,6 +139,18 @@ export class NotificationsPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  animate(i) {
+    this.article = !this.article;
+
+    if(this.article) {
+      this.render.setStyle(this.articleDiv[i], 'display', 'block');
+      this.render.setStyle(this.cardDiv[i], 'height', '25%');
+    }else {
+      this.render.setStyle(this.articleDiv[i], 'display', 'none');
+      this.render.setStyle(this.cardDiv[i], 'height', '20%');
+    }
   }
 
   async Accept(data, i){

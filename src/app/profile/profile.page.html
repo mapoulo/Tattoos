@@ -109,7 +109,7 @@
                 <ion-icon [name]="arrows"></ion-icon>
               </ion-button>
             </div>
-            <h1>{{showCustom.name}}</h1>
+            <h1>{{showCustom.name_t}}</h1>
            
             <p>{{showCustom.desc}}</p>
             <p>Length: {{showCustom.breadth}}cm</p>
@@ -133,7 +133,7 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/">Explore</ion-button>
+          <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -260,7 +260,7 @@
 
        </div>
        <div class="cardFor" *ngSwitchCase="'declined'">
-        <div class="no-items" *ngIf="DeclineSize.length == 0">
+        <div class="no-items" *ngIf="Decline.length == 0">
           <p>You have no request <span style="color: rgb(207, 49, 1);">declined</span>   yet</p>
         </div>
 
@@ -325,14 +325,14 @@
             <div class="no-messages">
               <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
             </div>
-            <div class="messages"  *ngFor = "let item of Messages"><!-- Put forloop -->
+         <!--   <div class="messages"  *ngFor = "let item of Messages"> Put forloop 
               <p>{{item.data.message}}</p>
             
               <div class="times">
                 <p><small>{{item.data.time}}</small></p>
                 <ion-button fill="clear" color="danger" (click)="DeleteMessage(item.key)"><ion-icon name="trash"></ion-icon></ion-button>
               </div>
-            </div>
+            </div>-->
           
           </div>  
          

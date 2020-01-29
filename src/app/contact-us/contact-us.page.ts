@@ -68,6 +68,10 @@ export class ContactUsPage implements OnInit {
     }
 
   }
+  
+  ionViewWillLeave () {
+    this.Contact = []
+  }
  
   ionViewDidEnter(){
     this.showProfile();
@@ -82,7 +86,7 @@ export class ContactUsPage implements OnInit {
    
    
     this.db.collection('Admin').get().then(data => {
-      
+       this.Contact = []
       //console.log('tt',this.Tattoos);
       data.forEach(item => {
         firetattoo.doc = item.data();
@@ -318,6 +322,7 @@ async Login(){
           message : this.message,
           satatus : "NotRead",
           time : moment().format('MMMM Do YYYY, h:mm:ss a'),
+          uid : firebase.auth().currentUser.uid
           
         })
       // User is signed in.

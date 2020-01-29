@@ -58,7 +58,7 @@ export class RegisterPage implements OnInit {
     })
   }
   
- async register(){
+ async register(tattooForm){
 
  
 
