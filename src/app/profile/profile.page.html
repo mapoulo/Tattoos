@@ -142,7 +142,7 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light"  routerLink="/">Explore</ion-button>
+          <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
@@ -340,7 +340,7 @@
             <div class="no-messages">
               <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
             </div>
-           <!-- <div class="messages"  *ngFor = "let item of Messages"> Put forloop 
+         <!--   <div class="messages"  *ngFor = "let item of Messages"> Put forloop 
               <p>{{item.data.message}}</p>
             
               <div class="times">
