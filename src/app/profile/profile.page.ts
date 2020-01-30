@@ -39,7 +39,9 @@ export class ProfilePage implements OnInit {
   }
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
-  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { 
+ 
+    this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
   email: string;
@@ -49,6 +51,7 @@ export class ProfilePage implements OnInit {
   startingDate;
   endingDate;
   Response=[];
+  Messages=[] 
   ViewMore=[];
   userID :string;
   name = "";
@@ -68,9 +71,14 @@ export class ProfilePage implements OnInit {
   MyNotifications = 0;
   Customized=[];
   db = firebase.firestore();
+
+  userId;
   
   ngOnInit() {
-    this.showProfile();
+  
+
+
+   
     setTimeout(() => {
       this.loader = false;
     }, 1000);
@@ -118,11 +126,14 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
   showProfile(){
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.presentToast('You have logged in Successfully')
+  
+
+       
+        /* this.presentToast('You have logged in Successfully') */
         this.showProfile1 = true;
         this.email=firebase.auth().currentUser.email;
+        this.userID=firebase.auth().currentUser.uid;
+        
         
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
           data.forEach(a => {
@@ -148,12 +159,6 @@ export class ProfilePage implements OnInit {
           })
         })
         
-        
-      
-      }else {
-        this.showProfile1 = false;
-      }
-    })
    }
    seeDecribe() {
      if(this.decribe) {
@@ -212,7 +217,7 @@ export class ProfilePage implements OnInit {
     let modal = await this.modalController.create({
       component : RegisterPage
     })
-    this.showProfile();
+
     return await modal.present();
   }
   async Login(){
@@ -228,7 +233,7 @@ export class ProfilePage implements OnInit {
         component : SignInPage,
       })
       
-      this.showProfile();
+      
       return await modal.present();
     
   
@@ -254,6 +259,7 @@ export class ProfilePage implements OnInit {
       console.log("Images  ", this.MyImage);
       
       setTimeout(() => {
+        //gfjgfhgfhgfhgfgf
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
           name :this.Myname,
         
@@ -312,12 +318,46 @@ export class ProfilePage implements OnInit {
     
   ionViewWillEnter(){
    
+    //Display Messages
+    
+ 
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
+        this.showProfile();
+
+        this.showProfile1 = true;
+        this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").onSnapshot(data => {
+       
+          data.forEach(i => {
+            this.Messages=[];
+            data.forEach(i => {
+             
+              if(i.exists){
+                // if(i.data().bookingState === "Accepted"){
+                  
+                 
+                  this.Messages.push(i.data());
+                 // this.size=  this.Messages.length;
+                  
+                // console.log("messages",this.Messages)
+                  //this.date=i.data().startdate;
+                  
+               
+                 
+                // }
+               
+              }
+            })
+           
+            
+          })
+        })
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
           this.Myname = item.data().name;
           this.Mynumber = item.data().number;
+          this.MyImage=item.data().image;
           
         })
         this.email=firebase.auth().currentUser.email;
@@ -341,15 +381,7 @@ export class ProfilePage implements OnInit {
                 })
             
           })
-          // return true; 
-             }
-          })
-        })
-        
-        
-    
-      }
-    })
+          
          //User's details
          this.email=firebase.auth().currentUser.email;
    
@@ -374,7 +406,7 @@ export class ProfilePage implements OnInit {
          })
        
       
-    if(firebase.auth().currentUser){
+  
     //  console.log("Your  pb data ", Bookings);
       console.log("Your pb here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
@@ -389,6 +421,7 @@ export class ProfilePage implements OnInit {
                 if(item.data().email === this.email){
                   
                   this.User.push(item.data());
+                  this.name=item.data().name;
                   console.log("Testing",this.User);
                 }
               }
@@ -503,7 +536,18 @@ export class ProfilePage implements OnInit {
        
  
    })
-  }
+  
+  // return true; 
+}
+})
+})
+
+
+
+}else {
+  this.showProfile1 = false;
+}
+})
   
 }
 showTattoo(item) {

@@ -115,6 +115,8 @@ export class NotificationsPage implements OnInit {
       endingDate : obj.endingDate,
       price : obj.price ,
       uid : obj.price ,
+      number:obj.number,
+      customerName:obj.customerName,
       bookingState : "Decline",
       auId : obj.auId,
       image : obj.image
@@ -128,6 +130,8 @@ export class NotificationsPage implements OnInit {
       endingDate : obj.endingDate,
       price : obj.price ,
       uid : obj.price ,
+      number:obj.number,
+      customerName:obj.customerName,
       bookingState : "Decline",
       auId : obj.auId,
       image : obj.image

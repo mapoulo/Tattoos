@@ -48,9 +48,9 @@
           <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account </ion-button>
           
           <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p> {{name}}</p>
+            <p> {{Myname}}</p>
             <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
-            <img *ngIf="image != ''" src="{{image}}" alt="">
+            <img *ngIf="image != ''" src="{{Picture}}" alt="">
           </div>
         </div>
         <div class="notification" *ngIf="showProfile1">
@@ -89,7 +89,7 @@
         
           <div class="phone-div">
             <p><strong>Location</strong></p>
-            <p>{{ contact.doc.address}}</p> 
+            <p (clik)="openGps()">{{ contact.doc.address}}</p> 
           </div>
         
         </div>
@@ -154,7 +154,7 @@
         </div>
       </div>
       <ion-row justify-content-center>
-        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage()" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
+        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round" disabled={{buttonDisabled}}  (click)="sendMessage()" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
       </ion-row>
        
      

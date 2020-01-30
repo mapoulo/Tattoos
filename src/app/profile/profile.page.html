@@ -148,8 +148,8 @@
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
           <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
           <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p>{{name}}</p>
-            <img src="{{image}}"alt="">
+            <p>{{Myname}}</p>
+            <img src="{{MyImage}}"alt="">
           </div>
         </div>
         <div class="notification" *ngIf="showProfile1">
@@ -170,7 +170,7 @@
           <div class="cup">
             <div class="profile-image-header-div">
               <div class="move-up">
-                <img src="{{image}}"alt="">
+                <img src="{{MyImage}}"alt="">
               </div>
             </div>
             <div class="info-data">
@@ -305,10 +305,10 @@
   </div> -->
  </div>
  <div class="cardFor" *ngSwitchCase="'pending'">
- <!--  <div class="no-items">
+   <div class="no-items" *ngIf="Request.length == 0">
     <p>You have no request <span style="color: rgb(109, 109, 109);">pending</span>   yet</p>
-  </div> -->
-  <div class="card" *ngFor = "let item of Requests">
+  </div> 
+  <div class="card" *ngFor = "let item of Request">
     <div class="card-t">
       <div class="image-card">
         <img src="{{item.image}}" alt="">
@@ -340,14 +340,16 @@
             <div class="no-messages">
               <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
             </div>
-         <!--   <div class="messages"  *ngFor = "let item of Messages"> Put forloop 
-              <p>{{item.data.message}}</p>
+          
+            
+           <div class="messages"  *ngFor = "let item of Messages">  
+              <p>{{item.message}}</p>
             
               <div class="times">
-                <p><small>{{item.data.time}}</small></p>
+                <p><small>{{item.time}}</small></p>
                 <ion-button fill="clear" color="danger" (click)="DeleteMessage(item.key)"><ion-icon name="trash"></ion-icon></ion-button>
               </div>
-            </div>-->
+            </div>
           
           </div>  
          

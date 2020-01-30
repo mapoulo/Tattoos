@@ -32,6 +32,19 @@ export class ContactUsPage implements OnInit {
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
   inputDisabled: boolean = false;
+
+
+  buttonDisabled: boolean = false;
+  
+
+
+  
+  Myname;
+  Mynumber;
+  Picture= "";
+
+
+
   validation_messages = {
     'name': [
       { type: 'required', message: 'Name is required.' },
@@ -74,6 +87,27 @@ export class ContactUsPage implements OnInit {
   }
  
   ionViewDidEnter(){
+
+    
+
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+
+        this.showProfile1 = true;
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+          console.log("User Logged in ", item.data());
+          this.Myname = item.data().name;
+          this.Mynumber = item.data().number;
+          this.Picture=item.data().image;
+          this.email=item.data().email;
+        })
+        
+
+      }
+
+    })
+
     this.showProfile();
   
 
@@ -156,12 +190,19 @@ export class ContactUsPage implements OnInit {
     }
   }
 
+
+
+  openGps(){
+
+    
+  }
     
   showProfile(){
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         this.showProfile1 = true;
         this.inputDisabled = true;
+        this.buttonDisabled = false;
         this.UserIn = false
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           this.name = item.data().name;
@@ -196,6 +237,7 @@ export class ContactUsPage implements OnInit {
           })
         })
         
+
     
         // this.showProfile = true;
         
@@ -245,6 +287,7 @@ export class ContactUsPage implements OnInit {
         //   })
         // })
       }else {
+        this.buttonDisabled = true;
          this.showProfile1 = false;
          this.UserIn = true
       }
@@ -290,6 +333,12 @@ async Login(){
     this.loader = true
     this.split = false;
     this.ShowName=[];
+
+
+    this.name = "";
+
+    this.message="";
+    this.email="";
   
     setTimeout(() => {
       firebase.auth().signOut().then(user => {
@@ -311,13 +360,15 @@ async Login(){
   }
   
    async sendMessage(){
-  
+
+
+
     var user = firebase.auth().currentUser;
     if (user) {
       this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").doc().set({
         //firebase.firestore().collection("Messages").doc().set({
          
-          name : this.name,
+          name : this.Myname,
           email : this.email,
           message : this.message,
           satatus : "NotRead",
@@ -338,8 +389,8 @@ async Login(){
       // No user is signed in.
     }
  
-     this.name = "";
-     this.email = "";
+    //  this.name = "";
+    //  this.email = "";
      this.message = "";
      const alert = await this.alertCtrl.create({
       header: "",
