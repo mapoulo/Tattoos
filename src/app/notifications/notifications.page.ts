@@ -60,6 +60,9 @@ export class NotificationsPage implements OnInit {
 
   }
 
+
+ 
+
   async Decline(data, i){
 
     
