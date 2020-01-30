@@ -179,7 +179,7 @@
               <div class="p"><ion-icon mode="ios" name="mail"></ion-icon><p>{{email}}</p></div>
               <div class="p"><ion-icon mode="ios" name="call"></ion-icon><p>{{Mynumber}}</p></div>
             </div>
-            <div class="customizedTattoo">
+            <div class="customizedTattoo" *ngIf="Customized.length == 0">
               <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
               <div class="custom-card-container" >
                
@@ -305,10 +305,10 @@
   </div> -->
  </div>
  <div class="cardFor" *ngSwitchCase="'pending'">
- <!--  <div class="no-items">
+  <div class="no-items" *ngIf="Request.length == 0" >
     <p>You have no request <span style="color: rgb(109, 109, 109);">pending</span>   yet</p>
-  </div> -->
-  <div class="card" *ngFor = "let item of Requests">
+  </div>
+  <div class="card" *ngFor = "let item of Request">
     <div class="card-t">
       <div class="image-card">
         <img src="{{item.image}}" alt="">
@@ -337,17 +337,17 @@
           </div>
           <div class="form">
 
-            <div class="no-messages">
+            <div class="no-messages" *ngIf="MyMessages.length == 0">
               <p>You have not asked us anything.click  <a routerLink="/contact-us">here</a> if you need to ask.</p>
             </div>
-         <!--   <div class="messages"  *ngFor = "let item of Messages"> Put forloop 
+           <div class="messages"  *ngFor = "let item of MyMessages"> 
               <p>{{item.data.message}}</p>
             
               <div class="times">
                 <p><small>{{item.data.time}}</small></p>
-                <ion-button fill="clear" color="danger" (click)="DeleteMessage(item.key)"><ion-icon name="trash"></ion-icon></ion-button>
+                <ion-button fill="clear" color="danger" (click)="DeleteMessage(item.aid)"><ion-icon name="trash"></ion-icon></ion-button>
               </div>
-            </div>-->
+            </div>
           
           </div>  
          

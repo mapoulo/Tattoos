@@ -15,7 +15,9 @@ import { NotificationsPage } from '../notifications/notifications.page';
 })
 export class ContactUsPage implements OnInit {
   
-  
+  Myname;
+  Mynumber;
+  Picture= "";
   tattooForm : FormGroup;
   UserIn : boolean
   name = ""
@@ -28,6 +30,7 @@ export class ContactUsPage implements OnInit {
   image = '';
   respnses=[];
   Contact: any = [];
+  buttonDisabled: boolean = false;
   loader: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
@@ -74,6 +77,21 @@ export class ContactUsPage implements OnInit {
   }
  
   ionViewDidEnter(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.showProfile1 = true;
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+          console.log("User Logged in ", item.data());
+          this.Myname = item.data().name;
+          this.Mynumber = item.data().number;
+          this.Picture=item.data().image;
+          this.email=item.data().email;
+        })
+        
+      }
+    })
+
+
     this.showProfile();
   
 
@@ -162,6 +180,7 @@ export class ContactUsPage implements OnInit {
       if(user) {
         this.showProfile1 = true;
         this.inputDisabled = true;
+        this.buttonDisabled = false;
         this.UserIn = false
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           this.name = item.data().name;
@@ -246,7 +265,8 @@ export class ContactUsPage implements OnInit {
         // })
       }else {
          this.showProfile1 = false;
-         this.UserIn = true
+         this.UserIn = true;
+         this.buttonDisabled = true;
       }
     })
    }

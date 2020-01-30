@@ -518,6 +518,17 @@ ion-row {
                 align-items: center;
                 display: flex;
 
+                position: relative;
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    left: 0%;
+                    width: 3px;
+                    height: 100%;
+                    background: #d36954;
+                    content: '';
+                }
+
               
             }
 
@@ -601,7 +612,7 @@ ion-row {
 
 
 
-    .messagesss {
+    .messages {
         position: relative;
         padding: 1em;
         margin-top: 1%;

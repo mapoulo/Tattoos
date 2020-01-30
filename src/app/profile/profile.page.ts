@@ -47,6 +47,7 @@ export class ProfilePage implements OnInit {
   Request=[];
   Bookings=[];
   startingDate;
+  MyMessages = []
   endingDate;
   Response=[];
   ViewMore=[];
@@ -68,16 +69,59 @@ export class ProfilePage implements OnInit {
   MyNotifications = 0;
   Customized=[];
   db = firebase.firestore();
+  Aid = ""
   
   ngOnInit() {
     this.showProfile();
     setTimeout(() => {
       this.loader = false;
     }, 1000);
+
+    this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").onSnapshot(data => {
+
+
+      let obj = {aid : "", data : {}}
+      this.MyMessages = []
+
+      data.forEach(item => {
+        console.log("Id  dddddddd ",  item.id);
+        obj.aid = item.id
+        obj.data = item.data()
+        // this.Aid = item.data().auid
+            this.MyMessages.push(obj)
+            obj = {aid : "", data : {}}
+      })
+    })
   }
 
 
+ async DeleteMessage(key){
+    console.log("dddddsdsd ", key);
 
+   
+    
+    const alert = await this.alertCtrl.create({
+      header: 'DELETE!',
+      message: '<strong>Are you sure you want to delete this message?</strong>',
+      buttons: [
+        {
+          text: 'Cancel',
+          
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        }, {
+          text: 'Delete',
+          handler: data => {
+         
+            this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").doc(key).delete()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
 
   changeListener(event): void {
