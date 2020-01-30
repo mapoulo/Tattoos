@@ -11,7 +11,7 @@ import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
 import { Storage } from '@ionic/storage';
 // import { OneSignal } from '@ionic-native/onesignal';
-
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'app-xplore',
@@ -97,7 +97,7 @@ tattoo = {
   continue: any;
   @ViewChild('slides', {static: true}) slides: IonSlides;
 
-  constructor(public DeliverDataService : DeliverDataService, private store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
+  constructor(public DeliverDataService : DeliverDataService,private splashScreen: SplashScreen, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
     

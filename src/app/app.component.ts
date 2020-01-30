@@ -37,8 +37,9 @@ firebase_id = '396095430599';
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#D36954');
+     
 
       if (this.platform.is('cordova')) {
         // this.setupPush();

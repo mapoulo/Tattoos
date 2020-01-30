@@ -15,7 +15,9 @@ import { NotificationsPage } from '../notifications/notifications.page';
 })
 export class ContactUsPage implements OnInit {
   
-  
+  Myname;
+  Mynumber;
+  Picture= "";
   tattooForm : FormGroup;
   UserIn : boolean
   name = ""
@@ -28,21 +30,14 @@ export class ContactUsPage implements OnInit {
   image = '';
   respnses=[];
   Contact: any = [];
+  buttonDisabled: boolean = false;
   loader: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
   inputDisabled: boolean = false;
 
 
-  buttonDisabled: boolean = false;
   
-
-
-  
-  Myname;
-  Mynumber;
-  Picture= "";
-
 
 
   validation_messages = {
@@ -289,7 +284,8 @@ export class ContactUsPage implements OnInit {
       }else {
         this.buttonDisabled = true;
          this.showProfile1 = false;
-         this.UserIn = true
+         this.UserIn = true;
+         this.buttonDisabled = true;
       }
     })
    }
