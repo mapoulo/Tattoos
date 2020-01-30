@@ -16,7 +16,7 @@ export class NotificationsPage implements OnInit {
   array = [];
   showMessage : boolean;
   message = "";
-
+  icon: 'ios-arrow-down';
   days = "";
 
   constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController ) {
@@ -55,6 +55,11 @@ export class NotificationsPage implements OnInit {
         })
       })
     }
+
+  }
+
+
+  animate(i) {
 
   }
 
