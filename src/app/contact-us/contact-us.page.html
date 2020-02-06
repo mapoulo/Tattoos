@@ -90,7 +90,7 @@
         
           <div class="phone-div">
             <p><strong>Location</strong></p>
-            <p>{{ contact.doc.address}}</p> 
+            <p (clik)="openGps()">{{ contact.doc.address}}</p> 
           </div>
         
         </div>
@@ -155,7 +155,7 @@
         </div>
       </div>
       <ion-row justify-content-center>
-        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round"disabled={{buttonDisabled}  (click)="sendMessage()" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
+        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round" disabled={{buttonDisabled}}  (click)="sendMessage()" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
       </ion-row>
        
      

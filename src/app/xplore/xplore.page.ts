@@ -69,7 +69,6 @@ tattoo = {
   respnses = []
   AcceptedData = [];
 
-  
   Myname;
   Mynumber;
   Picture= "";
@@ -164,9 +163,9 @@ tattoo = {
 
    ionViewDidEnter(){
 
-
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
         this.showProfile1 = true;
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
@@ -175,62 +174,68 @@ tattoo = {
           this.Picture=item.data().image;
         })
         
-      }
-    })
 
+      }
+
+    })
     
     this.showProfile();
     
 
 
-        // Or to get a key/value pair
- 
-      this.store.get('onboard').then((val) => {
-        if(val == true) {
-          this.onboard = false;
-        }else {
-          this.onboard = true;
-        }
-      });
+
+                // Or to get a key/value pair
+        
+              this.store.get('onboard').then((val) => {
+                if(val == true) {
+                  this.onboard = false;
+                }else {
+                  this.onboard = true;
+                }
+              });
 
 
-   setTimeout(() => {
-    this.loader = false;
+              setTimeout(() => {
+                this.loader = false;
 
 
-    // this.name = this.DeliverDataService.name;
+                // this.name = this.DeliverDataService.name;
 
-         //User's details
+                    //User's details
 
-         if(firebase.auth().currentUser) {
-          this.email=firebase.auth().currentUser.email;
-         }
-         
-         this.db.collection("Bookings").onSnapshot(data => {         
-           data.forEach(item => {
-             if(item.exists){
+                    if(firebase.auth().currentUser) {
+                      this.email=firebase.auth().currentUser.email;
+                    }
+                    
+                    this.db.collection("Bookings").onSnapshot(data => {         
+                      data.forEach(item => {
+                        if(item.exists){
 
-              this.ShowName = [];
-               if(item.data().email === this.email){
-                 this.DeliverDataService.name = item.data().name;
-                 this.name = item.data().name;
-                 this.image = item.data().image;
-                 console.log("Your name is here ", item.data().name);
-                 
-                 this.ShowName.push(item.data());
-                 console.log("ShowName",item.data().name);
-               }
-             }
-           })
-         })
-       
-  
+                          this.ShowName = [];
+                          if(item.data().email === this.email){
+                            this.DeliverDataService.name = item.data().name;
+                            this.name = item.data().name;
+                            this.image = item.data().image;
+                            console.log("Your name is here ", item.data().name);
+                            
+                            this.ShowName.push(item.data());
+                            console.log("ShowName",item.data().name);
+                          }
+                        }
+                      })
+                    })
+                  
+              
 
- }, 1000);
+            }, 1000);
 
-  
+              
   
   }
+
+
+
+
 
 
 

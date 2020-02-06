@@ -98,6 +98,7 @@ export class ContactUsPage implements OnInit {
         this.showProfile();
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
         this.showProfile1 = true;
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
@@ -107,9 +108,10 @@ export class ContactUsPage implements OnInit {
           this.email=item.data().email;
         })
         
-      }
-    })
 
+      }
+
+    })
 
 
   
@@ -193,6 +195,12 @@ export class ContactUsPage implements OnInit {
     }
   }
 
+
+
+  openGps(){
+
+    
+  }
     
   showProfile(){
     firebase.auth().onAuthStateChanged((user) => {
@@ -234,6 +242,7 @@ export class ContactUsPage implements OnInit {
           })
         })
         
+
     
         // this.showProfile = true;
         
@@ -283,6 +292,7 @@ export class ContactUsPage implements OnInit {
         //   })
         // })
       }else {
+        this.buttonDisabled = true;
          this.showProfile1 = false;
          this.UserIn = true;
          this.buttonDisabled = true;
@@ -331,6 +341,12 @@ async Login(){
     this.loader = true
     this.split = false;
     this.ShowName=[];
+
+
+    this.name = "";
+
+    this.message="";
+    this.email="";
   
     setTimeout(() => {
       firebase.auth().signOut().then(user => {
@@ -352,13 +368,15 @@ async Login(){
   }
   
    async sendMessage(){
-  
+
+
+
     var user = firebase.auth().currentUser;
     if (user) {
       this.db.collection("Message").doc(firebase.auth().currentUser.uid).set({
         //firebase.firestore().collection("Messages").doc().set({
          
-          name : this.name,
+          name : this.Myname,
           email : this.email,
           message : this.message,
           status : "NotRead",
