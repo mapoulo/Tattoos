@@ -15,7 +15,7 @@ exports.test = functions.firestore.document('Bookings/{docid}/Requests/{id}').on
             notification: {
                 title: 'New Booking!',
                 body: `name of customer: ${dataR.customerName} TattooName   ${dataR.tattoName}`,
-                icon: 'https://goo.gl/Fz9nrQ'
+                icon: '../../src/assets/anotherLogo.svg'
             }
         }
 
@@ -39,7 +39,7 @@ exports.ClinetResponse = functions.firestore.document('Bookings/{docid}/Response
             notification: {
                 title: 'Response from the CMS',
                 body: ``,
-                icon: 'https://goo.gl/Fz9nrQ'
+                icon: '../../src/assets/anotherLogo.svg'
             }
         }
 

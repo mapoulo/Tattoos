@@ -92,7 +92,10 @@ export class NotificationsPage implements OnInit {
           obj.price  =  doc.data().uid,
           obj.bookingState =  "Pending",
           obj.auId = doc.data().auId,
-          obj.image =  doc.data().image,doc.data()
+          obj.image =  doc.data().image,
+          obj.customerName = doc.data().customerName,
+          obj.number = doc.data().number
+
 
           this.updateDecline(doc.data().auId, doc.data());
 
@@ -120,7 +123,9 @@ export class NotificationsPage implements OnInit {
       uid : obj.price ,
       bookingState : "Decline",
       auId : obj.auId,
-      image : obj.image
+      image : obj.image,
+      customerName : obj.customerName,
+      number : obj.number
     })
 
     console.log("updateDecline successfully");
@@ -133,7 +138,10 @@ export class NotificationsPage implements OnInit {
       uid : obj.price ,
       bookingState : "Decline",
       auId : obj.auId,
-      image : obj.image
+      image : obj.image,
+      customerName : obj.customerName,
+      number : obj.number
+
 
     })
     
@@ -203,7 +211,9 @@ export class NotificationsPage implements OnInit {
             obj.price  =  doc.data().uid,
             obj.bookingState =  "Pending",
             obj.auId = doc.data().auId,
-            obj.image =  doc.data().image,doc.data()
+            obj.image =  doc.data().image,doc.data(),
+            obj.customerName = doc.data().customerName,
+            obj.number = doc.data().number
   
             this.updateAccept(doc.data().auId, doc.data());
   

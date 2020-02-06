@@ -1,4 +1,4 @@
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController, Platform } from '@ionic/angular';
 import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
@@ -15,8 +15,8 @@ export class CustomizePage implements OnInit {
 db = firebase.firestore();
   storage = firebase.storage().ref();
   tattoo = "";
-  Length = "";
-  Breadth = "";
+  Length = 1;
+  Breadth = 1;
   Cname = "";
     number : any = 0;
 
@@ -33,7 +33,7 @@ db = firebase.firestore();
     }
   loader: boolean = false;
   progress: number = 0;
-  constructor(public ModalController : ModalController,private fb: FormBuilder) { 
+  constructor(public ModalController : ModalController, public AlertController:AlertController, private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       Length: new FormControl('', Validators.compose([Validators.required])),
       Breadth: new FormControl('', Validators.compose([Validators.required])),
@@ -80,7 +80,8 @@ db = firebase.firestore();
   async Booking(tattoo){
 
 
-    if (firebase.auth().currentUser) {
+    if (firebase.auth().currentUser  && this.Length != 0 && this.Breadth != 0) {
+
 
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
@@ -89,7 +90,8 @@ db = firebase.firestore();
       category : "Customized",
       description : "Customized Tattoo",
       image : this.tattoo,
-      priceRange :  null,
+      endPrice : null,
+      startPrice : null,
       tattoName: null,
       breadth : this.Breadth,
       length : this.Length,
@@ -117,6 +119,15 @@ db = firebase.firestore();
     // this.modalController.dismiss({
     //   'dismissed': true
     // });
+  }else{
+    const alert = await this.AlertController.create({
+      header: "",
+      subHeader: "",
+      message: "The length and breadth cannot be zero",
+      buttons: ['OK']
+    });
+    alert.present();
+
   }
     
   }

@@ -35,6 +35,9 @@ export class ContactUsPage implements OnInit {
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
   inputDisabled: boolean = false;
+
+  placeid = ""
+
   validation_messages = {
     'name': [
       { type: 'required', message: 'Name is required.' },
@@ -64,6 +67,16 @@ export class ContactUsPage implements OnInit {
   }
   ngOnInit() {
 
+   
+    this.loader=true;
+
+
+    this.db.collection("Admin").onSnapshot(data => {
+      data.forEach(item => {
+        this.placeid = item.data().placeId
+      })
+    })
+
     if(firebase.auth().currentUser){
       this.UserIn = false
     }else{
@@ -73,10 +86,16 @@ export class ContactUsPage implements OnInit {
   }
   
   ionViewWillLeave () {
+
     this.Contact = []
+  }
+
+  GoTo(){
+    return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;
   }
  
   ionViewDidEnter(){
+        this.showProfile();
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         this.showProfile1 = true;
@@ -92,7 +111,7 @@ export class ContactUsPage implements OnInit {
     })
 
 
-    this.showProfile();
+
   
 
     let firetattoo = {
@@ -126,9 +145,7 @@ export class ContactUsPage implements OnInit {
     })
    
     this.inputDisabled = false;
-    setTimeout(() => {
-      this.loader = false;
-   }, 1000);
+   
     // this.name = this.DeliverDataService.name;
            //User's details
            if(firebase.auth().currentUser) {
@@ -154,7 +171,9 @@ export class ContactUsPage implements OnInit {
            })
          
  
-  
+           setTimeout(() => {
+            this.loader = false;
+         }, 1000);
   
   }
 
@@ -307,6 +326,8 @@ async Login(){
   
 }
   logOut(){
+    this.email = ""
+    this.name = ""
     this.loader = true
     this.split = false;
     this.ShowName=[];
@@ -334,32 +355,21 @@ async Login(){
   
     var user = firebase.auth().currentUser;
     if (user) {
-      this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").doc().set({
+      this.db.collection("Message").doc(firebase.auth().currentUser.uid).set({
         //firebase.firestore().collection("Messages").doc().set({
          
           name : this.name,
           email : this.email,
           message : this.message,
-          satatus : "NotRead",
+          status : "NotRead",
           time : moment().format('MMMM Do YYYY, h:mm:ss a'),
           uid : firebase.auth().currentUser.uid
           
         })
       // User is signed in.
-    } else {
-      this.db.collection("Messages").doc().set({
-        name : this.name,
-        email : this.email,
-        message : this.message,
-        satatus : "NotRead",
-        time : moment().format('MMMM Do YYYY, h:mm:ss a'),
-        
-      })
-      // No user is signed in.
     }
  
-     this.name = "";
-     this.email = "";
+    
      this.message = "";
      const alert = await this.alertCtrl.create({
       header: "",

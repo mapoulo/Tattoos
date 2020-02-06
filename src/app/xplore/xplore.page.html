@@ -28,7 +28,8 @@
         </ion-fab-button>
       </div> -->
        <div class="image-card-t">
-       <img src="{{tattoos.image}}" alt="">
+       <img  src="{{tattoos.image}}" alt="">
+      
        </div>
        <div class="describe-card-s">
        <h1 class="ion-text-center">{{tattoo.StartingpriceRange | currency : '&#82;'}} - {{tattoo.EndingpriceRange | currency : '&#82;'}}</h1>
@@ -55,7 +56,7 @@
   
   <div class="main-container">
 
-    <div class="onbording animated" [ngClass]="{'bounceInUp': onboard, 'bounceOutUp': !onboard}">
+    <div class="onbording" *ngIf="onboard">
       <div class="onboard">
 
         <div class="btn-close">
@@ -168,7 +169,8 @@
     <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
       <div class="close">
         <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-          <img  *ngIf="showProfile1"  src="{{image}}" alt="">
+          <img  *ngIf="Picture"  src="{{Picture}}" alt="">
+          <img  *ngIf="!Picture"  src="../../assets/person-icon.jpg" alt="">
         </div>
         <ion-button fill="clear" (click)="addClasseAnimates()" color="light">
           <ion-icon name="close"></ion-icon>
@@ -201,7 +203,8 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button>
+          <ion-button class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+          <ion-button class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
           <ion-button fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
@@ -212,7 +215,8 @@
             <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
 
 
-            <img *ngIf="image != ''" src="{{Picture}}" alt="">
+            <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
+            <img *ngIf="Picture" src="{{Picture}}"alt="">
           </div>
         </div>
 

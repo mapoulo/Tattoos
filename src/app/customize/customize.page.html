@@ -1,9 +1,9 @@
 <ion-header no-border>
-  <ion-toolbar>
-    <ion-title>Customize</ion-title>
+  <ion-toolbar  [style.backgroundColor]="!tattoo ? '#fff' : 'rgba(0,0,0,0.5)'">
+    <ion-title [style.color]="!tattoo ? 'grey' : '#fff'">Customize</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()" fill="icon-only" color="light">
-        <ion-icon color="light"  name="close"></ion-icon>
+        <ion-icon [style.color]="!tattoo ? 'grey' : '#fff'"  name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -31,7 +31,7 @@
           <ion-col size="11">
               <ion-item>
                   <ion-label position="floating">Length in cm</ion-label>
-                  <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
+                  <ion-input type="number" formControlName="Length" [(ngModel)]="Length" onKeyPress="if(this.value.length==5) return false;"></ion-input>
                   <ion-icon slot="end"  name="ios-calculator" size="small"></ion-icon>
               </ion-item>
               <div class="error" *ngFor="let validate of validation_messages.Length">
@@ -46,7 +46,7 @@
           <ion-col size="11">
               <ion-item>
                   <ion-label position="floating">Breadth in cm</ion-label>
-                  <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
+                  <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" onKeyPress="if(this.value.length==5) return false;" ></ion-input>
                   <ion-icon name="calculator" size="small" color="primary" slot="end"></ion-icon>
                 </ion-item>
                 <div class="error" *ngFor="let validate of validation_messages.Breadth">
@@ -72,7 +72,7 @@
     
       <div class="images">
         <div class="percent" *ngIf="progress != 0">
-          <p>{{progress | percent}}</p>
+          <p>{{progress / 100 | percent}}</p>
           </div>
         <label class="fileContainer animated jello">
           Tap to Upload your custom Tattoo

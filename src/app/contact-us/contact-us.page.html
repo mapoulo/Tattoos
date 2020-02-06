@@ -41,7 +41,8 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button  fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/">Explore</ion-button>
+          <ion-button fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+          <ion-button  fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
           <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
@@ -109,7 +110,7 @@
         <h3>Find Us on Google Maps</h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias neque repudiandae error nihil vero laudantium, ab aut sunt magni. Laborum sit incidunt aut consectetur distinctio fugit dolore esse in exercitationem.</p>  
       </div>
-      <div class="image-tatt">
+      <div class="image-tatt" (click)="GoTo()">
         <img src="../../../assets/icon/Group 1.jpg" alt="">
       </div>
      
@@ -168,4 +169,3 @@
       
     </div>
 </ion-content>
-

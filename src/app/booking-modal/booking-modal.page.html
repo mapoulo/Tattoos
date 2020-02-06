@@ -59,7 +59,7 @@
 
                   <ion-item class="item" style="margin-bottom: 1em;">
                     <ion-label color="primary" position="floating">Length (in Centimetre)</ion-label>
-                    <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="number" type="number" formControlName="Length" [(ngModel)]="Length" placeholder="Specify your Length (CM) e.g 10" required="true"></ion-input>
+                    <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="number" type="number" formControlName="Length" [(ngModel)]="Length" placeholder="Specify your Length (CM) e.g 10" required="true" onKeyPress="if(this.value.length==5) return false;"></ion-input>
                     <ion-icon name="calculator" color="primary" slot="end"></ion-icon>
                   </ion-item>
                    
@@ -74,7 +74,7 @@
                 <ion-col size="12">
                   <ion-item class="item" style="margin-bottom: 1em;">
                     <ion-label color="primary" position="floating">Breadth (in Centimetre)</ion-label>
-                    <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="number" type="number" formControlName="Breadth" [(ngModel)]="Breadth" placeholder="Specify your Breadth (CM) e.g 4" required="true"></ion-input>
+                    <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="number" type="number" formControlName="Breadth" [(ngModel)]="Breadth" placeholder="Specify your Breadth (CM) e.g 4" required="true" onKeyPress="if(this.value.length==5) return false;"></ion-input>
                     <ion-icon name="calculator" color="primary" slot="end"></ion-icon>
                   </ion-item>
                       <div class="error" *ngFor="let validate of validation_messages.Breadth">

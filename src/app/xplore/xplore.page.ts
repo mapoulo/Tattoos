@@ -11,7 +11,7 @@ import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
 import { Storage } from '@ionic/storage';
 // import { OneSignal } from '@ionic-native/onesignal';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
 
 @Component({
   selector: 'app-xplore',
@@ -27,6 +27,7 @@ export class XplorePage implements OnInit {
   splitDiv: any = document.getElementsByClassName('split-pane');
   loader: boolean = true;
   onboard: boolean = false;
+  onbordingDiv: any = document.getElementsByClassName('onbording');
   tattooDisplay: boolean = false;
   tattooDisplaDiv: any = document.getElementsByClassName('tattoo-image');
 
@@ -98,7 +99,7 @@ tattoo = {
   continue: any;
   @ViewChild('slides', {static: true}) slides: IonSlides;
 
-  constructor(public DeliverDataService : DeliverDataService,private splashScreen: SplashScreen, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
+  constructor(public DeliverDataService : DeliverDataService, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
     
@@ -179,7 +180,7 @@ tattoo = {
 
     
     this.showProfile();
-    this.splashScreen.hide();
+    
 
 
         // Or to get a key/value pair
@@ -401,6 +402,7 @@ tattoo = {
 
     onboardingFunc() {
       this.onboard = false;
+        this.render.setStyle(this.onbordingDiv[0], 'display', 'none');
       this.store.set('onboard', true);
     }
     onNext() {
