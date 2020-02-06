@@ -1,3 +1,8 @@
+
+ion-header, ion-toolbar {
+    background-color: transparent;
+    --background-color: transparent !important;
+}
 .error {
     color: red;
     width: 80%;
@@ -75,9 +80,14 @@
 } 
 
 .signUp {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
     width: 100%;
-    
-    & > * {
+    flex-direction: column;
+
+    p {
+        font-size: 80%;
         flex: 1;
     }
 }
@@ -93,6 +103,9 @@
 
     ion-button {
         width: 100%;
+    }
+    .form-container {
+        flex-basis: 80%;
     }
 }
 

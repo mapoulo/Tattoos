@@ -88,6 +88,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+ 
+    img {
+        transform: translate(0%, -15%); 
+    }
 }
 .profile-image {
     display: flex;

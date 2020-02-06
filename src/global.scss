@@ -28,7 +28,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 ion-toolbar {
-    --background: transparent;
+    --background: transparent !important;
     --ion-color-base: transparent !important;
 
 
@@ -61,6 +61,7 @@ p, h1, h2,h3,h4,h5,h6,small {
   right: 0;
   text-align: right;
   top: 0;
+  
 }
 
 
@@ -69,6 +70,7 @@ p, h1, h2,h3,h4,h5,h6,small {
   color: #fff;
   float: left;
   padding: 1em !important;
+  border-radius: 50px !important;
 }
 
 .fileContainer [type=file] {
@@ -85,6 +87,11 @@ p, h1, h2,h3,h4,h5,h6,small {
   }
   .modalNotification .modal-wrapper {
     width: 100%;
+  }
+
+  .resetModal .modal-wrapper {
+    --width: 90%;
+    --height: 40%;
   }
   }
   @media only screen and (min-width: 600px) {
