@@ -41,16 +41,17 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button  fill="clear" expand="block" color="light" (click)="goToExplore()" routerLink="/">Explore</ion-button>
+          <ion-button fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+          <ion-button  fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
           <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
           <ion-button fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account </ion-button>
           
           <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p> {{name}}</p>
+            <p> {{Myname}}</p>
             <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
-            <img *ngIf="image != ''" src="{{image}}" alt="">
+            <img *ngIf="image != ''" src="{{Picture}}" alt="">
           </div>
         </div>
         <div class="notification" *ngIf="showProfile1">
@@ -89,7 +90,7 @@
         
           <div class="phone-div">
             <p><strong>Location</strong></p>
-            <p>{{ contact.doc.address}}</p> 
+            <p (clik)="openGps()">{{ contact.doc.address}}</p> 
           </div>
         
         </div>
@@ -109,7 +110,7 @@
         <h3>Find Us on Google Maps</h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias neque repudiandae error nihil vero laudantium, ab aut sunt magni. Laborum sit incidunt aut consectetur distinctio fugit dolore esse in exercitationem.</p>  
       </div>
-      <div class="image-tatt">
+      <div class="image-tatt" (click)="GoTo()">
         <img src="../../../assets/icon/Group 1.jpg" alt="">
       </div>
      
@@ -154,7 +155,7 @@
         </div>
       </div>
       <ion-row justify-content-center>
-        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round" (click)="sendMessage()" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
+        <ion-col size="7"> <ion-button class="extend" fill="solid" color="secondary" shape="round" disabled={{buttonDisabled}}  (click)="sendMessage()" [disabled]="!tattooForm.valid">Send Message</ion-button></ion-col>
       </ion-row>
        
      
@@ -168,4 +169,3 @@
       
     </div>
 </ion-content>
-

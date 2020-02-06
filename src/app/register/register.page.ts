@@ -7,7 +7,7 @@ import { ViewController } from '@ionic/core';
 import { ModalController,AlertController, ActionSheetController } from '@ionic/angular';
 import { BookingModalPage } from '../booking-modal/booking-modal.page';
 import { DeliverDataService } from '../deliver-data.service';
-import { NotificationsService } from '../notifications.service';
+// import { NotificationsService } from '../notifications.service';
 
 
 
@@ -26,7 +26,9 @@ export class RegisterPage implements OnInit {
   password = '';
   db=firebase.firestore();
   storage = firebase.storage().ref();
-  number : number ;
+  number  = 0;
+
+  
   tattooForm : FormGroup;
   validation_messages = {
     'name': [
@@ -42,78 +44,103 @@ export class RegisterPage implements OnInit {
     ],
     'password': [
       {type: 'required', message: 'Password is required.'},
-      {type: 'maxlength', message: 'Password must be 6 char'},
+      {type: 'maxlength', message: 'Password must be minimum of 4 and maximum of  6 char'},
     ]
+
   }
+  
   loader: boolean = false;
-  constructor(public DeliverDataService : DeliverDataService, private notification : NotificationsService,  private modalController: ModalController, public actionSheetController: ActionSheetController, private fb: FormBuilder, private AlertController: AlertController) { }
+  constructor(public DeliverDataService : DeliverDataService,  private modalController: ModalController, public actionSheetController: ActionSheetController, private fb: FormBuilder, private AlertController: AlertController) { }
+
   ngOnInit() {
 
+    
   this.MyValue = this.DeliverDataService.checkValue
     this.tattooForm = this.fb.group({
+
       name: new FormControl('', Validators.compose([Validators.required])),
+      
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
-     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(6)])),
-     number: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)]))
+
+     password: new FormControl('', Validators.compose( [Validators.required, 
+      Validators.minLength(4), Validators.maxLength(6)])),
+
+     
+     number: new FormControl('', Validators.compose([Validators.required,
+       Validators.maxLength(12)]))
+
     })
+
   }
   
- async register(tattooForm){
-
- 
-
-
-
+  async register(){
     this.loader = true;
-  
-   setTimeout(() => {
-    
-    if (this.tattooForm.valid ) {
-   
-  
-      firebase.firestore().collection("Admin").onSnapshot(data => {
-        data.forEach(item => {
-          this.cmsTokenId = item.data().tokenId;
-          console.log("sdsddsd ", this.cmsTokenId);
-          
-        })
-      })
-  
-    firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log("Email already exist");
-      
-      // ...
-    }).then(() => {
+
+
 
 setTimeout(() => {
-
-  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
-    name : this.name,
-    email : this.email,
-    number : this.number,
-    cmsTokenId : this.cmsTokenId,
-    myTokenId : this.notification.token,
-    image : this.image
-  })
-       console.log("Logged in");
-   this.reg()
-console.log("1111111111111111111111", firebase.auth().currentUser.email);
-
-}, 2000)
  
+ if (this.tattooForm.valid ) {
+
+
+   firebase.firestore().collection("Admin").onSnapshot(data => {
+     data.forEach(item => {
+       this.cmsTokenId = item.data().tokenId;
+       console.log("sdsddsd ", this.cmsTokenId);
+       
+     })
+   })
+   
+
+ firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(( error) =>{
+   // Handle Errors here.
+
+this.log()
+   // var errorCode = error.code;
+   // var errorMessage = error.message;
+   //this.log2();
+   
+//     cmsTokenId : this.cmsTokenId,
+//  myTokenId : this.notification.token,
+   console.log("Email already exist");
+   
+   // ...
+
+ }).then(() => {
+setTimeout(() => {
+this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
+ name : this.name,
+ email : this.email,
+ number : this.number,
+
+ image : this.image
+})
+    console.log("Logged in");
+    this.loader=true;
   
-    });
-  }
-  
-  this.loader = false;
-   }, 3000);
-   this.dismiss()
-   this.modalController.dismiss({
-    'dismissed': true
-  });
+ setTimeout(() => {
+   this.loader = true;
+}, 1000);
+this.reg()
+
+this.dismiss()
+this.modalController.dismiss({
+ 'dismissed': true
+}); 
+
+console.log("1111111111111111111111", firebase.auth().currentUser.email);
+}, 2000)
+
+ });
+ 
+}
+
+this.loader = false;
+}, 3000);
+/* this.dismiss()
+this.modalController.dismiss({
+ 'dismissed': true
+}); */
   
 
   if(this.MyValue != 0){
@@ -129,6 +156,11 @@ console.log("1111111111111111111111", firebase.auth().currentUser.email);
   
 
   this.DeliverDataService.checkValue = 0;
+
+  
+ 
+
+
   }
 
 
@@ -184,4 +216,14 @@ const alert = await this.AlertController.create({
 });
 alert.present();
 }
+async log(){
+  const alert = await this.AlertController.create({
+    header: "Registration failed",
+    subHeader: "",
+    message: "Email address alredy exist login",
+    buttons: ['OK']
+  });
+  alert.present();
+  
+  }
 }

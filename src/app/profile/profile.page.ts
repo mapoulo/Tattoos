@@ -20,6 +20,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 })
 export class ProfilePage implements OnInit {
   respnses=[]
+  key = ""
+  uid = ""
   split: boolean = false;
   splitDiv: any = document.getElementsByClassName('split-pane');
   describeDiv: any = document.getElementsByClassName('details');
@@ -39,7 +41,9 @@ export class ProfilePage implements OnInit {
   }
   custom: boolean = false;
   customDiv:any = document.getElementsByClassName('customizedTDiv');
-  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(public alertCtrl: AlertController,private DeliverDataService: DeliverDataService, private toastController: ToastController, public fileOpener : FileOpener, public plt : Platform, private rout: Router, private modalController: ModalController, private rendered: Renderer2, public fileTransfer : FileTransferObject, public file : File ,  private transfer: FileTransfer, private render: Renderer2)  { 
+ 
+    this.respnses = this.DeliverDataService.AcceptedData; }
   loader = true;
   User=[];
   email: string;
@@ -47,8 +51,10 @@ export class ProfilePage implements OnInit {
   Request=[];
   Bookings=[];
   startingDate;
+  MyMessages = []
   endingDate;
   Response=[];
+  Messages=[] 
   ViewMore=[];
   userID :string;
   name = "";
@@ -68,16 +74,76 @@ export class ProfilePage implements OnInit {
   MyNotifications = 0;
   Customized=[];
   db = firebase.firestore();
+  Aid = ""
   
   ngOnInit() {
-    this.showProfile();
-    setTimeout(() => {
-      this.loader = false;
-    }, 1000);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+          this.MyImage = data.data().image
+      })
+  
+      
+      this.showProfile();
+      setTimeout(() => {
+        this.loader = false;
+      }, 1000);
+  
+      this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").onSnapshot(data => {
+  
+  
+        let obj = {aid : "", data : {}}
+        this.MyMessages = []
+  
+        data.forEach(item => {
+          console.log("Id  dddddddd ",  item.id);
+          obj.aid = item.id
+          obj.data = item.data()
+          // this.Aid = item.data().auid
+              this.MyMessages.push(obj)
+              obj = {aid : "", data : {}}
+        })
+      })
+
+      }else {
+        console.log('Not logied In');
+        
+      }
+    })
+  
+   
   }
 
 
+ async DeleteMessage(key){
+    console.log("dddddsdsd ", key);
 
+   
+    
+    const alert = await this.alertCtrl.create({
+      header: 'DELETE!',
+      message: '<strong>Are you sure you want to delete this message?</strong>',
+      buttons: [
+        {
+          text: 'Cancel',
+          
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        }, {
+          text: 'Delete',
+          handler: data => {
+         
+            this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").doc(key).delete()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
 
   changeListener(event): void {
@@ -118,11 +184,14 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
   showProfile(){
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.presentToast('You have logged in Successfully')
+  
+
+       
+        /* this.presentToast('You have logged in Successfully') */
         this.showProfile1 = true;
         this.email=firebase.auth().currentUser.email;
+        this.userID=firebase.auth().currentUser.uid;
+        
         
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
           data.forEach(a => {
@@ -148,14 +217,11 @@ export class ProfilePage implements OnInit {
           })
         })
         
-        
-      
-      }else {
-        this.showProfile1 = false;
-      }
-    })
    }
+
+
    seeDecribe() {
+
      if(this.decribe) {
       this.arrows = 'arrow-forward';
        this.render.setStyle(this.describeDiv[0], 'right', '0%');
@@ -168,6 +234,7 @@ export class ProfilePage implements OnInit {
        this.decribe = true;
      }
     /*  this.arrows = 'arrow-back'; */
+
    }
  
   
@@ -185,7 +252,10 @@ export class ProfilePage implements OnInit {
       }, 500);
     }
   }
+
+
   customTattoos() {
+
     this.custom = !this.custom;
      this.loader = true;
      setTimeout(() => {
@@ -202,7 +272,10 @@ export class ProfilePage implements OnInit {
        
       }, 500);
     }
+
   }
+
+
   async CreateAccount(){
     this.loader = true;
     this.split = false;
@@ -212,7 +285,7 @@ export class ProfilePage implements OnInit {
     let modal = await this.modalController.create({
       component : RegisterPage
     })
-    this.showProfile();
+
     return await modal.present();
   }
   async Login(){
@@ -228,7 +301,7 @@ export class ProfilePage implements OnInit {
         component : SignInPage,
       })
       
-      this.showProfile();
+      
       return await modal.present();
     
   
@@ -254,6 +327,7 @@ export class ProfilePage implements OnInit {
       console.log("Images  ", this.MyImage);
       
       setTimeout(() => {
+        //gfjgfhgfhgfhgfgf
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
           name :this.Myname,
         
@@ -312,12 +386,46 @@ export class ProfilePage implements OnInit {
     
   ionViewWillEnter(){
    
+    //Display Messages
+    
+ 
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
+        this.showProfile();
+
+        this.showProfile1 = true;
+        this.db.collection("Messages").doc(firebase.auth().currentUser.uid).collection("Message").onSnapshot(data => {
+       
+          data.forEach(i => {
+            this.Messages=[];
+            data.forEach(i => {
+             
+              if(i.exists){
+                // if(i.data().bookingState === "Accepted"){
+                  
+                 
+                  this.Messages.push(i.data());
+                 // this.size=  this.Messages.length;
+                  
+                // console.log("messages",this.Messages)
+                  //this.date=i.data().startdate;
+                  
+               
+                 
+                // }
+               
+              }
+            })
+           
+            
+          })
+        })
         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
           this.Myname = item.data().name;
           this.Mynumber = item.data().number;
+          this.MyImage=item.data().image;
           
         })
         this.email=firebase.auth().currentUser.email;
@@ -346,133 +454,124 @@ export class ProfilePage implements OnInit {
           })
         })
         
-        
-    
-      }
-    })
+        this.email=firebase.auth().currentUser.email;
+       //  console.log("Your  pb data ", Bookings);
+       console.log("Your pb here is ", firebase.auth().currentUser.uid);
+       console.log("Your email here is ", firebase.auth().currentUser.email);
+      // this.User.push(item.data());
+         
+         
          //User's details
-         this.email=firebase.auth().currentUser.email;
-   
-         this.db.collection("Bookings").onSnapshot(data => {
-        
-          
-           data.forEach(item => {
-             
-             if(item.exists){
-             
-               if(item.data().email === this.email){
-                this.DeliverDataService.name = item.data().name;
-                this.name = item.data().name;
-                this.image = item.data().image;
-                 this.User.push(item.data());
-              
-                 this.User=[];
-                 console.log("Testing",item.data().name);
+           this.email=firebase.auth().currentUser.email;
+           this.db.collection("Bookings").onSnapshot(data => {         
+             data.forEach(item => {
+               if(item.exists){
+                 if(item.data().email === this.email){
+                   
+                   this.User.push(item.data());
+                   console.log("Testing",this.User);
+                 }
                }
+             })
+           })
+         
+         
+          // this.Date;
+         //Response  
+       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+         data.forEach(i => {
+           this.Response=[];
+           data.forEach(i => {
+            
+             if(i.exists){
+               if(i.data().bookingState === "Accepted"){
+                 
+                
+                 this.Response.push(i.data());
+                 this.size=  this.Response.length;
+                 
+                 //this.date=i.data().startdate;
+                 
+              
+                
+               }
+              
              }
            })
+     
+          
+           
          })
-       
-      
-    if(firebase.auth().currentUser){
-    //  console.log("Your  pb data ", Bookings);
-      console.log("Your pb here is ", firebase.auth().currentUser.uid);
-      console.log("Your email here is ", firebase.auth().currentUser.email);
-     // this.User.push(item.data());
-        
-        
-        //User's details
-          this.email=firebase.auth().currentUser.email;
-          this.db.collection("Bookings").onSnapshot(data => {         
-            data.forEach(item => {
-              if(item.exists){
-                if(item.data().email === this.email){
-                  
-                  this.User.push(item.data());
-                  console.log("Testing",this.User);
-                }
-              }
-            })
-          })
-        
-        
-         // this.Date;
-        //Response  
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
-       
-        data.forEach(i => {
-          this.Response=[];
-          data.forEach(i => {
-           
-            if(i.exists){
-              if(i.data().bookingState === "Accepted"){
-                
-               
-                this.Response.push(i.data());
-                this.size=  this.Response.length;
-                
-                //this.date=i.data().startdate;
-                
-             
-               
-              }
-             
-            }
-          })
+       })
+   //Pending
+   this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+     this.Request=[];
+     this.PendingSize = 0;
     
+       data.forEach(i => {
+         if(i.exists){
+           if(i.data().bookingState === "waiting"){
+            
+             console.log("ewewew ", i.data());
+             this.Request.push(i.data());
+           
+             this.PendingSize =  this.Request.length;
+           }
+         }
+       })
+       
+   })
+   //Decline
+   this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
+     this.Decline=[];
+     this.DeclineSize = 0;
+    
+       data.forEach(i => {
+         if(i.exists){
+           if(i.data().bookingState === "Decline"){
+            
+             console.log("DeclineSize ", i.data());
+             this.Decline.push(i.data());
+           
+             this.DeclineSize =  this.Decline.length;
+           }
+         }
+       })
+       
+   })
+     
+      //Customized tattoo
+      this.Customized=[];
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
+        this.Customized=[];
+      
+         data.forEach(i => {
+           if(i.exists){
+             if(i.data().field === "Customized"){
+              
+               console.log("ewewew ", i.data());
+               this.Customized.push({id: i.id, dataTattoo: i.data()});
+             
+              
+             }
+           }
+         })
+   
          
-          
-        })
-      })
-      
-  //Pending
-  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-    this.Request=[];
-    this.PendingSize = 0;
    
-      data.forEach(i => {
-        if(i.exists){
-          if(i.data().bookingState === "waiting"){
-           
-            console.log("ewewew ", i.data());
-            this.Request.push(i.data());
-          
-            this.PendingSize =  this.Request.length;
-          }
-        }
-      })
-      
-  })
-  //Decline
-  this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
-    this.Decline=[];
-    this.DeclineSize = 0;
-   
-      data.forEach(i => {
-        if(i.exists){
-          if(i.data().bookingState === "Decline"){
-           
-            console.log("DeclineSize ", i.data());
-            this.Decline.push(i.data());
-          
-            this.DeclineSize =  this.Decline.length;
-          }
-        }
-      })
-      
-  })
-    
-     //Customized tattoo
-     this.Customized=[];
-     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
-       this.Customized=[];
+     })
+     //view More
+     this.ViewMore=[];
+     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+       this.ViewMore=[];
+       
      
         data.forEach(i => {
           if(i.exists){
             if(i.data().field === "Customized"){
-             
+           
               console.log("ewewew ", i.data());
-              this.Customized.push({id: i.id, dataTattoo: i.data()});
+              this.ViewMore.push({id: i.id, dataTattoo: i.data()});
             
              
             }
@@ -482,32 +581,23 @@ export class ProfilePage implements OnInit {
         
   
     })
-    //view More
-    this.ViewMore=[];
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-      this.ViewMore=[];
-      
-    
-       data.forEach(i => {
-         if(i.exists){
-           if(i.data().field === "Customized"){
-          
-             console.log("ewewew ", i.data());
-             this.ViewMore.push({id: i.id, dataTattoo: i.data()});
-           
-            
-           }
-         }
-       })
- 
+      }
+    })
+         //User's details
+         
+   
+        
        
+      
  
-   })
-  }
   
 }
+
+
 showTattoo(item) {
-  console.log(item);
+  console.log("wwwwwwwww",item);
+  this.key = item.id
+  this.uid = item.dataTattoo.uid
   this.showCustom.name_t = item.dataTattoo.name;
   this.showCustom.breadth = item.dataTattoo.breadth;
   this.showCustom.length = item.dataTattoo.length;
@@ -516,8 +606,11 @@ showTattoo(item) {
   this.showCustom.id = item.dataTattoo.id
   
 }
+
 async DeleteData() {
-  console.log();
+
+  console.log("key", this.key);
+  console.log("uid", this.uid);
   
   const alert = await this.alertCtrl.create({
     header: 'DELETE!',
@@ -532,12 +625,20 @@ async DeleteData() {
       }, {
         text: 'Delete',
         handler: data => {
-          this.db.collection("Bookings").doc().delete();
-          
+          this.db.collection("Bookings").doc(this.uid ).collection("Requests").doc(this.key).delete()
+          this.showCustom.name_t = "";
+          this.showCustom.breadth = "";
+          this.showCustom.length = "";
+          this.showCustom.image_t = "";
+          this.showCustom.desc = "";
+          this.showCustom.id = "";
+          this.seeDecribe()
         }
       }
     ]
   });
   await alert.present();
 }
+
+
 }

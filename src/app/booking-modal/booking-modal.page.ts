@@ -7,6 +7,7 @@ import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms'
 import { SuccessPagePage } from '../success-page/success-page.page';
 import { SuccessPagePageModule } from '../success-page/success-page.module';
 import { NotificationsService } from '../notifications.service';
+import { AlertController } from '@ionic/angular';
 
 
 
@@ -26,9 +27,10 @@ export class BookingModalPage implements OnInit {
   Myname = ""
   Mynumber = ""
   cmsTokenId = ""
+  userImage = ""
 
-    Length : number ;
-    Breadth : number;
+    Length : number = 1;
+    Breadth : number = 1;
     
     describe = false;
     describeDiv = document.getElementsByClassName('description');
@@ -60,7 +62,7 @@ export class BookingModalPage implements OnInit {
 
  
 
-  constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, private render: Renderer2) { 
+  constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, public alertController: AlertController,  private render: Renderer2) { 
   this.tattooForm = this.fb.group({
     Length: new FormControl('', Validators.compose([Validators.required])),
     Breadth: new FormControl('', Validators.compose([Validators.required])),
@@ -68,6 +70,35 @@ export class BookingModalPage implements OnInit {
 }
   ngOnInit() {
 
+
+    if(firebase.auth().currentUser){
+
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+
+        this.userImage = data.data().image
+        console.log("Image ", this.userImage);
+        
+      })
+
+      setTimeout(() => {
+
+      
+  
+        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
+          email : this.Myemail,
+          image  : this.Myimage,
+          name  : this.Myname ,
+          number  : this.Mynumber,
+          tokenId : this.notifications.token,
+          cmsTokenId : this.cmsTokenId ,
+          myTokenId : this.notifications.token,
+          
+  
+    })
+  
+    
+      }, 4000);
+     }
     
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
@@ -150,102 +181,95 @@ export class BookingModalPage implements OnInit {
 
 
     this.loader = true;
-   this.notifications.requestPermission();
+  //  this.notifications.requestPermission();
 
    console.log("The key Is here ", this.notifications.token);
    
   
    
-   if(firebase.auth().currentUser){
-
-  
-
-    setTimeout(() => {
-
-
-  
-
-      
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
-        email : this.Myemail,
-        image  : this.Myimage,
-        name  : this.Myname ,
-        number  : this.Mynumber,
-        tokenId : this.notifications.token,
-        cmsTokenId : this.cmsTokenId ,
-        myTokenId : this.notifications.token
-
-  })
-    }, 4000);
-   }
 
 
 
-    setTimeout(() => {
+
+    setTimeout(async () => {
       if (this.tattooForm.valid ) {
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+
+        if(this.Length != 0 && this.Breadth != 0){
+
+
+          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
     
                 
-          category : this.category,
-          description : this.description,
-          image : this.image,
-         startPrice : this.startPrice,
-         endPrice : this.endPrice,
-          tattoName: this.name,
-          breadth : this.Breadth,
-          length : this.Length,
-          email : firebase.auth().currentUser.email,
-          uid : firebase.auth().currentUser.uid,
-          customerName : this.Cname,
-          number : this.number,
-          bookingState : 'waiting',
-          field : "Booking",
-          tokenId : this.notifications.token,
-          cmsTokenId : this.cmsTokenId 
-    
-    
-        }).then( async() => {
-    
-          console.log("Your Booking is successful");
-          const modal = await this.modalController.create({
-            component: SuccessPagePage
+            category : this.category,
+            description : this.description,
+            image : this.image,
+           startPrice : this.startPrice,
+           endPrice : this.endPrice,
+            tattoName: this.name,
+            breadth : this.Breadth,
+            length : this.Length,
+            email : firebase.auth().currentUser.email,
+            uid : firebase.auth().currentUser.uid,
+            customerName : this.Cname,
+            number : this.number,
+            bookingState : 'waiting',
+            field : "Booking",
+            tokenId : this.notifications.token,
+            cmsTokenId : this.cmsTokenId ,
+            userImage : this.userImage
+      
+      
+          }).then( async() => {
+      
+            console.log("Your Booking is successful");
+            const modal = await this.modalController.create({
+              component: SuccessPagePage
+            });
+            return await  modal.present();
+      
+          })
+      
+          this.db.collection("Requests").doc().set({
+            category : this.category,
+            description : this.description,
+            image : this.image,
+            startPrice : this.startPrice,
+            endPrice : this.endPrice,
+            tattoName: this.name,
+            breadth : this.Breadth,
+            length : this.Length,
+            email : firebase.auth().currentUser.email,
+            uid : firebase.auth().currentUser.uid,
+            customerName : this.Cname,
+            number : this.number,
+            bookingState : 'waiting',
+            field : "Booking",
+            cmsTokenId : this.cmsTokenId 
+      
+          })
+      
+          this.modalController.dismiss({
+            'dismissed': true
           });
-          return await  modal.present();
-    
-        })
-    
-        this.db.collection("Requests").doc().set({
-          category : this.category,
-          description : this.description,
-          image : this.image,
-          startPrice : this.startPrice,
-          endPrice : this.endPrice,
-          tattoName: this.name,
-          breadth : this.Breadth,
-          length : this.Length,
-          email : firebase.auth().currentUser.email,
-          uid : firebase.auth().currentUser.uid,
-          customerName : this.Cname,
-          number : this.number,
-          bookingState : 'waiting',
-          field : "Booking",
-          cmsTokenId : this.cmsTokenId 
-    
-        })
-    
-        this.modalController.dismiss({
-          'dismissed': true
-        });
+
+        }else{
+          const alert = await this.alertController.create({
+            header: '',
+            subHeader: '',
+            message: 'The legnth and bredth cannot be zero ',
+            buttons: ['OK']
+          });
+      
+          await alert.present();
+        }
+        
       }
 
       this.loader = false;
       
     }, 2000);
  
-  
 
-
- 
   }
 
   dismiss() {

@@ -11,6 +11,8 @@
     height: 5px;
  
   }
+
+
   
   /* Track */
   ::-webkit-scrollbar-track {
@@ -162,6 +164,11 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
+    & > * {
+        transition: 500ms;
+    }
+    
     
 }
 

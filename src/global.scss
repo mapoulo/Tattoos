@@ -74,12 +74,18 @@ p, h1, h2,h3,h4,h5,h6,small {
 .fileContainer [type=file] {
   cursor: pointer;
 }
-
+.resetModal .modal-wrapper {
+  --width: 20%;
+  --height: 30%;
+}
     
 @media only screen and (max-width: 600px) {
-    .modalNotification .modal-wrapper {
-      width: 100%;
-    }
+  .modalNotification .modal-wrapper {
+    width: 100%;
+  }
+  .modalNotification .modal-wrapper {
+    width: 100%;
+  }
   }
   @media only screen and (min-width: 600px) {
     .modalNotification .modal-wrapper {

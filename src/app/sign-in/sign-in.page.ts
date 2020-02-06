@@ -8,6 +8,7 @@ import * as firebase from "firebase";
 import { Router } from '@angular/router';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { DeliverDataService } from '../deliver-data.service';
+import { ResetPasswordPage } from '../reset-password/reset-password.page';
 
 
 
@@ -106,6 +107,8 @@ export class SignInPage implements OnInit {
          this.Router.navigateByUrl('/')
      
         }).catch(error => {
+
+          this.log2();
      
          this.modalController.dismiss({
            'dismissed': true
@@ -118,11 +121,11 @@ export class SignInPage implements OnInit {
        });
      
          }
-
+        //  this.log2()
          this.loader = false;
      }, 1000);
 
-
+     
 
   }
 
@@ -142,6 +145,15 @@ export class SignInPage implements OnInit {
     })
    }
  
+   async resetPassword(){
+    let modal = await this.modalController.create({
+      component : ResetPasswordPage,
+      cssClass: 'resetModal'
+    })
+    
+    return await modal.present();
+
+   }
 
   async CreateAccount(){
 
@@ -151,6 +163,17 @@ export class SignInPage implements OnInit {
     
     return await modal.present();
   }
+
+  async log2(){
+    const alert = await this.AlertController.create({
+      header: "Login Failed",
+      subHeader: "",
+      message: "Please Check your Password and Email",
+      buttons: ['OK']
+    });
+    alert.present();
+    
+    }
   async log(){
     const alert = await this.AlertController.create({
       header: "",

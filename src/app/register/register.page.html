@@ -1,4 +1,5 @@
 <ion-header translucent no-border>
+
   <ion-toolbar>
     
     <ion-title text-right style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</ion-title>
@@ -7,10 +8,12 @@
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content fullscreen padding>
+<ion-content fullscreen>
   <form   [formGroup]="tattooForm">
   <main class="main">
     <div class="loader" *ngIf="loader">
@@ -63,7 +66,8 @@
 
                   <ion-item class="item" style="margin-bottom: .5em;">
                     <ion-label color="primary" position="floating">Phone Number</ion-label>
-                    <ion-input autocorrect="on" autofocus="on" clearInput="true" type="tel" formControlName="number" name="name" [(ngModel)]="number" placeholder="Enter Phone number" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                    <ion-input  autocorrect="on" minlength=10 maxlength=12 autofocus="on" clearInput="true" type="tel" formControlName="number" name="name" [(ngModel)]="number" clearOnEdit="true" color="primary" inputmode="text" required="true" value="+27">                     
+                    </ion-input>
                     <ion-icon name="call" size="small" color="primary" slot="end"></ion-icon>
                       </ion-item>
                     <div class="error" *ngFor="let validate of validation_messages.number">
@@ -85,11 +89,11 @@
                       
                       <ion-item class="item" style="margin-bottom: .5em;">
                         <ion-label color="primary" position="floating">Password</ion-label>
-                        <ion-input autocorrect="on" autofocus="on" clearInput="true" type="password" formControlName="password" name="name" [(ngModel)]="password" placeholder="Enter password" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                        <ion-input autocorrect="on" minlength=4 maxlength=6 autofocus="on" clearInput="true" type="password" formControlName="password" name="name" [(ngModel)]="password" placeholder="Enter password" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
                         <ion-icon name="lock" size="small" color="primary" slot="end"></ion-icon>
                           </ion-item>                        
                           <div class="error" *ngFor="let validate of validation_messages.password">
-                            <div class="messages" *ngIf="tattooForm.get('password').hasError(validate.type) && (tattooForm.get('password').dirty || tattooForm.get('password').touched)">
+                            <div class="messages" *ngIf="tattooForm.get('password').hasError(validate.type) &&  (tattooForm.get('password').dirty || tattooForm.get('password').touched)">
                               {{validate.message}}
                           </div> 
                         </div>
