@@ -125,9 +125,9 @@ export class NotificationsPage implements OnInit {
       customerName:obj.customerName,
       bookingState : "Decline",
       auId : obj.auId,
-      image : obj.image,
-      customerName : obj.customerName,
-      number : obj.number
+      image : obj.image
+      // customerName : obj.customerName,
+      // number : obj.number
     })
 
     console.log("updateDecline successfully");
@@ -143,8 +143,8 @@ export class NotificationsPage implements OnInit {
       bookingState : "Decline",
       auId : obj.auId,
       image : obj.image,
-      customerName : obj.customerName,
-      number : obj.number
+      // customerName : obj.customerName,
+      // number : obj.number
 
 
     })
