@@ -11,7 +11,7 @@
       <div class="small-modal-edit-profile">
         <div class="close-btn">
           <ion-fab-button mode="ios" color="dark" size="small" class="close-btn" fill="clear" (click)="modalAnimate()">
-            <ion-icon name="close"></ion-icon>
+            <ion-icon name="ios-close"></ion-icon>
           </ion-fab-button>
         </div>
        
@@ -191,7 +191,7 @@
               <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
               <div class="custom-card-container" >
                 <div class="messages" *ngIf="Customized.length == 0">
-                  <p>You do not have a custom tattoo</p>
+                  <p style="text-align: center;">You do not have a custom tattoo</p>
                 </div>
                 <div class="custom-card" *ngFor = "let item of Customized">
                   <img src="{{item.dataTattoo.image}}" alt="">
@@ -199,7 +199,7 @@
               
               </div>
               
-              <div class="more" *ngIf="Customized">
+              <div class="more" *ngIf="Customized.length > 0">
                 <ion-button mode="ios" fill="clear" slot="icon-only" size="small" expand="block" color="secondary" (click)="customTattoos()">View More</ion-button>
               </div>
             </div>

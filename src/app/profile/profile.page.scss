@@ -857,6 +857,19 @@ ion-button.explore {
 
 @media only screen and (max-width: 600px) {
 
+    .fileContainer {
+        padding: .6em !important;
+        font-size: 70%;
+    }
+
+    p, ion-label, ion-segment {
+        font-size: 70%;
+    }
+
+    h4 {
+        font-size: 90%;
+    }
+
   
     .modal {
         .small-modal-edit-profile{
