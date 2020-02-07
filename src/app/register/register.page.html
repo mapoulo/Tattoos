@@ -66,7 +66,7 @@
 
                   <ion-item  mode="ios" class="item" style="margin-bottom: .5em;">
                     <ion-label  mode="ios" color="primary" position="floating">Phone Number</ion-label>
-                    <ion-input   mode="ios" autocorrect="on" minlength=10 maxlength=12 autofocus="on" clearInput="true" type="tel" formControlName="number" name="name" [(ngModel)]="number" clearOnEdit="true" color="primary" inputmode="text" required="true" value="+27">                     
+                    <ion-input   mode="ios" autocorrect="on" minlength=10 maxlength=12 autofocus="on" type="tel" clearInput="true" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));" formControlName="number" name="name" [(ngModel)]="number" clearOnEdit="true" color="primary" inputmode="text" required="true" value="+27">                     
                     </ion-input>
                     <ion-icon  mode="ios" name="call" size="small" color="primary" slot="end"></ion-icon>
                       </ion-item>
@@ -89,7 +89,7 @@
                       
                       <ion-item  mode="ios" class="item" style="margin-bottom: .5em;">
                         <ion-label  mode="ios" color="primary" position="floating">Password</ion-label>
-                        <ion-input  mode="ios" autocorrect="on" minlength=4 maxlength=6 autofocus="on" clearInput="true" type="password" formControlName="password" name="name" [(ngModel)]="password" placeholder="Enter password" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                        <ion-input  mode="ios" autocorrect="on" minlength=4 maxlength=15 autofocus="on" clearInput="true" type="password" formControlName="password" name="name" [(ngModel)]="password" placeholder="Enter password" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
                         <ion-icon  mode="ios" name="lock" size="small" color="primary" slot="end"></ion-icon>
                           </ion-item>                        
                           <div class="error" *ngFor="let validate of validation_messages.password">

@@ -52,7 +52,7 @@
                 <ion-item>
                   <ion-label position="floating">Phone Number</ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
-                  <ion-input type="tel" maxLength="12"  [(ngModel)]="Mynumber"></ion-input>
+                  <ion-input minlength=10 maxlength=12 autofocus="on" type="tel" clearInput="true" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"  [(ngModel)]="Mynumber"></ion-input>
                 </ion-item>
                
               
