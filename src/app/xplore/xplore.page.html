@@ -238,7 +238,7 @@
       </div>
       <div class="scroll-container">
         <div class="scroll-list">
-          <div class="header-scroll"><h1>Sketched Tattoos</h1>
+          <div class="header-scroll"><h1>Portraits Tattoos</h1>
             
           </div>
           <div class="scroll-item">
@@ -262,7 +262,7 @@
        
 
         <div class="scroll-list">
-          <div class="header-scroll"><h1>Previous Work Tattoos</h1>
+          <div class="header-scroll"><h1>Art Works  Tattoos</h1>
             
           </div>
           <div class="scroll-item">
@@ -284,7 +284,28 @@
           </div>
         </div>
        
-      
+        <div class="scroll-list">
+          <div class="header-scroll"><h1>Letters Tattoos</h1>
+            
+          </div>
+          <div class="scroll-item">
+            <div class="scroll-key" *ngFor="let tattoo of Letters">
+           
+              <div class="scroll-value">
+                <img src="{{tattoo.image}}" alt="">
+                <div class="info-scroll">
+                  <div class="price">
+                    <p class="price-tag" color="success">{{tattoo.pricerange | currency: '&#82;'}}</p>
+                    <p class="ion-text-center">{{ tattoo.name}}</p>
+                    <p class="describe">{{tattoo.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque velit impedit beatae dolores ducimus voluptatibus nihil harum delectus blanditiis eum hic, nam veritatis, eaque rem architecto tempora nesciunt eos recusandae?</p> </div>
+                    <div class="book-btn">
+                      <ion-button expand="block" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         
       </div>
       

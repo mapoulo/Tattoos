@@ -65,7 +65,7 @@ tattoo = {
   Design = [];
   Sketch = [];
   PreviouseWork = [];
-  porpular = []
+  Letters = []
   respnses = []
   AcceptedData = [];
 
@@ -417,20 +417,11 @@ tattoo = {
 
   ngOnInit() {
 
-    
-
-   
-
-    
-    
-
-    
     this.db.collection("Tattoo").onSnapshot(data => {
-
       this.Sketch = []
       data.forEach(item => {
         if(item.exists){
-          if(item.data().categories === "Sketch/design"){
+          if(item.data().categories === "Portraits"){
             
            this.Sketch.push(item.data());
           //  console.log("11111111111111111",this.Sketch);
@@ -442,7 +433,7 @@ tattoo = {
       this.PreviouseWork = [];
       data.forEach(item => {
         if(item.exists){
-          if(item.data().categories === "Previous work"){
+          if(item.data().categories === "Art Works"){
             
            this.PreviouseWork.push(item.data());
          
@@ -453,15 +444,14 @@ tattoo = {
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
         if(item.exists){
-          if(item.data().categories === "Sketch/design"){
+          if(item.data().categories === "Letters"){
             
-           this.porpular.push(item.data());
+           this.Letters.push(item.data());
        
           }
         }
       })
     })
-            
 }
 
 
