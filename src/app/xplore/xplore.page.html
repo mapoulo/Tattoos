@@ -180,7 +180,8 @@
       </div>
 
       <div class="list-split-pane">
-        <ion-button mode="ios" class="explore" fill="clear" (click)="addClasseAnimates()"  expand="block" color="light" routerLink="/xplore">Explore</ion-button>
+        <ion-button mode="ios"  fill="clear" *ngIf="!showProfile1" (click)="addClasseAnimates()"  expand="block" color="light" routerLink="/">Explore</ion-button>
+        <ion-button mode="ios"  fill="clear" *ngIf="showProfile1" (click)="addClasseAnimates()"  expand="block" color="light" routerLink="/">Home</ion-button>
         <ion-button mode="ios" fill="clear" expand="block" (click)="addClasseAnimates()"  color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button mode="ios" fill="clear" expand="block" (click)="addClasseAnimates()"  color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
         <ion-button mode="ios" fill="clear" expand="block" (click)="addClasseAnimates()"  color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
@@ -203,8 +204,8 @@
           <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
         </div>
         <div class="list">
-          <ion-button  mode="ios" class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
-          <ion-button  mode="ios" class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
+        <ion-button mode="ios" fill="clear" expand="block"  (click)="addClasseAnimates()"    *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+        <ion-button mode="ios"  fill="clear" expand="block"  (click)="addClasseAnimates()"  *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
           <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
           <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
           <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
@@ -262,7 +263,7 @@
        
 
         <div class="scroll-list">
-          <div class="header-scroll"><h1>Art Works  Tattoos</h1>
+          <div class="header-scroll"><h1>Art Works Tattoos</h1>
             
           </div>
           <div class="scroll-item">
@@ -283,23 +284,22 @@
             </div>
           </div>
         </div>
-       
+ 
         <div class="scroll-list">
           <div class="header-scroll"><h1>Letters Tattoos</h1>
             
           </div>
           <div class="scroll-item">
-            <div class="scroll-key" *ngFor="let tattoo of Letters">
-           
+            <div class="scroll-key" *ngFor="let tattoo of Letters;">
               <div class="scroll-value">
                 <img src="{{tattoo.image}}" alt="">
                 <div class="info-scroll">
                   <div class="price">
-                    <p class="price-tag" color="success">{{tattoo.pricerange | currency: '&#82;'}}</p>
+                    <p class="price-tag">{{tattoo.pricerange | currency: '&#82;'}}</p>
                     <p class="ion-text-center">{{ tattoo.name}}</p>
-                    <p class="describe">{{tattoo.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque velit impedit beatae dolores ducimus voluptatibus nihil harum delectus blanditiis eum hic, nam veritatis, eaque rem architecto tempora nesciunt eos recusandae?</p> </div>
+                    <p class="describe">{{tattoo.description}}</p></div>
                     <div class="book-btn">
-                      <ion-button expand="block" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
+                      <ion-button mode="ios" expand="block" size="small" color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
                     </div>
                 </div>
               </div>

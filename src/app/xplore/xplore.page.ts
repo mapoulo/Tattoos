@@ -417,6 +417,13 @@ tattoo = {
 
   ngOnInit() {
 
+    
+
+   
+
+    
+    
+
     this.db.collection("Tattoo").onSnapshot(data => {
       this.Sketch = []
       data.forEach(item => {
@@ -452,6 +459,8 @@ tattoo = {
         }
       })
     })
+
+            
 }
 
 

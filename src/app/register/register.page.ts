@@ -7,6 +7,7 @@ import { ViewController } from '@ionic/core';
 import { ModalController,AlertController, ActionSheetController } from '@ionic/angular';
 import { BookingModalPage } from '../booking-modal/booking-modal.page';
 import { DeliverDataService } from '../deliver-data.service';
+import { Router } from '@angular/router';
 // import { NotificationsService } from '../notifications.service';
 
 
@@ -44,13 +45,13 @@ export class RegisterPage implements OnInit {
     ],
     'password': [
       {type: 'required', message: 'Password is required.'},
-      {type: 'maxlength', message: 'Password must be minimum of 4 and maximum of  6 char'},
+      {type: 'maxlength', message: 'Password must be minimum of 4 and maximum of  15 char'},
     ]
 
   }
   
   loader: boolean = false;
-  constructor(public DeliverDataService : DeliverDataService,  private modalController: ModalController, public actionSheetController: ActionSheetController, private fb: FormBuilder, private AlertController: AlertController) { }
+  constructor(public Router : Router,public DeliverDataService : DeliverDataService,  private modalController: ModalController, public actionSheetController: ActionSheetController, private fb: FormBuilder, private AlertController: AlertController) { }
 
   ngOnInit() {
 
@@ -63,7 +64,7 @@ export class RegisterPage implements OnInit {
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
 
      password: new FormControl('', Validators.compose( [Validators.required, 
-      Validators.minLength(4), Validators.maxLength(6)])),
+      Validators.minLength(4), Validators.maxLength(15)])),
 
      
      number: new FormControl('', Validators.compose([Validators.required,
@@ -95,7 +96,34 @@ setTimeout(() => {
  firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(( error) =>{
    // Handle Errors here.
 
-this.log()
+
+
+
+this.modalController.dismiss({
+  'dismissed': true
+  
+ });
+
+
+ setTimeout(() => {
+  this.log()
+ }, 1000);
+ 
+
+ this.redirectToSignin()
+
+
+//  this.modalController.create({
+//   component : SignInPage
+// })
+
+// this.modalController.create({
+//   component : SignInPage
+// });
+
+// return await modal.present();
+
+//this.Router.navigateByUrl('/sign-in')
    // var errorCode = error.code;
    // var errorMessage = error.message;
    //this.log2();
@@ -221,9 +249,28 @@ async log(){
     header: "Registration failed",
     subHeader: "",
     message: "Email address alredy exist login",
-    buttons: ['OK']
+    buttons: ['OK'],
+    
+      
+    
+
+
   });
+
+
   alert.present();
-  
+
+
+
+ 
+  }
+
+  async redirectToSignin(){
+    let modal = await this.modalController.create({
+      component : SignInPage
+    })
+    
+    return await modal.present();
+
   }
 }
