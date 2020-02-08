@@ -48,7 +48,7 @@
     },
     "devDependencies": {
         "@angular-devkit/architect": "~0.801.2",
-        "@angular-devkit/build-angular": "^0.803.23",
+        "@angular-devkit/build-angular": "^0.803.25",
         "@angular-devkit/core": "~8.1.2",
         "@angular-devkit/schematics": "~8.1.2",
         "@angular/cli": "~8.1.2",
@@ -90,7 +90,9 @@
             },
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-file": {},
-            "cordova-plugin-file-opener2": {},
+            "cordova-plugin-file-opener2": {
+                "ANDROID_SUPPORT_V4_VERSION": "27.+"
+            },
             "cordova-plugin-file-transfer": {},
             "cordova-sqlite-storage": {}
         },
@@ -176,6 +178,9 @@
             "platforms": [
                 "android"
             ]
-        }
+        },
+        "platforms": [
+            "android"
+        ]
     }
 }

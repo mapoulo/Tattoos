@@ -33,27 +33,16 @@ export class NotificationsPage implements OnInit {
 
     if(firebase.auth().currentUser){
 
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(i => {
-        i.forEach(a => {
-
-         if(a.data().bookingState === "Accepted"){   
-          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response")
-          .onSnapshot(data => {
-            this.array = []; 
-            data.forEach(item => {
-              if(item.data().bookingState === "Pending"){
-               
-                this.array.push(item.data())
-                // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-              } 
-            })
-          })
-          
-          
-    
-      // return true; 
-         }
-        
+      this.db.collection("Response").onSnapshot(data => {
+        this.array = []
+        data.forEach(item => {
+          let obj = {obj:{}, id : ""}
+          if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending" ){
+              obj.id = item.id
+              obj.obj = item.data()
+              this.array.push(obj)
+              obj = {obj:{}, id : ""}
+          }
         })
       })
     }
@@ -63,46 +52,22 @@ export class NotificationsPage implements OnInit {
 
  
 
-  async Decline(data, i){
+  async Decline(data, i, key){
 
+   
+    // setTimeout(() => {
+      this.array.splice(i, 1);
+    // },2000);
+
+  this.db.collection("Response").doc(key).set({
+  
+    bookingState : "Declined"
     
-    this.array.splice(i, 1);
-
-  let obj = {
-    startingDate : "",
-    endingDate : "",
-    price : "",
-    uid : "",
-    number:"",
-    bookingState : "",
-    auId : "",
-    image : "",
-    customerName:""
-  }
+  }, {merge : true})
       
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(myItem => {       
-        myItem.forEach(doc => {
-          if(doc.data().auId === data.auId){
-            
-          console.log("Declined obj", doc.data());
-          
-          obj.startingDate =  doc.data().startingDate,
-          obj.endingDate =  doc.data().endingDate,
-          obj.price =  doc.data().price,
-          obj.price  =  doc.data().uid,
-          obj.bookingState =  "Pending",
-          obj.auId = doc.data().auId,
-          obj.image =  doc.data().image,
-          obj.customerName = doc.data().customerName,
-          obj.number = doc.data().number
 
 
-          this.updateDecline(doc.data().auId, doc.data());
-
-          }   
-        })
-    
-  })
+ 
 
   const alert = await this.AlertController.create({
     header: "",
@@ -114,42 +79,8 @@ export class NotificationsPage implements OnInit {
 
   }
 
-  updateDecline(auId, obj){
+ 
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").doc(auId).update({
-      startingDate : obj.startingDate,
-      endingDate : obj.endingDate,
-      price : obj.price ,
-      uid : obj.price ,
-      number:obj.number,
-      customerName:obj.customerName,
-      bookingState : "Decline",
-      auId : obj.auId,
-      image : obj.image
-      // customerName : obj.customerName,
-      // number : obj.number
-    })
-
-    console.log("updateDecline successfully");
-
-    this.db.collection("Users").doc().set({
-
-      startingDate : obj.startingDate,
-      endingDate : obj.endingDate,
-      price : obj.price ,
-      uid : obj.price ,
-      number:obj.number,
-      customerName:obj.customerName,
-      bookingState : "Decline",
-      auId : obj.auId,
-      image : obj.image,
-      // customerName : obj.customerName,
-      // number : obj.number
-
-
-    })
-    
-  }
   dismiss() {
     this.modalController.dismiss({
       'dismissed': true
@@ -168,7 +99,7 @@ export class NotificationsPage implements OnInit {
     }
   }
 
-  async Accept(data, i){
+  async Accept(data, i, key){
 
     const alert = await this.AlertController.create({
       header: "",
@@ -183,11 +114,11 @@ export class NotificationsPage implements OnInit {
     this.message = "Accept";
    
 
-    setTimeout(() => {
-      console.log("ACCEPTED DATA");
+    // setTimeout(() => {
+    //   console.log("ACCEPTED DATA");
       this.array.splice(i, 1);
      
-    },2000);
+    // },2000);
     
    
 
@@ -202,72 +133,13 @@ export class NotificationsPage implements OnInit {
       auId : "",
       image : ""
     }
+
+    this.db.collection("Response").doc(key).set({
+      bookingState : "Accepted"
+    }, {merge : true})
         
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(myItem => {       
-          myItem.forEach(doc => {
-            if(doc.data().auId === data.auId){
-              
-            console.log("Declined obj", doc.data());
-            
-            obj.startingDate =  doc.data().startingDate,
-            obj.endingDate =  doc.data().endingDate,
-            obj.price =  doc.data().price,
-            obj.price  =  doc.data().uid,
-            obj.bookingState =  "Pending",
-            obj.auId = doc.data().auId,
-            obj.image =  doc.data().image,doc.data(),
-            obj.customerName = doc.data().customerName,
-            obj.number = doc.data().number
-  
-            this.updateAccept(doc.data().auId, doc.data());
-  
-            }   
-          })
-      
-    })
-
-
-  
   }
 
- 
 
-
-  
-
-
-
-  updateAccept(auId, obj){
-
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").doc(auId).update({
-      startingDate : obj.startingDate,
-      endingDate : obj.endingDate,
-      price : obj.price ,
-      uid : obj.price ,
-      number:obj.number,
-      customerName:obj.customerName,
-      bookingState : "Accepted",
-      auId : obj.auId,
-      image : obj.image
-    })
-
-    console.log("updateAccept successfully");
-    
-    
-    this.db.collection("Users").doc().set({
-
-      startingDate : obj.startingDate,
-      endingDate : obj.endingDate,
-      price : obj.price ,
-      uid : obj.price ,
-      number:obj.number,
-      customerName:obj.customerName,
-      bookingState : "Accepted",
-      auId : obj.auId,
-      image : obj.image
-
-    })
-
-  }
 
 }

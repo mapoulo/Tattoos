@@ -10,6 +10,7 @@ import { ModalController,AlertController, Platform, ToastController } from '@ion
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { timingSafeEqual } from 'crypto';
 
 
 @Component({
@@ -60,6 +61,8 @@ export class ProfilePage implements OnInit {
   name = "";
   Decline=[];
   DeclineSize=0;
+  Pending = []
+  Accepted = []
   image = "";
   size=0;
   PendingSize=0;
@@ -183,39 +186,29 @@ export class ProfilePage implements OnInit {
     });
     toast.present();
   }
-  showProfile(){
-  
 
-       
+
+  showProfile(){
+ 
         /* this.presentToast('You have logged in Successfully') */
         this.showProfile1 = true;
         this.email=firebase.auth().currentUser.email;
         this.userID=firebase.auth().currentUser.uid;
         
-        
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-          data.forEach(a => {
-            if(a.data().bookingState === "Accepted"){ 
-              this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-              .collection("Response")
-              
-              .onSnapshot(myItem => {
-                this. MyNotifications = 0;     
-                myItem.forEach(doc => {
-                  if(doc.data().bookingState === "Pending"){
-                  
-                   this. MyNotifications += 1;
-                   console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-                    // this.array.push(doc.data())
-                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-                  }   
-                })
-            
-          })
-          // return true; 
-             }
+        this.db.collection("Response").onSnapshot(data => {
+          this.MyNotifications  = 0
+          data.forEach(item => {
+            if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending"){
+              this.MyNotifications += 1
+            }
           })
         })
+
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+          this.Myname = data.data().name
+          this.MyImage = data.data().image
+        })
+
         
    }
 
@@ -522,23 +515,34 @@ export class ProfilePage implements OnInit {
        
    })
    //Decline
-   this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").onSnapshot(data => {
-     this.Decline=[];
-     this.DeclineSize = 0;
-    
-       data.forEach(i => {
-         if(i.exists){
-           if(i.data().bookingState === "Decline"){
-            
-             console.log("DeclineSize ", i.data());
-             this.Decline.push(i.data());
-           
-             this.DeclineSize =  this.Decline.length;
-           }
-         }
-       })
-       
-   })
+this.db.collection("Response").onSnapshot(data => {
+  this.Decline = []
+  data.forEach(item => {
+    if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Declined"){
+        this.Decline.push(item.data())
+    }
+  })
+})
+
+
+this.db.collection("Response").onSnapshot(data => {
+  this.Accepted = []
+  data.forEach(item => {
+    if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Accepted"){
+        this.Accepted.push(item.data())
+    }
+  })
+})
+
+
+this.db.collection("Response").onSnapshot(data => {
+  this.Pending = []
+  data.forEach(item => {
+    if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending"){
+        this.Pending.push(item.data())
+    }
+  })
+})
      
       //Customized tattoo
       this.Customized=[];

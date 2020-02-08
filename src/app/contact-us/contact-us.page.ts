@@ -100,12 +100,12 @@ export class ContactUsPage implements OnInit {
       if(user) {
 
         this.showProfile1 = true;
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
-          console.log("User Logged in ", item.data());
-          this.Myname = item.data().name;
-          this.Mynumber = item.data().number;
-          this.Picture=item.data().image;
-          this.email=item.data().email;
+    
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+          this.Myname = data.data().name;
+          this.Mynumber = data.data().number;
+          this.Picture=data.data().image;
+          this.email=data.data().email;
         })
         
 

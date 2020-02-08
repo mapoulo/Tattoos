@@ -136,12 +136,11 @@ this.modalController.dismiss({
 
  }).then(() => {
 setTimeout(() => {
-this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
+this.db.collection("Users").doc(firebase.auth().currentUser.uid).set({
  name : this.name,
  email : this.email,
  number : this.number,
-
- image : this.image
+ image :   this.image 
 })
     console.log("Logged in");
     this.loader=true;
