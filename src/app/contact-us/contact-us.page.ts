@@ -124,7 +124,7 @@ export class ContactUsPage implements OnInit {
   
    
    
-    this.db.collection('Admin').get().then(data => {
+    this.db.collection('Admin').onSnapshot(data => {
        this.Contact = []
       //console.log('tt',this.Tattoos);
       data.forEach(item => {
