@@ -135,38 +135,41 @@
        </div>
        
     </div>
-    <div class="nav-bar">
-      <div  class="menu-btn">
-        <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
-          <ion-icon name="menu"></ion-icon>
-        </ion-button>
-      </div>
-     
-        <div class="logo">
-          <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
-        </div>
-        <div class="list">
-          <ion-button mode="ios" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
-          <ion-button mode="ios" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
-          <!-- <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button> -->
-          <ion-button mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
-          <ion-button mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
-          <ion-button mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
-          <ion-button mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
-          <div class="profile-image explore" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p>{{Myname}}</p>
-            <img *ngIf="!MyImage" src="../../assets/person-icon.jpg"alt="">
-            <img *ngIf="MyImage" src="{{MyImage}}"alt="">
-          </div>
-        </div>
-        <div class="notification" *ngIf="showProfile1">
-          <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
-            <ion-icon name="notifications-outline"></ion-icon>
+    <ion-toolbar color="dark">
+      <div class="nav-bar">
+        <div  class="menu-btn">
+          <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
+            <ion-icon name="menu"></ion-icon>
           </ion-button>
-          <ion-badge class="badge" color="secondary">{{MyNotifications}}</ion-badge>
         </div>
-      
-    </div>
+       
+          <div class="logo">
+            <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+          </div>
+          <div class="list">
+            <ion-button mode="ios" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+            <ion-button mode="ios" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
+            <!-- <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button> -->
+            <ion-button mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
+            <ion-button mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
+            <ion-button mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
+            <ion-button mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+            <div class="profile-image explore" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+              <p>{{Myname}}</p>
+              <img *ngIf="!MyImage" src="../../assets/person-icon.jpg"alt="">
+              <img *ngIf="MyImage" src="{{MyImage}}"alt="">
+            </div>
+          </div>
+          <div class="notification" *ngIf="showProfile1">
+            <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
+              <ion-icon name="notifications-outline"></ion-icon>
+            </ion-button>
+            <ion-badge class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+          </div>
+        
+      </div>
+    </ion-toolbar>
+
     <div class="wrapper-page">
       <div class="wrapper-header">
         <h1>Hi,{{Myname}} </h1>

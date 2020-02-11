@@ -86,14 +86,14 @@
     background: rgba(0, 0, 0, 0.648);
     z-index: 500;
     display: flex;
-   
+    
     justify-content: center;
     align-items: center;
 
 
     .small-modal-edit-profile{
         padding: 1em;
-        flex-basis: 20%;
+        flex-basis: 30%;
        /*  height: 60%; */
         background: rgb(255, 255, 255);
         box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.5),  
@@ -270,7 +270,6 @@ ion-row {
 .nav-bar {
     display: flex;
     flex-basis: 5%;
-    background: #000;
     width: 100%;
     justify-content: space-between;
     align-items: center;
