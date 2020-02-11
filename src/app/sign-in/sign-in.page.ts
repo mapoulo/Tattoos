@@ -39,7 +39,7 @@ export class SignInPage implements OnInit {
     ],
     'password': [
       {type: 'required', message: 'Password is required.'},
-      {type: 'maxlength', message: 'password must be atleast 6 char'},
+      {type: 'maxlength', message: 'password must be less than 16 characters'},
     ]
 
   }
@@ -57,7 +57,7 @@ export class SignInPage implements OnInit {
     this.showProfile();
     this.tattooForm = this.fb.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
-     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(6)]))
+     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(15)]))
     })
   }
   

@@ -117,9 +117,10 @@ export class BookingModalPage implements OnInit {
     })
 
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
+    this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
+      this.userImage = data.data().image;
     })
 
   }
@@ -184,12 +185,6 @@ export class BookingModalPage implements OnInit {
   //  this.notifications.requestPermission();
 
    console.log("The key Is here ", this.notifications.token);
-   
-  
-   
-
-
-
 
     setTimeout(async () => {
       if (this.tattooForm.valid ) {
@@ -197,7 +192,7 @@ export class BookingModalPage implements OnInit {
         if(this.Length != 0 && this.Breadth != 0){
 
 
-          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+          this.db.collection("Bookings").doc().set({
     
                 
             category : this.category,
@@ -229,24 +224,24 @@ export class BookingModalPage implements OnInit {
       
           })
       
-          this.db.collection("Requests").doc().set({
-            category : this.category,
-            description : this.description,
-            image : this.image,
-            startPrice : this.startPrice,
-            endPrice : this.endPrice,
-            tattoName: this.name,
-            breadth : this.Breadth,
-            length : this.Length,
-            email : firebase.auth().currentUser.email,
-            uid : firebase.auth().currentUser.uid,
-            customerName : this.Cname,
-            number : this.number,
-            bookingState : 'waiting',
-            field : "Booking",
-            cmsTokenId : this.cmsTokenId 
+          // this.db.collection("Requests").doc().set({
+          //   category : this.category,
+          //   description : this.description,
+          //   image : this.image,
+          //   startPrice : this.startPrice,
+          //   endPrice : this.endPrice,
+          //   tattoName: this.name,
+          //   breadth : this.Breadth,
+          //   length : this.Length,
+          //   email : firebase.auth().currentUser.email,
+          //   uid : firebase.auth().currentUser.uid,
+          //   customerName : this.Cname,
+          //   number : this.number,
+          //   bookingState : 'waiting',
+          //   field : "Booking",
+          //   cmsTokenId : this.cmsTokenId 
       
-          })
+          // })
       
           this.modalController.dismiss({
             'dismissed': true

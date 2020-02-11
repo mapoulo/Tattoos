@@ -65,7 +65,7 @@ tattoo = {
   Design = [];
   Sketch = [];
   PreviouseWork = [];
-  porpular = []
+  Letters = []
   respnses = []
   AcceptedData = [];
 
@@ -167,7 +167,7 @@ tattoo = {
       if(user) {
 
         this.showProfile1 = true;
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
           this.Myname = item.data().name;
           this.Mynumber = item.data().number;
@@ -207,7 +207,7 @@ tattoo = {
                       this.email=firebase.auth().currentUser.email;
                     }
                     
-                    this.db.collection("Bookings").onSnapshot(data => {         
+                    this.db.collection("Users").onSnapshot(data => {         
                       data.forEach(item => {
                         if(item.exists){
 
@@ -337,60 +337,17 @@ tattoo = {
 
         this.email=firebase.auth().currentUser.email;
         
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-          data.forEach(a => {
-
-            if(a.data().bookingState === "Accepted"){ 
-
-              this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-              .collection("Response")
-              
-              .onSnapshot(myItem => {
-                this. MyNotifications = 0;     
-                myItem.forEach(doc => {
-                  if(doc.data().bookingState === "Pending"){
-
-                              this.name = a.data().name;
-                               this.image = a.data().image;
-                  
-                   this. MyNotifications += 1;
-                   console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-                    // this.array.push(doc.data())
-                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-                  }   
-                })
-            
-          })
-          // return true; 
+         this.db.collection("Response").onSnapshot(data => {
+          this.MyNotifications = 0
+           data.forEach(item => {
+             if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending"){
+               this.MyNotifications += 1
              }
-          })
-        })
+           })
+         })
         
         
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
+        
 
       }else {
         this.showProfile1 = false;
@@ -424,13 +381,11 @@ tattoo = {
     
     
 
-    
     this.db.collection("Tattoo").onSnapshot(data => {
-
       this.Sketch = []
       data.forEach(item => {
         if(item.exists){
-          if(item.data().categories === "Sketch/design"){
+          if(item.data().categories === "Portraits"){
             
            this.Sketch.push(item.data());
           //  console.log("11111111111111111",this.Sketch);
@@ -442,7 +397,7 @@ tattoo = {
       this.PreviouseWork = [];
       data.forEach(item => {
         if(item.exists){
-          if(item.data().categories === "Previous work"){
+          if(item.data().categories === "Art Works"){
             
            this.PreviouseWork.push(item.data());
          
@@ -453,14 +408,15 @@ tattoo = {
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
         if(item.exists){
-          if(item.data().categories === "Sketch/design"){
+          if(item.data().categories === "Letters"){
             
-           this.porpular.push(item.data());
+           this.Letters.push(item.data());
        
           }
         }
       })
     })
+
             
 }
 
@@ -580,7 +536,7 @@ logOut(){
       this.DeliverDataService.dataSaved.endPrice = tattoo.endPrice;
 
       this.tattooDisplay = false;
-      console.log("Sorry no user here");
+    
       const modal = await this.modalController.create({
         component: RegisterPage
       });

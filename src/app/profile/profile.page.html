@@ -52,7 +52,7 @@
                 <ion-item>
                   <ion-label position="floating">Phone Number</ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
-                  <ion-input type="tel" maxLength="12"  [(ngModel)]="Mynumber"></ion-input>
+                  <ion-input minlength=10 maxlength=12 autofocus="on" type="tel" clearInput="true" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"  [(ngModel)]="Mynumber"></ion-input>
                 </ion-item>
                
               
@@ -228,7 +228,7 @@
               <ion-segment-button value="accepted">
                
                 <div class="grow">
-                  <ion-badge color="primary">{{size}}</ion-badge>
+                  <ion-badge color="primary">{{Accepted.length}}</ion-badge>
                   <ion-label>Accepted</ion-label>
                   
                 </div>
@@ -236,7 +236,7 @@
               </ion-segment-button>
               <ion-segment-button  value="declined">
                 <div class="grow">
-                  <ion-badge color="primary" >{{DeclineSize}}</ion-badge>
+                  <ion-badge color="primary" >{{Decline.length}}</ion-badge>
                   <ion-label>Declined</ion-label>
                   
                 </div>
@@ -245,7 +245,7 @@
   
               <ion-segment-button  value="pending">
                 <div class="grow">
-                  <ion-badge color="primary">{{PendingSize}}</ion-badge>
+                  <ion-badge color="primary">{{Pending.length}}</ion-badge>
                   <ion-label>Pending</ion-label>
                   
                 </div>
@@ -259,12 +259,12 @@
           <div class="card-container" [ngSwitch]="category">
             <div class="cardFor" *ngSwitchCase="'accepted'">
 
-              <div class="no-items" *ngIf="Response.length == 0">
+              <div class="no-items" *ngIf="Accepted.length == 0">
                 <p>You have no request <span style="color: green;">accepted</span>  yet</p>
               </div>
               
  
-            <div class="card"  *ngFor = "let item of Response">
+            <div class="card"  *ngFor = "let item of Accepted">
               <div class="card-t">
                 <div class="image-card">
                   <img src="{{item.image}}" alt="">
@@ -317,10 +317,10 @@
   </div> -->
  </div>
  <div class="cardFor" *ngSwitchCase="'pending'">
-  <div class="no-items" *ngIf="Request.length == 0" >
+  <div class="no-items" *ngIf="Pending.length == 0" >
     <p>You have no request <span style="color: rgb(109, 109, 109);">pending</span>   yet</p>
   </div>
-  <div class="card" *ngFor = "let item of Request">
+  <div class="card" *ngFor = "let item of Pending">
     <div class="card-t">
       <div class="image-card">
         <img src="{{item.image}}" alt="">
