@@ -191,44 +191,46 @@
         <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
       </div>
     </aside>
-
-    <div class="nav-bar">
-      <div  class="menu-btn">
-        <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
-          <ion-icon mode="ios" name="menu"></ion-icon>
-        </ion-button>
-      </div>
-     
-        <div class="logo">
-          <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
-        </div>
-        <div class="list">
-          <ion-button  mode="ios" class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
-          <ion-button  mode="ios" class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
-          <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
-          <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
-          <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
-          <ion-button  mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
-          <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p>{{Myname}}</p>
-
-            <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
-
-
-            <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
-            <img *ngIf="Picture" src="{{Picture}}"alt="">
-          </div>
-        </div>
-
-        <div class="notification" *ngIf="showProfile1">
-
-          <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
-            <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
+    <ion-toolbar color="dark">
+      <div class="nav-bar">
+        <div  class="menu-btn">
+          <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
+            <ion-icon mode="ios" name="menu"></ion-icon>
           </ion-button>
-          <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
         </div>
-      
-    </div>
+       
+          <div class="logo">
+            <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+          </div>
+          <div class="list">
+            <ion-button  mode="ios" class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+            <ion-button  mode="ios" class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
+            <ion-button  mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+            <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+              <p>{{Myname}}</p>
+  
+              <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
+  
+  
+              <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
+              <img *ngIf="Picture" src="{{Picture}}"alt="">
+            </div>
+          </div>
+  
+          <div class="notification" *ngIf="showProfile1">
+  
+            <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
+              <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
+            </ion-button>
+            <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+          </div>
+        
+      </div>
+    </ion-toolbar>
+  
     <div class="wrapper-page">
       <div class="wrapper-header">
         
@@ -258,7 +260,27 @@
             </div>
           </div>
         </div>
-        
+        <div class="scroll-list">
+          <div class="header-scroll"><h1>Sketched Tattoos</h1>
+            
+          </div>
+          <div class="scroll-item">
+            <div class="scroll-key" *ngFor="let tattoo of Sketch;">
+              <div class="scroll-value">
+                <img src="{{tattoo.image}}" alt="">
+                <div class="info-scroll">
+                  <div class="price">
+                    <p class="price-tag">{{tattoo.pricerange | currency: '&#82;'}}</p>
+                    <p class="ion-text-center">{{ tattoo.name}}</p>
+                    <p class="describe">{{tattoo.description}}</p></div>
+                    <div class="book-btn">
+                      <ion-button mode="ios" expand="block" size="small" color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
        
 
         <div class="scroll-list">
@@ -283,12 +305,62 @@
             </div>
           </div>
         </div>
-       
+
+          <ion-row justify-content-evenly align-items-center style="padding: 2em; background: rgb(78, 78, 78);">
+            <ion-col size-sm="12" size-md="6" size-lg="3">
+              <ion-card>
+                <ion-item>
+                  <ion-icon name="pin" slot="start"></ion-icon>
+                  <ion-label>ion-item in a card, icon left, button right</ion-label>
+                  <ion-button fill="outline" slot="end">View</ion-button>
+                </ion-item>
+              
+                <ion-card-content>
+                  This is content, without any paragraph or header tags,
+                  within an ion-card-content element.
+                </ion-card-content>
+              </ion-card>
+              
+            </ion-col >
+            <ion-col size-sm="12" size-md="6" size-lg="3">
+              <ion-card>
+                <ion-item>
+                  <ion-icon name="pin" slot="start"></ion-icon>
+                  <ion-label>ion-item in a card, icon left, button right</ion-label>
+                  <ion-button fill="outline" slot="end">View</ion-button>
+                </ion-item>
+              
+                <ion-card-content>
+                  This is content, without any paragraph or header tags,
+                  within an ion-card-content element.
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-sm="12" size-md="6" size-lg="3">
+              <ion-card>
+                <ion-item>
+                  <ion-icon name="pin" slot="start"></ion-icon>
+                  <ion-label>ion-item in a card, icon left, button right</ion-label>
+                  <ion-button fill="outline" slot="end">View</ion-button>
+                </ion-item>
+              
+                <ion-card-content>
+                  This is content, without any paragraph or header tags,
+                  within an ion-card-content element.
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+    
       
         
       </div>
+
+      
       
     </div>
+ 
+  
   </div>
 
   <ion-fab *ngIf="showProfile1" [style.display]="!tattooDisplay ? 'block' : 'none'" vertical="bottom" horizontal="end"  slot="fixed">
@@ -434,5 +506,5 @@
     </div> 
 </div>  -->
  
-</ion-content> 
+</ion-content>
 
