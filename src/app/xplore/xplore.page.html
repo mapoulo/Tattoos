@@ -192,44 +192,46 @@
         <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
       </div>
     </aside>
-
-    <div class="nav-bar">
-      <div  class="menu-btn">
-        <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
-          <ion-icon mode="ios" name="menu"></ion-icon>
-        </ion-button>
-      </div>
-     
-        <div class="logo">
-          <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
-        </div>
-        <div class="list">
-        <ion-button mode="ios" fill="clear" expand="block"  (click)="addClasseAnimates()"    *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
-        <ion-button mode="ios"  fill="clear" expand="block"  (click)="addClasseAnimates()"  *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
-          <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
-          <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
-          <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
-          <ion-button  mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
-          <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-            <p>{{Myname}}</p>
-
-            <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
-
-
-            <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
-            <img *ngIf="Picture" src="{{Picture}}"alt="">
-          </div>
-        </div>
-
-        <div class="notification" *ngIf="showProfile1">
-
-          <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
-            <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
+    <ion-toolbar color="dark">
+      <div class="nav-bar">
+        <div  class="menu-btn">
+          <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
+            <ion-icon mode="ios" name="menu"></ion-icon>
           </ion-button>
-          <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
         </div>
-      
-    </div>
+       
+          <div class="logo">
+            <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+          </div>
+          <div class="list">
+            <ion-button  mode="ios" class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+            <ion-button  mode="ios" class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
+            <ion-button  mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+            <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+              <p>{{Myname}}</p>
+  
+              <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
+  
+  
+              <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
+              <img *ngIf="Picture" src="{{Picture}}"alt="">
+            </div>
+          </div>
+  
+          <div class="notification" *ngIf="showProfile1">
+  
+            <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
+              <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
+            </ion-button>
+            <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+          </div>
+        
+      </div>
+    </ion-toolbar>
+  
     <div class="wrapper-page">
       <div class="wrapper-header">
         
@@ -257,9 +259,10 @@
                 </div>
               </div>
             </div>
+           
+           
           </div>
         </div>
-        
        
 
         <div class="scroll-list">
@@ -306,10 +309,83 @@
             </div>
           </div>
         </div>
-        
+        <ion-grid>
+          <ion-row justify-content-center align-items-center style="padding: 2em; background: rgb(54, 54, 54);">
+            <ion-col  size-xs="12" size-sm="12" size-md="6" size-lg="3">
+              <div class="navigations">
+                <div class="head_t">
+                 <p style="font-size: 120%; text-align: left;"><strong> Navigation</strong></p>
+                </div>
+               <div class="nav_t">
+                 <p>Explore</p>
+                 <p>Contact Us</p>
+                 <p>Create an Account</p>
+                 <p>Sign In</p>
+               </div>
+           
+              </div>
+              
+            </ion-col>
+            <ion-col  size-xs="12" size-sm="12" size-md="6" size-lg="3">
+              <div class="conta_r">
+                <p style="font-size: 100%"><strong> Contact Us</strong></p>
+              
+              </div>
+              
+              <div class="conta_r">
+                <ion-fab-button color="transparent" size="small">
+                  <ion-icon name="ios-call"></ion-icon>
+                </ion-fab-button>
+                <p>+2774 389 3493</p>
+              </div>
+              <div class="conta_r">
+                <ion-fab-button color="transparent" size="small">
+                  <ion-icon name="ios-pin"></ion-icon>
+                </ion-fab-button>
+                <p>Soweto, Johannesburg, 1818</p>
+              </div>
+              <div class="conta_r">
+                <ion-fab-button color="transparent" size="small">
+                  <ion-icon name="ios-mail"></ion-icon>
+                </ion-fab-button>
+                <p>muenddkhuthadzo@gmail.com</p>
+              </div>
+            </ion-col>
+            <ion-col  size-xs="12" size-sm="12" size-md="12" size-lg="3">
+             
+              <div class="aboutUs">
+                <div class="logo-footer">
+                  <img src="../../assets/anotherLogo.svg" width="70px" alt="">
+                </div>
+                <div class="b_rr">
+                  <p style="font-size: 120%"><strong> About Us</strong></p>
+                <p>Lorem ipsum, dolor sit amplicabo ea, reiciendis autem asperiores veritatis hic expedita fuga, laborum voluptas! Libero, voluptatibus.</p>
+                
+              </div>
+            
+              </div>
+            </ion-col>
+          </ion-row>
+         
+            
+              <ion-toolbar color="dark">
+                  <div class="social">
+                    <p style="font-size: 70%;">&copy;2020 Ink Scribe Tattoo. Right Reserved. </p>
+                  </div>
+              </ion-toolbar>
+
+              
+          
+    
+        </ion-grid>
+       
       </div>
+
+      
       
     </div>
+ 
+  
   </div>
 
   <ion-fab *ngIf="showProfile1" [style.display]="!tattooDisplay ? 'block' : 'none'" vertical="bottom" horizontal="end"  slot="fixed">
@@ -455,5 +531,5 @@
     </div> 
 </div>  -->
  
-</ion-content> 
+</ion-content>
 

@@ -41,6 +41,58 @@
 
 
 }
+ion-item, ion-list {
+    background-color: transparent;
+}
+.conta_r {
+    display: flex;
+    color: #fff;
+    padding-bottom: .5em;
+    align-items: center;
+ 
+
+    p {
+        padding-left: 1em;
+        font-size: 80%;
+    }
+    
+}
+
+.aboutUs {
+    color: #fff;
+    font-size: 80%;
+    display: flex;
+    justify-content: space-between;
+   /*  align-items: center; */
+    flex-direction: column;
+    text-align: left;
+
+    &> *, .b_rr{
+        padding: .5em;
+    }
+
+    .logo-footer {
+        display: flex;
+        justify-content: flex-start;
+    }
+    
+}
+.navigations {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-size: 80%;
+    .head_t {
+        padding: .5em;
+        text-align: left;
+    }
+    .nav_t {
+        p {
+            padding: .5em;
+        }
+        text-align: left;
+    }
+}
 
 .onbording {
     position: absolute;
@@ -160,7 +212,7 @@
 .nav-bar {
     display: flex;
     flex-basis: 5%;
-    background: #000;
+  
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -238,9 +290,14 @@
 .wrapper-page {
     flex-basis: 95%;
     width: 100%;
-  
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
 
 
@@ -280,12 +337,11 @@
 }
 .scroll-container {
     flex-basis: 80%; 
-    overflow: auto;
+
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-
-
+    justify-content: space-between;
 
 }
 .notification {
@@ -343,8 +399,10 @@ ion-button.explore {
 
 .scroll-list {
     flex: 0 0 40%;
-    
- /*    margin-top: 1em; */
+    width: 70%;
+    margin: 0 auto;
+    background: rgb(243, 243, 243);
+    margin: 1em auto;
     display: flex;
     flex-direction: column;
 
@@ -359,7 +417,7 @@ ion-button.explore {
         overflow-y: hidden;
 
         .scroll-key {
-           flex: 0 0 20%;
+           flex: 0 0 30%;
            padding: .3em;
            transition: 500ms;
 
@@ -486,6 +544,19 @@ ion-button.explore {
     flex-direction:row;
 
 }
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .social_r {
+        padding: 1em;
+       p{
+        font-size: 70%;
+       }
+    }
+}
 .tattoo-details > .tattoo-card-details {
     flex-basis: 20%;
     background: black;
@@ -569,6 +640,28 @@ ion-button.explore {
 } */
 
 @media only screen and (max-width: 600px) {
+
+    .logo-footer {
+        display: flex;
+        justify-content: center;
+    }
+    ion-col {
+        margin-top: .4em;
+    }
+    ion-row {
+        padding: .5em !important;
+    }
+    .conta_r {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        p {
+            padding: 0 !important;
+            padding-left: .4em !important;
+            margin-top: .5em;
+        }
+    }
     .onbording{
         .onboard {
      
@@ -652,11 +745,12 @@ ion-button.explore {
 
     .scroll-container {
         .scroll-list {
-            flex: 0 0 60%;
-
+            flex: 0 0 40% !important;
+            width: 100%;
+            margin: 0 !important;
             .scroll-item {
                 .scroll-key {
-                    flex: 0 0 80%;
+                    flex: 0 0 80% !important;
                 }
                
             }
@@ -671,7 +765,9 @@ ion-button.explore {
         display: block;
     }
     .split-pane {
-        display: block;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between;
         position: absolute;
         top: 0;
         left: 0;
@@ -681,6 +777,11 @@ ion-button.explore {
         z-index: 1000;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+        padding-bottom: 1em;
+
+        .list-split-pane {
+            flex: 1;
+        }
 
 
     }
@@ -706,10 +807,12 @@ ion-button.explore {
     }
     
 }
-@media only screen and (min-width: 600px) {
-    .scroll-container {
+@media only screen and (max-width: 600px) {
+  /*   .scroll-container {
         .scroll-list {
             flex: 0 0 40%;
+            width: 100%;
+            margin: 0 !important;
 
             .scroll-item {
                 .scroll-key {
@@ -718,7 +821,7 @@ ion-button.explore {
                
             }
         }
-    }
+    } */
 }
 
 
