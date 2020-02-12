@@ -445,7 +445,7 @@ ion-row {
    }
 }
 .cup {
-    flex-basis: 80%;
+    flex: 0 0 80%;
     background: rgb(255, 255, 255); 
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281); 
@@ -497,7 +497,7 @@ ion-row {
          /*    padding: .8em; */
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
 
             p {
                 margin: 5%;
@@ -514,7 +514,7 @@ ion-row {
         flex-direction: column;
 
         .header-custom {
-            flex-basis: 5%;
+            flex: 0 0 5%;
             align-items: center;
             justify-content: center;
         }
@@ -691,7 +691,7 @@ ion-row {
     .card {
        
         flex-basis: 50%;
-        height: 25%;
+        height: 29%;
         padding: .5em;
 
         .card-t {
@@ -755,7 +755,7 @@ ion-row {
   
 }
 .download {
-    flex-basis: 7%;
+    flex: 0 0 7%;
     border-radius: 50px;
     background:#eaeaea;
     cursor: pointer;
