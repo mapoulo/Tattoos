@@ -1,5 +1,5 @@
 <ion-header no-border>
-  <ion-toolbar  [style.backgroundColor]="!tattoo ? '#fff' : 'rgba(0,0,0,0.5)'">
+  <ion-toolbar  [style.backgroundColor]="!tattoo ? 'rgba(255,255,255,0)' : 'rgba(0,0,0,0.5)'">
     <ion-title [style.color]="!tattoo ? 'grey' : '#fff'">Customize</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()" fill="icon-only" color="light">
@@ -59,7 +59,7 @@
         </ion-row>
         <ion-row justify-content-center>
           <ion-col size="6" justify-content-center>
-              <ion-button  color="secondary" shape="round" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
+              <ion-button  mode="ios" color="secondary" shape="round" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -72,7 +72,7 @@
     
       <div class="images">
         <div class="percent" *ngIf="progress != 0">
-          <p>{{progress / 100 | percent}}</p>
+          <p>{{progress / 1000 | percent}}</p>
           </div>
         <label class="fileContainer animated jello">
           Tap to Upload your custom Tattoo

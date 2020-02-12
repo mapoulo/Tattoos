@@ -39,10 +39,10 @@ p, h1, h2,h3,h4,h5,h6,small {
 }
 
 
-.modalNotification .modal-wrapper {
+/* .modalNotification .modal-wrapper {
     width: 30%;
     transform: translate(0, -100%);
-}
+} */
 
 .fileContainer {
   overflow: hidden;
@@ -66,9 +66,10 @@ p, h1, h2,h3,h4,h5,h6,small {
 
 
 .fileContainer {
-  background: #de652d;
+  background:  #d36954;
   color: #fff;
   float: left;
+  font-size: 80%;
   padding: 1em !important;
   border-radius: 50px !important;
 }

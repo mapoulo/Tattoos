@@ -1,3 +1,4 @@
+import { CustomizePage } from './../customize/customize.page';
 import { SignInPage } from './../sign-in/sign-in.page';
 import { RegisterPage } from './../register/register.page';
 import { Component, OnInit, Renderer2 } from '@angular/core';
@@ -118,6 +119,14 @@ export class ProfilePage implements OnInit {
   
    
   }
+
+  async opnModal(){
+    let modal = await this.modalController.create({
+      component : CustomizePage,
+      cssClass: 'modalNotification'
+    })
+    return await modal.present();
+   }
 
 
  async DeleteMessage(key){

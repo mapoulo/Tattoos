@@ -20,21 +20,20 @@
         </div>
 
         <div class="p_">
-          <div class="profile" *ngIf="MyImage">
-          <img src="{{MyImage}}" alt="khuthy">
-            </div>
+            <div class="profile">
+              <img *ngIf="!MyImage" src="../../assets/person-icon.jpg" alt="khuthy">
+              <img *ngIf="MyImage" src="{{MyImage}}" alt="khuthy">
+              <label class="fileContainer">
+                <ion-icon size="large" name="ios-camera"></ion-icon>
+                <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
+            </label> 
+                </div>
         </div>
       
           <ion-grid>
             <ion-row justify-content-center>
             
-              <ion-col size="9" class="pro-form-image">
-                <label class="fileContainer">
-                  Edit your profile image
-                  <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
-              </label> 
-              </ion-col>
-              <ion-col size="12" class="pro-form-image">
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Full Name </ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="person"></ion-icon>
@@ -48,7 +47,7 @@
              
             </ion-row>
             <ion-row justify-content-center>
-              <ion-col size="12" class="pro-form-image">
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Phone Number</ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
@@ -59,7 +58,7 @@
               </ion-col>
             </ion-row>
             <ion-row justify-content-center>
-              <ion-col size="7" class="pro-form-image">
+              <ion-col size="8" style="margin-top: 1em;">
                 <ion-button mode="ios" expand="block" color="success" shape="round" (click)="Edit()">Edit</ion-button>
               
               </ion-col>
@@ -194,7 +193,10 @@
               <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
               <div class="custom-card-container" >
                 <div class="messages" *ngIf="Customized.length == 0">
-                  <p style="text-align: center;">You do not have a custom tattoo</p>
+                  <ion-fab-button size="large" color="light" (click)="opnModal()" mode="ios">
+                    <ion-icon name="ios-add"></ion-icon>
+                  </ion-fab-button>
+                  <p>Upload your your custom tattoo</p>
                 </div>
                 <div class="custom-card" *ngFor = "let item of Customized">
                   <img src="{{item.dataTattoo.image}}" alt="">
