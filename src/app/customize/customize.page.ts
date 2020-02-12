@@ -43,7 +43,7 @@ db = firebase.firestore();
 
   ngOnInit() {
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
+    this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
     })
@@ -84,7 +84,7 @@ db = firebase.firestore();
 
 
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+    this.db.collection("Bookings").doc().set({
 
             
       category : "Customized",
@@ -131,6 +131,8 @@ db = firebase.firestore();
   }
     
   }
+
+  
 
   dismiss() {
     this.ModalController.dismiss({

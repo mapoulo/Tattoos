@@ -11,8 +11,9 @@ import { ModalController,AlertController, Platform, ToastController } from '@ion
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { timingSafeEqual } from 'crypto';
-
+// import { timingSafeEqual } from 'crypto';
+declare var require: any
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-profile',
@@ -85,7 +86,7 @@ export class ProfilePage implements OnInit {
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
 
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
           this.MyImage = data.data().image
       })
   
@@ -216,6 +217,7 @@ export class ProfilePage implements OnInit {
         this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
           this.Myname = data.data().name
           this.MyImage = data.data().image
+          this.Mynumber = data.data().number
         })
 
         
@@ -325,12 +327,11 @@ export class ProfilePage implements OnInit {
 
 
     Edit(){
-
       console.log("Images  ", this.MyImage);
       
       setTimeout(() => {
         //gfjgfhgfhgfhgfgf
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).update({
           name :this.Myname,
         
           number:this.Mynumber,
@@ -423,7 +424,7 @@ export class ProfilePage implements OnInit {
             
           })
         })
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           console.log("User Logged in ", item.data());
           this.Myname = item.data().name;
           this.Mynumber = item.data().number;
@@ -544,10 +545,10 @@ this.db.collection("Response").onSnapshot(data => {
 })
 
 
-this.db.collection("Response").onSnapshot(data => {
+this.db.collection("Bookings").onSnapshot(data => {
   this.Pending = []
   data.forEach(item => {
-    if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending"){
+    if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "waiting"){
         this.Pending.push(item.data())
     }
   })
@@ -555,12 +556,12 @@ this.db.collection("Response").onSnapshot(data => {
      
       //Customized tattoo
       this.Customized=[];
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").limit(6).onSnapshot(data => {
+      this.db.collection("Bookings").limit(6).onSnapshot(data => {
         this.Customized=[];
       
          data.forEach(i => {
            if(i.exists){
-             if(i.data().field === "Customized"){
+             if(i.data().field === "Customized" && i.data().uid == firebase.auth().currentUser.uid){
               
                console.log("ewewew ", i.data());
                this.Customized.push({id: i.id, dataTattoo: i.data()});
@@ -573,15 +574,18 @@ this.db.collection("Response").onSnapshot(data => {
          
    
      })
+
+
      //view More
      this.ViewMore=[];
-     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
+
+     this.db.collection("Bookings").onSnapshot(data => {
        this.ViewMore=[];
        
      
         data.forEach(i => {
           if(i.exists){
-            if(i.data().field === "Customized"){
+            if(i.data().field === "Customized" && i.data().uid == firebase.auth().currentUser.uid){
            
               console.log("ewewew ", i.data());
               this.ViewMore.push({id: i.id, dataTattoo: i.data()});
@@ -608,7 +612,7 @@ this.db.collection("Response").onSnapshot(data => {
 
 
 showTattoo(item) {
-  console.log("wwwwwwwww",item);
+  console.log("wwwwwwwww",item.id);
   this.key = item.id
   this.uid = item.dataTattoo.uid
   this.showCustom.name_t = item.dataTattoo.name;
@@ -638,7 +642,7 @@ async DeleteData() {
       }, {
         text: 'Delete',
         handler: data => {
-          this.db.collection("Bookings").doc(this.uid ).collection("Requests").doc(this.key).delete()
+          this.db.collection("Bookings").doc(this.key ).delete()
           this.showCustom.name_t = "";
           this.showCustom.breadth = "";
           this.showCustom.length = "";
@@ -653,5 +657,14 @@ async DeleteData() {
   await alert.present();
 }
 
-
+downloadPdf1(){
+  this.db.collection("Admin").onSnapshot(data => {
+    data.forEach(i => {
+    this.MyPdf = i.data().pdf;
+    const pdfUrl = this.MyPdf ;
+    const pdfName = 'InkScribeTattoo Contract.pdf';
+    FileSaver.saveAs(pdfUrl, pdfName);
+    })
+  })
+}
 }
