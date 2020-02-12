@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,10 +13,12 @@ export class ResetPasswordPage implements OnInit {
   email="";
   message: any = "";
 
-  constructor(public modalController:ModalController) { }
+  constructor(public modalController:ModalController, public alertController: AlertController,) { }
 
   ngOnInit() {
   }
+
+
   dismiss() {
     this.modalController.dismiss({
       'dismissed': true
@@ -25,9 +28,27 @@ export class ResetPasswordPage implements OnInit {
   resetPassword() {
     var auth = firebase.auth();
     return auth.sendPasswordResetEmail(this.email)
-      .then(() => console.log("email sent"))
+      .then(async () => 
+      {
+
+        const alert = await this.alertController.create({
+          header: '',
+          subHeader: '',
+          message: 'Message sent check your email',
+          buttons: ['OK']
+        });
+    
+        await alert.present();
+
+        setTimeout(() => {
+          this.dismiss()
+        }, 1000)
+      }
+      )
       .catch((error) => {
         this.message = error.message;
       })
+
+      
   }
 }

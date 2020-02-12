@@ -7,17 +7,17 @@ export const environment = {
 };
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyAdeBGJ4PnOutAeXV25jC_D7PknhvlKn3E",
-  authDomain: "inktattoo2-66bce.firebaseapp.com",
-  databaseURL: "https://inktattoo2-66bce.firebaseio.com",
-  projectId: "inktattoo2-66bce",
-  storageBucket: "inktattoo2-66bce.appspot.com",
-  messagingSenderId: "830483214004",
-  appId: "1:830483214004:web:3df2f116e2d82ed807b1e1",
-  measurementId: "G-61ND0GK89C"
-};
+  apiKey: "AIzaSyDPxIN83IXDDR0Jpsrm9PlQ3hlHvl0Wy2o",
+  authDomain: "myintattoo.firebaseapp.com",
+  databaseURL: "https://myintattoo.firebaseio.com",
+  projectId: "myintattoo",
+  storageBucket: "myintattoo.appspot.com",
+  messagingSenderId: "111524298478",
+  appId: "1:111524298478:web:ccb738b34f2f203a9bbdff",
+  measurementId: "G-KPXGYV92NE",
+  vapidKey: "BKmzoGplIo-9urZ1WPhr_mmDPnR-vd0AuAQ_3eaeJ73NoZzDpwu-jx7gKJdKVY8k7qc2Al7LH1u5vR_PqLaBbos"
 
-
+  };
 
 
 /*

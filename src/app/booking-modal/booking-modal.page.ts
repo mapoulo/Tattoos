@@ -63,45 +63,52 @@ export class BookingModalPage implements OnInit {
  
 
   constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, public alertController: AlertController,  private render: Renderer2) { 
+
   this.tattooForm = this.fb.group({
     Length: new FormControl('', Validators.compose([Validators.required])),
     Breadth: new FormControl('', Validators.compose([Validators.required])),
   })
+
 }
   ngOnInit() {
 
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
 
-    if(firebase.auth().currentUser){
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
 
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+          this.userImage = data.data().image
+          console.log("Image ", this.userImage);
+          
+        })
 
-        this.userImage = data.data().image
-        console.log("Image ", this.userImage);
-        
-      })
 
-      setTimeout(() => {
+         // cmsTokenId : this.cmsTokenId ,
+      // myTokenId : this.notifications.token,
+      // tokenId : this.notifications.token,
+
+        setTimeout(() => {
 
       
   
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).update({
-          email : this.Myemail,
-          image  : this.Myimage,
-          name  : this.Myname ,
-          number  : this.Mynumber,
-          tokenId : this.notifications.token,
-          cmsTokenId : this.cmsTokenId ,
-          myTokenId : this.notifications.token,
-          
-  
-    })
-  
+          this.db.collection("Users").doc(firebase.auth().currentUser.uid).update({
+            email : this.Myemail,
+            image  : this.Myimage,
+            name  : this.Myname ,
+            number  : this.Mynumber
+           
+      })
     
-      }, 4000);
-     }
+      
+        }, 1000);
+
+      }
+    })
+
+
     
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+    this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
       this.Myemail = data.data().email;
       this.Myimage  = data.data().image
       this.Myname  = data.data().name
@@ -178,23 +185,19 @@ export class BookingModalPage implements OnInit {
 
 
   senBookig(){
-
-
-
+    console.log("Token Id ", this.notifications.token);
+    
     this.loader = true;
-  //  this.notifications.requestPermission();
-
-   console.log("The key Is here ", this.notifications.token);
 
     setTimeout(async () => {
+     
+
       if (this.tattooForm.valid ) {
 
         if(this.Length != 0 && this.Breadth != 0){
 
-
           this.db.collection("Bookings").doc().set({
-    
-                
+        
             category : this.category,
             description : this.description,
             image : this.image,
@@ -210,12 +213,13 @@ export class BookingModalPage implements OnInit {
             bookingState : 'waiting',
             field : "Booking",
             tokenId : this.notifications.token,
-            cmsTokenId : this.cmsTokenId ,
             userImage : this.userImage
       
       
           }).then( async() => {
-      
+
+            this.DeliverDataService.wantToBook = false
+
             console.log("Your Booking is successful");
             const modal = await this.modalController.create({
               component: SuccessPagePage
@@ -224,24 +228,6 @@ export class BookingModalPage implements OnInit {
       
           })
       
-          // this.db.collection("Requests").doc().set({
-          //   category : this.category,
-          //   description : this.description,
-          //   image : this.image,
-          //   startPrice : this.startPrice,
-          //   endPrice : this.endPrice,
-          //   tattoName: this.name,
-          //   breadth : this.Breadth,
-          //   length : this.Length,
-          //   email : firebase.auth().currentUser.email,
-          //   uid : firebase.auth().currentUser.uid,
-          //   customerName : this.Cname,
-          //   number : this.number,
-          //   bookingState : 'waiting',
-          //   field : "Booking",
-          //   cmsTokenId : this.cmsTokenId 
-      
-          // })
       
           this.modalController.dismiss({
             'dismissed': true

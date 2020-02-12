@@ -180,8 +180,8 @@
       </div>
 
       <div class="list-split-pane">
-        <ion-button mode="ios"  fill="clear" *ngIf="!showProfile1" (click)="addClasseAnimates()"  expand="block" color="light" routerLink="/">Explore</ion-button>
-        <ion-button mode="ios"  fill="clear" *ngIf="showProfile1" (click)="addClasseAnimates()"  expand="block" color="light" routerLink="/">Home</ion-button>
+        <ion-button mode="ios"  fill="clear" *ngIf="!showProfile1"  expand="block" color="light" routerLink="/">Explore</ion-button>
+        <ion-button mode="ios"  fill="clear" *ngIf="showProfile1"  expand="block" color="light" routerLink="/">Home</ion-button>
         <ion-button mode="ios" fill="clear" expand="block" (click)="addClasseAnimates()"  color="light" routerLink="/contact-us">Contact Us</ion-button>
         <ion-button mode="ios" fill="clear" expand="block" (click)="addClasseAnimates()"  color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
         <ion-button mode="ios" fill="clear" expand="block" (click)="addClasseAnimates()"  color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>

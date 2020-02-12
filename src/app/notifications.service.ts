@@ -72,7 +72,7 @@ export class NotificationsService {
             const messaging = firebase.messaging();
             await messaging.requestPermission();
             this.token  = await messaging.getToken();
-            console.log('User notifications token:', this.token);
+            console.log('My token Id is here :', this.token);
         } catch (err) {
        console.log('error',err);   
         }

@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { DeliverDataService } from '../deliver-data.service';
 import { ResetPasswordPage } from '../reset-password/reset-password.page';
+import { BookingModalPage } from '../booking-modal/booking-modal.page';
+
 
 
 
@@ -64,48 +66,42 @@ export class SignInPage implements OnInit {
   
 
 
-  login(tattooForm){
+  login(){
+
     this.loader = true;
 
-
      setTimeout(() => {
+
       if (this.tattooForm.valid ) {
+
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
      
-         console.log("=========================");
-         if(firebase.auth().currentUser){
-     
-           this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(i => {
-             i.forEach(a => {
-     
-              if(a.data().bookingState === "Accepted"){   
-               this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(myItem => {       
-                 myItem.forEach(doc => {
-                   if(doc.data().bookingState === "Pending"){
-                     this.DeliverDataService.AcceptedData = [];
-                     this.DeliverDataService.AcceptedData.push(doc.data())
-                     // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-                   }   
-                 })
-               
-           })
-           // return true; 
-              }
-             
-             })
-           })
-         }
-     
-     
-         this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
-           console.log("qqqqqqqqqqqqqq ", data.data().name);
-           this.DeliverDataService.name = data.data().name;
-           
-         })
+        
+     setTimeout(() => {
+
+
+      this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(async (data) => {
+          
+        this.DeliverDataService.name = data.data().name;
+
+        if(this.DeliverDataService.wantToBook){
+          
+           const modal = await this.modalController.create({
+         component: BookingModalPage
+       });
+       return await  modal.present();
+        
+
+        }
+
+        this.Router.navigateByUrl('/')
+      })
+      
+
+     }, 1000)
        
-     
-         this.Router.navigateByUrl('/')
-     
+
+
         }).catch(error => {
 
           this.log2();

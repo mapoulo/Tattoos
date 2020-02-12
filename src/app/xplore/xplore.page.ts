@@ -101,7 +101,9 @@ tattoo = {
   constructor(public DeliverDataService : DeliverDataService, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
-    
+    if(this.plt.width() > 600) {
+      this.split = false;
+    }
    }
 
 
@@ -124,6 +126,7 @@ tattoo = {
     return await modal.present();
    }
 
+   
    load(){
 
     if(firebase.auth().currentUser){
@@ -166,14 +169,21 @@ tattoo = {
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
 
-        this.showProfile1 = true;
-        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
-          console.log("User Logged in ", item.data());
-          this.Myname = item.data().name;
-          this.Mynumber = item.data().number;
-          this.Picture=item.data().image;
-        })
+        setTimeout(() => {
+          
+
+          this.showProfile1 = true;
+          this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+            console.log("User Logged in ", item.data());
+            this.Myname = item.data().name;
+            this.Mynumber = item.data().number;
+            this.Picture=item.data().image;
+          })
         
+          
+        }, 1000);
+
+       
 
       }
 
@@ -378,7 +388,7 @@ tattoo = {
 
    
 
-    
+    this.showProfile();
     
 
     this.db.collection("Tattoo").onSnapshot(data => {
@@ -406,6 +416,7 @@ tattoo = {
       })
     })
     this.db.collection("Tattoo").onSnapshot(data => {
+      this.Letters = []
       data.forEach(item => {
         if(item.exists){
           if(item.data().categories === "Letters"){
@@ -468,7 +479,10 @@ async presentToast(message) {
   toast.present();
 }
 
+
+
 logOut(){
+
   this.name = "";
   this.image = "";
   this.loader = true
@@ -482,9 +496,10 @@ logOut(){
 
      this.presentToast('You are now logged out');
       
-     
+     this.DeliverDataService.wantToBook = false
   
     }).catch(error => {
+
       console.log("Something went wrong");
       
     })
@@ -516,7 +531,7 @@ logOut(){
       this.DeliverDataService.dataSaved.name = tattoo.name;
       this.DeliverDataService.dataSaved.startPrice = tattoo.startPrice;
       this.DeliverDataService.dataSaved.endPrice = tattoo.endPrice;
-     this.tattooDisplay = false;
+      this.tattooDisplay = false;
    
 
       console.log("Your data in the service",  this.DeliverDataService.dataSaved);
@@ -528,6 +543,7 @@ logOut(){
 
     }else{
 
+      this.DeliverDataService.wantToBook = true
       this.DeliverDataService.dataSaved.category = tattoo.categories;
       this.DeliverDataService.dataSaved.description = tattoo.description;
       this.DeliverDataService.dataSaved.image = tattoo.image;

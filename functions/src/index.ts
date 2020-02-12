@@ -3,32 +3,8 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 const db = admin.firestore()
 
-exports.test = functions.firestore.document('Bookings/{docid}/Requests/{id}').onCreate((snap: { data: () => any; }, context: any) => {
-    console.log('Document change', snap.data());
-    const dataR = snap.data();
-
-   
-
-        const token = dataR.cmsTokenId
-
-        const payload = {
-            notification: {
-                title: 'New Booking!',
-                body: `name of customer: ${dataR.customerName} TattooName   ${dataR.tattoName}`,
-                icon: '../../src/assets/anotherLogo.svg'
-            }
-        }
-
-        return admin.messaging().sendToDevice(token, payload)
-
-  
- 
- 
-
-})
-
-exports.ClinetResponse = functions.firestore.document('Bookings/{docid}/Response/{id}').onCreate((snap: { data: () => any; }, context: any) => {
-    console.log('Document change', snap.data());
+exports.test = functions.firestore.document('Bookings/{id}').onUpdate((snap: { data: () => any; }, context: any) => {
+    console.log('Document change is here', snap.data());
     const dataR = snap.data();
 
    
@@ -37,7 +13,7 @@ exports.ClinetResponse = functions.firestore.document('Bookings/{docid}/Response
 
         const payload = {
             notification: {
-                title: 'Response from the CMS',
+                title: 'New Booking!',
                 body: ``,
                 icon: '../../src/assets/anotherLogo.svg'
             }
@@ -45,12 +21,6 @@ exports.ClinetResponse = functions.firestore.document('Bookings/{docid}/Response
 
         return admin.messaging().sendToDevice(token, payload)
 
-  
- 
- 
 
 })
-
-
-
 

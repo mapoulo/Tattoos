@@ -12,6 +12,7 @@ export class DeliverDataService {
   logout :boolean =false;
 
   checkValue = 0
+  wantToBook = false;
 
   name  = "";
 

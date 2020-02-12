@@ -75,9 +75,8 @@ export class RegisterPage implements OnInit {
   }
   
   async register(){
+
     this.loader = true;
-
-
 
 setTimeout(() => {
  
@@ -112,29 +111,9 @@ this.modalController.dismiss({
 
  this.redirectToSignin()
 
-
-//  this.modalController.create({
-//   component : SignInPage
-// })
-
-// this.modalController.create({
-//   component : SignInPage
-// });
-
-// return await modal.present();
-
-//this.Router.navigateByUrl('/sign-in')
-   // var errorCode = error.code;
-   // var errorMessage = error.message;
-   //this.log2();
-   
-//     cmsTokenId : this.cmsTokenId,
-//  myTokenId : this.notification.token,
-   console.log("Email already exist");
-   
-   // ...
-
  }).then(() => {
+
+
 setTimeout(() => {
 this.db.collection("Users").doc(firebase.auth().currentUser.uid).set({
  name : this.name,
@@ -155,7 +134,7 @@ this.modalController.dismiss({
  'dismissed': true
 }); 
 
-console.log("1111111111111111111111", firebase.auth().currentUser.email);
+
 }, 2000)
 
  });
@@ -221,6 +200,8 @@ this.modalController.dismiss({
 
 
   async SignIn(){
+
+
      this.modalController.dismiss({
       'dismissed': true
     });
@@ -229,6 +210,8 @@ this.modalController.dismiss({
     });
     return await modal.present();
   }
+
+  
   dismiss() {
     this.modalController.dismiss({
       'dismissed': true

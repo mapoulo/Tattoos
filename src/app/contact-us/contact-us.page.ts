@@ -74,11 +74,25 @@ export class ContactUsPage implements OnInit {
     this.db.collection("Admin").onSnapshot(data => {
       data.forEach(item => {
         this.placeid = item.data().placeId
+        console.log("PlaceId ", item.data().placeId );
+        
       })
     })
 
     if(firebase.auth().currentUser){
+
       this.UserIn = false
+
+      this.db.collection("Response").onSnapshot(data => {
+        this.MyNotifications = 0
+         data.forEach(item => {
+           if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending"){
+             this.MyNotifications += 1
+           }
+         })
+       })
+        
+
     }else{
       this.UserIn = true
     }
@@ -90,8 +104,10 @@ export class ContactUsPage implements OnInit {
     this.Contact = []
   }
 
-  GoTo(){
+  GoTo(){ 
+
     return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;
+    
   }
  
   ionViewDidEnter(){
@@ -209,7 +225,7 @@ export class ContactUsPage implements OnInit {
         this.inputDisabled = true;
         this.buttonDisabled = false;
         this.UserIn = false
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
           this.name = item.data().name;
           this.image = item.data().image;
           console.log("User Logged in ", item.data());
@@ -218,79 +234,9 @@ export class ContactUsPage implements OnInit {
         })
        
         
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-          data.forEach(a => {
-            if(a.data().bookingState === "Accepted"){ 
-              this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-              .collection("Response")
-              
-              .get().then(myItem => {
-                this. MyNotifications = 0;     
-                myItem.forEach(doc => {
-                  if(doc.data().bookingState === "Pending"){
-                  
-                   this. MyNotifications += 1;
-                   console.log("@@@@@@@@@@@@@",  doc.data() );
-                    // this.array.push(doc.data())
-                    // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-                  }   
-                })
-            
-          })
-          // return true; 
-             }
-          })
-        })
+     
         
-
-    
-        // this.showProfile = true;
-        
-        this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").onSnapshot(data => {
-          data.forEach(a => {
-            if(a.data().bookingState === "Accepted"){ 
-              this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-              .collection("Response")
-              
-              .onSnapshot(myItem => {
-                  
-                myItem.forEach(doc => {
-                  if(doc.data().bookingState === "Pending"){
-                  
-                   
-                  }   
-                })
-            
-          })
-          // return true; 
-             }
-          })
-        })
-        
-        
-        // .get().then(i => {
-        //   i.forEach(a => {
-  
-        //    if(a.data().bookingState === "Accepted"){ 
-        //     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid)
-        //     .collection("Response").get().then(myItem => {
-        //       this. MyNotifications = 0;     
-        //       myItem.forEach(doc => {
-        //         if(doc.data().bookingState === "Pending"){
-                
-        //          this. MyNotifications += 1;
-        //          console.log("@@@@@@@@@@@@@",  this. MyNotifications );
-        //           // this.array.push(doc.data())
-        //           // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
-        //         }   
-        //       })
-          
-        // })
-        // // return true; 
-        //    }
-          
-        //   })
-        // })
+   
       }else {
         this.buttonDisabled = true;
          this.showProfile1 = false;

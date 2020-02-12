@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase';
 import {firebaseConfig} from '../environments/firebaseConfig'
 import { AlertController } from '@ionic/angular';
-// import { NotificationsService } from './notifications.service';
+import { NotificationsService } from './notifications.service';
 
 
 
@@ -28,8 +28,8 @@ firebase_id = '396095430599';
     private alertCtrl: AlertController,
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-    // private notificationsService: NotificationsService
+    private statusBar: StatusBar,
+    private notificationsService: NotificationsService
   ) {
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
@@ -51,10 +51,10 @@ firebase_id = '396095430599';
   ngAfterViewInit() {
     
     this.platform.ready().then(async () => {
-      //  await this.notificationsService.requestPermission();
+       await this.notificationsService.requestPermission();
     });
   }
-  setupPush() {}
+ 
   
 
 
@@ -74,7 +74,7 @@ firebase_id = '396095430599';
 
 
  
-    // Notification was really clicked/opened
+  //   Notification was really clicked/opened
   //   this.oneSignal.handleNotificationOpened().subscribe(data => {
   //     // Just a note that the data is a different place here!
   //     let additionalData = data.notification.payload.additionalData;
