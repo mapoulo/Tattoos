@@ -1,12 +1,6 @@
 <ion-header translucent no-border>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-button fill="icon-only">
-            <ion-icon name="save"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #fff; text-shadow: 1px 1px rgba(24, 24, 24, 0.26);">Book Now</ion-title>
-    <ion-buttons slot="end" (click)="dismiss()">
+   <ion-buttons slot="end" (click)="dismiss()">
       <ion-button color="light">
         <ion-icon style="font-weight: bold; text-shadow: 1px 1px rgba(24, 24, 24, 0.26);" color="light" name="close"></ion-icon>
       </ion-button>
@@ -31,11 +25,11 @@
                 <ion-icon color="dark" [name]="icon"></ion-icon>
               </ion-fab-button>
         </div>
-        <article>
+        <article *ngIf="describe">
             <p class="header-para" style="text-align: center;">View Tattoo's Information</p>
             <img src="{{image}}" alt="" width="100px" class="small-image">
             <p> {{description}}</p>
-            <h1 style="font-size: 2.8vh;text-align: center; color:#fff">R{{startPrice}} - R{{endPrice}}</h1>
+            <h1 style="font-size: 2.8vh;text-align: center; color:#fff">{{startPrice | currency : '&#82;'}} - {{endPrice | currency : '&#82;'}}</h1>
         </article>
       </div>
     <div class="container">
@@ -43,7 +37,7 @@
         <div class="show-close"></div>
        <div class="tittle">
           <div class="priceRage">
-              <p style="font-weight: bold; font-size: 100%;" class="animated flipInX delay-1s">R{{startPrice}} - R{{endPrice}}</p>
+              <p style="font-weight: bold; font-size: 100%; font-family: 'NewRocker'" class="animated flipInX delay-1s">{{startPrice | currency : '&#82;'}} - {{endPrice | currency : '&#82;'}}</p>
             </div>
          <p>{{name}}</p>
        </div>
@@ -53,9 +47,9 @@
 
           <form [formGroup]="tattooForm"> 
 
-            <ion-item color="transparent">
-              <ion-label color="primary" >Tattoo Sizes</ion-label>
-              <ion-select  color="primary" name="categories" [(ngModel)]="sizes" formControlName="sizes" >
+            <ion-item>
+              <ion-label>Tattoo Sizes</ion-label>
+              <ion-select name="categories" [(ngModel)]="sizes" formControlName="sizes" >
                 <ion-select-option value="Small" >Small </ion-select-option>
                 <ion-select-option value="Medium">Medium</ion-select-option>
                 <ion-select-option value="Large">Large</ion-select-option>
@@ -66,24 +60,26 @@
                 {{validate.message}}
             </div> 
             </div>
-
-           <br>
-           <br>
-              <ion-label color="primary">colour additional</ion-label>
-          
-              <div *ngFor="let color of color">
+            <div class="color-edition"  style="margin-top: 2em;">
+              <ion-label color="primary">Do you want additional colors?</ion-label>
+              <div class="inputs">
+                <div class="max" *ngFor="let color of color">
              
-                <input
-                 type="radio" 
-                  name="tattooSize"
-                  value="{{color}}"
-                  (change)="radioChangeHandler($event)">
-                
-                
-                
-                <i>{{color}}</i>
-                
+                  <input
+                   type="radio" 
+                    name="tattooSize"
+                    value="{{color}}"
+                    (change)="radioChangeHandler($event)">
+                  
+                  
+                  
+                  <span>{{color}}</span>
+                  
+                </div>
               </div>
+            </div>
+              
+           
 
          
        
@@ -94,11 +90,12 @@
 
               <ion-row justify-content-center>
                 <ion-col size="12">
-                  <p>{{SelectedSize}}</p>
+                  <p *ngIf="SelectedSize == 'yes'" style="color: seagreen;"> <ion-icon name="checkmark"></ion-icon> {{SelectedSize | titlecase}}, I need additional colors please.</p>
+                  <p *ngIf="SelectedSize == 'no'" style="color: rgb(207, 71, 71)"><ion-icon name="close"></ion-icon> {{SelectedSize | titlecase}}, I just want a Tattoo. Thanks.</p>
                     <p style="font-size: 80%;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
                 </ion-col>
                 <ion-col size="6" justify-content-center>
-                    <ion-button  color="secondary" shape="round" expand="block" (click)="senBookig()" [disabled]="!tattooForm.valid" >Book</ion-button>
+                    <ion-button  color="secondary" shape="round" mode="ios" expand="block" (click)="senBookig()" [disabled]="!tattooForm.valid" >Book</ion-button>
                 </ion-col>
               </ion-row>
     

@@ -270,7 +270,7 @@
             <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
-            <ion-button  mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+            <ion-button  mode="ios" fill="outline" expand="block" color="secondary" shape="round"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
             <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
               <p>{{Myname}}</p>
   
@@ -280,7 +280,7 @@
               <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
               <img *ngIf="Picture" src="{{Picture}}"alt="">
             </div>
-            <ion-button mode="ios" *ngIf="showProfile1"[style.display]="!tattooDisplay ? 'block' : 'none'" mode="ios" shape="round" fill="solid" (click)="opnModal()" color="secondary">Upload your own Tattoo</ion-button>
+            <ion-button mode="ios" *ngIf="showProfile1"[style.display]="!tattooDisplay ? 'block' : 'none'" mode="ios" shape="round" fill="outline" (click)="opnModal()" color="secondary">Upload your own Tattoo</ion-button>
           </div>
   
           <div class="notification" *ngIf="showProfile1">
@@ -372,7 +372,7 @@
           <div class="gang-wr">
             <div class="key-gang" *ngFor="let tattoo of PreviouseWork">
            
-              <div class="scroll-gang">
+              <div class="scroll-gang_r">
                 <div class="r_image">
                   <img src="{{tattoo.image}}" alt="">
                   <div class="info-scroll-gang">
