@@ -20,18 +20,28 @@ import { Storage } from '@ionic/storage';
 })
 export class XplorePage implements OnInit {
 
- 
+ @ViewChild('slideBanner', {static: false}) slideBanner: IonSlides;
 
   split: boolean = false;
   tattooView: any;
-  splitDiv: any = document.getElementsByClassName('split-pane');
+  splitDiv = document.getElementsByClassName('split-pane');
   loader: boolean = true;
   onboard: boolean = false;
-  onbordingDiv: any = document.getElementsByClassName('onbording');
+  onbordingDiv = document.getElementsByClassName('onbording');
   tattooDisplay: boolean = false;
-  tattooDisplaDiv: any = document.getElementsByClassName('tattoo-image');
+  tattooDisplaDiv = document.getElementsByClassName('tattoo-image');
 
 
+  viewMore: boolean = false;
+  viewMoreDiv: any;
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    effect: 'fade',
+    loop: true
+  };
+
+  category: string  = "art";
   /* Animations */
 popoverState = false;
 popoverDiv = document.getElementsByClassName('popOver');
@@ -98,15 +108,19 @@ tattoo = {
   continue: any;
   @ViewChild('slides', {static: false}) slides: IonSlides;
 
+
+ 
+
   constructor(public DeliverDataService : DeliverDataService, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
+
     if(this.plt.width() > 600) {
       this.split = false;
     }
    }
 
-
+  
 
    async Notifications(){
      console.log("ttttttttt", this.respnses);
@@ -165,6 +179,7 @@ tattoo = {
 
 
    ionViewDidEnter(){
+    this.viewMoreDiv = document.getElementsByClassName('view-more');
 
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
@@ -245,7 +260,12 @@ tattoo = {
 
 
 
-
+  nextSlides() {
+    this.slideBanner.slideNext();
+  }
+  prevSlides() {
+    this.slideBanner.slidePrev();
+  }
 
 
 
@@ -280,6 +300,20 @@ tattoo = {
        
       }, 500);
     }
+  }
+
+
+  viewMoreFunc(cat) {
+    this.loader = true;
+
+    setTimeout(() => {
+      this.category = cat;
+      this.viewMore = !this.viewMore;
+      this.loader = false;
+    }, 500);
+   
+   
+   
   }
 
   tattooAnimated(tattoo) {
@@ -323,7 +357,7 @@ tattoo = {
          this.render.setStyle(this.tattooDisplaDiv[0],'display','none');
          
          
-        }, 500);
+        }, 1000);
       }
       this.loader = false;
  

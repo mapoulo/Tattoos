@@ -81,8 +81,9 @@
 
 }
 .header-explore{
-    font-family: 'Pacifico', cursive !important;
-    color: #888 !important;
+    font-family: 'NewRocker', cursive !important;
+    color: rgb(255, 255, 255) !important;
+    font-size: 3.5vw;
 }
 .logo {
     display: flex;
@@ -136,11 +137,16 @@
 .wrapper-page {
     flex-basis: 95%;
     width: 100%;
-  
+    position: relative;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+
+
+
+    
+   
 
 
 }
