@@ -15,35 +15,38 @@ export class CustomizePage implements OnInit {
 db = firebase.firestore();
   storage = firebase.storage().ref();
   tattoo = "";
-  Length = 1;
-  Breadth = 1;
+  SelectedSize: string='';
+  color: any=[
+    'yes',
+    'no',
+  ];
+  sizes:""
   Cname = "";
     number : any = 0;
 
     tattooForm : FormGroup;
     validation_messages = {
-      'Length': [
-        { type: 'required', message: 'Length  is required.' },
+      'sizes': [
+        { type: 'required', message: 'sizes  is required.' },
   
       ],
-      'Breadth': [
-        { type: 'required', message: 'Breadth  is required.' },
-  
-      ],
+     
     }
   loader: boolean = false;
   progress: number = 0;
   constructor(public ModalController : ModalController, public AlertController:AlertController, private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
-      Length: new FormControl('', Validators.compose([Validators.required])),
-      Breadth: new FormControl('', Validators.compose([Validators.required])),
+      sizes: new FormControl('', Validators.compose([Validators.required])),
+      // Breadth: new FormControl('', Validators.compose([Validators.required])),
     })
   
   }
-
+  radioChangeHandler(event: any){
+    this.SelectedSize=event.target.value;
+ }
   ngOnInit() {
 
-    this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
     })
@@ -80,11 +83,11 @@ db = firebase.firestore();
   async Booking(tattoo){
 
 
-    if (firebase.auth().currentUser  && this.Length != 0 && this.Breadth != 0) {
+    // if (firebase.auth().currentUser  && this.Length != 0 && this.Breadth != 0) {
 
 
 
-    this.db.collection("Bookings").doc().set({
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
 
             
       category : "Customized",
@@ -93,8 +96,10 @@ db = firebase.firestore();
       endPrice : null,
       startPrice : null,
       tattoName: null,
-      breadth : this.Breadth,
-      length : this.Length,
+      // breadth : this.Breadth,
+      // length : this.Length,
+      sizes:this.sizes,
+      color:this.SelectedSize,
       email : firebase.auth().currentUser.email,
       uid : firebase.auth().currentUser.uid,
       customerName : this.Cname,
@@ -119,20 +124,18 @@ db = firebase.firestore();
     // this.modalController.dismiss({
     //   'dismissed': true
     // });
-  }else{
-    const alert = await this.AlertController.create({
-      header: "",
-      subHeader: "",
-      message: "The length and breadth cannot be zero",
-      buttons: ['OK']
-    });
-    alert.present();
+  // }else{
+  //   const alert = await this.AlertController.create({
+  //     header: "",
+  //     subHeader: "",
+  //     message: "The length and breadth cannot be zero",
+  //     buttons: ['OK']
+  //   });
+  //   alert.present();
 
-  }
+  // }
     
   }
-
-  
 
   dismiss() {
     this.ModalController.dismiss({
