@@ -49,160 +49,73 @@
        </div>
     </div>
     <div class="booking animated zoomIn delay-.5s">
+         
+
+          <form [formGroup]="tattooForm"> 
+
+            <ion-item color="transparent">
+              <ion-label color="primary" >Tattoo Sizes</ion-label>
+              <ion-select  color="primary" name="categories" [(ngModel)]="sizes" formControlName="sizes" >
+                <ion-select-option value="Small" >Small </ion-select-option>
+                <ion-select-option value="Medium">Medium</ion-select-option>
+                <ion-select-option value="Large">Large</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div class="error" *ngFor="let validate of validation_messages.sizes">
+              <div class="messages" *ngIf="tattooForm.get('sizes').hasError(validate.type) && (tattooForm.get('sizes').dirty || tattooForm.get('sizes').touched)">
+                {{validate.message}}
+            </div> 
+            </div>
+
+           <br>
+           <br>
+              <ion-label color="primary">colour additional</ion-label>
           
+              <div *ngFor="let color of color">
+             
+                <input
+                 type="radio" 
+                  name="tattooSize"
+                  value="{{color}}"
+                  (change)="radioChangeHandler($event)">
+                
+                
+                
+                <i>{{color}}</i>
+                
+              </div>
 
-          <form [formGroup]="tattooForm">
+         
+       
+             
 
-            <ion-grid>
+
+
+
               <ion-row justify-content-center>
                 <ion-col size="12">
-
-                  <ion-item class="item" style="margin-bottom: 1em;">
-                    <ion-label color="primary" position="floating">Length (in Centimetre)</ion-label>
-                    <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="number" type="number" formControlName="Length" [(ngModel)]="Length" placeholder="Specify your Length (CM) e.g 10" required="true" onKeyPress="if(this.value.length==5) return false;"></ion-input>
-                    <ion-icon name="calculator" color="primary" slot="end"></ion-icon>
-                  </ion-item>
-                   
-                    <div class="error" *ngFor="let validate of validation_messages.Length">
-                        <div class="messages" *ngIf="tattooForm.get('Length').hasError(validate.type) && (tattooForm.get('Length').dirty || tattooForm.get('Length').touched)">
-                          {{validate.message}}
-                      </div>
-                      </div>
-                </ion-col>
-              </ion-row>
-              <ion-row justify-content-center>
-                <ion-col size="12">
-                  <ion-item class="item" style="margin-bottom: 1em;">
-                    <ion-label color="primary" position="floating">Breadth (in Centimetre)</ion-label>
-                    <ion-input autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="number" type="number" formControlName="Breadth" [(ngModel)]="Breadth" placeholder="Specify your Breadth (CM) e.g 4" required="true" onKeyPress="if(this.value.length==5) return false;"></ion-input>
-                    <ion-icon name="calculator" color="primary" slot="end"></ion-icon>
-                  </ion-item>
-                      <div class="error" *ngFor="let validate of validation_messages.Breadth">
-                          <div class="messages" *ngIf="tattooForm.get('Breadth').hasError(validate.type) && (tattooForm.get('Breadth').dirty || tattooForm.get('Breadth').touched)">
-                            {{validate.message}}
-                        </div> 
-                        </div>
-                </ion-col>
-              </ion-row>
-              <ion-row justify-content-center>
-                <ion-col size="12">
+                  <p>{{SelectedSize}}</p>
                     <p style="font-size: 80%;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
                 </ion-col>
                 <ion-col size="6" justify-content-center>
-                    <ion-button  color="secondary" shape="round" expand="block" (click)="senBookig()" [disabled]="!tattooForm.valid">Book</ion-button>
+                    <ion-button  color="secondary" shape="round" expand="block" (click)="senBookig()" [disabled]="!tattooForm.valid" >Book</ion-button>
                 </ion-col>
               </ion-row>
-            </ion-grid>
-        <!--       <ion-item>
-                  <ion-label position="floating">Length in cm</ion-label>
-                  <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
-                </ion-item>
-                <div class="error" *ngFor="let validate of validation_messages.Length">
-                  <div class="messages" *ngIf="tattooForm.get('Length').hasError(validate.type) && (tattooForm.get('Length').dirty || tattooForm.get('Length').touched)">
-                    {{validate.message}}
-                </div> 
-              </div>
-              
-                <ion-item>
-                    <ion-label position="floating">Breadth in cm</ion-label>
-                    <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
-                  </ion-item>
-                  <div class="error" *ngFor="let validate of validation_messages.Breadth">
-                    <div class="messages" *ngIf="tattooForm.get('Breadth').hasError(validate.type) && (tattooForm.get('Breadth').dirty || tattooForm.get('Breadth').touched)">
-                      {{validate.message}}
-                  </div> 
-                </div>
-                
-              
-                  <ion-item>
-                     <p>You will receive a contract, date and time at which you can come and have your tattoo done.</p>
-                    </ion-item>
-              
-              
+    
                
         
-    <ion-button  color="secondary" shape="block" (click)="senBookig(tattooForm)" [disabled]="!tattooForm.valid">Book</ion-button>  -->
+
   </form>
   </div>
   </main>
 
-<!--   <div class="tattoo-image">
-      <div class="tattoo-details-image">
-          <img src="{{image}}" alt="">
-        </div>
-  </div>
-
-  <main class="main">
-
-     <section class="upload-tattoo">
-      <div class="upload" >
-        <div class="tattoo-details-image">
-          <img src="{{image}}" alt="">
-        </div>
-        <div class="information-details">
-          <p>Price range : {{priceRange}}</p>
-          <p>TattooName: {{name}}</p>
-          <p>Category : {{category}}</p>
-          <p>{{description}}</p>
-        </div>
-        
-      </div>
-    </section> 
 
 
-    <section class="form-container">
-     
-     
-            <ion-list>
-                    
-                   <ion-item>                      
-                          <p>Price range : {{priceRange}}</p>
-                      </ion-item>
 
-                      <ion-item>                      
-                          <p>TattooName: {{name}}</p>
-                      </ion-item>
+  
 
-                      <ion-item>                      
-                          <p>Category : {{category}}</p>
-                      </ion-item>
-
-                      <form [formGroup]="tattooForm">
-                      <ion-item>
-                          <ion-label position="floating">Length in cm</ion-label>
-                          <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
-                        </ion-item>
-                        <div class="error" *ngFor="let validate of validation_messages.Length">
-                          <div class="messages" *ngIf="tattooForm.get('Length').hasError(validate.type) && (tattooForm.get('Length').dirty || tattooForm.get('Length').touched)">
-                            {{validate.message}}
-                        </div> 
-                      </div>
-                      
-                        <ion-item>
-                            <ion-label position="floating">Breadth in cm</ion-label>
-                            <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
-                          </ion-item>
-                          <div class="error" *ngFor="let validate of validation_messages.Breadth">
-                            <div class="messages" *ngIf="tattooForm.get('Breadth').hasError(validate.type) && (tattooForm.get('Breadth').dirty || tattooForm.get('Breadth').touched)">
-                              {{validate.message}}
-                          </div> 
-                        </div>
-                        
-                      
-                          <ion-item>
-                             <p>You will receive a contract, date and time at which you can come and have your tattoo done.</p>
-                            </ion-item>
-                      
-                      
-                       
                 
-            <ion-button  color="secondary" shape="block" (click)="senBookig(tattooForm)" [disabled]="!tattooForm.valid">Book</ion-button> 
-          </form>
-
-
-        </ion-list>
-    </section>
-  </main> -->
+         
 </ion-content>
   
     
