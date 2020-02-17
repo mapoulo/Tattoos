@@ -56,7 +56,7 @@
   
   <div class="main-container">
 
-    <div class="view-more animated slideIn" *ngIf="viewMore">
+    <div class="view-more animated" *ngIf="viewMore">
        <div class="list-view">
          <div class="close-bt">
          
@@ -74,45 +74,28 @@
          </div>
          <div class="list_b"  [ngSwitch]="category">
             <div class="categories"  *ngSwitchCase="'portrait'">
-                <div class="card_more">
-                    <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+                <div class="card_more" *ngFor="let tattoo of Sketch;">
+                    <img src="{{tattoo.image}}" alt="">
                     <div class="name-btn">
                       <div class="btn-tattoo">
-                        <ion-button size="small" fill="clear" color="light" mode="ios">View to Book</ion-button>
+                        <ion-button mode="ios" expand="half" size="small" color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
                       </div>
-                      <p>Tattoo Butterfly</p>
+                      <p>{{ tattoo.name | titlecase}}</p>
                     </div>
                 </div>
-                
-                <div class="card_more">
-                  <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
-                  <div class="name-btn">
-                    <div class="btn-tattoo">
-                      <ion-button size="small" fill="clear" color="light" mode="ios">View to Book</ion-button>
-                    </div>
-                    <p>Tattoo Butterfly</p>
-                  </div>
-              </div>
-              <div class="card_more">
-                <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
-                <div class="name-btn">
-                  <div class="btn-tattoo">
-                    <ion-button size="small" fill="clear" color="light" mode="ios">View to Book</ion-button>
-                  </div>
-                  <p>Tattoo Butterfly</p>
-                </div>
-            </div>
                   
                 
             </div>
+
+
             <div class="categories" *ngSwitchCase="'art'">
-              <div class="card_more">
-                <img src="../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt="">
+              <div class="card_more" *ngFor="let tattoo of PreviouseWork">
+                <img src="{{tattoo.image}}" alt="">
                 <div class="name-btn">
                   <div class="btn-tattoo">
-                    <ion-button size="small" fill="clear" color="light" mode="ios">View to Book</ion-button>
+                    <ion-button  mode="ios" expand="half" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
                   </div>
-                  <p>Tattoo Butterfly</p>
+                  <p>{{ tattoo.name}}</p>
                 </div>
             </div>
             </div>
@@ -120,6 +103,9 @@
          </div>
        </div>
     </div>
+
+
+
 
     <div class="onbording" *ngIf="onboard">
       <div class="onboard">
