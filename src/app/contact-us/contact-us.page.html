@@ -79,7 +79,7 @@
             <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
               <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
             </ion-button>
-            <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+            <ion-badge mode="ios" class="badge" color="secondary" *ngIf="MyNotifications > 0">{{MyNotifications}}</ion-badge>
           </div>
        
       </div>

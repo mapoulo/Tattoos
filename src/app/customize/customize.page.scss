@@ -114,4 +114,19 @@
     height: 50%;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding: 1em 3em;
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
+    padding-top: 1em;
+
+    .max {
+        flex: 1;
+        font-family: 'Montserrat', sans-serif !important;
+        span {
+            margin-left: 1em;
+        }
+    }
 }

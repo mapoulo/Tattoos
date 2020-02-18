@@ -35,7 +35,7 @@ ion-toolbar {
 
 }
 p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   
 }
 
@@ -67,12 +67,18 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
 
 
 .fileContainer {
-  background:  #d36954;
-  color: #fff;
+  background:  #dddddd;
+  color: rgb(71, 71, 71);
   float: left;
   font-size: 80%;
   padding: 1em !important;
   border-radius: 50px !important;
+  transition: all 500ms;
+}
+
+.fileContainer:hover {
+  background: #000;
+  color: #fff;
 }
 
 .fileContainer [type=file] {

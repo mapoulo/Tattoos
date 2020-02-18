@@ -39,8 +39,9 @@ export class XplorePage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    effect: 'fade',
-    loop: true
+    effects: 'cube',
+    loop: true,
+    autoplay: true
   };
 
   category: string  = "art";

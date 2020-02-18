@@ -9,8 +9,8 @@
 
  <div class="tattoo-image animated" *ngIf="tattooDisplay" [ngClass]="{'zoomOut': !tattooDisplay, 'fadeIn': tattooDisplay}">
    <div class="close-btn">
-    <ion-button fill="clear" size="large" (click)="tattooAnimated('')" color="light">
-      <ion-icon name="close"></ion-icon>
+    <ion-button fill="clear" mode="ios" size="large" (click)="tattooAnimated('')" color="light">
+      <ion-icon  name="ios-close"></ion-icon>
     </ion-button>
 
    
@@ -78,7 +78,7 @@
                     <img src="{{tattoo.image}}" alt="">
                     <div class="name-btn">
                       <div class="btn-tattoo">
-                        <ion-button mode="ios" expand="half" size="small" color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
+                        <ion-button mode="ios" expand="block" size="small"  color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
                       </div>
                       <p>{{ tattoo.name | titlecase}}</p>
                     </div>
@@ -93,7 +93,7 @@
                 <img src="{{tattoo.image}}" alt="">
                 <div class="name-btn">
                   <div class="btn-tattoo">
-                    <ion-button  mode="ios" expand="half" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
+                    <ion-button  mode="ios" expand="block" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
                   </div>
                   <p>{{ tattoo.name}}</p>
                 </div>
@@ -239,8 +239,8 @@
       </div>
 
       <div class="list-split-pane">
-        <div class="btn-return" *ngIf="!showProfile1" routerLink="/">Explore</div>
-        <div class="btn-return" *ngIf="showProfile1" routerLink="/">Home</div>
+        <div class="btn-return" (click)="addClasseAnimates()" *ngIf="!showProfile1" routerLink="/">Explore</div>
+        <div class="btn-return" (click)="addClasseAnimates()" *ngIf="showProfile1" routerLink="/">Home</div>
         <div class="btn-return"  (click)="addClasseAnimates()"  routerLink="/contact-us">Contact Us</div>
         <div class="btn-return"  (click)="addClasseAnimates()"   *ngIf="!showProfile1" (click)="Login()">Sign In</div>
         <div class="btn-return"  (click)="addClasseAnimates()"  *ngIf="showProfile1" (click)="logOut()">Sign Out</div>
@@ -288,7 +288,7 @@
             <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
               <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
             </ion-button>
-            <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+            <ion-badge mode="ios" class="badge" color="secondary" *ngIf="MyNotifications > 0">{{MyNotifications}}</ion-badge>
           </div>
        
       </div>
@@ -316,32 +316,32 @@
           <img src="../../assets/Group 45@2x.png" alt="">
         </div>
         <ion-slides pager="true" [options]="slideOpts" #slideBanner>
-          <ion-slide  class="slide1 animated slideInUp">
+          <ion-slide  class="slide1 animated pulse">
             <img src="../../assets/photo1.jpg" alt="">
           </ion-slide>
    
-          <ion-slide class="slide2 animated slideInUp">
+          <ion-slide class="slide2 animated pulse">
             <img src="../../assets/photo3.jpg" alt="">
           </ion-slide>
-          <ion-slide class="slide3 animated slideInUp">
-            <img src="../../assets/photo4.jpg" alt="">
+          <ion-slide class="slide3 animated pulse">
+            <img src="../../assets/sarah-cervantes-Aq7YXfrIG5g-unsplash.jpg" alt="">
           </ion-slide>
-          <ion-slide class="slide3 animated slideInUp">
-            <img src="../../assets/photo5.jpg" alt="">
+          <ion-slide class="slide3 animated pulse">
+            <img src="../../assets/chris-blonk-sjI_iRsD-kU-unsplash.jpg" alt="">
           </ion-slide>
-          <ion-slide class="slide3 animated slideInUp">
+          <ion-slide class="slide3 animated pulse">
             <img src="../../assets/photo6.jpg" alt="">
           </ion-slide>
-          <ion-slide class="slide3 animated slideInUp">
+          <ion-slide class="slide3 animated pulse">
             <img src="../../assets/photo7.jpg" alt="">
           </ion-slide>
-          <!-- <ion-slide class="slide3 animated slideInUp">
+          <!-- <ion-slide class="slide3 animated pulse">
             <img src="../../assets/photo8.jpg" alt="">
           </ion-slide> -->
-          <ion-slide class="slide3 animated slideInUp">
+          <ion-slide class="slide3 animated pulse">
             <img src="../../assets/letter1.jpg" alt="">
           </ion-slide>
-          <ion-slide class="slide3 animated slideInUp">
+          <ion-slide class="slide3 animated pulse">
             <img src="../../assets/letter2.jpg" alt="">
           </ion-slide>
         </ion-slides>
@@ -349,7 +349,8 @@
       </div>
 
       <div class="small-device-header">
-        <h1>Explore</h1>
+        <h1 *ngIf="!showProfile1">Explore</h1>
+        <h1 *ngIf="showProfile1">Home Tattoo</h1>
       </div>
 
 
@@ -370,7 +371,7 @@
                     
                  <div class="info-scroll">
                   <div class="book-btn">
-                    <ion-button mode="ios" expand="half" size="small" color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
+                    <ion-button mode="ios" expand="block" size="small" color="light" fill="clear" (click)="tattooAnimated(tattoo)"> View to Book </ion-button>
                   </div>
                     <p class="ion-text-left">{{ tattoo.name | titlecase}}</p>
                 </div> 
@@ -400,9 +401,9 @@
                   <img src="{{tattoo.image}}" alt="">
                   <div class="info-scroll-gang">
                     <div class="book-btn">
-                      <ion-button  mode="ios" expand="half" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
+                      <ion-button  mode="ios" expand="block" size="small" color="light" (click)="tattooAnimated(tattoo)" fill="clear"> View to Book </ion-button>
                     </div>
-                      <p class="ion-text-left">{{ tattoo.name}}</p>
+                      <p>{{ tattoo.name}}</p>
                   </div>
                 </div>
               
@@ -413,7 +414,7 @@
           </div>
         </div>
        
-        <ion-grid>
+        <ion-grid class="grid">
           <ion-row justify-content-center align-items-center style="padding: 2em; background: rgb(54, 54, 54);">
             <ion-col  size-xs="12" size-sm="12" size-md="6" size-lg="3">
               <div class="navigations">

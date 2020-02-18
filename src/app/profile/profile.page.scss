@@ -348,11 +348,16 @@ ion-row {
 
 
 
-.split-pane, .menu-btn {
+.split-pane{
     display: none;
+    position: absolute;
+    /* z-index: -10; */
+
 
 }
-
+ .menu-btn {
+    display: none;
+}
 .list-split-pane {
     padding: 1em;
 
@@ -456,7 +461,7 @@ ion-row {
    }
 }
 .cup {
-    flex: 0 0 80%;
+    flex-basis: 80%;
     background: rgb(255, 255, 255); 
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281); 
@@ -916,7 +921,7 @@ ion-button.explore {
             flex-basis: 90%;
 
             .close-btn {
-                top: -20%;
+                top: -15%;
             }
         }
     }

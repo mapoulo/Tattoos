@@ -149,7 +149,7 @@
                             background: rgba(0, 0, 0, 0.647);
                             color: #fff;
                             padding: .6em;
-                            flex-wrap: wrap;
+                            flex-wrap: wrap-reverse;
 
                             p {
                                 font-size: 90%;
@@ -403,9 +403,15 @@ ion-item, ion-list {
 }
 
 
-.split-pane, .menu-btn {
+.split-pane{
     display: none;
+    position: absolute;
+    /* z-index: -10; */
 
+
+}
+ .menu-btn {
+    display: none;
 }
 
 .list-split-pane {
@@ -853,6 +859,17 @@ ion-button.explore {
     display: none;
 }
 @media only screen and (max-width: 600px) {
+    .info-scroll { 
+        p {
+            text-align: center !important;
+            width: 100%;
+
+        }
+        .book-btn {
+            width: 100%;
+        }
+    }
+
 
     ion-grid.grid {
         display: none;
@@ -1199,6 +1216,11 @@ ion-button.explore {
                         .name-btn {
                             p {
                                 text-align: center !important;
+                                width: 100%;
+                               
+                            }
+                            .btn-tattoo {
+                                width: 100%;
                             }
                         }
                     }
@@ -1217,7 +1239,7 @@ ion-button.explore {
             width: 60% !important;
 
             img {
-                object-fit: contain !important;
+                object-fit: cover !important;
                 filter: blur(3px);
             }
         }
@@ -1388,7 +1410,7 @@ ion-button.explore {
             width: 60% !important;
 
             img {
-                object-fit: contain !important;
+                object-fit: cover !important;
                 filter: blur(3px);
             }
         }
