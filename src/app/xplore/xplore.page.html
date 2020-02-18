@@ -60,7 +60,7 @@
        <div class="list-view">
          <div class="close-bt">
          
-          <ion-button fill="clear" color="light" size="large" (click)="viewMoreFunc()"><ion-icon size="large" name="ios-close"></ion-icon></ion-button>
+          <ion-button fill="clear" color="light" size="large" (click)="viewMoreFunc()"><ion-icon size="large" color="light" name="ios-close"></ion-icon></ion-button>
          </div>
          <div class="segment">
           <ion-segment  [(ngModel)]="category" value="javascript">
@@ -316,13 +316,13 @@
           <img src="../../assets/Group 45@2x.png" alt="">
         </div>
         <ion-slides pager="true" [options]="slideOpts" #slideBanner>
-          <ion-slide  class="slide1 animated slideInUp">
+          <ion-slide  class="slide1 animated zoomIn">
             <h1>Slide 1</h1>
           </ion-slide>
-          <ion-slide class="slide2 animated slideInUp">
+          <ion-slide class="slide2 animated zoomIn">
             <h1>Slide 2</h1>
           </ion-slide>
-          <ion-slide class="slide3 animated slideInUp">
+          <ion-slide class="slide3 animated zoomIn">
             <h1>Slide 3</h1>
           </ion-slide>
         </ion-slides>

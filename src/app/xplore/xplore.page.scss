@@ -1210,6 +1210,19 @@ ion-button.explore {
 }
 @media only screen and (min-width: 600px) and (max-width: 768px) {
 
+    .wrapper-header  {
+        flex: 0 0 30% !important;
+
+        .images__r {
+            width: 60% !important;
+
+            img {
+                object-fit: contain !important;
+                filter: blur(3px);
+            }
+        }
+    }
+
        .nav-bar {
         width: 100% !important;
         flex-wrap: wrap;
@@ -1255,6 +1268,18 @@ ion-button.explore {
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .wrapper-header  {
+        flex: 0 0 30% !important;
+
+        .images__r {
+            width: 60% !important;
+
+            img {
+                object-fit: contain !important;
+                filter: blur(3px);
+            }
+        }
+    }
     .scroll-container {
         .scroll-list, .scroll-gang {
             flex: 0 0 60% !important;
