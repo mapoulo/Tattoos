@@ -223,9 +223,9 @@
           <img  *ngIf="Picture"  src="{{Picture}}" alt="">
           <img  *ngIf="!Picture"  src="../../assets/person-icon.jpg" alt="">
         </div>
-        <div class="info-side">
+        <div class="info-side" *ngIf="Myname">
           <p style="color: #fff;">{{Myname}}</p>
-          <p style="color: #fff;">muenda@gmail.com</p>
+        
         </div>
        
         <div class="btn-man">
@@ -311,6 +311,10 @@
             </ion-icon>
           </ion-button>
         </div> 
+
+        <div class="images__r">
+          <img src="../../assets/Group 45@2x.png" alt="">
+        </div>
         <ion-slides pager="true" [options]="slideOpts" #slideBanner>
           <ion-slide  class="slide1 animated slideInUp">
             <h1>Slide 1</h1>

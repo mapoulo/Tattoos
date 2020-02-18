@@ -40,10 +40,10 @@
 }
 .error {
     color: rgb(196, 36, 36);
-    width: 90%;
-    margin: 0 auto;
-    font-family: 80%;
-    padding: .3em;
+    width: 95%;
+    margin: 1% auto;
+    font-family: 70%;
+   /*  padding: .3em; */
 
 }
 /* .fullscreenTattoo {
@@ -255,8 +255,8 @@ ion-button.explore {
 
 .information {
     display: flex;
-    justify-content: space-evenly;
-   
+    justify-content: flex-start;
+    
     align-items: flex-start;
     flex-direction: column;
 
@@ -270,7 +270,7 @@ ion-button.explore {
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        flex-basis: 100%;
+       /*  flex-basis: 100%; */
         padding: 1em;
 
 
@@ -312,7 +312,8 @@ ion-button.explore {
 
 
            &:hover {
-               transform: scale(1.1);
+               transform: scale(1.05);
+               filter: contrast(2);
            }
        }
    }
@@ -531,17 +532,135 @@ ion-item.item {
     }
     
 }
-@media only screen and (min-width: 600px) {
-    .scroll-container {
-        .scroll-list {
-            flex: 0 0 40%;
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .cont-container {
+        flex-direction: column;
+    }
+    .nav-bar {
+        flex-wrap: wrap;
+    }
+    .list {
+        display: none;
+    
+    }
+    .menu-btn  {
+        display: block;
+    }
+    .split-pane {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.83);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+        padding-bottom: 1em;
 
-            .scroll-item {
-                .scroll-key {
-                    flex: 0 0 20%;
+        .close {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-basis: 25%;
+            background: rgba(66, 66, 66, 0.404);
+            position: relative;
+            padding-left: .5em;
+            padding-right: .5em;
+            &::after {
+                position: absolute;
+                bottom: 0;
+                left: 5%;
+                width: 90%;
+                background: rgba(221, 221, 221, 0.096);
+                height: 2px;
+                border-radius: 50px;
+                content: '';
+            }
+
+            .btn-man {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+            }
+
+
+            .profile-image {
+                margin-right: 1%;
+                
+                 
+                img {
+                    height: 10vh;
+                    width: 10vh;
+                    border-left: 3px solid rgb(161, 148, 148);
+                    border-top: 3px solid rgb(192, 174, 174);
+                    border-right: 3px solid rgba(211, 106, 85, 0.663);
+                    border-bottom: 3px solid rgba(211, 105, 84, 0.714);
                 }
-               
+            }
+    
+        }
+
+        .list-split-pane {
+            flex-basis:60%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 !important;
+
+
+            div.btn-return  {
+                width: 100%;
+                text-align: left;
+                color: rgb(228, 228, 228);
+               flex-basis: 20%;
+                background: rgba(3, 3, 3, 0.63);
+                margin-top: 2%;
+                display: flex;
+                align-items: center;
+                padding-left: 2em;
+                font-family: 'NewRocker';
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4px;
+                    height: 100%;
+                    background: #d36954;
+                    border-radius: 50px;
+                }
             }
         }
+
+        .logoman {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 15%;
+        
+        }
+
+
+    }
+  
+   
+    .logo {
+        flex: 1;
+
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .cont-container {
+        flex-direction: column;
+    }
+
+    .nav-bar {
+        flex-wrap: wrap;
     }
 }

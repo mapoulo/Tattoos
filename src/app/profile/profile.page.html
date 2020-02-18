@@ -209,13 +209,10 @@
               <div class="p"><ion-icon mode="ios" name="call"></ion-icon><p>{{Mynumber}}</p></div>
             </div>
             <div class="customizedTattoo" >
-              <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
+              <div class="header-custom"><h4 style="font-weight: 700; text-align: center; font-size: 96%;">Customized Tattoo</h4></div>
               <div class="custom-card-container" >
                 <div class="messages" *ngIf="Customized.length == 0">
-                  <ion-fab-button size="large" color="light" (click)="opnModal()" mode="ios">
-                    <ion-icon name="ios-add"></ion-icon>
-                  </ion-fab-button>
-                  <p>Upload your your custom tattoo</p>
+                  <p style="font-size: 70%;">Upload your your custom tattoo</p>
                 </div>
                 <div class="custom-card" *ngFor = "let item of Customized">
                   <img src="{{item.dataTattoo.image}}" alt="">
@@ -245,7 +242,7 @@
           <div class="deep">
           
               <h4 style="font-weight: 700;">View all Request</h4>
-              <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
+              <p style="padding: 1em 0;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
           
             <ion-segment [(ngModel)]="category" color="primary">
             
