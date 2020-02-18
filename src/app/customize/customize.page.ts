@@ -11,8 +11,10 @@ import { SuccessPagePage } from '../success-page/success-page.page';
   styleUrls: ['./customize.page.scss'],
 })
 export class CustomizePage implements OnInit {
-  userImage:""
+  
 db = firebase.firestore();
+
+userImage = "";
   storage = firebase.storage().ref();
   tattoo = "";
   SelectedSize: string='';
@@ -52,7 +54,7 @@ db = firebase.firestore();
     this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
-      this.userImage = data.data().image
+      this.userImage = data.data().image;
     })
   }
 
@@ -108,6 +110,7 @@ db = firebase.firestore();
       number : this.number,
       bookingState : 'waiting',
       field : "Customized"
+     
     
 
 
