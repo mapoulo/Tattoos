@@ -37,7 +37,7 @@
                 <ion-item>
                   <ion-label position="floating">Full Name </ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="person"></ion-icon>
-                  <ion-input type="text" [(ngModel)]="Myname"></ion-input>
+                  <ion-input type="text" [(ngModel)]="Myname" onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
                  
                 </ion-item>
 
@@ -124,8 +124,8 @@
             <h1>{{showCustom.name_t}}</h1>
            
             <p>{{showCustom.desc}}</p>
-            <p>Length: {{showCustom.breadth}}cm</p>
-            <p>Breadth: {{showCustom.length}}cm</p>
+            <p>Size: {{showCustom.sizes}}</p>
+            <p>Additional Color: {{showCustom.color}}</p>
             <ion-button  mode="ios" (click)="DeleteData()" size="large" fill="clear"color="danger">
               <ion-icon name="ios-trash"></ion-icon> Delete
             </ion-button>
