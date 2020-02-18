@@ -50,18 +50,24 @@
            type="radio" 
             name="tattooSize"
             value="{{color}}"
-            (change)="radioChangeHandler($event)">
+            (change)="radioChangeHandler($event)" formControlName="color">
           
           
           
-          <i>{{color}}</i>
+          <!-- <i>{{color}}</i> -->
           
         </div>
+      
         <ion-row justify-content-center>
           <ion-col size="12">
             <p>{{SelectedSize}}</p>
               <p style="font-size: 80%;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
           </ion-col>
+          <div class="error" *ngFor="let validate of validation_messages.color">
+            <div class="messages" *ngIf="tattooForm.get('color').hasError(validate.type) && (tattooForm.get('color').dirty || tattooForm.get('color').touched)">
+              {{validate.message}}
+          </div> 
+          </div>
           <ion-col size="6" justify-content-center>
               <ion-button  color="secondary" shape="round" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
           </ion-col>

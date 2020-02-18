@@ -37,8 +37,8 @@ export class ProfilePage implements OnInit {
   showCustom = {
     name_t: '',
     image_t: '',
-    length: '',
-    breadth: '',
+    sizes: '',
+    color: '',
     desc: '',
     id: ''
   }
@@ -616,8 +616,8 @@ showTattoo(item) {
   this.key = item.id
   this.uid = item.dataTattoo.uid
   this.showCustom.name_t = item.dataTattoo.name;
-  this.showCustom.breadth = item.dataTattoo.breadth;
-  this.showCustom.length = item.dataTattoo.length;
+  this.showCustom.sizes = item.dataTattoo.sizes;
+  this.showCustom.color = item.dataTattoo.color;
   this.showCustom.image_t = item.dataTattoo.image;
   this.showCustom.desc = item.dataTattoo.description;
   this.showCustom.id = item.dataTattoo.id
@@ -644,8 +644,8 @@ async DeleteData() {
         handler: data => {
           this.db.collection("Bookings").doc(this.key ).delete()
           this.showCustom.name_t = "";
-          this.showCustom.breadth = "";
-          this.showCustom.length = "";
+          this.showCustom.sizes = "";
+          this.showCustom.color = "";
           this.showCustom.image_t = "";
           this.showCustom.desc = "";
           this.showCustom.id = "";

@@ -49,7 +49,7 @@
 
               <ion-item  mode="ios" class="item" style="margin-bottom: .5em;">
                 <ion-label  mode="ios" color="primary" position="floating">Full Name</ion-label>
-                <ion-input  mode="ios" autocorrect="on" autofocus="on" type="text" formControlName="name" name="name" [(ngModel)]="name" placeholder="Enter name" clearOnEdit="true" color="primary" inputmode="text" required="true"></ion-input>
+                <ion-input  mode="ios" autocorrect="on" autofocus="on" type="text" formControlName="name" name="name" [(ngModel)]="name" placeholder="Enter name" clearOnEdit="true" color="primary" inputmode="text" required="true" onkeypress="return /[a-zA-Z\s]/i.test(event.key)"></ion-input>
                 <ion-icon  mode="ios" name="person" size="small" color="primary" slot="end"></ion-icon>
                   </ion-item>
                     <div class="error" *ngFor="let validate of validation_messages.name">
