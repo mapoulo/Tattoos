@@ -72,30 +72,42 @@
       
     </div>
   </div>
-    <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
-      <div class="close">
-        <div class="profile-image explore" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-          <img *ngIf="!MyImage" src="../../assets/person-icon.jpg"alt="">
-            <img *ngIf="MyImage" src="{{MyImage}}"alt="">
-        </div>
-        <ion-button mode="ios" fill="clear" (click)="addClasseAnimates()" color="light">
-          <ion-icon name="close"></ion-icon>
-        </ion-button>
-       
+   
+  <aside class="split-pane animated" [ngClass]="{'slideOutLeft': !split, 'slideInLeft': split}">
+    <div class="close">
+      <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+        <img  *ngIf="MyImage"  src="{{MyImage}}" alt="">
+        <img  *ngIf="!MyImage"  src="../../assets/person-icon.jpg" alt="">
       </div>
-      <div class="list-split-pane">
-        <ion-button mode="ios" fill="clear" expand="block"  (click)="addClasseAnimates()"    *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
-        <ion-button mode="ios"  fill="clear" expand="block"  (click)="addClasseAnimates()"  *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
-        <ion-button mode="ios" fill="clear" expand="block"  (click)="addClasseAnimates()"  color="light" routerLink="/contact-us">Contact Us</ion-button>
-        <ion-button mode="ios" fill="clear" expand="block"  (click)="addClasseAnimates()"  color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
-        <ion-button mode="ios" fill="clear" expand="block"  (click)="addClasseAnimates()"  color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
-        <ion-button mode="ios" fill="solid" expand="block"  (click)="addClasseAnimates()"  color="light"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+      <div class="info-side">
+        <p style="color: #fff;">{{Myname}}</p>
+        <p style="color: #fff;">muenda@gmail.com</p>
+      </div>
      
+      <div class="btn-man">
+        <ion-button  mode="ios"  size="large"  fill="clear" (click)="addClasseAnimates()" color="light">
+          <ion-icon mode="ios" name="close"></ion-icon>
+        </ion-button>
       </div>
-      <div class="logoman">
-        <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
-      </div>
-    </aside>
+     
+
+     
+    </div>
+
+    <div class="list-split-pane">
+      <div class="btn-return" *ngIf="!showProfile1" routerLink="/">Explore</div>
+      <div class="btn-return" *ngIf="showProfile1" routerLink="/">Home</div>
+      <div class="btn-return"  (click)="addClasseAnimates()"  routerLink="/contact-us">Contact Us</div>
+      <div class="btn-return"  (click)="addClasseAnimates()"   *ngIf="!showProfile1" (click)="Login()">Sign In</div>
+      <div class="btn-return"  (click)="addClasseAnimates()"  *ngIf="showProfile1" (click)="logout()">Sign Out</div>
+      <div class="btn-return" (click)="addClasseAnimates()"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</div>
+      <div class="btn-return" *ngIf="showProfile1" (click)="opnModal()">Upload your own Tattoo</div>
+        
+    </div>
+    <div class="logoman">
+      <img src="../../assets/split.svg" width="150px" alt="">
+    </div>
+  </aside>
     <div class="customizedTDiv animated" [ngClass]="{'bounceOutUp': !custom, 'bounceInUp': custom}">
       <div class="header-custom">
         <h4>Customized Tattoo</h4>
@@ -138,40 +150,47 @@
       <div class="nav-bar">
         <div  class="menu-btn">
           <ion-button mode="ios" fill="clear" color="light" (click)="addClasseAnimates()">
-            <ion-icon name="menu"></ion-icon>
+            <ion-icon mode="ios" name="menu"></ion-icon>
           </ion-button>
         </div>
        
           <div class="logo">
-            <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+            <img src="../../assets/logoj.svg" width="80px" alt="">
           </div>
           <div class="list">
-            <ion-button mode="ios" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
-            <ion-button mode="ios" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
-            <!-- <ion-button class="explore" fill="clear" expand="block" color="light" routerLink="/">Explore</ion-button> -->
-            <ion-button mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
-            <ion-button mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
-            <ion-button mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
-            <ion-button mode="ios" fill="solid" expand="block" color="secondary"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
-            <div class="profile-image explore" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+            <ion-button  mode="ios" class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
+            <ion-button  mode="ios" class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
+           
+            <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
+            <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logout()">Sign Out</ion-button>
+            <ion-button  mode="ios" fill="outline" expand="block" color="secondary" shape="round"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
+            <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
               <p>{{Myname}}</p>
+  
+              <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
+  
+  
               <img *ngIf="!MyImage" src="../../assets/person-icon.jpg"alt="">
               <img *ngIf="MyImage" src="{{MyImage}}"alt="">
             </div>
+            <ion-button mode="ios" *ngIf="showProfile1" mode="ios" shape="round" fill="outline" (click)="opnModal()" color="secondary">Upload your own Tattoo</ion-button>
           </div>
+  
           <div class="notification" *ngIf="showProfile1">
+  
             <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
-              <ion-icon name="notifications-outline"></ion-icon>
+              <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
             </ion-button>
-            <ion-badge class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+            <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
           </div>
-        
+       
       </div>
     </ion-toolbar>
 
     <div class="wrapper-page">
       <div class="wrapper-header">
-        <h1>Hi,{{Myname}} </h1>
+        <h1>Hi {{Myname}} </h1>
      
       </div>
       <div class="container-sub">
@@ -190,13 +209,10 @@
               <div class="p"><ion-icon mode="ios" name="call"></ion-icon><p>{{Mynumber}}</p></div>
             </div>
             <div class="customizedTattoo" >
-              <div class="header-custom"><h4 style="font-weight: 700; text-align: center;">Customized Tattoo</h4></div>
+              <div class="header-custom"><h4 style="font-weight: 700; text-align: center; font-size: 96%;">Customized Tattoo</h4></div>
               <div class="custom-card-container" >
                 <div class="messages" *ngIf="Customized.length == 0">
-                  <ion-fab-button size="large" color="light" (click)="opnModal()" mode="ios">
-                    <ion-icon name="ios-add"></ion-icon>
-                  </ion-fab-button>
-                  <p>Upload your your custom tattoo</p>
+                  <p style="font-size: 70%;">Upload your your custom tattoo</p>
                 </div>
                 <div class="custom-card" *ngFor = "let item of Customized">
                   <img src="{{item.dataTattoo.image}}" alt="">
@@ -226,7 +242,7 @@
           <div class="deep">
           
               <h4 style="font-weight: 700;">View all Request</h4>
-              <p style="padding: 1em;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
+              <p style="padding: 1em 0;">Lerror veritatis hic eius asperiores quas at provident, repellendus minus, quam praesentium. Possimus iure voluptate quos.</p>
           
             <ion-segment [(ngModel)]="category" color="primary">
             

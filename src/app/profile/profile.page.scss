@@ -287,9 +287,17 @@ ion-row {
 .nav-bar {
     display: flex;
     flex-basis: 5%;
-    width: 100%;
+    margin: 0 auto;
+    width: 95%;
     justify-content: space-between;
     align-items: center;
+   
+
+
+    & > * {
+        transition: 500ms;
+    }
+    
     
 }
 
@@ -318,6 +326,7 @@ ion-row {
     align-items: center;
     justify-content: space-between;
     color: #fff;
+    margin-right: 1%;
 
     p {
         margin: 0 !important;
@@ -415,10 +424,12 @@ ion-row {
    /*  background: red; */
     display: flex;
     
+    
 }
 .information {
     flex-basis: 20%;
  /*    background: rgb(207, 207, 207); */
+    justify-self: flex-start;
     display: flex;
     flex-direction: column;
     margin-left: 1%;
@@ -498,6 +509,7 @@ ion-row {
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            padding-left: 1em;
 
             p {
                 margin: 5%;
@@ -512,6 +524,18 @@ ion-row {
        /*  background: red; */
         display: flex;
         flex-direction: column;
+        padding: 1em;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0%;
+            width: 100%;
+            height: 1px;
+            background: hsla(0, 0%, 89%, 0.506);
+            content: '';
+        }
 
         .header-custom {
             flex: 0 0 5%;
@@ -525,7 +549,8 @@ ion-row {
             flex-wrap: wrap;
            /*  justify-content: center; */
             padding: 1em;
-            background:#eaeaea;
+           
+          
 
             .messages {
                 height: 100%;
@@ -539,15 +564,7 @@ ion-row {
                 }
 
                 position: relative;
-                &::before {
-                    position: absolute;
-                    top: 0;
-                    left: 0%;
-                    width: 3px;
-                    height: 100%;
-                    background: #d36954;
-                    content: '';
-                }
+              
 
               
             }
@@ -593,7 +610,7 @@ ion-row {
 
 }
 .segment {
-    flex-basis: 50%;
+    flex: 0 0  50%;
     background: rgb(255, 255, 255);
     margin-left: 1%;
     margin-right: 1%;
@@ -666,6 +683,7 @@ ion-row {
     flex-basis: 80%;
 
     display: flex;
+    flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -675,7 +693,7 @@ ion-row {
         padding: 1em;
     flex-wrap: wrap;
     justify-content: flex-start;
-    flex-basis: 100%;
+    flex-basis: 60%;
 
 
     .no-items {
@@ -691,7 +709,7 @@ ion-row {
     .card {
        
         flex-basis: 50%;
-        height: 29%;
+        height: 50%;
         padding: .5em;
 
         .card-t {
@@ -877,7 +895,12 @@ ion-button.explore {
 
 @media only screen and (max-width: 600px) {
 
- 
+    .nav-bar {
+        width: 100% !important;
+        flex-wrap: wrap;
+      
+
+    }
 
     p, ion-label, ion-segment {
         font-size: 70%;
@@ -923,7 +946,7 @@ ion-button.explore {
       
 
         .card {
-            flex-basis: 90%;
+            flex: 0 0 96%;
            /*  background: red; */
             height: 100%;
             flex-grow: 0;
@@ -1022,7 +1045,7 @@ ion-button.explore {
         .information
          {
 
-            flex: 1;
+            flex: 0 0 90%;
             flex-direction: column;
            
          
@@ -1125,7 +1148,9 @@ ion-button.explore {
         display: block;
     }
     .split-pane {
-        display: block;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between;
         position: absolute;
         top: 0;
         left: 0;
@@ -1135,24 +1160,94 @@ ion-button.explore {
         z-index: 1000;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+        padding-bottom: 1em;
+
+        .close {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-basis: 25%;
+            background: rgba(66, 66, 66, 0.404);
+            position: relative;
+            padding-left: .5em;
+            padding-right: .5em;
+            &::after {
+                position: absolute;
+                bottom: 0;
+                left: 5%;
+                width: 90%;
+                background: rgba(221, 221, 221, 0.096);
+                height: 2px;
+                border-radius: 50px;
+                content: '';
+            }
+
+            .btn-man {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+            }
 
 
-    }
-    .close {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 10%;
-       
-        padding-left: .3em;
-
-    }
-    .profile-image {
-        img {
-            height: 8vh;
-            width: 8vh;
-
+            .profile-image {
+                margin-right: 1%;
+                
+                 
+                img {
+                    height: 10vh;
+                    width: 10vh;
+                    border-left: 3px solid rgb(161, 148, 148);
+                    border-top: 3px solid rgb(192, 174, 174);
+                    border-right: 3px solid rgba(211, 106, 85, 0.663);
+                    border-bottom: 3px solid rgba(211, 105, 84, 0.714);
+                }
+            }
+    
         }
+
+        .list-split-pane {
+            flex-basis:60%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 !important;
+
+
+            div.btn-return  {
+                width: 100%;
+                text-align: left;
+                color: rgb(228, 228, 228);
+               flex-basis: 20%;
+                background: rgba(3, 3, 3, 0.63);
+                margin-top: 2%;
+                display: flex;
+                align-items: center;
+                padding-left: 2em;
+                font-family: 'NewRocker';
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4px;
+                    height: 100%;
+                    background: #d36954;
+                    border-radius: 50px;
+                }
+            }
+        }
+
+        .logoman {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 15%;
+        
+        }
+
+
     }
     .logo {
         flex: 1;
@@ -1160,17 +1255,182 @@ ion-button.explore {
     }
     
 }
-@media only screen and (min-width: 600px) {
-    .scroll-container {
-        .scroll-list {
-            flex: 0 0 40%;
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .container-sub {
 
-            .scroll-item {
-                .scroll-key {
-                    flex: 0 0 20%;
+        .information {
+            flex: 0 0 40%;
+        }
+      
+    }
+    .list {
+        display: none;
+    
+    }
+    .split-pane {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 60%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.83);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.281);
+        padding-bottom: 1em;
+
+        .close {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-basis: 25%;
+            background: rgba(66, 66, 66, 0.404);
+            position: relative;
+            padding-left: .5em;
+            padding-right: .5em;
+            &::after {
+                position: absolute;
+                bottom: 0;
+                left: 5%;
+                width: 90%;
+                background: rgba(221, 221, 221, 0.096);
+                height: 2px;
+                border-radius: 50px;
+                content: '';
+            }
+
+            .btn-man {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+            }
+
+
+            .profile-image {
+                margin-right: 1%;
+                
+                 
+                img {
+                    height: 10vh;
+                    width: 10vh;
+                    border-left: 3px solid rgb(161, 148, 148);
+                    border-top: 3px solid rgb(192, 174, 174);
+                    border-right: 3px solid rgba(211, 106, 85, 0.663);
+                    border-bottom: 3px solid rgba(211, 105, 84, 0.714);
                 }
-               
+            }
+    
+        }
+
+        .list-split-pane {
+            flex-basis:60%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 !important;
+
+
+            div.btn-return  {
+                width: 100%;
+                text-align: left;
+                color: rgb(228, 228, 228);
+               flex-basis: 20%;
+                background: rgba(3, 3, 3, 0.63);
+                margin-top: 2%;
+                display: flex;
+                align-items: center;
+                padding-left: 2em;
+                font-family: 'NewRocker';
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4px;
+                    height: 100%;
+                    background: #d36954;
+                    border-radius: 50px;
+                }
             }
         }
+
+        .logoman {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 15%;
+        
+        }
+
+
+    }
+    .logo {
+        flex: 1;
+
+    }
+    .menu-btn  {
+        display: block;
+    }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .container-sub {
+       
+ 
+        .information {
+            flex: 0 0 40%;
+        }
+      
+    }
+
+    .editForm {
+    
+        display: none;
+    }
+    .segment {
+        flex: 0 0 60%;
+    }
+
+    .cardFor {
+
+        .card {
+            .card-t {
+                position: relative;
+                .image-card {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                  
+                }
+                .info {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    padding: .5em;
+                    color: #fff;
+                    background: rgba(0, 0, 0, 0.423);
+                }
+            }
+        }
+
     }
 }

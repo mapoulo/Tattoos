@@ -145,7 +145,12 @@ export class BookingModalPage implements OnInit {
     
     
   }
+
+
   senBookig(){
+
+
+
     this.loader = true;
   //  this.notifications.requestPermission();
    console.log("The key Is here ", this.notifications.token);
@@ -205,11 +210,15 @@ export class BookingModalPage implements OnInit {
     }, 2000);
  
   }
+
+
   dismiss() {
+
     this.modalController.dismiss({
       'dismissed': true
     });
   }
+
 }
 
 

@@ -1,3 +1,4 @@
+import { CustomizePage } from './../customize/customize.page';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
@@ -65,6 +66,14 @@ export class ContactUsPage implements OnInit {
   
   
   }
+
+  async opnModal(){
+    let modal = await this.modalController.create({
+      component : CustomizePage,
+      cssClass: 'modalNotification'
+    })
+    return await modal.present();
+   }
   ngOnInit() {
 
    this.showProfile();

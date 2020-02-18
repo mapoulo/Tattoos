@@ -20,6 +20,8 @@ import { Storage } from '@ionic/storage';
 })
 export class XplorePage implements OnInit {
 
+ 
+  Contact=[]
  @ViewChild('slideBanner', {static: false}) slideBanner: IonSlides;
 
   split: boolean = false;
@@ -93,7 +95,7 @@ tattoo = {
   image = '';
 
   email: string;
-  Contact=[]
+  // Contact=[]
   tattoos: any = {
     image: '',
     description: '',
