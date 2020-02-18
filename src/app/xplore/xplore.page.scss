@@ -435,7 +435,7 @@ ion-button {
 .wrapper-header {
     flex: 0 0 40%;
     width: 100%;
-    background: rgba(196, 212, 102, 0.514);
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -465,7 +465,7 @@ ion-button {
                 object-fit: cover;
             }
         }
-        ion-slide.slide1 {
+        ion-slide {
             background: rgb(0, 0, 0);
         }
     }
