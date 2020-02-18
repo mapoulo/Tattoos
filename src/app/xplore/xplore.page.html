@@ -317,10 +317,11 @@
                  <p style="font-size: 120%; text-align: left;"><strong> Navigation</strong></p>
                 </div>
                <div class="nav_t">
-                 <p>Explore</p>
-                 <p>Contact Us</p>
-                 <p>Create an Account</p>
-                 <p>Sign In</p>
+                 <p *ngIf="!showProfile1" color="light" routerLink="/">Explore</p>
+                 <p *ngIf="showProfile1" color="light" routerLink="/">Home</p>
+                 <p routerLink="/contact-us">Contact Us</p>
+                 <p *ngIf="!showProfile1" (click)="CreateAccount()">Create an Account</p>
+                 <p *ngIf="!showProfile1" (click)="Login()">Sign In</p>
                </div>
            
               </div>
@@ -332,23 +333,23 @@
               
               </div>
               
-              <div class="conta_r">
+              <div class="conta_r" *ngFor="let contact of Contact">
                 <ion-fab-button color="transparent" size="small">
                   <ion-icon name="ios-call"></ion-icon>
                 </ion-fab-button>
-                <p>+2774 389 3493</p>
+                <p>{{contact.doc.phoneNumber}}</p>
               </div>
-              <div class="conta_r">
+              <div class="conta_r" *ngFor="let contact of Contact">
                 <ion-fab-button color="transparent" size="small">
                   <ion-icon name="ios-pin"></ion-icon>
                 </ion-fab-button>
-                <p>Soweto, Johannesburg, 1818</p>
+                <p>{{contact.doc.address}}</p>
               </div>
-              <div class="conta_r">
+              <div class="conta_r"*ngFor="let contact of Contact">
                 <ion-fab-button color="transparent" size="small">
                   <ion-icon name="ios-mail"></ion-icon>
                 </ion-fab-button>
-                <p>muenddkhuthadzo@gmail.com</p>
+                <p>{{contact.doc.email}}</p>
               </div>
             </ion-col>
             <ion-col  size-xs="12" size-sm="12" size-md="12" size-lg="3">
@@ -366,15 +367,10 @@
               </div>
             </ion-col>
           </ion-row>
-         
-            
-             
-
               
           
     
         </ion-grid>
-       
       </div>
 
       

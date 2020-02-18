@@ -21,7 +21,7 @@ import { Storage } from '@ionic/storage';
 export class XplorePage implements OnInit {
 
  
-
+  Contact=[]
   split: boolean = false;
   tattooView: any;
   splitDiv: any = document.getElementsByClassName('split-pane');
@@ -166,6 +166,35 @@ tattoo = {
 
    ionViewDidEnter(){
 
+    let firetattoo = {
+      docid: '',
+      doc: {}
+    }
+   
+  
+   
+   
+    this.db.collection('Admin').onSnapshot(data => {
+       this.Contact = []
+      //console.log('tt',this.Tattoos);
+      data.forEach(item => {
+        firetattoo.doc = item.data();
+        firetattoo.docid = item.id;
+        
+        
+        this.Contact.push(firetattoo)
+        //console.log('all',this.Tattoos);
+         firetattoo = {
+          docid: '',
+      
+          doc: {}
+        }
+      })
+      
+      console.log("Contact US ",  this.Contact );
+      
+      
+    })
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
 
