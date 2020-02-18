@@ -27,13 +27,14 @@
 @import '~animate.css/animate.min.css';
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
 ion-toolbar {
     --background: transparent !important;
     --ion-color-base: transparent !important;
 
 
 }
-p, h1, h2,h3,h4,h5,h6,small {
+p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
   font-family: 'Montserrat', sans-serif !important;
   
 }
