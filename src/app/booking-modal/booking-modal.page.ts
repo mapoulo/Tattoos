@@ -62,7 +62,7 @@ export class BookingModalPage implements OnInit {
 }
   ngOnInit() {
     if(firebase.auth().currentUser){
-      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+      this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
         this.userImage = data.data().image
         console.log("Image ", this.userImage);
         
@@ -86,7 +86,7 @@ export class BookingModalPage implements OnInit {
       }, 4000);
      }
     
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+    this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
       this.Myemail = data.data().email;
       this.Myimage  = data.data().image
       this.Myname  = data.data().name
@@ -145,7 +145,12 @@ export class BookingModalPage implements OnInit {
     
     
   }
+
+
   senBookig(){
+
+
+
     this.loader = true;
   //  this.notifications.requestPermission();
    console.log("The key Is here ", this.notifications.token);
@@ -205,11 +210,15 @@ export class BookingModalPage implements OnInit {
     }, 2000);
  
   }
+
+
   dismiss() {
+
     this.modalController.dismiss({
       'dismissed': true
     });
   }
+
 }
 
 

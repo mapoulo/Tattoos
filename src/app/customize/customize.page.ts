@@ -11,7 +11,7 @@ import { SuccessPagePage } from '../success-page/success-page.page';
   styleUrls: ['./customize.page.scss'],
 })
 export class CustomizePage implements OnInit {
-
+  userImage:""
 db = firebase.firestore();
   storage = firebase.storage().ref();
   tattoo = "";
@@ -30,14 +30,17 @@ db = firebase.firestore();
         { type: 'required', message: 'sizes  is required.' },
   
       ],
-     
+      'color': [
+        { type: 'required', message: 'color  is required.' },
+  
+      ],
     }
   loader: boolean = false;
   progress: number = 0;
   constructor(public ModalController : ModalController, public AlertController:AlertController, private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       sizes: new FormControl('', Validators.compose([Validators.required])),
-      // Breadth: new FormControl('', Validators.compose([Validators.required])),
+      color: new FormControl('', Validators.compose([Validators.required])),
     })
   
   }
@@ -46,9 +49,10 @@ db = firebase.firestore();
  }
   ngOnInit() {
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
+    this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
+      this.userImage = data.data().image
     })
   }
 
@@ -83,11 +87,9 @@ db = firebase.firestore();
   async Booking(tattoo){
 
 
-    // if (firebase.auth().currentUser  && this.Length != 0 && this.Breadth != 0) {
 
 
-
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+      this.db.collection("Bookings").doc().set({
 
             
       category : "Customized",
@@ -96,8 +98,8 @@ db = firebase.firestore();
       endPrice : null,
       startPrice : null,
       tattoName: null,
-      // breadth : this.Breadth,
-      // length : this.Length,
+      userImage:  this.userImage,
+      
       sizes:this.sizes,
       color:this.SelectedSize,
       email : firebase.auth().currentUser.email,
@@ -121,19 +123,7 @@ db = firebase.firestore();
 
     })
 
-    // this.modalController.dismiss({
-    //   'dismissed': true
-    // });
-  // }else{
-  //   const alert = await this.AlertController.create({
-  //     header: "",
-  //     subHeader: "",
-  //     message: "The length and breadth cannot be zero",
-  //     buttons: ['OK']
-  //   });
-  //   alert.present();
-
-  // }
+   
     
   }
 

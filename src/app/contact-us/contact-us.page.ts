@@ -76,7 +76,7 @@ export class ContactUsPage implements OnInit {
    }
   ngOnInit() {
 
-   
+   this.showProfile();
     this.loader=true;
 
 

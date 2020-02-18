@@ -10,7 +10,7 @@ import { BookingModalPage } from '../booking-modal/booking-modal.page';
 import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
 import { Storage } from '@ionic/storage';
-// import { OneSignal } from '@ionic-native/onesignal';
+
 
 
 @Component({
@@ -95,7 +95,7 @@ tattoo = {
   image = '';
 
   email: string;
-
+  // Contact=[]
   tattoos: any = {
     image: '',
     description: '',
@@ -120,9 +120,12 @@ tattoo = {
     if(this.plt.width() > 600) {
       this.split = false;
     }
+    
    }
 
-  
+   slidesDidLoad(slides: IonSlides) {
+    slides.startAutoplay();
+  }
 
    async Notifications(){
      console.log("ttttttttt", this.respnses);
@@ -183,35 +186,8 @@ tattoo = {
    ionViewDidEnter(){
     this.viewMoreDiv = document.getElementsByClassName('view-more');
 
-    let firetattoo = {
-      docid: '',
-      doc: {}
-    }
-   
-  
-   
-   
-    this.db.collection('Admin').onSnapshot(data => {
-       this.Contact = []
-      //console.log('tt',this.Tattoos);
-      data.forEach(item => {
-        firetattoo.doc = item.data();
-        firetattoo.docid = item.id;
-        
-        
-        this.Contact.push(firetattoo)
-        //console.log('all',this.Tattoos);
-         firetattoo = {
-          docid: '',
-      
-          doc: {}
-        }
-      })
-      
-      console.log("Contact US ",  this.Contact );
-      
-      
-    })
+
+
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
 
@@ -285,7 +261,35 @@ tattoo = {
 
             }, 1000);
 
-              
+             let firetattoo = {
+      docid: '',
+      doc: {}
+    }
+   
+  
+   
+   
+    this.db.collection('Admin').onSnapshot(data => {
+       this.Contact = []
+      //console.log('tt',this.Tattoos);
+      data.forEach(item => {
+        firetattoo.doc = item.data();
+        firetattoo.docid = item.id;
+        
+        
+        this.Contact.push(firetattoo)
+        //console.log('all',this.Tattoos);
+         firetattoo = {
+          docid: '',
+      
+          doc: {}
+        }
+      })
+      
+      console.log("Contact US ",  this.Contact );
+      
+      
+    })  
   
   }
 
