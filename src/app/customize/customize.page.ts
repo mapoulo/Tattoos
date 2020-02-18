@@ -13,6 +13,7 @@ import { SuccessPagePage } from '../success-page/success-page.page';
 export class CustomizePage implements OnInit {
 
 db = firebase.firestore();
+userImage = "";
   storage = firebase.storage().ref();
   tattoo = "";
   SelectedSize: string='';
@@ -46,9 +47,10 @@ db = firebase.firestore();
  }
   ngOnInit() {
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
+    this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
       this.number = data.data().number;
+      this.userImage = data.data().image;
     })
   }
 
@@ -87,7 +89,7 @@ db = firebase.firestore();
 
 
 
-    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
 
             
       category : "Customized",
@@ -105,7 +107,8 @@ db = firebase.firestore();
       customerName : this.Cname,
       number : this.number,
       bookingState : 'waiting',
-      field : "Customized"
+      field : "Customized",
+      userImage : this.userImage
     
 
 
