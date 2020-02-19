@@ -20,7 +20,7 @@ userImage = "";
   SelectedSize: string='';
   color: any=[
     'yes',
-    'no',
+    'no'
   ];
   sizes:""
   Cname = "";
@@ -32,17 +32,17 @@ userImage = "";
         { type: 'required', message: 'sizes  is required.' },
   
       ],
-      'color': [
-        { type: 'required', message: 'color  is required.' },
+      // 'color': [
+      //   { type: 'required', message: 'color  is required.' },
   
-      ],
+      // ],
     }
   loader: boolean = false;
   progress: number = 0;
   constructor(public ModalController : ModalController, public AlertController:AlertController, private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       sizes: new FormControl('', Validators.compose([Validators.required])),
-      color: new FormControl('', Validators.compose([Validators.required])),
+      // color: new FormControl('', Validators.compose([Validators.required])),
     })
   
   }
