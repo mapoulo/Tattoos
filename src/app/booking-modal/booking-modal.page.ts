@@ -57,10 +57,15 @@ export class BookingModalPage implements OnInit {
     // Breadth: new FormControl('', Validators.compose([Validators.required])),
   })
 }
+
+
  radioChangeHandler(event: any){
    this.SelectedSize=event.target.value;
 }
+
+
   ngOnInit() {
+
     if(firebase.auth().currentUser){
       this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
         this.userImage = data.data().image
@@ -104,10 +109,13 @@ export class BookingModalPage implements OnInit {
       this.number = data.data().number;
       this.userImage = data.data().image;
     })
+
   }
   
   
   ionViewWillEnter(){
+
+    
     this.loader = true;
     setTimeout(() => {
       this.loader = false;

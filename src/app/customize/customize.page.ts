@@ -32,23 +32,26 @@ userImage = "";
         { type: 'required', message: 'sizes  is required.' },
   
       ],
-      'color': [
-        { type: 'required', message: 'color  is required.' },
-  
-      ],
+     
     }
   loader: boolean = false;
   progress: number = 0;
   constructor(public ModalController : ModalController, public AlertController:AlertController, private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       sizes: new FormControl('', Validators.compose([Validators.required])),
-      color: new FormControl('', Validators.compose([Validators.required])),
+     
     })
   
   }
-  radioChangeHandler(event: any){
-    this.SelectedSize=event.target.value;
- }
+
+
+
+
+ radioChangeHandler(event: any){
+  this.SelectedSize=event.target.value;
+}
+
+
   ngOnInit() {
 
     this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {
