@@ -26,9 +26,9 @@
     </div>
 
     <form class="form" [formGroup]="tattooForm" *ngIf="tattoo">
-      <ion-item color="transparent">
-        <ion-label color="primary" >Tattoo Sizes</ion-label>
-        <ion-select  color="primary" name="categories" [(ngModel)]="sizes" formControlName="sizes" >
+      <ion-item>
+        <ion-label >Tattoo Sizes</ion-label>
+        <ion-select name="categories" [(ngModel)]="sizes" formControlName="sizes" >
           <ion-select-option value="Small" >Small </ion-select-option>
           <ion-select-option value="Medium">Medium</ion-select-option>
           <ion-select-option value="Large">Large</ion-select-option>
@@ -39,28 +39,33 @@
           {{validate.message}}
       </div> 
       </div>
-
-     <br>
-     <br>
-        <ion-label color="primary">colour additional</ion-label>
+      <div class="color-edition"  style="margin-top: 2em;"> 
+        <ion-label>colour additional</ion-label>
+        <div class="inputs">
+      
     
-        <div *ngFor="let color of color">
-       
-          <input
-           type="radio" 
-            name="tattooSize"
-            value="{{color}}"
-            (change)="radioChangeHandler($event)" formControlName="color">
-          
-          
-          
-          <!-- <i>{{color}}</i> -->
-          
-        </div>
+          <div class="max" *ngFor="let color of color">
+         
+            <input
+             type="radio" 
+              name="tattooSize"
+              value="{{color}}"
+              (change)="radioChangeHandler($event)" formControlName="color">
+            
+            
+            
+            <span>{{color}}</span>
+            
+          </div>
+      </div>
+      </div>
+  
+        
       
         <ion-row justify-content-center>
           <ion-col size="12">
-            <p>{{SelectedSize}}</p>
+            <p *ngIf="SelectedSize == 'yes'" style="color: seagreen;"> <ion-icon name="checkmark"></ion-icon> {{SelectedSize | titlecase}}, I need additional colors please.</p>
+            <p *ngIf="SelectedSize == 'no'" style="color: rgb(207, 71, 71);"><ion-icon name="close"></ion-icon> {{SelectedSize | titlecase}}, I just want a Tattoo. Thanks.</p>
               <p style="font-size: 80%;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
           </ion-col>
           <div class="error" *ngFor="let validate of validation_messages.color">
@@ -69,7 +74,7 @@
           </div> 
           </div>
           <ion-col size="6" justify-content-center>
-              <ion-button  color="secondary" shape="round" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
+              <ion-button  color="secondary" shape="round" mode="ios" expand="block" (click)="Booking(tattooForm)" [disabled]="!tattooForm.valid" >Book</ion-button>
           </ion-col>
         </ion-row>
 

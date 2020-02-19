@@ -19,7 +19,7 @@ export class NotificationsPage implements OnInit {
   icon = 'ios-arrow-down'
   days = "";
   article: boolean = false;
-  articleDiv: any = document.getElementsByClassName('article');
+  articleDiv: any = document.querySelectorAll('.article');
   cardDiv: any = document.getElementsByClassName('card');
   constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
     // this.array = [];

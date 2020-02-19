@@ -127,9 +127,15 @@
 }
 
 
-.split-pane, .menu-btn {
+.split-pane{
     display: none;
+    position: absolute;
+    /* z-index: -10; */
 
+
+}
+ .menu-btn {
+    display: none;
 }
 
 .list-split-pane {

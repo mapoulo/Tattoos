@@ -7,7 +7,7 @@
   </ion-fab>
   
   <div class="main-container">
-    <div class="modal edit animated " [ngClass]="{'flipInX': edit, 'flipOutY': !edit}">
+    <div class="modal edit animated " *ngIf="edit" [ngClass]="{'flipInX': edit, 'flipOutY': !edit}">
       <div class="small-modal-edit-profile">
         <div class="close-btn">
           <ion-fab-button mode="ios" color="dark" size="small" class="close-btn" fill="clear" (click)="modalAnimate()">
@@ -24,13 +24,13 @@
               <img *ngIf="!MyImage" src="../../assets/person-icon.jpg" alt="khuthy">
               <img *ngIf="MyImage" src="{{MyImage}}" alt="khuthy">
               <label class="fileContainer">
-                <ion-icon size="large" name="ios-camera"></ion-icon>
+                <ion-icon size="small" name="ios-image"></ion-icon>
                 <input type="file"  accept="image/*" (change)="changeListener($event)"/> 
             </label> 
                 </div>
         </div>
       
-          <ion-grid>
+          <ion-grid style="margin-bottom: 2em;">
             <ion-row justify-content-center>
             
               <ion-col size="12">
@@ -51,7 +51,7 @@
                 <ion-item>
                   <ion-label position="floating">Phone Number</ion-label>
                   <ion-icon size="small" mode="ios" slot="end" name="call"></ion-icon>
-                  <ion-input minlength=10 maxlength=12 autofocus="on" type="tel" clearInput="true" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"  [(ngModel)]="Mynumber"></ion-input>
+                  <ion-input minlength=10 maxlength=12 autofocus="on" type="tel" clearInput="false" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"  [(ngModel)]="Mynumber"></ion-input>
                 </ion-item>
                
               
@@ -108,7 +108,7 @@
       <img src="../../assets/split.svg" width="150px" alt="">
     </div>
   </aside>
-    <div class="customizedTDiv animated" [ngClass]="{'bounceOutUp': !custom, 'bounceInUp': custom}">
+    <div class="customizedTDiv animated" *ngIf="custom" [ngClass]="{'bounceOutUp': !custom, 'bounceInUp': custom}">
       <div class="header-custom">
         <h4>Customized Tattoo</h4>
         <ion-button mode="ios" fill="clear" (click)="customTattoos()" color="light" size="small"><ion-icon name="close"></ion-icon></ion-button>
@@ -182,7 +182,7 @@
             <ion-button mode="ios" fill="clear" (click)="Notifications()" size="large" color="light">
               <ion-icon  mode="ios" name="notifications-outline"></ion-icon>
             </ion-button>
-            <ion-badge mode="ios" class="badge" color="secondary">{{MyNotifications}}</ion-badge>
+            <ion-badge mode="ios" class="badge" color="secondary" *ngIf="MyNotifications > 0">{{MyNotifications}}</ion-badge>
           </div>
        
       </div>
@@ -316,7 +316,7 @@
               <img src="{{item.image}}" alt="">
             </div>
             <div class="info">
-              <div class="icon" style="background: red !important;">
+              <div class="icon" style="background: rgb(153, 32, 32) !important;">
                 <ion-icon color="light" name="close"></ion-icon>
               </div>
               <p >{{item.bookingState}}</p>
