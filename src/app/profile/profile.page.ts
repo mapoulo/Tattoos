@@ -73,6 +73,7 @@ export class ProfilePage implements OnInit {
   editDivModal = document.getElementsByClassName('modal');
   Myname = "";
   Mynumber = "";
+  MyEmail = "";
   link = "";
   MyPdf = "";
   pdfObj = null;
@@ -218,6 +219,7 @@ export class ProfilePage implements OnInit {
           this.Myname = data.data().name
           this.MyImage = data.data().image
           this.Mynumber = data.data().number
+          this.MyEmail = data.data().email
         })
 
         

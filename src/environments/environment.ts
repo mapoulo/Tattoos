@@ -7,17 +7,18 @@ export const environment = {
 };
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDPxIN83IXDDR0Jpsrm9PlQ3hlHvl0Wy2o",
-  authDomain: "myintattoo.firebaseapp.com",
-  databaseURL: "https://myintattoo.firebaseio.com",
-  projectId: "myintattoo",
-  storageBucket: "myintattoo.appspot.com",
-  messagingSenderId: "111524298478",
-  appId: "1:111524298478:web:ccb738b34f2f203a9bbdff",
-  measurementId: "G-KPXGYV92NE",
-  vapidKey: "BKmzoGplIo-9urZ1WPhr_mmDPnR-vd0AuAQ_3eaeJ73NoZzDpwu-jx7gKJdKVY8k7qc2Al7LH1u5vR_PqLaBbos"
 
+  apiKey: "AIzaSyC3vCG0b69VGuhdnn82Ra6xLoI-3IAG-q0",
+  authDomain: "ink-tatoos.firebaseapp.com",
+  databaseURL: "https://ink-tatoos.firebaseio.com",
+  projectId: "ink-tatoos",
+  storageBucket: "ink-tatoos.appspot.com",
+  messagingSenderId: "614855155179",
+  appId: "1:614855155179:web:ea09d009668a40b4a1cdae",
+  measurementId: "G-694DP6LKJV"
+  
   };
+
 
 
 /*

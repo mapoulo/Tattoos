@@ -116,6 +116,8 @@ export class ContactUsPage implements OnInit {
   GoTo(){ 
 
     return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;
+
+    // 230 Park Ave, New York, NY 10169, USA
     
   }
  
@@ -328,8 +330,8 @@ async Login(){
 
     var user = firebase.auth().currentUser;
     if (user) {
-      this.db.collection("Message").doc(firebase.auth().currentUser.uid).set({
-        //firebase.firestore().collection("Messages").doc().set({
+      this.db.collection("Message").doc().set({
+      
          
           name : this.Myname,
           email : this.email,
@@ -339,7 +341,7 @@ async Login(){
           uid : firebase.auth().currentUser.uid
           
         })
-      // User is signed in.
+      
     }
  
     
