@@ -20,13 +20,14 @@ export class NotificationsPage implements OnInit {
   days = "";
   article: any;
   articleDiv: any = document.querySelectorAll('.article');
- 
+
   cardDiv: any = document.getElementsByClassName('card');
-  constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
+
+  constructor(public DeliverDataService: DeliverDataService, public AlertController: AlertController, private modalController: ModalController) {
     // this.array = [];
     // this.array = this.DeliverDataService.AcceptedData;
-    console.log("Data in the Notifications ", this.array);
-    
+    console.log('Data in the Notifications ', this.array);
+
    }
 
   ngOnInit() {
@@ -34,16 +35,18 @@ export class NotificationsPage implements OnInit {
 
     if(firebase.auth().currentUser){
 
-      this.db.collection("Response").onSnapshot(data => {
+      this.db.collection('Response').onSnapshot(data => {
         this.array = []
         data.forEach(item => {
-          let obj = {obj:{}, id : "", val: false}
-          if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending" ){
-              obj.id = item.id
+          let obj = {obj: {}, id : '', val: false, icon: 'ios-arrow-down' }
+          // tslint:disable-next-line: triple-equals
+          if( item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == 'Pending' ){
+              obj.id = item.id;
               obj.obj = item.data();
               obj.val = false;
+              obj.icon = 'ios-arrow-down';
               this.array.push(obj)
-              obj = {obj:{}, id : "", val: false}
+              obj = {obj: {}, id : '', val: false, icon: 'ios-arrow-down' }
           }
         })
       })
@@ -52,24 +55,24 @@ export class NotificationsPage implements OnInit {
   }
 
 
- 
+
 
   async Decline(data, i, key){
 
-   
+
     // setTimeout(() => {
       this.array.splice(i, 1);
     // },2000);
 
   this.db.collection("Response").doc(key).set({
-  
+
     bookingState : "Declined"
-    
+
   }, {merge : true})
-      
 
 
- 
+
+
 
   const alert = await this.AlertController.create({
     header: "",
@@ -81,7 +84,7 @@ export class NotificationsPage implements OnInit {
 
   }
 
- 
+
 
   dismiss() {
     this.modalController.dismiss({
@@ -91,16 +94,16 @@ export class NotificationsPage implements OnInit {
 
   animate(val,i) {
     console.log(this.array[i].val);
-    
+
       this.array[i].val = !val;
 
       if(this.array[i].val) {
-        this.icon = 'ios-arrow-up'
+        this.array[i].icon = 'ios-arrow-up'
       }else {
-        this.icon = 'ios-arrow-down'
+        this.array[i].icon = 'ios-arrow-down'
       }
-   
-    
+
+
   }
 
   async Accept(data, i, key){
@@ -116,15 +119,15 @@ export class NotificationsPage implements OnInit {
     console.log("a", data.uid);
     this.showMessage = true;
     this.message = "Accept";
-   
+
 
     // setTimeout(() => {
     //   console.log("ACCEPTED DATA");
       this.array.splice(i, 1);
-     
+
     // },2000);
-    
-   
+
+
 
     let obj = {
       startingDate : "",
@@ -141,7 +144,7 @@ export class NotificationsPage implements OnInit {
     this.db.collection("Response").doc(key).set({
       bookingState : "Accepted"
     }, {merge : true})
-        
+
   }
 
 
