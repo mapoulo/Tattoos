@@ -51,7 +51,7 @@
             <ion-item>
               <ion-label>Tattoo Sizes</ion-label>
               <ion-select name="categories" [(ngModel)]="sizes" formControlName="sizes" >
-                <ion-select-option value="Small" >Small </ion-select-option>
+                <ion-select-option value="Small" selected >Small </ion-select-option>
                 <ion-select-option value="Medium">Medium</ion-select-option>
                 <ion-select-option value="Large">Large</ion-select-option>
               </ion-select>
@@ -96,7 +96,7 @@
                     <p style="font-size: 80%;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
                 </ion-col>
                 <ion-col size="6" justify-content-center>
-                    <ion-button  color="secondary" shape="round" mode="ios" expand="block" (click)="senBookig()" [disabled]="!tattooForm.valid" >Book</ion-button>
+                    <ion-button  color="secondary" shape="round" mode="ios" expand="block" (click)="senBookig()"  >Book</ion-button>
                 </ion-col>
               </ion-row>
     

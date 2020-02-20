@@ -7,6 +7,9 @@ import { SuccessPagePage } from '../success-page/success-page.page';
 import { SuccessPagePageModule } from '../success-page/success-page.module';
 import { NotificationsService } from '../notifications.service';
 import { AlertController } from '@ionic/angular';
+import * as moment from 'moment';
+
+
 @Component({
   selector: 'app-booking-modal',
   templateUrl: './booking-modal.page.html',
@@ -115,7 +118,7 @@ export class BookingModalPage implements OnInit {
   
   ionViewWillEnter(){
 
-    
+
     this.loader = true;
     setTimeout(() => {
       this.loader = false;
@@ -167,7 +170,7 @@ export class BookingModalPage implements OnInit {
         // if(this.Length != 0 && this.Breadth != 0){
           this.db.collection("Bookings").doc().set({
     
-                
+            time : moment().format('MMMM Do YYYY, h:mm:ss a'),
             category : this.category,
             description : this.description,
             image : this.image,
@@ -181,6 +184,7 @@ export class BookingModalPage implements OnInit {
             number : this.number,
             bookingState : 'waiting',
             field : "Booking",
+        
             // tokenId : this.notifications.token,
             //cmsTokenId : this.cmsTokenId ,
             userImage : this.userImage,
@@ -202,14 +206,7 @@ export class BookingModalPage implements OnInit {
             'dismissed': true
           });
         }else{
-          const alert = await this.alertController.create({
-            header: '',
-            subHeader: '',
-            message: 'The legnth and bredth cannot be zero ',
-            buttons: ['OK']
-          });
-      
-          await alert.present();
+          
         }
         
       // }
