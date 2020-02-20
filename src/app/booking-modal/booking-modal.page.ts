@@ -103,7 +103,7 @@ export class BookingModalPage implements OnInit {
     this.db.collection("Admin").onSnapshot(data => {
       data.forEach(item => {
         // this.cmsTokenId = item.data().tokenId
-        console.log("Your data is dddddd ", item.data().tokenId);
+        // console.log("Your data is dddddd ", item.data().tokenId);
         
       })
     })

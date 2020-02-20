@@ -3,7 +3,7 @@ import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms'
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { SuccessPagePage } from '../success-page/success-page.page';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-customize',
@@ -99,7 +99,7 @@ userImage = "";
 
       this.db.collection("Bookings").doc().set({
 
-            
+        time : moment().format('MMMM Do YYYY, h:mm:ss a'),     
       category : "Customized",
       description : "Customized Tattoo",
       image : this.tattoo,

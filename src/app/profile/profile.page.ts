@@ -328,25 +328,27 @@ export class ProfilePage implements OnInit {
     }
 
 
-    Edit(){
-      console.log("Images  ", this.MyImage);
-      
-      setTimeout(() => {
-        //gfjgfhgfhgfhgfgf
-        this.db.collection("Users").doc(firebase.auth().currentUser.uid).update({
-          name :this.Myname,
-        
-          number:this.Mynumber,
-          image : this.MyImage
-        
-        });
-  
-  
-        this.modalAnimate();
-      }, 3000)
     
-   
-    }
+      async Edit(){
+        console.log("Images  ", this.MyImage);
+        this.loader = true;
+        setTimeout(() => {
+          this.db.collection("Users").doc(firebase.auth().currentUser.uid).update({
+            name :this.Myname,
+            number:this.Mynumber,
+            image : this.MyImage
+          
+          });
+          
+          setTimeout(() => {
+            this.loader = false;
+          }, 2000);
+    
+          this.modalAnimate();
+          
+        }, 3000)
+       
+      }
   
   
     modalAnimate() {
@@ -651,6 +653,7 @@ async DeleteData() {
           this.showCustom.image_t = "";
           this.showCustom.desc = "";
           this.showCustom.id = "";
+          this.del()
           this.seeDecribe()
         }
       }
@@ -661,12 +664,45 @@ async DeleteData() {
 
 downloadPdf1(){
   this.db.collection("Admin").onSnapshot(data => {
-    data.forEach(i => {
-    this.MyPdf = i.data().pdf;
-    const pdfUrl = this.MyPdf ;
-    const pdfName = 'InkScribeTattoo Contract.pdf';
-    FileSaver.saveAs(pdfUrl, pdfName);
+    data.forEach( async(i) => {
+
+      if(i.data().pdf == ""){
+
+        
+      const alert = await this.alertCtrl.create({
+        header: '',
+        message: 'There is no contract to download.',
+        buttons: [
+          {
+            text: 'ok',
+            
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+  
+    
+      await alert.present();
+
+      }else{
+        this.MyPdf = i.data().pdf;
+        const pdfUrl = this.MyPdf ;
+        const pdfName = 'InkScribeTattoo Contract.pdf';
+        FileSaver.saveAs(pdfUrl, pdfName);
+      }
+   
     })
   })
 }
+async del(){
+  const alert = await this.alertCtrl.create({
+    header: "",
+    subHeader: "",
+    message: "Tattoo deleted successfully",
+    buttons: ['OK']
+  });
+  alert.present();
+}  
 }
