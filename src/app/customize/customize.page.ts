@@ -14,11 +14,11 @@ export class CustomizePage implements OnInit {
   
 db = firebase.firestore();
 
-userImage = "";
+userImage = '';
   storage = firebase.storage().ref();
-  tattoo = "";
-  SelectedSize: string='';
-  color: any=[
+  tattoo = '';
+  SelectedSize: string = '';
+  color: any = [
     'yes',
     'no'
   ];
@@ -46,15 +46,11 @@ userImage = "";
     })
   
   }
-
-
-
-
- radioChangeHandler(event: any){
-  this.SelectedSize=event.target.value;
-}
-
-
+  radioChangeHandler(event: any){
+    this.SelectedSize = event.target.value;
+    console.log(this.SelectedSize);
+    
+ }
   ngOnInit() {
 
     this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(data => {

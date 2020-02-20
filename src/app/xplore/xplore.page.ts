@@ -1,3 +1,4 @@
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import * as firebase from 'firebase';
@@ -85,7 +86,9 @@ tattoo = {
   Myname;
   Mynumber;
   Picture= "";
-
+  name_contact = ""
+  email_contact = ""
+  message = ""
 
 
   MyNotifications = 0;
@@ -111,12 +114,32 @@ tattoo = {
   continue: any;
   @ViewChild('slides', {static: false}) slides: IonSlides;
 
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Name is required.' },
+    ],
+    'email': [
+      {type: 'required', message: 'Email address is required.'},
+      {type: 'pattern', message: 'Email address is not Valid.'},
+      {type: 'validEmail', message: 'Email address already exists in the system.'},
+    ],
+    'message': [
+      { type: 'required', message: 'Message  is required.' },
+    ],
+  }
 
+  tattooForm: FormGroup;
  
 
-  constructor(public DeliverDataService : DeliverDataService, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
+  constructor(private fb: FormBuilder, public DeliverDataService : DeliverDataService, public store: Storage, private toastController: ToastController, private plt: Platform, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
+
+    this.tattooForm = this.fb.group({
+      name: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
+      message: new FormControl('', Validators.compose([Validators.required])),
+    })
 
     if(this.plt.width() > 600) {
       this.split = false;

@@ -319,11 +319,12 @@ export class ProfilePage implements OnInit {
     console.log("Method Called");
     
     this.loader = true;
+    setTimeout(() => {
+      this.loader = false;
+    }, 2000);
     this.DeliverDataService.logoutUser().then(()=>{
       this.rout.navigateByUrl('/');
-      setTimeout(() => {
-        this.loader = false;
-      }, 2000);
+     
     })
     }
 
