@@ -1,5 +1,5 @@
 <ion-header translucent no-border>
-  <ion-toolbar>
+  <ion-toolbar style="background-color: #eaeaea;">
     <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">My Notifications</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
       <ion-button fill="icon-only">
@@ -16,14 +16,14 @@
     <div class="messages" *ngIf="array.length == 0">
       <p>You do not have any Notifications</p>
     </div>
-    <div class="card"  *ngFor="let data of array; let i = index">
+    <div class="card"  *ngFor="let data of array; let i = index;" [ngStyle]="{'height: 25%': article, 'height: 20%': !article}">
         <div class="profile">
           <img src="{{data.obj.image}}" alt="">
           </div>
           <div class="info-to-card">
               <h4>{{data.obj.price | currency : '&#82;'}}</h4>
-             <article class="sessions"> <p> {{data.obj.days}} Days Sessions</p> <ion-button fill="clear" color="dark" (click)="animate(i)" size="small"><ion-icon [name]="icon"></ion-icon></ion-button></article>
-              <article class="article animated" [ngClass]="{'zoomIn': article, 'zoomOut': !article}">
+             <article class="sessions"> <p> {{data.obj.days}} Days Sessions</p> <ion-button fill="clear" color="dark" (click)="animate(data.val, i)" size="small"><ion-icon [name]="icon"></ion-icon></ion-button></article>
+              <article class="article animated" [ngClass]="{'slideBox zoomIn': article, 'closeBox zoomOut': !article}">
                 <p>Start Date: <strong>{{data.obj.startingDate | date: 'dd/MM/yyyy'}}</strong> </p>
                 <p>End Date: <strong>{{data.obj.endingDate | date: 'dd/MM/yyyy'}}</strong></p>
               </article>
@@ -32,8 +32,8 @@
             </div>
             
             <div class="accept-decline">
-              <ion-button size="small" fill="clear" tooltip="Accept" color="success" class="btn" (click)="Accept(data, i, data.id)"><ion-icon name="checkmark-circle"></ion-icon></ion-button>
-              <ion-button size="small" fill="clear" color="danger" class="btn" (click)="Decline(data, i, data.id)"><ion-icon name="close-circle"></ion-icon></ion-button>
+              <button mode="ios" size="small" fill="clear" tooltip="Accept" expand="block" class="btn_accept" (click)="Accept(data, i, data.id)"><ion-icon color="light" size="large" name="ios-checkmark"></ion-icon></button>
+              <button mode="ios" size="small" fill="clear"  expand="block" class="btn_decline" (click)="Decline(data, i, data.id)"><ion-icon size="large" color="light" name="ios-close"></ion-icon></button>
             </div>
 
             

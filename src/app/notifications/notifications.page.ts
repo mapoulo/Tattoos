@@ -18,8 +18,8 @@ export class NotificationsPage implements OnInit {
   message = "";
   icon = 'ios-arrow-down'
   days = "";
-  article: boolean = false;
-  articleDiv: any = document.querySelectorAll('.article');
+  article: any;
+ 
   cardDiv: any = document.getElementsByClassName('card');
   constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
     // this.array = [];
@@ -36,12 +36,13 @@ export class NotificationsPage implements OnInit {
       this.db.collection("Response").onSnapshot(data => {
         this.array = []
         data.forEach(item => {
-          let obj = {obj:{}, id : ""}
+          let obj = {obj:{}, id : "", val: false}
           if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending" ){
               obj.id = item.id
-              obj.obj = item.data()
+              obj.obj = item.data();
+              obj.val = false;
               this.array.push(obj)
-              obj = {obj:{}, id : ""}
+              obj = {obj:{}, id : "", val: false}
           }
         })
       })
@@ -87,16 +88,11 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  animate(i) {
-    this.article = !this.article;
-
-    if(this.article) {
-      this.render.setStyle(this.articleDiv[i], 'display', 'block');
-      this.render.setStyle(this.cardDiv[i], 'height', '25%');
-    }else {
-      this.render.setStyle(this.articleDiv[i], 'display', 'none');
-      this.render.setStyle(this.cardDiv[i], 'height', '20%');
-    }
+  animate(value, i) {
+    
+   
+   
+    
   }
 
   async Accept(data, i, key){

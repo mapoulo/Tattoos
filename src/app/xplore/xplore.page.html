@@ -364,7 +364,7 @@
             <ion-button fill="outline" (click)="viewMoreFunc('portrait')" mode="ios" size="small" color="secondary" shape="round">View All</ion-button>
           </div>
           <div class="scroll-item">
-            <div class="scroll-key" *ngFor="let tattoo of Sketch;"  >
+          <div  *ngFor="let tattoo of Sketch; let i=index;"  class="scroll-key animated fadeInRight delay-0.{{ i }}s">
               <div class="scroll-value">
                 <div class="r_image">
                   <img src="{{tattoo.image}}" alt="">
@@ -394,7 +394,7 @@
             <ion-button fill="outline" mode="ios" size="small" color="secondary" (click)="viewMoreFunc('art')" shape="round">View All</ion-button>
           </div>
           <div class="gang-wr">
-            <div class="key-gang" *ngFor="let tattoo of PreviouseWork">
+            <div *ngFor="let tattoo of PreviouseWork; let i=index;"  class="key-gang  animated fadeInLeft delay-0.{{ i }}s">
            
               <div class="scroll-gang_r">
                 <div class="r_image">
@@ -415,11 +415,11 @@
         </div>
        
         <ion-grid class="grid">
-          <ion-row justify-content-center align-items-center style="padding: 2em; background: rgb(54, 54, 54);">
+          <ion-row justify-content-center align-items-start style="padding: 2em;">
             <ion-col  size-xs="12" size-sm="12" size-md="6" size-lg="3">
               <div class="navigations">
                 <div class="head_t">
-                 <p style="font-size: 120%; text-align: left;"><strong> Navigation</strong></p>
+                 <p style="font-size: 18px;"><strong> Navigation</strong></p>
                 </div>
                <div class="nav_t">
                  <p *ngIf="!showProfile1" color="light" routerLink="/">Explore</p>
@@ -427,49 +427,61 @@
                  <p routerLink="/contact-us">Contact Us</p>
                  <p *ngIf="!showProfile1" (click)="CreateAccount()">Create an Account</p>
                  <p *ngIf="!showProfile1" (click)="Login()">Sign In</p>
+                 <p *ngIf="showProfile1" routerLink="/profile">View your Profile</p>
                </div>
            
               </div>
               
             </ion-col>
             <ion-col  size-xs="12" size-sm="12" size-md="6" size-lg="3">
-              <div class="conta_r">
-                <p style="font-size: 100%"><strong> Contact Us</strong></p>
+              <div class="conta">
+                <p style="color: #fff;"><strong>Contact Us</strong></p>
               
               </div>
               
               <div class="conta_r" *ngFor="let contact of Contact">
-                <ion-fab-button color="transparent" size="small">
+               
                   <ion-icon name="ios-call"></ion-icon>
-                </ion-fab-button>
+          
                 <p>{{contact.doc.phoneNumber}}</p>
               </div>
               <div class="conta_r" *ngFor="let contact of Contact">
-                <ion-fab-button color="transparent" size="small">
+             
                   <ion-icon name="ios-pin"></ion-icon>
-                </ion-fab-button>
+              
                 <p>{{contact.doc.address}}</p>
               </div>
               <div class="conta_r"*ngFor="let contact of Contact">
-                <ion-fab-button color="transparent" size="small">
+              
                   <ion-icon name="ios-mail"></ion-icon>
-                </ion-fab-button>
+                
                 <p>{{contact.doc.email}}</p>
               </div>
             </ion-col>
             <ion-col  size-xs="12" size-sm="12" size-md="12" size-lg="3">
-             
-              <div class="aboutUs">
-                <div class="logo-footer">
-                  <img src="../../assets/anotherLogo.svg" width="70px" alt="">
-                </div>
-                <div class="b_rr">
-                  <p style="font-size: 120%"><strong> About Us</strong></p>
-                <p>Lorem ipsum, dolor sit amplicabo ea, reiciendis autem asperiores veritatis hic expedita fuga, laborum voluptas! Libero, voluptatibus.</p>
-                
+              <div class="conta">
+                <p style="color: #fff;"><strong>Privacy Policy</strong></p>
+              
               </div>
-            
+              <div class="contra_r">
+                <p style="color: #fff;font-size: 80%;">
+                  Lorem ipsum dolor sit amet consectetur,nobis!  
+                </p>
               </div>
+              <div class="contra_r">
+                <h6>Terms and Conditions</h6>
+                <p style="color: #fff;font-size: 80%;">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ex eius distinctio dicta aperiam! Nisi, nemo sit? Facere iusto quidem reprehenderit enim modi delectus, necessitatibus ea porro earum dicta esse.
+                </p>
+              </div>
+              <div class="contra_r">
+                <h6>Terms and Conditions</h6>
+                <p style="color: #fff;font-size: 80%;">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ex eius distinctio dicta aperiam! Nisi, nemo sit? Facere iusto quidem reprehenderit enim modi delectus, necessitatibus ea porro earum dicta esse.
+                </p>
+              </div>
+
+
             </ion-col>
           </ion-row>
               

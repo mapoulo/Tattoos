@@ -19,6 +19,18 @@
     background: #555;
   }
 
+  ion-content {
+    --background: #eaeaea;
+  }
+
+
+  .slideBox {
+    display: flex !important;
+  }
+  .closeBox {
+    display: none !important;
+  }
+
 .container {
     height: 100%;
     width: 100%;
@@ -43,7 +55,8 @@
     flex: 1;
     height: 100%;
     width: 100%;
-    overflow: auto;
+    
+   /*  overflow: auto; */
 
     /* display: flex;
     flex-direction: column; */
@@ -56,10 +69,25 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.116), 0 3px 6px rgba(0, 0, 0, 0.185);
-    /* border-radius: .5em; */
+    box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.1),  
+    -6px -6px 12px  rgba(255, 255, 255, 1);
+    border-radius: .5em !important;
+    overflow: hidden;
     margin-bottom: 5%;
+   /*  padding: 1em; */
     justify-content: space-between;
+
+    &::before {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow:  6px 6px 12px rgba(0, 0, 0, 0.1),  
+      -6px -6px 12px  rgba(255, 255, 255, 1);
+      content: '';
+
+    }
   }
   .profile {
     flex-basis: 30%;
@@ -98,13 +126,23 @@
 
       
       justify-self: flex-end;
-      flex-basis: 10%;
+      flex-basis: 15%;
       display: flex;
       flex-direction: column;
       background: rgba(0, 0, 0, 0.11);
          
-      .btn {
-        flex: 1;
+      .btn_accept, .btn_decline{
+        flex-basis:100%;
+        border-radius: none !important;
+     
+       
+      }
+      .btn_accept {
+        background: rgba(0, 150, 20, 0.74) !important;
+      }
+
+      .btn_decline {
+        background: #d36954af !important;
       }
       
        

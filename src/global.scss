@@ -40,10 +40,10 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
 }
 
 
-/* .modalNotification .modal-wrapper {
+.modalNotification .modal-wrapper {
     width: 30%;
     transform: translate(0, -100%);
-} */
+}
 
 .fileContainer {
   overflow: hidden;
@@ -102,12 +102,17 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
     --height: 40%;
   }
   }
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 600px) and (max-width: 768px){
     .modalNotification .modal-wrapper {
       width: 40%;
     }
   }
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px)  {
+    .modalNotification .modal-wrapper {
+      width: 30%;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px)  {
     .modalNotification .modal-wrapper {
       width: 30%;
     }
