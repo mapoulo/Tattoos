@@ -19,6 +19,7 @@ export class NotificationsPage implements OnInit {
   icon = 'ios-arrow-down'
   days = "";
   article: any;
+  articleDiv: any = document.querySelectorAll('.article');
  
   cardDiv: any = document.getElementsByClassName('card');
   constructor(public DeliverDataService : DeliverDataService,public AlertController : AlertController, private modalController: ModalController, private render: Renderer2 ) {
@@ -88,9 +89,16 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  animate(value, i) {
+  animate(val,i) {
+    console.log(this.array[i].val);
     
-   
+      this.array[i].val = !val;
+
+      if(this.array[i].val) {
+        this.icon = 'ios-arrow-up'
+      }else {
+        this.icon = 'ios-arrow-down'
+      }
    
     
   }
