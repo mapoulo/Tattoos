@@ -16,14 +16,14 @@
     <div class="messages" *ngIf="array.length == 0">
       <p>You do not have any Notifications</p>
     </div>
-    <div class="card"  *ngFor="let data of array; let i = index;" [ngStyle]="{'height: 25%': article, 'height: 20%': !article}">
+    <div class="card"  *ngFor="let data of array; let i = index;" [style.flex]="data.val ? '0 0 25%': '0 0 20%'">
         <div class="profile">
           <img src="{{data.obj.image}}" alt="">
           </div>
           <div class="info-to-card">
               <h4>{{data.obj.price | currency : '&#82;'}}</h4>
              <article class="sessions"> <p> {{data.obj.days}} Days Sessions</p> <ion-button fill="clear" color="dark" (click)="animate(data.val, i)" size="small"><ion-icon [name]="icon"></ion-icon></ion-button></article>
-              <article class="article animated" [ngClass]="{'slideBox zoomIn': article, 'closeBox zoomOut': !article}">
+              <article class="article animated" [ngClass]="{'slideBox slideInUp': data.val, 'closeBox slideInUp': !data.val}">
                 <p>Start Date: <strong>{{data.obj.startingDate | date: 'dd/MM/yyyy'}}</strong> </p>
                 <p>End Date: <strong>{{data.obj.endingDate | date: 'dd/MM/yyyy'}}</strong></p>
               </article>
