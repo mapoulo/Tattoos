@@ -16,7 +16,7 @@
     <div class="messages" *ngIf="array.length == 0">
       <p>You do not have any Notifications</p>
     </div>
-    <div class="card"  *ngFor="let data of array; let i = index;" [style.flex]="data.val ? '0 0 25%': '0 0 20%'">
+    <div class="card"  *ngFor="let data of array; let i = index;" [ngClass]="{'max': data.val, 'min': !data.val}">
         <div class="profile">
           <img src="{{data.obj.image}}" alt="">
           </div>
