@@ -27,7 +27,11 @@ export class BookingModalPage implements OnInit {
   Mynumber = ""
   cmsTokenId = ""
   userImage = ""
- 
+  calendar = {
+    mode: 'month',
+    currentDate: new Date()
+  };
+  minDate = new Date().toISOString();
     sizes:""
     describe = false;
     describeDiv = document.getElementsByClassName('description');
@@ -38,7 +42,7 @@ export class BookingModalPage implements OnInit {
     endPrice = ""
     startPrice = ""
     name = "";
-  
+  date=""
     Cname = "";
     number : any = 0;
     db = firebase.firestore()
@@ -48,7 +52,10 @@ export class BookingModalPage implements OnInit {
         { type: 'required', message: 'sizes  is required.' },
   
       ],
-     
+      'date': [
+        { type: 'required', message: 'date  is required.' },
+  
+      ],
     }
   loader: boolean = false;
        
@@ -57,7 +64,7 @@ export class BookingModalPage implements OnInit {
   constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, public alertController: AlertController,  private render: Renderer2) { 
   this.tattooForm = this.fb.group({
     sizes: new FormControl('', Validators.compose([Validators.required])),
-    // Breadth: new FormControl('', Validators.compose([Validators.required])),
+    date: new FormControl('', Validators.compose([Validators.required])),
   })
 }
 
@@ -178,6 +185,7 @@ export class BookingModalPage implements OnInit {
            endPrice : this.endPrice,
             tattoName: this.name,
             sizes:this.sizes,
+            date:this.date,
             email : firebase.auth().currentUser.email,
             uid : firebase.auth().currentUser.uid,
             customerName : this.Cname,

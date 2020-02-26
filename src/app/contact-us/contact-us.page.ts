@@ -326,26 +326,25 @@ async Login(){
   
    async sendMessage(){
 
+    this.db.collection("Admin").onSnapshot(data => {
+      data.forEach(item => {
+        console.log("CMS UID ", item.data().uid); 
+        this.db.collection("Message").doc().set({
 
-
-    var user = firebase.auth().currentUser;
-    if (user) {
-      this.db.collection("Message").doc().set({
-      
-         
           name : this.Myname,
           email : this.email,
           message : this.message,
           status : "NotRead",
+          cmsUid : "CMS",
           time : moment().format('MMMM Do YYYY, h:mm:ss a'),
           uid : firebase.auth().currentUser.uid
-          
+        
         })
-      
-    }
- 
-    
-     this.message = "";
+  
+      })
+    })
+
+
      const alert = await this.alertCtrl.create({
       header: "",
       subHeader:"",
@@ -353,8 +352,11 @@ async Login(){
       buttons: ['OK']
     });
     alert.present();
+    
      
    }
+
+
    goToExplore(){
      this.rout.navigateByUrl('');
    }

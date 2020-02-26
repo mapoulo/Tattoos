@@ -61,6 +61,16 @@
                 {{validate.message}}
             </div> 
             </div>
+            <ion-item>
+              <ion-label position="floating">Date</ion-label>
+              <ion-datetime  displayFormat="MMM DD YYYY HH:mm a"  pickerFormat="MMM DD YYYY  HH:mm a" [(ngModel)]="date" formControlName="date" [min]="minDate"></ion-datetime>
+              <ion-icon size="small" slot="end" name="ios-calendar"></ion-icon>
+            </ion-item>
+            <div class="error" *ngFor="let validate of validation_messages.date">
+              <div class="messages" *ngIf="tattooForm.get('date').hasError(validate.type) && (tattooForm.get('date').dirty || tattooForm.get('date').touched)">
+                {{validate.message}}
+            </div>
+            </div>
             <div class="color-edition"  style="margin-top: 2em;">
               <ion-label color="primary">Do you want additional colors?</ion-label>
               <div class="inputs">

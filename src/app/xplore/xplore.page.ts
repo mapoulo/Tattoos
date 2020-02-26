@@ -11,6 +11,8 @@ import { BookingModalPage } from '../booking-modal/booking-modal.page';
 import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
 import { Storage } from '@ionic/storage';
+import { MessagesPage } from '../messages/messages.page';
+
 
 
 
@@ -44,6 +46,8 @@ export class XplorePage implements OnInit {
     loop: true,
     autoplay: true
   };
+
+  messages = 0
 
   category: string  = "art";
   /* Animations */
@@ -168,6 +172,17 @@ tattoo = {
     })
     return await modal.present();
    }
+
+   async  viewMessages(){
+
+    const modal = await this.modalController.create({
+      component: MessagesPage,
+      cssClass:'modalMessages'
+
+    });
+    return await  modal.present();
+
+  }
 
    
    load(){
@@ -436,6 +451,8 @@ tattoo = {
 
         this.presentToast('You have logged in Successfully')
 
+
+
         this.showProfile1 = true;
 
         this.email=firebase.auth().currentUser.email;
@@ -445,6 +462,16 @@ tattoo = {
            data.forEach(item => {
              if(item.data().uid == firebase.auth().currentUser.uid && item.data().bookingState == "Pending"){
                this.MyNotifications += 1
+             }
+           })
+         })
+
+
+         this.db.collection("Message").onSnapshot(data => {
+           this.messages = 0
+           data.forEach(item => {
+             if(item.data().uid == firebase.auth().currentUser.uid && item.data().cmsUid == null  && item.data().status == "NotRead"){
+                  this.messages += 1
              }
            })
          })
