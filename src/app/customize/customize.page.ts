@@ -22,8 +22,15 @@ userImage = '';
     'yes',
     'no'
   ];
+  calendar = {
+    mode: 'month',
+    currentDate: new Date()
+  };
+  date:""
+  desc:""
   sizes:""
   Cname = "";
+  minDate = new Date().toISOString();
     number : any = 0;
 
     tattooForm : FormGroup;
@@ -32,17 +39,22 @@ userImage = '';
         { type: 'required', message: 'sizes  is required.' },
   
       ],
-      // 'color': [
-      //   { type: 'required', message: 'color  is required.' },
+      'desc': [
+        { type: 'required', message: 'desc  is required.' },
   
-      // ],
+      ],
+      'date': [
+        { type: 'required', message: 'date  is required.' },
+  
+      ],
     }
   loader: boolean = false;
   progress: number = 0;
   constructor(public ModalController : ModalController, public AlertController:AlertController, private fb: FormBuilder) { 
     this.tattooForm = this.fb.group({
       sizes: new FormControl('', Validators.compose([Validators.required])),
-      // color: new FormControl('', Validators.compose([Validators.required])),
+      desc: new FormControl('', Validators.compose([Validators.required])),
+      date: new FormControl('', Validators.compose([Validators.required])),
     })
   
   }
@@ -95,7 +107,7 @@ userImage = '';
 
       this.db.collection("Bookings").doc().set({
 
-        time : moment().format('MMMM Do YYYY, h:mm:ss a'),     
+    time : moment().format('MMMM Do YYYY, h:mm:ss a'),     
       category : "Customized",
       description : "Customized Tattoo",
       image : this.tattoo,
@@ -103,7 +115,8 @@ userImage = '';
       startPrice : null,
       tattoName: null,
       userImage:  this.userImage,
-      
+      date:this.date,
+      desc:this.desc,
       sizes:this.sizes,
       color:this.SelectedSize,
       email : firebase.auth().currentUser.email,
