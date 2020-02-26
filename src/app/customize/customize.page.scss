@@ -45,17 +45,7 @@
     width: 100%;
     position: relative;
     
-    .progress {
-        background: blue;
-        height: 5px;
-        width: 100%;
-
-
-        .bar {
-            background: red;
-            height: 100%;
-        }
-    }
+ 
 
     .images {
      
@@ -67,9 +57,41 @@
         height: 100%;
 
 
+        .percentage {
+            flex: 0 0 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            width: 80%;
+        }
+
+        .tap {
+            flex: 0 0 40%;
+           
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+
     }
 
  
+
+}
+
+.f_r {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 1em;
+
+    ion-button {
+        width: 50% !important;
+    }
 
 }
 
@@ -107,14 +129,7 @@
     }
 }
 
-.gauge {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-}
 
 .form {
     position: absolute;
