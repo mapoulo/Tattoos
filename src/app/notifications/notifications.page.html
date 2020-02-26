@@ -22,7 +22,7 @@
           </div>
           <div class="info-to-card">
               <h4>{{data.obj.price | currency : '&#82;'}}</h4>
-             <article class="sessions"> <p>Start Date: <strong>{{data.obj.startingDate | date: 'dd/MM/yyyy HH:mm a'}}<br>End Date:{{data.obj.endingDate | date: 'dd/MM/yyyy'}}</strong> </p> <ion-button fill="clear" color="dark" (click)="animate(data.val, i)" size="small"><ion-icon [name]="data.icon"></ion-icon></ion-button></article>
+             <article class="sessions"> <p>Start Date: <strong>{{data.obj.startingDate | date: 'dd/MM/yyyy HH:mm a'}}<br>End Date:{{data.obj.endingDate | date: 'dd/MM/yyyy HH:mm a'}}</strong> </p> <ion-button fill="clear" color="dark" (click)="animate(data.val, i)" size="small"><ion-icon [name]="data.icon"></ion-icon></ion-button></article>
               <article class="article animated" [ngClass]="{'slideBox slideInUp': data.val, 'closeBox slideInUp': !data.val}">
                 <p>{{data.obj.days}} Day(s) Session(s) </p>
                 <!-- <p></strong></p> -->
