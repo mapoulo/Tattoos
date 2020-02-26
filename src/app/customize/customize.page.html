@@ -51,7 +51,7 @@
       </div>
       <ion-item color="transparent">
         <ion-label color="primary" position="floating">Description</ion-label>
-       <ion-textarea color="primary" formControlName="desc" type="text"  name="description"  autocorrect="on" rows="3" cols="20"  [(ngModel)]="desc"  onkeypress="return /[a-zA-Z\s]/i.test(event.key)"  placeholder="{{description}}"></ion-textarea>
+       <ion-textarea color="primary" formControlName="desc" type="text"  name="description"  autocorrect="on" rows="3" cols="20"  [(ngModel)]="desc"  onkeypress="return /[a-zA-Z\s]/i.test(event.key)"  placeholder="{{desc}}"></ion-textarea>
       
    </ion-item>
       <div class="error" *ngFor="let validate of validation_messages.desc">
@@ -104,9 +104,13 @@
     <div class="container" *ngIf="!tattoo">
     
       <div class="images">
-        <div class="percent" *ngIf="progress != 0">
-          <p>{{progress / 100 | percent}}</p>
-          </div>
+        <div class="percentage">
+          <svg class="gauge" viewBox="0 0">
+            <circle r="100" cx="100" cy="100"></circle>
+          </svg>
+        </div>
+      
+         
         <label class="fileContainer animated jello">
           Tap to Upload your custom Tattoo
           <input type="file"  accept="image/*" (change)="changeListener($event)"/> 

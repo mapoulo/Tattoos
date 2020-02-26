@@ -60,7 +60,7 @@
     .images {
      
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         flex-direction: column;
         align-items: center;
         width: 100%;
@@ -105,6 +105,15 @@
     .fileContainer {
         z-index: 10;
     }
+}
+
+.gauge {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .form {
