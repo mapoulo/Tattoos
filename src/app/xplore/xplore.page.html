@@ -246,6 +246,8 @@
         <div class="btn-return"  (click)="addClasseAnimates()"  *ngIf="showProfile1" (click)="logOut()">Sign Out</div>
         <div class="btn-return" (click)="addClasseAnimates()"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</div>
         <div class="btn-return" *ngIf="showProfile1"[style.display]="!tattooDisplay ? 'flex' : 'none'" (click)="opnModal()">Upload your own Tattoo</div>
+
+      
           
       </div>
       <div class="logoman">
@@ -267,6 +269,8 @@
             <ion-button  mode="ios" class="explore" fill="clear" expand="block"  *ngIf="!showProfile1" color="light" routerLink="/">Explore</ion-button>
             <ion-button  mode="ios" class="explore" fill="clear" expand="block" *ngIf="showProfile1" color="light" routerLink="/">Home</ion-button>
            
+            
+
             <ion-button  mode="ios" fill="clear" expand="block" color="light" routerLink="/contact-us">Contact Us</ion-button>
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
@@ -282,6 +286,17 @@
             </div>
             <ion-button mode="ios" *ngIf="showProfile1"[style.display]="!tattooDisplay ? 'block' : 'none'" mode="ios" shape="round" fill="outline" (click)="opnModal()" color="secondary">Upload your own Tattoo</ion-button>
           </div>
+
+          <!-- Message Icon -->
+       
+            <div class="notification" *ngIf="showProfile1">
+              <ion-button mode="ios" fill="clear" (click)="viewMessages()" size="large" color="light">
+                <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+              </ion-button>
+              <ion-badge mode="ios" class="badge" color="secondary" *ngIf="MyNotifications > 0">{{messages}}</ion-badge>
+            </div>
+
+
   
           <div class="notification" *ngIf="showProfile1">
   
