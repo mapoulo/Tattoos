@@ -25,10 +25,18 @@ export class MessagesPage implements OnInit {
     message: '',
     time: ''
   };
+
+  MyImages = ""
+  MyName = ""
+  phoneNumber = ""
   MyMessages = [];
+  MyNames = ""
   AllMessages = 0;
   ReadMessages = 0;
   unReadMessages = 0;
+  ShowMessage :boolean = false;
+ 
+  MyImage = ""
 
   db = firebase.firestore();
   active;
@@ -49,6 +57,39 @@ export class MessagesPage implements OnInit {
   }
 
   ngOnInit() {
+    
+   
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+
+        this.db.collection("Admin").onSnapshot(data => {
+          data.forEach(item => {
+            this.MyImages = item.data().image
+            this.MyNames = item.data().name
+            this.phoneNumber = item.data().phoneNumber
+          })
+        })
+
+        this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+          this.MyName = data.data().name
+          this.MyImage = data.data().image
+        })
+        this.ShowMessage = true
+        this.db.collection("Message").orderBy("time", "asc").onSnapshot(data => {
+
+          this.MyMessages  = []
+
+          data.forEach(item => {
+            if(item.data().uid == firebase.auth().currentUser.uid){
+              this.MyMessages.push(item.data())
+              console.log("Messages  ", item.data());
+              
+            }
+          })
+        })
+      }
+    })
 
 
     this.db.collection('Message').orderBy('time', 'desc').onSnapshot(data => {
@@ -98,43 +139,26 @@ export class MessagesPage implements OnInit {
 
   async sendMessage(){
 
-    let name = ""
-
-    this.db.collection("Users").onSnapshot(data => {
-      data.forEach(item => {
-        if(item.data().uid == firebase.auth().currentUser.uid){
-              name = item.data().name
-        }
-      })
-    })
-
     this.db.collection("Admin").onSnapshot(data => {
       data.forEach(item => {
         console.log("CMS UID ", item.data().uid); 
         this.db.collection("Message").doc().set({
 
-          name : name,
+          name : this.MyName,
           email : firebase.auth().currentUser.email,
           message : this.response,
           status : "NotRead",
-          cmsUid : item.data().uid,
+          cmsUid : "CMS",
           time : moment().format('MMMM Do YYYY, h:mm:ss a'),
-          uid : firebase.auth().currentUser.uid
-        
+          uid : firebase.auth().currentUser.uid,
+         
         })
   
       })
     })
 
-    
-     const alert = await this.alertController.create({
-      header: "",
-      subHeader:"",
-      message: "Message sent",
-      buttons: ['OK']
-    });
-    alert.present();
-    
+  
+    this.response = ""
      
    }
 

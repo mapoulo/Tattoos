@@ -328,39 +328,7 @@ async Login(){
    
   }
   
-   async sendMessage(){
-
-    this.db.collection("Admin").onSnapshot(data => {
-      data.forEach(item => {
-        console.log("CMS UID ", item.data().uid); 
-        this.db.collection("Message").doc().set({
-
-          name : this.Myname,
-          email : this.email,
-          message : this.message,
-          status : "NotRead",
-          cmsUid : "CMS",
-          time : moment().format('MMMM Do YYYY, h:mm:ss a'),
-          uid : firebase.auth().currentUser.uid,
-          image : this.UserImage,
-          number : this.phoneNumber
-        
-        })
-  
-      })
-    })
-
-
-     const alert = await this.alertCtrl.create({
-      header: "",
-      subHeader:"",
-      message: "Message sent",
-      buttons: ['OK']
-    });
-    alert.present();
-    
-     
-   }
+ 
 
 
    goToExplore(){
