@@ -23,6 +23,8 @@ export class ContactUsPage implements OnInit {
   UserIn : boolean
   name = ""
   email = ""
+  phoneNumber = ""
+  UserImage = ""
   message = ""
    showProfile1
   db = firebase.firestore();
@@ -133,6 +135,8 @@ export class ContactUsPage implements OnInit {
           this.Mynumber = data.data().number;
           this.Picture=data.data().image;
           this.email=data.data().email;
+          this.phoneNumber = data.data().number,
+          this.UserImage = data.data().image
         })
         
 
@@ -337,7 +341,9 @@ async Login(){
           status : "NotRead",
           cmsUid : "CMS",
           time : moment().format('MMMM Do YYYY, h:mm:ss a'),
-          uid : firebase.auth().currentUser.uid
+          uid : firebase.auth().currentUser.uid,
+          image : this.UserImage,
+          number : this.phoneNumber
         
         })
   
