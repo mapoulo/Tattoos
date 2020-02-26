@@ -58,10 +58,14 @@
 
     <div class="view-more animated" *ngIf="viewMore">
        <div class="list-view">
-         <div class="close-bt">
+         <ion-toolbar>
+          <div class="close-bt">
          
-          <ion-button fill="clear" color="light" size="large" (click)="viewMoreFunc('')"><ion-icon size="large" name="ios-close"></ion-icon></ion-button>
-         </div>
+            <ion-button fill="clear" color="light" size="large" (click)="viewMoreFunc('')"><ion-icon size="large" name="ios-close"></ion-icon></ion-button>
+           </div>
+
+         </ion-toolbar>
+      
          <div class="segment">
           <ion-segment  [(ngModel)]="category" value="javascript">
             <ion-segment-button value="portrait">
@@ -291,9 +295,9 @@
        
             <div class="notification" *ngIf="showProfile1">
               <ion-button mode="ios" fill="clear" (click)="viewMessages()" size="large" color="light">
-                <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+                <ion-icon mode="ios" color="light" name="chatbubbles"></ion-icon>
               </ion-button>
-              <ion-badge mode="ios" class="badge" color="secondary" *ngIf="MyNotifications > 0">{{messages}}</ion-badge>
+              <ion-badge mode="ios" class="badge" color="success" *ngIf="MyNotifications > 0">{{messages}}</ion-badge>
             </div>
 
 

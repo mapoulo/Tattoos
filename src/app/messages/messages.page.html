@@ -1,9 +1,18 @@
 <ion-header no-border>
   <ion-toolbar>
-    <ion-buttons slot="start" *ngIf="messageInfo.message">
-      <ion-button  class="hide" fill="clear" color="dark"  (click)="back()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    <ion-buttons slot="start">
+      <div class="pro-main">
+        <div class="profile_rsx">
+         <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+         </div>
+         <div class="names">
+           <p style="font-weight: bold;">Muenda Khuthadzo</p>
+           <p>072 578 3324</p>
+         </div>
+
+      </div>
     </ion-buttons>
-    <ion-title text-center>Messages</ion-title>
+    
 
     <ion-buttons slot="end">
       <ion-button fill="clear" color="dark"  (click)="dismiss()"><ion-icon name="close"></ion-icon></ion-button>
@@ -15,72 +24,105 @@
 
 <ion-content>
 
+ 
 
- <!--  <ion-list >
-    <ion-item>
-      <p> Name :{{message.obj.name}}</p> <br>
-      <p>Email : {{message.obj.email}}</p>
-      <p>Message : {{message.obj.message}}</p>
-      <p>Time : {{message.obj.time}}</p>
-      <button (click)="updateMessage(message.keys)">Read</button>
-    </ion-item>
-</ion-list> -->
-
-  <div class="list">
-
-    <div class="read-not-container">
-      <div class="header-reader">
-        <ion-badge color="primary">{{AllMessages}}</ion-badge>
-        <p>All Messages</p>
-        <ion-badge color="success">{{ReadMessages}}</ion-badge>
-        <p>Read Messages</p>
-        <ion-badge color="secondary">{{unReadMessages}}</ion-badge>
-        <p>Unread Messages </p>
-      </div>
-      <div class="messages">
-       
-        <div class="item" *ngFor = "let message of MyMessages; let i=index;" (click)="updateMessage(message.obj.uid, message.id, message.obj, i)" [ngClass]="{'active': active == i}">
-          <div class="statuss" [ngClass]="{'notRead': message.stat=='NotRead', 'Read': message.stat=='Read'}"></div>
-          <ion-icon size="small" color="dark" name="mail"></ion-icon>
-          <div class="info">
-            <p>{{message.obj.name}}</p>
-            <p>{{message.obj.time}}</p>
-          </div>
-         
-        </div>
-        
-        
-      </div>
-    </div>
+   
    
   
 
-    <div class="content-messages animated slideInUp">
+    <div class="content-messages">
         <div class="header">
          
-          <h1 style="color: #fff; font-size: 80%;"> {{messageInfo.name}}</h1>
-          <ion-icon color="light" size="small" name="ios-person"></ion-icon>
+         <img src="../../assets/logoj.svg" width="90px" alt="">
          
         </div>
 
         <div class="message-text">
-        <p  *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}">{{messageInfo.message}}</p>
-        <div class="no-selected" *ngIf="!messageInfo.message">
-          <p>Please select a message card on the left hand side to read</p>
-        </div>
-        </div>
+          <!-- <p  *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}">{{messageInfo.message}}</p> -->
+  
+          
+           
+           
+            <div class="chat">
+              <div class="user">
+                <div class="i_chat">
+                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+                </div>
+                <div class="user-text">
+                  <div class="inner-text">
+                    <p>Hi</p>
+                  </div>
+                  <div class="time"><p><small>11:00 AM</small></p></div>
+                </div>
+              </div>
+              <div class="artist">
+                <div class="i_chat">
+                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+                </div>
+                <div class="artist-text">
+                  <div class="inner-text">
+                    <p>How are you doing? </p>
+                  </div>
+                  <div class="time">
+                    <p><small>12:00 AM</small></p>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+            <div class="chat">
+              <div class="user">
+                <div class="i_chat">
+                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+                </div>
+                <div class="user-text">
+                  <div class="inner-text">
+                    <p>Im Very nice and you</p>
+                  </div>
+                  <div class="time"><p><small>11:00 AM</small></p></div>
+                </div>
+              </div>
+              <div class="artist">
+                <div class="i_chat">
+                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+                </div>
+                <div class="artist-text">
+                  <div class="inner-text">
+                    <p>How are you doing? </p>
+                  </div>
+                  <div class="time">
+                    <p><small>12:00 AM</small></p>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+           
+  
+  
+  
+          <!-- <div class="no-selected" *ngIf="!messageInfo.message">
+            <p>Please select a message card on the left hand side to read</p>
+          </div> -->
+          </div>
 
-        <textarea   *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}"  [(ngModel)]="response" name="" id="" cols="30" rows="5"></textarea>
-<button  *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}"  (click)="sendMessage()">Send</button>
+ 
 
         <div class="options" >
-          <!-- <ion-button fill="clear" color="danger"  ><ion-icon name="trash" ></ion-icon></ion-button> -->
-          <p style="color: #000; font-size: 80%;"> <ion-icon name="time"></ion-icon> {{messageInfo.time}}</p>
+          <div class="textrear">
+            <ion-textarea  placeholder="Type a message"  [(ngModel)]="response" name="" id="" rows="1"></ion-textarea>
+          </div>
+          <div class="btn-send">
+            <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()">
+              <ion-icon name="send"></ion-icon>
+            </ion-button>
+          </div>
+        
         </div>
 
         
     </div>
-  </div>
+
 
 
 

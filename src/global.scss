@@ -28,6 +28,40 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #92929262;
+
+}
+
+
+
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
 ion-toolbar {
     --background: transparent !important;
     --ion-color-base: transparent !important;
@@ -38,11 +72,14 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
   font-family: 'Roboto', sans-serif !important;
   
 }
-
+p, h1, h2,h3,h4,h5,h6,small {
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 .modalNotification .modal-wrapper {
     width: 30%;
-    transform: translate(0, -100%);
+    border-radius: 10px;
 }
 
 .fileContainer {
@@ -88,7 +125,13 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
   --width: 20%;
   --height: 30%;
 }
-    
+.modalMessages .modal-wrapper {
+        
+  --width: 50%;
+  --height: 90%;
+  --border-radius: 10px;
+ 
+}  
 @media only screen and (max-width: 600px) {
   .modalNotification .modal-wrapper {
     width: 100%;
@@ -96,6 +139,12 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
   .modalNotification .modal-wrapper {
     width: 100%;
   }
+  .modalMessages .modal-wrapper {
+  
+    --width: 100%;
+    --height: 100%;
+    
+    }
 
   .resetModal .modal-wrapper {
     --width: 90%;
@@ -106,17 +155,39 @@ p, h1, h2,h3,h4,h5,h6,small, ion-label, ion-input {
     .modalNotification .modal-wrapper {
       width: 40%;
     }
+    .modalMessages .modal-wrapper {
+  
+      --width: 100%;
+      --height: 100%;
+      }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px)  {
+    .modalNotification .modal-wrapper {
+      width: 30%;
+    }
+    .modalMessages .modal-wrapper {
+  
+      --width: 100%;
+      --height: 100%;
+      }
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px)  {
     .modalNotification .modal-wrapper {
       width: 30%;
     }
   }
-  @media only screen and (min-width: 768px) and (max-width: 1024px)  {
-    .modalNotification .modal-wrapper {
-      width: 30%;
-    }
-  }
+
+  
+
+
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+.modalMessages .modal-wrapper {
+  
+--width: 90%;
+--height: 90%;
+}
+} 
 
   /* Loader */
 .loader {
