@@ -158,7 +158,7 @@ export class MessagesPage implements OnInit {
     })
 
   
-    this.response = ""
+    
      
    }
 
