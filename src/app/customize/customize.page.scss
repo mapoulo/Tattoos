@@ -60,11 +60,25 @@
         .percentage {
             flex: 0 0 60%;
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
             align-content: center;
+            flex-direction: column;
 
             width: 80%;
+
+            .progr {
+                font-weight: bold;
+                margin: 1em;
+                background: #000;
+                color: #fff;
+                border-radius: 50px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
 
         .tap {
@@ -94,6 +108,8 @@
     }
 
 }
+
+
 
 .error {
     color: rgb(196, 36, 36);
