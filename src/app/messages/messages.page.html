@@ -3,11 +3,15 @@
     <ion-buttons slot="start">
       <div class="pro-main">
         <div class="profile_rsx">
-         <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+
+         <img *ngIf = "!MyImages" src="../../assets/person-icon.jpg" alt="">
+
+         <img *ngIf = "MyImages" src="{{MyImages}}" alt="">
+
          </div>
          <div class="names">
-           <p style="font-weight: bold;">Muenda Khuthadzo</p>
-           <p>072 578 3324</p>
+           <p style="font-weight: bold;">{{MyNames}}</p>
+           <p>{{phoneNumber}}</p>
          </div>
 
       </div>
@@ -37,66 +41,52 @@
          
         </div>
 
-        <div class="message-text">
+        <div class="message-text"   >
           <!-- <p  *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}">{{messageInfo.message}}</p> -->
   
           
            
            
-            <div class="chat">
-              <div class="user">
+            <div class="chat"   *ngFor = "let item of MyMessages" >
+
+
+              <div class="user" *ngIf = "item.cmsUid == null">
                 <div class="i_chat">
-                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+             
+                  <img *ngIf = "!MyImage" src="../../assets/person-icon.jpg" alt="">
+                  <img *ngIf = "MyImage" src="{{MyImage}}" alt="">
                 </div>
                 <div class="user-text">
                   <div class="inner-text">
-                    <p>Hi</p>
+                    <p>{{item.message}}</p>
                   </div>
-                  <div class="time"><p><small>11:00 AM</small></p></div>
+                  <div class="time"><p><small>{{item.time}}</small></p></div>
                 </div>
               </div>
-              <div class="artist">
+
+
+              <div class="artist" *ngIf = "item.cmsUid ">
                 <div class="i_chat">
-                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
+
+                  <img *ngIf = "!MyImages" src="../../assets/person-icon.jpg" alt="">
+                  <img *ngIf = "MyImages" src="{{MyImages}}" alt="">
+
                 </div>
                 <div class="artist-text">
                   <div class="inner-text">
-                    <p>How are you doing? </p>
+                    <p>{{item.message}}</p>
                   </div>
                   <div class="time">
-                    <p><small>12:00 AM</small></p>
+                    <p><small>{{item.time}}</small></p>
                   </div>
-                </div>
-              
+                </div>             
               </div>
+
+
             </div>
-            <div class="chat">
-              <div class="user">
-                <div class="i_chat">
-                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
-                </div>
-                <div class="user-text">
-                  <div class="inner-text">
-                    <p>Im Very nice and you</p>
-                  </div>
-                  <div class="time"><p><small>11:00 AM</small></p></div>
-                </div>
-              </div>
-              <div class="artist">
-                <div class="i_chat">
-                  <img src="../../assets/allef-vinicius-vKIc4k6dm10-unsplash.jpg" alt="">
-                </div>
-                <div class="artist-text">
-                  <div class="inner-text">
-                    <p>How are you doing? </p>
-                  </div>
-                  <div class="time">
-                    <p><small>12:00 AM</small></p>
-                  </div>
-                </div>
-              
-              </div>
-            </div>
+
+
+        
            
   
   
