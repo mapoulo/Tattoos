@@ -26,7 +26,7 @@ export class XplorePage implements OnInit {
  
   Contact=[]
  @ViewChild('slideBanner', {static: false}) slideBanner: IonSlides;
-
+ footer: boolean = true;
   split: boolean = false;
   tattooView: any;
   splitDiv = document.getElementsByClassName('split-pane');
@@ -362,13 +362,17 @@ tattoo = {
   }
 
   addClasseAnimates() {
-    this.split = !this.split
+    this.split = !this.split;
+    this.footer = !this.footer;
     if (this.split) {
-     
+      console.log('value found');
+      
+      
        this.render.setStyle(this.splitDiv[0],'display','block'); 
      
     } else {
       setTimeout(() => {
+        
        this.render.setStyle(this.splitDiv[0],'display','none');
        
        

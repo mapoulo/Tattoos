@@ -279,14 +279,14 @@
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="!showProfile1" (click)="Login()">Sign In</ion-button>
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
             <ion-button  mode="ios" fill="outline" expand="block" color="secondary" shape="round"  *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
-            <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-              <p>{{Myname}}</p>
+            <div class="profile-image" style=" cursor: pointer;" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+              <p style=" cursor: pointer;">{{Myname}}</p>
   
               <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
   
   
-              <img *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
-              <img *ngIf="Picture" src="{{Picture}}"alt="">
+              <img style="margin-left: 1em; cursor: pointer;" *ngIf="!Picture" src="../../assets/person-icon.jpg"alt="">
+              <img style="margin-left: 1em; cursor: pointer;" *ngIf="Picture" src="{{Picture}}"alt="">
             </div>
             <ion-button mode="ios" *ngIf="showProfile1"[style.display]="!tattooDisplay ? 'block' : 'none'" mode="ios" shape="round" fill="outline" (click)="opnModal()" color="secondary">Upload your own Tattoo</ion-button>
           </div>
@@ -331,9 +331,9 @@
           </ion-button>
         </div> 
 
-        <div class="images__r">
+       <!--  <div class="images__r">
           <img src="../../assets/Group 45@2x.png" alt="">
-        </div>
+        </div> -->
         <ion-slides pager="true" [options]="slideOpts" #slideBanner>
          
           <ion-slide class="slide3 animated pulse">
@@ -501,7 +501,7 @@
 
 
 </ion-content>
-<ion-footer>
+<ion-footer class="animated" *ngIf="footer" [ngClass]="{'slideInUp': footer, 'slideInDown': !this.footer}">
   <ion-toolbar color="dark" >
     <div class="social">
       <p style="font-size: 80%; color: rgb(255, 255, 255)">Ink Scribe Tattoo Company &copy; 2020</p>
