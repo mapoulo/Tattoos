@@ -57,6 +57,7 @@ export class MessagesPage implements OnInit  {
   }
   scrollToBottomOnInit() {
     this.content.scrollToBottom(300);
+    
   }
 
   ngOnInit() {
