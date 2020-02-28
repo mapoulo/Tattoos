@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2, ElementRef, ViewChild, ViewChildren, Quer
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 import { AlertController, ModalController } from '@ionic/angular';
+import { DeliverDataService } from '../deliver-data.service';
+
 
 @Component({
   selector: 'app-messages',
@@ -26,6 +28,9 @@ export class MessagesPage implements OnInit {
     time: ''
   };
 
+
+  ids = []
+
   MyImages = ""
   MyName = ""
   phoneNumber = ""
@@ -40,7 +45,7 @@ export class MessagesPage implements OnInit {
 
   db = firebase.firestore();
   active;
-  constructor(private render: Renderer2, public alertController: AlertController, public modalController: ModalController) {
+  constructor(private render: Renderer2,  public DeliverDataService : DeliverDataService,  public alertController: AlertController, public modalController: ModalController) {
 
 
 
@@ -58,10 +63,24 @@ export class MessagesPage implements OnInit {
 
   ngOnInit() {
     
+
+    this.db.collection("Message").get().then(item => {
+      item.forEach(data => {
+        if(data.data().uid == firebase.auth().currentUser.uid && data.data().cmsUid == null){
+          this.db.collection("Message").doc(data.id).set({status : "Read"}, {merge : true})
+        }
+      })
+    })
    
+  //  this.ids.forEach(id => {
+  //   this.db.collection("Message").doc(id).set({message : "Read"}, {merge : true})
+  //   console.log("ssss ", id);
+    
+  // })
 
     firebase.auth().onAuthStateChanged((user) => {
       if(user){
+
 
         this.db.collection("Admin").onSnapshot(data => {
           data.forEach(item => {
@@ -75,6 +94,8 @@ export class MessagesPage implements OnInit {
           this.MyName = data.data().name
           this.MyImage = data.data().image
         })
+
+
         this.ShowMessage = true
         this.db.collection("Message").orderBy("time", "asc").onSnapshot(data => {
 
@@ -83,56 +104,27 @@ export class MessagesPage implements OnInit {
           data.forEach(item => {
             if(item.data().uid == firebase.auth().currentUser.uid){
               this.MyMessages.push(item.data())
-              console.log("Messages  ", item.data());
+            
               
             }
           })
         })
+
+
+     
+
+
       }
     })
 
 
-    this.db.collection('Message').orderBy('time', 'desc').onSnapshot(data => {
 
-      this.MyMessages = [];
-      this.unReadMessages = 0;
-      this.ReadMessages  = 0;
-      this.AllMessages = 0;
-
-      let obj = {obj: {}, id: '', stat: ''};
-      data.forEach(item => {
-
-        obj.obj = item.data();
-        obj.id = item.id;
-        obj.stat = item.data().status;
-       
-
-        if(item.data().uid == firebase.auth().currentUser.uid){
-          this.AllMessages += 1;
-        }
-
-        if(item.data().uid == firebase.auth().currentUser.uid){
-          this.MyMessages.push(obj);
-        }
-       
-      
-        
-        // tslint:disable-next-line: triple-equals
-        if (item.data().status == 'NotRead' && item.data().uid == firebase.auth().currentUser.uid) {
-          this.unReadMessages += 1;
-        } else if(item.data().uid == firebase.auth().currentUser.uid) {
-           this.ReadMessages += 1;
-        }
-
-
-        obj = {obj: {}, id: '', stat: ''};
-      });
-    });
 
 
   }
 
   ionViewDidEnter() {
+
 
   }
 

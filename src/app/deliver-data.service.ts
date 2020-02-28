@@ -10,6 +10,8 @@ export class DeliverDataService {
   notifications : number = 0;
 
   logout :boolean =false;
+  
+  number = 0
 
   checkValue = 0
   wantToBook = false;
