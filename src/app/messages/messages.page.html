@@ -26,7 +26,7 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content #content>
 
  
 
@@ -41,7 +41,7 @@
          
         </div>
 
-        <div class="message-text"   >
+        <div class="message-text"  #scrollMe >
           <!-- <p  *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}">{{messageInfo.message}}</p> -->
   
           
@@ -98,17 +98,7 @@
 
  
 
-        <div class="options" >
-          <div class="textrear">
-            <ion-textarea  placeholder="Type a message"  [(ngModel)]="response" name="" id="" rows="1"></ion-textarea>
-          </div>
-          <div class="btn-send">
-            <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()">
-              <ion-icon name="send"></ion-icon>
-            </ion-button>
-          </div>
-        
-        </div>
+      
 
         
     </div>
@@ -121,3 +111,18 @@
 
   
 </ion-content>
+<ion-footer no-border>
+  
+    <div class="options">
+      <div class="textrear">
+        <ion-textarea  placeholder="Type a message"  [(ngModel)]="response" name="" id="" rows="1"></ion-textarea>
+      </div>
+      <div class="btn-send">
+        <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </div>
+    
+    </div>
+
+</ion-footer>

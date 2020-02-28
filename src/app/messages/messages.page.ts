@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -10,8 +10,8 @@ import { DeliverDataService } from '../deliver-data.service';
   templateUrl: './messages.page.html',
   styleUrls: ['./messages.page.scss'],
 })
-export class MessagesPage implements OnInit {
-
+export class MessagesPage implements OnInit  {
+  @ViewChild('content', {static: false}) private content: any;
   itemDiv: any = document.documentElement.getElementsByClassName('item');
   contentMessages: any = document.getElementsByClassName('content-messages');
 
@@ -60,8 +60,15 @@ export class MessagesPage implements OnInit {
       time: ''
     };
   }
+  scrollToBottomOnInit() {
+    this.content.scrollToBottom(300);
+    
+  }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.scrollToBottomOnInit(); 
+    }, 100);
     
 
     this.db.collection("Message").get().then(item => {
@@ -124,13 +131,14 @@ export class MessagesPage implements OnInit {
   }
 
   ionViewDidEnter() {
-
-
+    setTimeout(() => {
+      this.scrollToBottomOnInit(); 
+    }, 100);
   }
 
 
   async sendMessage(){
-
+  
     this.db.collection("Admin").onSnapshot(data => {
       data.forEach(item => {
         console.log("CMS UID ", item.data().uid); 
@@ -147,8 +155,15 @@ export class MessagesPage implements OnInit {
         })
   
       })
-    })
-
+      setTimeout(() => {
+        this.response = "";
+      }, 25);
+    });
+    setTimeout(() => {
+      this.scrollToBottomOnInit(); 
+    }, 100);
+    
+  
   
     
      

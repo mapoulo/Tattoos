@@ -1,5 +1,5 @@
 import { ModalController, AlertController, Platform } from '@ionic/angular';
-import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormBuilder, FormGroup, MaxLengthValidator } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { SuccessPagePage } from '../success-page/success-page.page';
@@ -74,7 +74,7 @@ userImage = '';
 
   
 
-
+ nProgress: number = 0;
   changeListener(event): void {
     console.log("My Method is Called");
     
@@ -89,7 +89,7 @@ userImage = '';
     upload.on('state_changed', snapshot => {
      
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes);
-
+      this.nProgress = Math.round(progress);
       this.progress += progress;
       console.log('upload is: ', progress , '% done.');
     }, err => {
@@ -97,6 +97,8 @@ userImage = '';
       upload.snapshot.ref.getDownloadURL().then(dwnURL => {
         console.log('File avail at: ', dwnURL);
         this.tattoo = dwnURL;
+
+        
       });
     });
   }
