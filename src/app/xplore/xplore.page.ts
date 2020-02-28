@@ -25,7 +25,7 @@ export class XplorePage implements OnInit {
 
  
   Contact=[]
- @ViewChild('slideBanner', {static: false}) slideBanner: IonSlides;
+ @ViewChild('slideBanner', {static: true}) slideBanner: IonSlides;
  footer: boolean = true;
   split: boolean = false;
   tattooView: any;
@@ -41,11 +41,12 @@ export class XplorePage implements OnInit {
   viewMoreDiv: any;
   slideOpts = {
     initialSlide: 0,
-    speed: 400,
-    effects: 'cube',
+    effect: 'fade',
     loop: true,
+    speed:1500,
     autoplay: true
   };
+
 
   messages = 0
 
