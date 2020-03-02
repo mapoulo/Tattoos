@@ -27,7 +27,7 @@ export class MessagesPage implements OnInit  {
     message: '',
     time: ''
   };
-
+  buttonDisabled: boolean = false;
 
   ids = []
 
@@ -136,9 +136,12 @@ export class MessagesPage implements OnInit  {
 
   async sendMessage(){
   
-  
-    
-    this.db.collection("Admin").get().then(data => {
+  if (this.response==""){
+
+this.buttonDisabled=false;
+  }else{
+    this.buttonDisabled=true;
+this.db.collection("Admin").get().then(data => {
 
       data.forEach(item => {
         console.log("CMS UID ", item.data().uid); 
@@ -149,7 +152,7 @@ export class MessagesPage implements OnInit  {
           message : this.response,
           status : "NotRead",
           cmsUid : "CMS",
-          time : moment().format('MMMM Do YYYY, h:mm:ss a'),
+          time : moment().format('MMMM Do YYYY, hh:mm a'),
           uid : firebase.auth().currentUser.uid,
          
         })
@@ -163,6 +166,10 @@ export class MessagesPage implements OnInit  {
     setTimeout(() => {
       this.scrollToBottomOnInit(); 
     }, 100);
+    
+
+  }
+    
     
   
   
