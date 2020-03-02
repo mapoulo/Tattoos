@@ -66,6 +66,7 @@ export class MessagesPage implements OnInit  {
   }
 
   ngOnInit() {
+    
     setTimeout(() => {
       this.scrollToBottomOnInit(); 
     }, 100);
@@ -79,11 +80,7 @@ export class MessagesPage implements OnInit  {
       })
     })
    
-  //  this.ids.forEach(id => {
-  //   this.db.collection("Message").doc(id).set({message : "Read"}, {merge : true})
-  //   console.log("ssss ", id);
-    
-  // })
+ 
 
     firebase.auth().onAuthStateChanged((user) => {
       if(user){
@@ -139,7 +136,10 @@ export class MessagesPage implements OnInit  {
 
   async sendMessage(){
   
-    this.db.collection("Admin").onSnapshot(data => {
+  
+    
+    this.db.collection("Admin").get().then(data => {
+
       data.forEach(item => {
         console.log("CMS UID ", item.data().uid); 
         this.db.collection("Message").doc().set({
@@ -158,7 +158,8 @@ export class MessagesPage implements OnInit  {
       setTimeout(() => {
         this.response = "";
       }, 25);
-    });
+
+    })
     setTimeout(() => {
       this.scrollToBottomOnInit(); 
     }, 100);

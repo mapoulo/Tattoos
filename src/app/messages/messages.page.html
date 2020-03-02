@@ -53,8 +53,8 @@
               <div class="user" *ngIf = "item.cmsUid == null">
                 <div class="i_chat">
              
-                  <img *ngIf = "!MyImage" src="../../assets/person-icon.jpg" alt="">
-                  <img *ngIf = "MyImage" src="{{MyImage}}" alt="">
+                  <img *ngIf = "!MyImages" src="../../assets/person-icon.jpg" alt="">
+                  <img *ngIf = "MyImages" src="{{MyImages}}" alt="">
                 </div>
                 <div class="user-text">
                   <div class="inner-text">
@@ -68,8 +68,8 @@
               <div class="artist" *ngIf = "item.cmsUid ">
                 <div class="i_chat">
 
-                  <img *ngIf = "!MyImages" src="../../assets/person-icon.jpg" alt="">
-                  <img *ngIf = "MyImages" src="{{MyImages}}" alt="">
+                  <img *ngIf = "!MyImage" src="../../assets/person-icon.jpg" alt="">
+                  <img *ngIf = "MyImage" src="{{MyImage}}" alt="">
 
                 </div>
                 <div class="artist-text">
