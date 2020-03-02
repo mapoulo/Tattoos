@@ -9,6 +9,8 @@ import { SignInPage } from '../sign-in/sign-in.page';
 import { RegisterPage } from '../register/register.page';
 import { DeliverDataService } from '../deliver-data.service';
 import { NotificationsPage } from '../notifications/notifications.page';
+import { MessagesPage } from '../messages/messages.page';
+
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
@@ -121,6 +123,18 @@ export class ContactUsPage implements OnInit {
 
     // 230 Park Ave, New York, NY 10169, USA
     
+  }
+
+
+  async  viewMessages(){
+
+    const modal = await this.modalController.create({
+      component: MessagesPage,
+      cssClass:'modalMessages'
+
+    });
+    return await  modal.present();
+
   }
  
   ionViewDidEnter(){

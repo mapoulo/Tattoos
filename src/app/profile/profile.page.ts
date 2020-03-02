@@ -11,6 +11,9 @@ import { ModalController,AlertController, Platform, ToastController } from '@ion
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
 import { DatePipe } from '@angular/common';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { MessagesPage } from '../messages/messages.page';
+
+
 // import { timingSafeEqual } from 'crypto';
 declare var require: any
 const FileSaver = require('file-saver');
@@ -121,6 +124,18 @@ export class ProfilePage implements OnInit {
   
    
   }
+
+  async  viewMessages(){
+
+    const modal = await this.modalController.create({
+      component: MessagesPage,
+      cssClass:'modalMessages'
+
+    });
+    return await  modal.present();
+
+  }
+  
 
   async opnModal(){
     let modal = await this.modalController.create({
