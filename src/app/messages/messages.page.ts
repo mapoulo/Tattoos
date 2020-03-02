@@ -36,6 +36,7 @@ export class MessagesPage implements OnInit  {
   phoneNumber = ""
   MyMessages = [];
   MyNames = ""
+  MyNumber = ""
   AllMessages = 0;
   ReadMessages = 0;
   unReadMessages = 0;
@@ -95,8 +96,11 @@ export class MessagesPage implements OnInit  {
         })
 
         this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
+
           this.MyName = data.data().name
           this.MyImage = data.data().image
+          this.MyNumber = data.data().number
+
         })
 
 
@@ -136,7 +140,7 @@ export class MessagesPage implements OnInit  {
 
   async sendMessage(){
   
-  
+
     
     this.db.collection("Admin").get().then(data => {
 
@@ -145,10 +149,12 @@ export class MessagesPage implements OnInit  {
         this.db.collection("Message").doc().set({
 
           name : this.MyName,
+          image : this.MyImage,
           email : firebase.auth().currentUser.email,
           message : this.response,
           status : "NotRead",
           cmsUid : "CMS",
+          number : this.MyNumber,
           time : moment().format('MMMM Do YYYY, h:mm:ss a'),
           uid : firebase.auth().currentUser.uid,
          
@@ -160,14 +166,12 @@ export class MessagesPage implements OnInit  {
       }, 25);
 
     })
+
     setTimeout(() => {
       this.scrollToBottomOnInit(); 
     }, 100);
-    
-  
-  
-    
      
+
    }
 
 

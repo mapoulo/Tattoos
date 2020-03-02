@@ -178,10 +178,6 @@ tattoo = {
 
    async  viewMessages(){
 
-    
-
-    
-  
     const modal = await this.modalController.create({
       component: MessagesPage,
       cssClass:'modalMessages'
@@ -245,10 +241,16 @@ tattoo = {
 
           this.showProfile1 = true;
           this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(item => {
-            console.log("User Logged in ", item.data());
+
+            if(item.exists){
+
+              console.log("User Logged in ", item.data());
             this.Myname = item.data().name;
             this.Mynumber = item.data().number;
             this.Picture=item.data().image;
+            
+            }
+            
           })
         
           
@@ -484,11 +486,19 @@ tattoo = {
          this.db.collection("Message").onSnapshot(data => {
            this.messages = 0
            data.forEach(item => {
-             if( item.data().status == "NotRead" && item.data().uid == firebase.auth().currentUser.uid && item.data().cmsUid == null  ){
-                  this.messages += 1
-                  console.log("Called  ssss");                
-             }
+
+            if(item.exists){
+
+              if( item.data().status == "NotRead" && item.data().uid == firebase.auth().currentUser.uid && item.data().cmsUid == null  ){
+                this.messages += 1
+                console.log("Called  ssss");                
+           }
+
+            }
+           
            })
+
+           
          })
         
         
