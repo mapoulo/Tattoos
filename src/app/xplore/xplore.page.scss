@@ -593,7 +593,7 @@ ion-button.explore {
     }
 }
 
-.list > ion-button {
+.list > ion-button, .list > .profile-image {
     position: relative;
     transition: 500ms;
 

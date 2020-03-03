@@ -67,7 +67,7 @@
             <ion-button  mode="ios" fill="clear" expand="block" color="light"  *ngIf="showProfile1" (click)="logOut()">Sign Out</ion-button>
             <ion-button  mode="ios" fill="outline" expand="block" color="secondary" shape="round"   *ngIf="!showProfile1" (click)="CreateAccount()">Create Account</ion-button>
             <div class="profile-image" *ngIf="showProfile1" routerLink="/profile"  ShowName >
-              <p>{{Myname}}</p>
+              <p style="cursor: pointer; font-size:100%">{{Myname}}</p>
   
               <!-- <img  src="../../../assets/chris-blonk-aTiGszXqrJE-unsplash.jpg" alt=""> -->
   
