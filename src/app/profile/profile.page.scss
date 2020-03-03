@@ -336,11 +336,11 @@ ion-row {
   
 
     img {
-        height: 5vh;
-        width: 5vh;
+        height: 4vh;
+        width: 4vh;
         object-fit: cover;
         border-radius: 50px;
-
+        margin-left: 1em;
 
     }
 }
@@ -514,8 +514,8 @@ ion-row {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding-left: 1em;
-
+            padding-left: 1em !important;
+            padding-top: 1em !important;
             p {
                 margin: 5%;
             }
@@ -858,8 +858,7 @@ ion-row {
 ion-segment {
     padding: 5px;
   }
-
-ion-button.explore {
+  ion-button.explore, div.explore  {
     position: relative;
 
 
@@ -876,7 +875,7 @@ ion-button.explore {
     }
 }
 
-.list > ion-button {
+.list > ion-button, .list > .profile-image {
     position: relative;
     transition: 500ms;
 

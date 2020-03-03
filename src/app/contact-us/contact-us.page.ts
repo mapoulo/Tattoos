@@ -56,7 +56,7 @@ export class ContactUsPage implements OnInit {
       { type: 'required', message: 'Message  is required.' },
     ],
   }
-  constructor(private fb:FormBuilder,private rout : Router, private alertCtrl: AlertController, public modalController: ModalController, public deliverDataService : DeliverDataService, private render: Renderer2) 
+  constructor(private fb:FormBuilder,private rout : Router, private AlertController: AlertController, public modalController: ModalController, public deliverDataService : DeliverDataService, private render: Renderer2) 
   {
     //his.ionViewWillEnter();
    // this.name;
@@ -142,6 +142,9 @@ export class ContactUsPage implements OnInit {
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
 
+
+
+
         this.showProfile1 = true;
     
         this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
@@ -223,6 +226,45 @@ export class ContactUsPage implements OnInit {
          }, 1000);
   
   }
+
+
+  async sendMessage(){
+
+
+    this.db.collection("Admin").get().then(data => {
+
+      data.forEach(item => {
+        console.log("CMS UID ", item.data().uid); 
+        this.db.collection("Message").doc().set({
+
+          name : this.Myname,
+          image : this.Picture,
+          email : firebase.auth().currentUser.email,
+          message : this.message,
+          status : "NotRead",
+          cmsUid : "CMS",
+          number : this.phoneNumber,
+          time : moment().format('MMMM Do YYYY, h:mm:ss a'),
+          uid : firebase.auth().currentUser.uid,
+         
+        })
+  
+      })
+    
+
+    })
+
+    const alert = await this.AlertController.create({
+      header: '',
+      subHeader: '',
+      message: 'Message sent',
+      buttons: [ 'Ok']
+    });
+
+    await alert.present();
+     
+
+   }
 
   
   addClasseAnimates() {

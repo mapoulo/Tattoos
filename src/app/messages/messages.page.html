@@ -35,16 +35,18 @@
   
 
     <div class="content-messages">
-        <div class="header">
+       <!--  <div class="header">
          
          <img src="../../assets/logoj.svg" width="90px" alt="">
          
-        </div>
+        </div> -->
 
         <div class="message-text"  #scrollMe >
           <!-- <p  *ngIf="messageInfo.message" class="no-selected animated" [ngClass]="{'zoomInLeft': messageInfo.message}">{{messageInfo.message}}</p> -->
   
-          
+          <div class="g_r" *ngIf="MyMessages.length == 0">
+            <img src="../../assets/chat.svg" width="200px" alt="">
+          </div>
            
            
             <div class="chat"   *ngFor = "let item of MyMessages" >

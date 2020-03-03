@@ -120,8 +120,7 @@
         width: 4vh;
         object-fit: cover;
         border-radius: 50px;
-
-
+        margin-left: 1em;
 
     }
 }
@@ -222,7 +221,7 @@
     flex-basis: 80%;
 }
 
-ion-button.explore {
+ion-button.explore, div.explore {
     position: relative;
 
 
@@ -239,7 +238,7 @@ ion-button.explore {
     }
 }
 
-.list > ion-button {
+.list > ion-button, .list > .profile-image {
     position: relative;
     transition: 500ms;
 
@@ -353,7 +352,7 @@ h3 {
     margin: 1em 0;
 }
 p {
-    font-size: 90% !important;
+    font-size: 90%;
 
 }
 
