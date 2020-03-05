@@ -43,10 +43,10 @@ userImage = '';
         { type: 'required', message: 'desc  is required.' },
   
       ],
-      'date': [
-        { type: 'required', message: 'date  is required.' },
+      // 'date': [
+      //   { type: 'required', message: 'date  is required.' },
   
-      ],
+      // ],
     }
   loader: boolean = false;
   progress: number = 0;
@@ -54,7 +54,7 @@ userImage = '';
     this.tattooForm = this.fb.group({
       sizes: new FormControl('', Validators.compose([Validators.required])),
       desc: new FormControl('', Validators.compose([Validators.required])),
-      date: new FormControl('', Validators.compose([Validators.required])),
+      // date: new FormControl('', Validators.compose([Validators.required])),
     })
   
   }
@@ -118,7 +118,7 @@ userImage = '';
       startPrice : null,
       tattoName: null,
       userImage:  this.userImage,
-      date:this.date,
+      // date:this.date,
       desc:this.desc,
       sizes:this.sizes,
       color:this.SelectedSize,

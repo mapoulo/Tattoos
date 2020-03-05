@@ -28,7 +28,7 @@ export class MessagesPage implements OnInit  {
     time: ''
   };
 
-
+  buttonDisabled: boolean = false;
   ids = []
 
   MyImages = ""
@@ -148,9 +148,11 @@ export class MessagesPage implements OnInit  {
 
   async sendMessage(){
   
-
-    
-    this.db.collection("Admin").get().then(data => {
+    if (this.response==""){
+      this.buttonDisabled=false;
+        }else{
+          this.buttonDisabled=true;
+           this.db.collection("Admin").get().then(data => {
 
       data.forEach(item => {
         console.log("CMS UID ", item.data().uid); 
@@ -163,7 +165,7 @@ export class MessagesPage implements OnInit  {
           status : "NotRead",
           cmsUid : "CMS",
           number : this.MyNumber,
-          time : moment().format('MMMM Do YYYY, h:mm a'),
+          time : moment().format('MMMM Do YYYY, h:mm:ss a'),
           uid : firebase.auth().currentUser.uid,
          
         })
@@ -180,6 +182,9 @@ export class MessagesPage implements OnInit  {
     }, 20);
      
 
+        }
+    
+   
    }
 
 

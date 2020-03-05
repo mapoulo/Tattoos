@@ -61,6 +61,7 @@ export class ProfilePage implements OnInit {
   endingDate;
   Response=[];
   Messages=[] 
+  messages = 0;
   ViewMore=[];
   userID :string;
   name = "";
@@ -89,6 +90,26 @@ export class ProfilePage implements OnInit {
 
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
+
+        this.db.collection("Message").onSnapshot(data => {
+          this.messages = 0
+          data.forEach(item => {
+
+           if(item.exists){
+
+             if( item.data().status == "NotRead" && item.data().uid == firebase.auth().currentUser.uid && item.data().cmsUid == null  ){
+               this.messages += 1
+               console.log("Called  ssss");                
+          }
+
+           }
+          
+          })
+
+          
+        })
+
 
         this.db.collection("Users").doc(firebase.auth().currentUser.uid).onSnapshot(data => {
           this.MyImage = data.data().image
@@ -679,10 +700,11 @@ async DeleteData() {
 }
 
 downloadPdf1(){
+
   this.db.collection("Admin").onSnapshot(data => {
     data.forEach( async(i) => {
 
-      if(i.data().pdf == ""){
+      if(i.data().pdf == "" || i.data().pdf == null || i.data().pdf == undefined){
 
         
       const alert = await this.alertCtrl.create({

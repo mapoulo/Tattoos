@@ -120,7 +120,7 @@
         <ion-textarea  placeholder="Type a message"  [(ngModel)]="response" name="" id="" rows="1"></ion-textarea>
       </div>
       <div class="btn-send">
-        <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()">
+        <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()" disabled={{buttonDisabled}}>
           <ion-icon name="send"></ion-icon>
         </ion-button>
       </div>

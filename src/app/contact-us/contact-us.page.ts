@@ -25,6 +25,7 @@ export class ContactUsPage implements OnInit {
   UserIn : boolean
   name = ""
   email = ""
+  messages = 0;
   phoneNumber = ""
   UserImage = ""
   message = ""
@@ -95,6 +96,25 @@ export class ContactUsPage implements OnInit {
     if(firebase.auth().currentUser){
 
       this.UserIn = false
+
+
+      this.db.collection("Message").onSnapshot(data => {
+        this.messages = 0
+        data.forEach(item => {
+
+         if(item.exists){
+
+           if( item.data().status == "NotRead" && item.data().uid == firebase.auth().currentUser.uid && item.data().cmsUid == null  ){
+             this.messages += 1
+             console.log("Called  ssss");                
+        }
+
+         }
+        
+        })
+
+        
+      })
 
       this.db.collection("Response").onSnapshot(data => {
         this.MyNotifications = 0

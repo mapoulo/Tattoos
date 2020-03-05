@@ -64,7 +64,7 @@ export class BookingModalPage implements OnInit {
   constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, public alertController: AlertController,  private render: Renderer2) { 
   this.tattooForm = this.fb.group({
     sizes: new FormControl('', Validators.compose([Validators.required])),
-    date: new FormControl('', Validators.compose([Validators.required])),
+    // date: new FormControl('', Validators.compose([Validators.required])),
   })
 }
 
@@ -185,7 +185,7 @@ export class BookingModalPage implements OnInit {
            endPrice : this.endPrice,
             tattoName: this.name,
             sizes:this.sizes,
-            date:this.date,
+            // date:this.date,
             email : firebase.auth().currentUser.email,
             uid : firebase.auth().currentUser.uid,
             customerName : this.Cname,
