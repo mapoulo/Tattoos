@@ -62,7 +62,7 @@
                   <div class="inner-text">
                     <p>{{item.message}}</p>
                   </div>
-                  <div class="time"><p><small>{{item.time}}</small></p></div>
+                  <div class="time"><p><small>{{item.time }}</small></p></div>
                 </div>
               </div>
 
@@ -79,7 +79,7 @@
                     <p>{{item.message}}</p>
                   </div>
                   <div class="time">
-                    <p><small>{{item.time}}</small></p>
+                    <p><small>{{item.time }}</small></p>
                   </div>
                 </div>             
               </div>
@@ -93,9 +93,7 @@
   
   
   
-          <!-- <div class="no-selected" *ngIf="!messageInfo.message">
-            <p>Please select a message card on the left hand side to read</p>
-          </div> -->
+         
           </div>
 
  
@@ -120,7 +118,7 @@
         <ion-textarea  placeholder="Type a message"  [(ngModel)]="response" name="" id="" rows="1"></ion-textarea>
       </div>
       <div class="btn-send">
-        <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()">
+        <ion-button fill="clear" mode="ios" color="success" (click)="sendMessage()" disabled={{buttonDisabled}}>
           <ion-icon name="send"></ion-icon>
         </ion-button>
       </div>

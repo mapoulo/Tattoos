@@ -27,7 +27,7 @@ export class MessagesPage implements OnInit  {
     message: '',
     time: ''
   };
-
+  buttonDisabled: boolean = false;
 
   ids = []
 
@@ -70,7 +70,7 @@ export class MessagesPage implements OnInit  {
     
     setTimeout(() => {
       this.scrollToBottomOnInit(); 
-    }, 100);
+    }, 20);
     
 
     this.db.collection("Message").get().then(item => {
@@ -107,7 +107,11 @@ export class MessagesPage implements OnInit  {
         this.ShowMessage = true
         this.db.collection("Message").orderBy("time", "asc").onSnapshot(data => {
 
-          this.MyMessages  = []
+          this.MyMessages  = [];
+
+          setTimeout(() => {
+            this.scrollToBottomOnInit(); 
+          }, 20);
 
           data.forEach(item => {
             if(item.data().uid == firebase.auth().currentUser.uid){
@@ -116,6 +120,10 @@ export class MessagesPage implements OnInit  {
               
             }
           })
+          
+          setTimeout(() => {
+            this.scrollToBottomOnInit(); 
+          }, 20);
         })
 
 
@@ -140,9 +148,12 @@ export class MessagesPage implements OnInit  {
 
   async sendMessage(){
   
+  if (this.response==""){
 
-    
-    this.db.collection("Admin").get().then(data => {
+this.buttonDisabled=false;
+  }else{
+    this.buttonDisabled=true;
+this.db.collection("Admin").get().then(data => {
 
       data.forEach(item => {
         console.log("CMS UID ", item.data().uid); 
@@ -155,7 +166,7 @@ export class MessagesPage implements OnInit  {
           status : "NotRead",
           cmsUid : "CMS",
           number : this.MyNumber,
-          time : moment().format('MMMM Do YYYY, h:mm:ss a'),
+          time : moment().format('MMMM Do YYYY, h:mm a'),
           uid : firebase.auth().currentUser.uid,
          
         })
@@ -169,11 +180,11 @@ export class MessagesPage implements OnInit  {
 
     setTimeout(() => {
       this.scrollToBottomOnInit(); 
-    }, 100);
+    }, 20);
      
 
    }
-
+  }
 
 
 
