@@ -106,6 +106,8 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: .8em;
 
     p {
         font-size: 80%;

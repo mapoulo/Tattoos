@@ -12,6 +12,7 @@ import { DeliverDataService } from '../deliver-data.service';
 import { RegisterPage } from '../register/register.page';
 import { Storage } from '@ionic/storage';
 import { MessagesPage } from '../messages/messages.page';
+import { SuccessPagePage } from '../success-page/success-page.page';
 
 
 
@@ -750,6 +751,13 @@ logOut(){
   //     }, 500);
   //   }
   // }
+
+  async success() {
+    const modal = await this.modalController.create({
+      component: SuccessPagePage
+    });
+    return await  modal.present();
+  }
 
   addClasseAnimate() {
     this.menu = !this.menu

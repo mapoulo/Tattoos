@@ -23,7 +23,7 @@ import { BookingModalPage } from '../booking-modal/booking-modal.page';
   styleUrls: ['./sign-in.page.scss'],
 })
 export class SignInPage implements OnInit {
-
+  fPassword: string = 'Forgot password?'
   db = firebase.firestore();
   counter : number = 0;
   email = "";

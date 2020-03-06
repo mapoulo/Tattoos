@@ -5,10 +5,10 @@ ion-header, ion-toolbar {
 }
 .error {
     color: red;
-    width: 80%;
+    width: 90%;
     margin: 0 auto !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 80%;
+    font-size: 90%;
 }
 .main {
     display: flex;
@@ -83,12 +83,15 @@ ion-header, ion-toolbar {
     display: flex;
     /* justify-content: center;
     align-items: center; */
+    margin-top: 2em;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     p {
-        font-size: 80%;
-        flex: 1;
+        font-size: 90%;
+       
     }
 }
 
@@ -109,6 +112,12 @@ ion-header, ion-toolbar {
     }
 }
 
+.buttons-pass {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 @media only screen and (max-width: 768px) {
     .main {
         flex-direction: column;
@@ -120,7 +129,7 @@ ion-header, ion-toolbar {
     align-items: center;
 
     p {
-        flex: 1;
+  
         white-space: nowrap;
         text-align: right;
     }

@@ -1,6 +1,6 @@
 <ion-header translucent no-border>
   <ion-toolbar style="background-color: transparent;">
-    <ion-title text-left style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #fff;">Welcome!</ion-title>
+    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #fff;">Welcome!</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
       <ion-button fill="icon-only" color="light">
         <ion-icon [color]="color" name="close"></ion-icon>
@@ -47,10 +47,10 @@
       
            
             <ion-row justify-content-end>
-              <ion-col size="6"><ion-button  mode="ios" fill="clear" color="primary" expand="half" size="small"  (click)="resetPassword()" style="text-transform: lowercase;">forgot password</ion-button>
+              <ion-col size="12" class="buttons-pass"><ion-button  mode="ios" fill="clear" color="primary" expand="half" size="small"  (click)="resetPassword()">{{fPassword | titlecase}}</ion-button>
               </ion-col>
             </ion-row>
-           <div class="row">
+           <div class="row" style="margin-top:1em ;">
               <ion-col size="6"><ion-button mode="ios" shape="round" expand="block" color="secondary" (click)="login()"  [disabled]="!tattooForm.valid">Sign In</ion-button></ion-col>
             </div>
            

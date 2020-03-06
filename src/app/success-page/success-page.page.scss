@@ -18,16 +18,14 @@
 
 
 .container-success {
-   flex-basis: 20%;
+   flex-basis: 40%;
    width: 50%;
-   background: #fff;
+   background: rgb(243, 243, 243);
    border-radius: 10px;
    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.356);
    position: relative;
     display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+   flex-direction: column;
 
    &::after {
        position: absolute;
@@ -48,22 +46,30 @@
    }
 
    .success {
-       position: absolute;
-       top: -50px;
-       width: 100%;
-       /* border: 1px solid #fff; */
-       display: flex;
-       justify-content: center;
-       align-items: center;
+      flex: 0 0 20%;
+      position: relative;
+      //background: red;
+
+      img {
+          height: 100px;
+          position: absolute;
+          width: 30%;
+       
+          top: -50px;
+          left: 35%;
+      }
+
    }
    .success-messages {
        display: flex;
        flex-direction: column;
        align-items: center;
-       justify-content: center;
+       justify-content: space-evenly;
        text-align: center;
        color: rgb(77, 77, 77);
         padding: 1em;
+        flex: 0 0 80%;
+
        h4 {
            font-size: 3vh;
        }
@@ -72,7 +78,7 @@
 }
 @media only screen and (max-width: 600px) {
     .container-success {
-        flex-basis: 50%;
+        flex-basis: 40%;
         width: 90%;
         padding: .5em;
 
