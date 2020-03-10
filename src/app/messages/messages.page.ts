@@ -27,8 +27,8 @@ export class MessagesPage implements OnInit  {
     message: '',
     time: ''
   };
-
   buttonDisabled: boolean = false;
+
   ids = []
 
   MyImages = ""
@@ -186,7 +186,7 @@ export class MessagesPage implements OnInit  {
     
    
    }
-  }
+  
 
 
 

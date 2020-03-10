@@ -115,6 +115,12 @@ tattoo = {
     categories: '',
   }
  
+
+  phoneNumber = ""
+  email2 = ''
+  address = ''
+
+
   storage = firebase.storage().ref();
   showProfile1;
   continue: any;
@@ -229,6 +235,16 @@ tattoo = {
    ionViewDidEnter(){
     this.viewMoreDiv = document.getElementsByClassName('view-more');
 
+
+    this.db.collection("Admin").get().then(
+      data => {
+        data.forEach(item=> {
+          this.phoneNumber = item.data().phoneNumber
+          this.email2 = item.data().email
+          this.address = item.data().address
+        })
+      }
+    )
 
 
     firebase.auth().onAuthStateChanged((user) => {
