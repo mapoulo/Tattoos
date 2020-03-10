@@ -18,8 +18,8 @@ import * as moment from 'moment';
 export class BookingModalPage implements OnInit {
   SelectedSize: string='';
   color: any=[
-    'yes',
-    'no',
+    'Yes',
+    'No',
   ];
   Myemail = ""
   Myimage = ""
@@ -49,11 +49,11 @@ export class BookingModalPage implements OnInit {
     tattooForm : FormGroup;
     validation_messages = {
       'sizes': [
-        { type: 'required', message: 'sizes  is required.' },
+        { type: 'required', message: 'Sizes  is required.' },
   
       ],
-      'date': [
-        { type: 'required', message: 'date  is required.' },
+      'color': [
+        { type: 'required', message: 'Color  is required.' },
   
       ],
     }
@@ -64,7 +64,7 @@ export class BookingModalPage implements OnInit {
   constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private notifications : NotificationsService, public alertController: AlertController,  private render: Renderer2) { 
   this.tattooForm = this.fb.group({
     sizes: new FormControl('', Validators.compose([Validators.required])),
-    // date: new FormControl('', Validators.compose([Validators.required])),
+    color: new FormControl('', Validators.compose([Validators.required])),
   })
 }
 

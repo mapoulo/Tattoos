@@ -11,6 +11,9 @@ import { DeliverDataService } from '../deliver-data.service';
 import { NotificationsPage } from '../notifications/notifications.page';
 import { MessagesPage } from '../messages/messages.page';
 
+declare var require: any
+const FileSaver = require('file-saver');
+
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
@@ -41,6 +44,7 @@ export class ContactUsPage implements OnInit {
   splitDiv: any = document.getElementsByClassName('split-pane');
   ShowName: any[];
   inputDisabled: boolean = false;
+  
 
   placeid = ""
 
@@ -72,6 +76,8 @@ export class ContactUsPage implements OnInit {
   
   }
 
+
+
   async opnModal(){
     let modal = await this.modalController.create({
       component : CustomizePage,
@@ -79,6 +85,8 @@ export class ContactUsPage implements OnInit {
     })
     return await modal.present();
    }
+
+
   ngOnInit() {
 
    this.showProfile();
@@ -137,10 +145,20 @@ export class ContactUsPage implements OnInit {
     this.Contact = []
   }
 
+  // GoTo(){ 
+
+  //   return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;
+
+  //   // 230 Park Ave, New York, NY 10169, USA
+    
+  // }
+
+
   GoTo(){ 
-
-    return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;
-
+    const pdfUrl = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid; ;
+    const pdfName = 'InkScribeTattoo Contract.pdf';
+    FileSaver.saveAs(pdfUrl, pdfName);
+    // return window.location.href = 'https://www.google.com/maps/place/?q=place_id:'+this.placeid;
     // 230 Park Ave, New York, NY 10169, USA
     
   }
@@ -251,9 +269,12 @@ export class ContactUsPage implements OnInit {
   async sendMessage(){
 
 
+   setTimeout(() => {
+
     this.db.collection("Admin").get().then(data => {
 
       data.forEach(item => {
+
         console.log("CMS UID ", item.data().uid); 
         this.db.collection("Message").doc().set({
 
@@ -268,11 +289,14 @@ export class ContactUsPage implements OnInit {
           uid : firebase.auth().currentUser.uid,
          
         })
+
   
       })
     
 
     })
+     
+   }, 1000);
 
     const alert = await this.AlertController.create({
       header: '',
@@ -310,8 +334,10 @@ export class ContactUsPage implements OnInit {
   }
     
   showProfile(){
+
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+
         this.showProfile1 = true;
         this.inputDisabled = true;
         this.buttonDisabled = false;

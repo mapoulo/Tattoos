@@ -68,39 +68,57 @@ export class SignInPage implements OnInit {
 
   login(){
 
+
+
+
     this.loader = true;
 
      setTimeout(() => {
 
       if (this.tattooForm.valid ) {
 
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-     
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(async (user) => {
+
+          if(user && firebase.auth().currentUser.emailVerified){
+
+
+            setTimeout(() => {
+              this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(async (data) => {
+                  
+                this.DeliverDataService.name = data.data().name;
         
-     setTimeout(() => {
-
-
-      this.db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(async (data) => {
-          
-        this.DeliverDataService.name = data.data().name;
-
-        if(this.DeliverDataService.wantToBook){
-          
-           const modal = await this.modalController.create({
-         component: BookingModalPage
-       });
-       return await  modal.present();
+                if(this.DeliverDataService.wantToBook){
+                  
+                   const modal = await this.modalController.create({
+                 component: BookingModalPage
+               });
+               return await  modal.present();
+                
         
+                }
+        
+                this.Router.navigateByUrl('/')
+              })
+              
+        
+             }, 1000)
+               
 
-        }
+             
 
-        this.Router.navigateByUrl('/')
-      })
+          }else{
+
+            const alert = await this.AlertController.create({
+              header: "",
+              subHeader: "",
+              message: "Please verify your email.",
+              buttons: ['OK']
+            });
+            alert.present();
+
+          }
       
-
-     }, 1000)
-       
-
+   
 
         }).catch(error => {
 
@@ -162,7 +180,7 @@ export class SignInPage implements OnInit {
 
   async log2(){
     const alert = await this.AlertController.create({
-      header: "Login Failed",
+      header: "",
       subHeader: "",
       message: "Please Check your Password and Email",
       buttons: ['OK']

@@ -231,7 +231,7 @@ tattoo = {
 
 
     firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+      if(user && firebase.auth().currentUser.emailVerified) {
 
         setTimeout(() => {
 
@@ -463,7 +463,7 @@ tattoo = {
 
 
     firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+      if(user && firebase.auth().currentUser.emailVerified) {
 
         this.presentToast('You have logged in Successfully')
 

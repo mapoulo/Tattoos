@@ -19,8 +19,8 @@ userImage = '';
   tattoo = '';
   SelectedSize: string = '';
   color: any = [
-    'yes',
-    'no'
+    'Yes',
+    'No'
   ];
   calendar = {
     mode: 'month',
@@ -36,11 +36,11 @@ userImage = '';
     tattooForm : FormGroup;
     validation_messages = {
       'sizes': [
-        { type: 'required', message: 'sizes  is required.' },
+        { type: 'required', message: 'Sizes  is required.' },
   
       ],
       'desc': [
-        { type: 'required', message: 'desc  is required.' },
+        { type: 'required', message: 'Description  is required.' },
   
       ],
       // 'date': [
@@ -54,7 +54,7 @@ userImage = '';
     this.tattooForm = this.fb.group({
       sizes: new FormControl('', Validators.compose([Validators.required])),
       desc: new FormControl('', Validators.compose([Validators.required])),
-      // date: new FormControl('', Validators.compose([Validators.required])),
+      color: new FormControl('', Validators.compose([Validators.required])),
     })
   
   }

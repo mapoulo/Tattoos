@@ -173,7 +173,7 @@ export class ProfilePage implements OnInit {
    
     
     const alert = await this.alertCtrl.create({
-      header: 'DELETE!',
+      header: '',
       message: '<strong>Are you sure you want to delete this message?</strong>',
       buttons: [
         {
@@ -671,7 +671,7 @@ async DeleteData() {
   console.log("uid", this.uid);
   
   const alert = await this.alertCtrl.create({
-    header: 'DELETE!',
+    header: '',
     message: '<strong>Are you sure you want to delete this tattoo?</strong>',
     buttons: [
       {

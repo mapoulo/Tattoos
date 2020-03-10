@@ -74,7 +74,11 @@ export class RegisterPage implements OnInit {
 
   }
   
+
+
   async register(){
+
+    console.log("The data ", this.email);
 
     this.loader = true;
 
@@ -111,9 +115,15 @@ this.modalController.dismiss({
 
  this.redirectToSignin()
 
- }).then(() => {
+ }).then((user) => {
 
-
+ 
+  firebase.auth().currentUser.sendEmailVerification().then(()=>{
+      console.log("email sent")
+  }).catch(function(error){
+    console.log("email not sent")
+  });
+  
 setTimeout(() => {
 this.db.collection("Users").doc(firebase.auth().currentUser.uid).set({
  name : this.name,
@@ -127,6 +137,7 @@ this.db.collection("Users").doc(firebase.auth().currentUser.uid).set({
  setTimeout(() => {
    this.loader = true;
 }, 1000);
+
 this.reg()
 
 this.dismiss()
@@ -217,34 +228,34 @@ this.modalController.dismiss({
       'dismissed': true
     });
   }
+
+
 async reg(){
+
 const alert = await this.AlertController.create({
   header: "",
   subHeader: "",
-  message: "Successfully registered",
+  message: "Please check and verify your email ",
   buttons: ['OK']
 });
+
 alert.present();
+
 }
+
+
 async log(){
   const alert = await this.AlertController.create({
-    header: "Registration failed",
+    header: "",
     subHeader: "",
     message: "Email address alredy exist login",
     buttons: ['OK'],
-    
-      
-    
-
-
+  
   });
 
 
   alert.present();
 
-
-
- 
   }
 
   async redirectToSignin(){
