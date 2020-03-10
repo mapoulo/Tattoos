@@ -150,10 +150,10 @@ p, span, input, ion-label {
 }
 .booking {
     position: absolute;
-    top: 25%;
-    left: 10%;
-    right: 10%;
-    height: 60%;
+    top: 15%;
+    left: 5%;
+    right: 5%;
+    height: 75%;
     padding: 1em 3em;
     background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,1));
     box-shadow: 0 3px 6px rgba(27, 27, 27, 0.527);
@@ -200,13 +200,13 @@ ion-item {
 
 .priceRage{
     background: rgba(61, 59, 59, 0.719);
-    min-width: 80%;
-    max-width: 80%;
+    min-width: 90%;
+    max-width: 90%;
     height: 10%;
     color: #fff;
     position: absolute;
     top: 20%;
-    right: 10%;
+    right: 5%;
     padding: .5em;
     /* transform: rotateX(-45deg); */
     font-weight: bold;

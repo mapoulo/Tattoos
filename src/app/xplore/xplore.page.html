@@ -27,14 +27,15 @@
           <ion-icon name="ios-arrow-down"></ion-icon>
         </ion-fab-button>
       </div> -->
+      <p class="ion-text-center name">{{tattoos.nameTattoo}}</p>
        <div class="image-card-t">
        <img  src="{{tattoos.image}}" alt="">
       
        </div>
        <div class="describe-card-s">
-       <h1 class="ion-text-center">{{tattoo.StartingpriceRange | currency : '&#82;'}} - {{tattoo.EndingpriceRange | currency : '&#82;'}}</h1>
-       <p class="ion-text-center name">{{tattoos.nameTattoo}}</p>
-       <p>{{tattoos.description}}</p> 
+       <h1>{{tattoo.StartingpriceRange | currency : '&#82;'}} - {{tattoo.EndingpriceRange | currency : '&#82;'}}</h1>
+       
+       <p class="ion-text-left" style="margin-top: 1.5em !important; text-align: left; width: 100% !important;">{{tattoos.description}}</p> 
       </div>
       <div class="booking">
         <ion-button mode="ios" fill="solid" shape="round" expand="half" (click)="Booking(continue)" color="success">Continue Bookings</ion-button>
@@ -506,5 +507,6 @@
     <div class="social">
       <p style="font-size: 80%; color: rgb(255, 255, 255)">Ink Scribe Tattoo Company &copy; 2020</p>
     </div>
+
 </ion-toolbar>
 </ion-footer>
