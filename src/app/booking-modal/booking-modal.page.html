@@ -103,10 +103,10 @@
 
 
               <ion-row justify-content-center>
-                <ion-col size="12" style="margin: 0 1em;">
-                  <p *ngIf="SelectedSize == 'yes'" style="color: seagreen;"> <ion-icon name="checkmark"></ion-icon> {{SelectedSize | titlecase}}, I need additional colors please.</p>
-                  <p *ngIf="SelectedSize == 'no'" style="color: rgb(207, 71, 71)"><ion-icon name="close"></ion-icon> {{SelectedSize | titlecase}}, I just want a Tattoo. Thanks.</p>
-                    <p style="font-size: 80%;margin: 0 1em;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
+                <ion-col size="12" style="margin: 1.7em 0 !important;">
+                  <p *ngIf="SelectedSize == 'yes'" style="color: seagreen;margin: 1em 0 !important;"> <ion-icon name="checkmark"></ion-icon> {{SelectedSize | titlecase}}, I need additional colors please.</p>
+                  <p *ngIf="SelectedSize == 'no'" style="color: rgb(207, 71, 71);margin: 1em 0 !important;"><ion-icon name="close"></ion-icon> {{SelectedSize | titlecase}}, I just want a Tattoo. Thanks.</p>
+                    <p style="font-size: 80%;margin: 1em 0 !important;">You will receive a contract, date and time at which you can come and have your tattoo done.</p>
                 </ion-col>
                 <ion-col size="6" justify-content-center>
                     <ion-button  color="secondary" shape="round" mode="ios" expand="block" (click)="senBookig()"  >Book</ion-button>

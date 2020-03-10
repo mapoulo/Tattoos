@@ -153,6 +153,8 @@ export class SignInPage implements OnInit {
 
   async CreateAccount(){
 
+    this.dismiss();
+
     let modal = await this.modalController.create({
       component : RegisterPage
     })
